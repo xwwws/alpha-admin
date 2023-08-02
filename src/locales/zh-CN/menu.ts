@@ -5,4 +5,5 @@ export default {
   'menu.experiment.read': '读值',
   'menu.experiment.sleep': '等待',
   'menu.experiment.move': '移动',
+  'menu.experiment.addSol': '加液',
 };

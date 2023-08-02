@@ -20,16 +20,25 @@ declare namespace API {
     end_time: string;
     result: string[];
   };
-  type MoveParams = {
+
+  type Coordinates = {
     name: string;
     x: string | number;
     y: string | number;
     z: string | number;
   };
+
   type MoveReq = {
     src_area: MoveParams;
     dst_area: MoveParams;
     height: string | number;
+  };
+  type AddSolReq = {
+    src_area: MoveParams;
+    dst_area: MoveParams;
+    speed: string | number;
+    weight: string | number;
+    accuracy: string | number;
   };
 
   type CurrentUser = {};

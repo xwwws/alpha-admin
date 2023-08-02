@@ -11,7 +11,7 @@ export const readMethod = (data: API.ReadReq) => {
 };
 /**
  * 等待
- * @param data {API.ReadReq}
+ * @param data {API.sleepReq}
  */
 export const sleepMethod = (data: API.sleepReq) => {
   return request<API.MethodsRes>(`/api/v1/lab/methods/sleep`, {
@@ -21,11 +21,20 @@ export const sleepMethod = (data: API.sleepReq) => {
 };
 /**
  * 移动
- * @param data {API.MethodsRes}
+ * @param data {API.MoveReq}
  */
-
 export const moveMethod = (data: API.MoveReq) => {
   return request<API.MethodsRes>(`/api/v1/lab/methods/movething`, {
+    method: 'post',
+    data,
+  });
+};
+/**
+ * 加液
+ * @param data {API.AddSolReq}
+ */
+export const addSolMethod = (data: API.AddSolReq) => {
+  return request<API.MethodsRes>(`/api/v1/lab/methods/addsol`, {
     method: 'post',
     data,
   });

@@ -27,6 +27,12 @@ export const experimentRoutes = [
         name: 'move',
         component: './Experiment/Move',
       },
+      // 加液
+      {
+        path: 'add-sol',
+        name: 'addSol',
+        component: './Experiment/AddSol',
+      },
     ],
   },
 ];
