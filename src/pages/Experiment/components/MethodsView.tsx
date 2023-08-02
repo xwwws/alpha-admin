@@ -4,6 +4,7 @@ import React from 'react';
 import type { ReactNode } from 'react';
 // @ts-ignore
 import { SmileOutlined } from '@ant-design/icons';
+// @ts-ignore
 import { Result, Spin } from 'antd';
 import styled from 'styled-components';
 type IProps = {
