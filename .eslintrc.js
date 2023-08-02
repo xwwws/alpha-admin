@@ -5,6 +5,6 @@ module.exports = {
     REACT_APP_ENV: true,
   },
   rules: {
-    '@typescript-eslint/no-unused-vars': 1,
+    '@typescript-eslint/no-unused-vars': 0,
   },
 };

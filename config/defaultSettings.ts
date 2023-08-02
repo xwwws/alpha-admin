@@ -8,22 +8,21 @@ const Settings: ProLayoutProps & {
   pwa?: boolean;
   logo?: string;
 } = {
-  navTheme: "light",
-  colorPrimary: "#1890ff",
-  layout: "mix",
-  contentWidth: "Fluid",
+  navTheme: 'light',
+  colorPrimary: '#1890ff',
+  layout: 'mix',
+  contentWidth: 'Fluid',
   fixedHeader: true,
   fixSiderbar: true,
   pwa: true,
-  logo: "/logo.png",
-  siderMenuType: "sub",
+  logo: '/logo.png',
+  siderMenuType: 'sub',
   splitMenus: false,
   // 拂晓蓝
   colorWeak: false,
   title: '计算化学合成平台监管系统',
   iconfontUrl: '',
-  token: {
-  },
+  token: {},
 };
 
 export default Settings;

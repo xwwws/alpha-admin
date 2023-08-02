@@ -5,6 +5,7 @@ import { PageContainer } from '@ant-design/pro-layout/es/components/PageContaine
 // @ts-ignore
 import { readMethod } from '@/api/experiment';
 import MethodsView from '@/pages/Experiment/components/MethodsView';
+// @ts-ignore
 import { Card, Form, Select, Spin } from 'antd';
 
 const formItemLayout = {

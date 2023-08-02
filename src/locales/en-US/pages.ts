@@ -1,5 +1,5 @@
 export default {
-  'pages.layouts.userLayout.title':'Convenience for every calculator',
+  'pages.layouts.userLayout.title': 'Convenience for every calculator',
   'pages.login.accountLogin.tab': 'Account Login',
   'pages.login.accountLogin.errorMessage': 'Incorrect username/password',
   'pages.login.failure': 'Login failed, please try again!',

@@ -1,13 +1,10 @@
 import { login } from '@/services/ant-design-pro/api';
-import {
-  LockOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 // @ts-ignore
-import { LoginForm, ProFormText, } from '@ant-design/pro-components';
+import { LoginForm, ProFormText } from '@ant-design/pro-components';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
-import { FormattedMessage, history, useIntl, useModel, Helmet } from 'umi';
+import { FormattedMessage, Helmet, history, useIntl, useModel } from 'umi';
 
 // @ts-ignore
 import { Alert, message, Tabs } from 'antd';
@@ -18,7 +15,7 @@ import React, { useState } from 'react';
 // @ts-ignore
 import { flushSync } from 'react-dom';
 
-const LoginMessage: React.FC<{ content: string; }> = ({ content }) => {
+const LoginMessage: React.FC<{ content: string }> = ({ content }) => {
   return (
     <Alert
       style={{
@@ -120,8 +117,7 @@ const Login: React.FC = () => {
           initialValues={{
             autoLogin: true,
           }}
-          actions={[
-          ]}
+          actions={[]}
           onFinish={async (values) => {
             await handleSubmit(values as API.LoginParams);
           }}
@@ -208,8 +204,7 @@ const Login: React.FC = () => {
             style={{
               marginBottom: 24,
             }}
-          >
-          </div>
+          ></div>
         </LoginForm>
       </div>
       {/*<Footer />*/}

@@ -1,11 +1,11 @@
 // @ts-ignore
+import { Outlet } from '@@/exports';
 import React from 'react';
-import { Outlet } from "@@/exports";
 interface IProp {
-[propName: string]: any
+  [propName: string]: any;
 }
-const Index:React.FC<IProp> = () => {
-  return <Outlet/>
-}
+const Index: React.FC<IProp> = () => {
+  return <Outlet />;
+};
 
 export default Index;
