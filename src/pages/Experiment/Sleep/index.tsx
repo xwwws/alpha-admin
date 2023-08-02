@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 // @ts-ignore
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 // @ts-ignore
-import { readMethod } from '@/api/experiment';
+import { sleepMethod } from '@/api/experiment';
 import MethodsView from '@/pages/Experiment/components/MethodsView';
 // @ts-ignore
-import { Card, Form, Select } from 'antd';
+import { Button, Card, Form, Input } from 'antd';
 
 const formItemLayout = {
   labelCol: { span: 10 },
@@ -14,17 +14,24 @@ const formItemLayout = {
 };
 
 interface IConditions {
-  node_index: string | number;
+  seconds: string | number;
 }
-
+const formRules = {
+  seconds: [
+    { required: true, message: '请输入等待时间' },
+    { pattern: /^\d+$/, message: '请输入数字' },
+    { max: 6, message: '等待时间过长' },
+  ],
+};
 const Index: React.FC = () => {
   const [form] = Form.useForm();
   const [readResult, setReadResult] = useState<any>('');
   const [loading, setLoading] = useState<boolean>(false);
-  const onFormChange = async (val: IConditions) => {
+  const onFinish = async (val: IConditions) => {
+    console.log(val);
     try {
       setLoading(true);
-      const res = await readMethod(val);
+      const res = await sleepMethod(val);
       setLoading(false);
       setReadResult(JSON.stringify(res.result));
     } catch (err) {
@@ -40,10 +47,15 @@ const Index: React.FC = () => {
       form={form}
       initialValues={{ layout: `inline` }}
       style={{ maxWidth: 'none' }}
-      onValuesChange={onFormChange}
+      onFinish={onFinish}
     >
-      <Form.Item name="node_index" label="节点id">
-        <Select style={{ width: `150px` }} options={[{ label: '任务1', value: 1 }]}></Select>
+      <Form.Item name="seconds" label="等待" rules={formRules.seconds}>
+        <Input addonAfter="秒" defaultValue="mysite" />
+      </Form.Item>
+      <Form.Item>
+        <Button type={'primary'} htmlType="submit">
+          确定
+        </Button>
       </Form.Item>
     </Form>
   );

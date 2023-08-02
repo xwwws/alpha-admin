@@ -15,6 +15,12 @@ export const experimentRoutes = [
         name: 'read',
         component: './Experiment/Read',
       },
+      // 等待
+      {
+        path: 'sleep',
+        name: 'sleep',
+        component: './Experiment/Sleep',
+      },
       // 移动
       {
         path: 'move',
