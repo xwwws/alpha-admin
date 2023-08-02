@@ -1,16 +1,20 @@
 // @ts-ignore
 import { PageContainer } from '@ant-design/pro-components';
 // @ts-ignore
-import { Card, theme } from 'antd';
+import {} from 'antd';
 // @ts-ignore
-import React from 'react';
+import { moveMethod } from '@/api/experiment';
+import React, { useEffect } from 'react';
 
 const Welcome: React.FC = () => {
-  return (
-    <PageContainer>
-
-    </PageContainer>
-  );
+  useEffect(() => {
+    const a = async () => {
+      const res = await moveMethod({ node_index: 1 });
+      console.log(res);
+    };
+    a();
+  }, []);
+  return <PageContainer></PageContainer>;
 };
 
 export default Welcome;
