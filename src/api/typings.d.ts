@@ -53,6 +53,11 @@ declare namespace API {
     y: string | number;
     height: string | number;
   };
+  // 更换夹爪
+  type ClawGripper = {
+    dst_tool: string;
+    src_tool: string;
+  };
 
   type CurrentUser = {};
 }

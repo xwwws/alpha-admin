@@ -61,3 +61,14 @@ export const closeCapMethod = (data: API.CloseCap) => {
     data,
   });
 };
+/**
+ * 更换夹爪
+ * @param data {API.ClawGripper}
+ */
+export const clawGripperMethod = (data: API.ClawGripper) => {
+  console.log(data);
+  return request<API.MethodsRes>(`/api/v1/lab/methods/chngtool`, {
+    method: 'post',
+    data,
+  });
+};

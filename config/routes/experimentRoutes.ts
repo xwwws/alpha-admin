@@ -45,6 +45,12 @@ export const experimentRoutes = [
         name: 'closeCap',
         component: './Experiment/CloseCap',
       },
+      // 更换夹爪
+      {
+        path: 'claw-gripper',
+        name: 'clawGripper',
+        component: './Experiment/ClawGripper',
+      },
     ],
   },
 ];
