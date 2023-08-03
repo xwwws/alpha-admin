@@ -33,6 +33,12 @@ export const experimentRoutes = [
         name: 'addSol',
         component: './Experiment/AddSol',
       },
+      // 开盖
+      {
+        path: 'open-cap',
+        name: 'openCap',
+        component: './Experiment/OpenCap',
+      },
     ],
   },
 ];

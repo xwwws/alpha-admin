@@ -6,4 +6,5 @@ export default {
   'menu.experiment.sleep': '等待',
   'menu.experiment.move': '移动',
   'menu.experiment.addSol': '加液',
+  'menu.experiment.openCap': '开盖',
 };
