@@ -51,6 +51,12 @@ export const experimentRoutes = [
         name: 'clawGripper',
         component: './Experiment/ClawGripper',
       },
+      // 抬起枪头
+      {
+        path: 'pick-tip',
+        name: 'pickTip',
+        component: './Experiment/PickTip',
+      },
     ],
   },
 ];

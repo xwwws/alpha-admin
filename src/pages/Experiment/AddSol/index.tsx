@@ -101,7 +101,6 @@ const Index: React.FC = () => {
       layout={'inline'}
       labelWrap={true}
       form={form}
-      initialValues={{ layout: `inline` }}
       style={formStyle}
       colon={false}
       onFinish={onFinish}

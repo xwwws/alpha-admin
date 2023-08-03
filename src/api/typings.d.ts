@@ -58,6 +58,16 @@ declare namespace API {
     dst_tool: string;
     src_tool: string;
   };
-
+  // 抬起枪头
+  type PickTipReq = {
+    tip_area: {
+      name: string;
+      x: number | string;
+      y: number | string;
+      z: number | string;
+    };
+    tip_length: number;
+    drop_pre: boolean;
+  };
   type CurrentUser = {};
 }

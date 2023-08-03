@@ -72,3 +72,14 @@ export const clawGripperMethod = (data: API.ClawGripper) => {
     data,
   });
 };
+/**
+ * 抬起枪头
+ * @param data {API.PickTipReq}
+ */
+export const pickTipMethod = (data: API.PickTipReq) => {
+  console.log(data);
+  return request<API.MethodsRes>(`/api/v1/lab/methods/picktip`, {
+    method: 'post',
+    data,
+  });
+};

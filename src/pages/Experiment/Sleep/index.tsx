@@ -45,7 +45,6 @@ const Index: React.FC = () => {
       {...formItemLayout}
       layout={'inline'}
       form={form}
-      initialValues={{ layout: `inline` }}
       style={{ maxWidth: 'none' }}
       onFinish={onFinish}
     >

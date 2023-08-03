@@ -9,4 +9,5 @@ export default {
   'menu.experiment.openCap': '开盖',
   'menu.experiment.closeCap': '加盖',
   'menu.experiment.clawGripper': '更换夹爪',
+  'menu.experiment.pickTip': '抬起枪头',
 };
