@@ -7,4 +7,5 @@ export default {
   'menu.experiment.move': '移动',
   'menu.experiment.addSol': '加液',
   'menu.experiment.openCap': '开盖',
+  'menu.experiment.closeCap': '加盖',
 };

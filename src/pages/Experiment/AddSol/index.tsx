@@ -59,7 +59,7 @@ const formItemStyle = {};
 const formStyle = {
   width: '100%',
   display: 'grid',
-  'grid-template-columns': '280px 1fr 1fr 1fr',
+  gridTemplateColumns: '280px 1fr 1fr 1fr',
   gap: '10px',
 };
 const Index: React.FC = () => {

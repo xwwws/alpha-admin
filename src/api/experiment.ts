@@ -43,9 +43,20 @@ export const addSolMethod = (data: API.AddSolReq) => {
  * 开盖
  * @param data {API.OpenCap}
  */
-export const OpenCapMethod = (data: API.OpenCap) => {
+export const openCapMethod = (data: API.OpenCap) => {
   console.log(data);
   return request<API.MethodsRes>(`/api/v1/lab/methods/uncap`, {
+    method: 'post',
+    data,
+  });
+};
+/**
+ * 加盖
+ * @param data {API.CloseCap}
+ */
+export const closeCapMethod = (data: API.CloseCap) => {
+  console.log(data);
+  return request<API.MethodsRes>(`/api/v1/lab/methods/recap`, {
     method: 'post',
     data,
   });

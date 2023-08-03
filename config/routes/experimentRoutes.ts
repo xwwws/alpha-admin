@@ -39,6 +39,12 @@ export const experimentRoutes = [
         name: 'openCap',
         component: './Experiment/OpenCap',
       },
+      // 加盖
+      {
+        path: 'close-cap',
+        name: 'closeCap',
+        component: './Experiment/CloseCap',
+      },
     ],
   },
 ];

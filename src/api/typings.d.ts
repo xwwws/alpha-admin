@@ -47,6 +47,12 @@ declare namespace API {
     y: string | number;
     height: string | number;
   };
+  // 加盖
+  type CloseCap = {
+    area_name: string;
+    y: string | number;
+    height: string | number;
+  };
 
   type CurrentUser = {};
 }
