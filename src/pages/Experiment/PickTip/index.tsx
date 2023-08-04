@@ -129,8 +129,8 @@ const Index: React.FC = () => {
       >
         <Input addonAfter="cm" />
       </Form.Item>
-      <Form.Item style={formItemStyle} name="drop_pre" label="是否卸下">
-        <Switch defaultChecked />
+      <Form.Item style={formItemStyle} valuePropName="checked" name="drop_pre" label="是否卸下">
+        <Switch />
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 4 }}>
         <Button type={'primary'} htmlType="submit">

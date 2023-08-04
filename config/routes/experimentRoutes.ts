@@ -57,6 +57,13 @@ export const experimentRoutes = [
         name: 'pickTip',
         component: './Experiment/PickTip',
       },
+
+      // 移液
+      {
+        path: 'liquid-movement',
+        name: 'liquidMovement',
+        component: './Experiment/LiquidMovement',
+      },
     ],
   },
 ];

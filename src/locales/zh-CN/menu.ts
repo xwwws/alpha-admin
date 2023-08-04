@@ -10,4 +10,5 @@ export default {
   'menu.experiment.closeCap': '加盖',
   'menu.experiment.clawGripper': '更换夹爪',
   'menu.experiment.pickTip': '抬起枪头',
+  'menu.experiment.liquidMovement': '移液',
 };

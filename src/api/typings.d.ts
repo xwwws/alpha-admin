@@ -60,14 +60,21 @@ declare namespace API {
   };
   // 抬起枪头
   type PickTipReq = {
-    tip_area: {
-      name: string;
-      x: number | string;
-      y: number | string;
-      z: number | string;
-    };
+    tip_area: MoveParams;
     tip_length: number;
     drop_pre: boolean;
+  };
+
+  // 移液
+  type LiquidMovementReq = {
+    src_area: MoveParams;
+    tip_length: number | string;
+    dst_area: MoveParams;
+    total: number | string;
+    take_once: number | string;
+    spit_once: number | string;
+    interval: number | string;
+    speed: number | string;
   };
   type CurrentUser = {};
 }

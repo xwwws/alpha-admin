@@ -83,3 +83,15 @@ export const pickTipMethod = (data: API.PickTipReq) => {
     data,
   });
 };
+
+/**
+ * 移动液体
+ * @param data {API.LiquidMovementReq}
+ */
+export const liquidMovementMethod = (data: API.LiquidMovementReq) => {
+  console.log(data);
+  return request<API.MethodsRes>(`/api/v1/lab/methods/trnsliquid`, {
+    method: 'post',
+    data,
+  });
+};
