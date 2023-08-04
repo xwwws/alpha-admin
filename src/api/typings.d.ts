@@ -6,6 +6,10 @@ declare namespace API {
     limit?: string | number;
     page?: string | number;
   };
+
+  /**
+   * method相关
+   */
   // 读值
   type ReadReq = {
     node_index: string | number;
@@ -76,5 +80,24 @@ declare namespace API {
     interval: number | string;
     speed: number | string;
   };
-  type CurrentUser = {};
+
+  /**
+   * 用户相关
+   */
+  type UserLoginReq = {
+    username: string;
+    password: string;
+  };
+  interface response<T> {
+    status: 'ok' | 'err';
+    code: number;
+    data: T;
+  }
+  interface UserLoginRes {
+    token: string;
+  }
+
+  type UserInfoRes = {
+    username: string;
+  };
 }

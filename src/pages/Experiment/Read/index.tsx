@@ -1,10 +1,9 @@
 // @ts-ignore
 import React, { useState } from 'react';
 // @ts-ignore
-import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
-// @ts-ignore
 import { readMethod } from '@/api/experiment';
 import MethodsView from '@/pages/Experiment/components/MethodsView';
+import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 // @ts-ignore
 import { Card, Form, Select } from 'antd';
 
@@ -42,7 +41,11 @@ const Index: React.FC = () => {
       onValuesChange={onFormChange}
     >
       <Form.Item name="node_index" label="节点id">
-        <Select style={{ width: `150px` }} options={[{ label: '任务1', value: 1 }]}></Select>
+        <Select
+          allowClear={true}
+          style={{ width: `150px` }}
+          options={[{ label: '任务1', value: 1 }]}
+        ></Select>
       </Form.Item>
     </Form>
   );

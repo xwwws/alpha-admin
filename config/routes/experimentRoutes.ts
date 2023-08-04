@@ -3,7 +3,7 @@ export const experimentRoutes = [
     path: '/experiment',
     name: 'experiment',
     icon: 'crown',
-    access: 'canAdmin',
+    // access: 'canAdmin',
     routes: [
       {
         path: '/experiment',

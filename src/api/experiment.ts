@@ -44,7 +44,6 @@ export const addSolMethod = (data: API.AddSolReq) => {
  * @param data {API.OpenCap}
  */
 export const openCapMethod = (data: API.OpenCap) => {
-  console.log(data);
   return request<API.MethodsRes>(`/api/v1/lab/methods/uncap`, {
     method: 'post',
     data,
@@ -55,7 +54,6 @@ export const openCapMethod = (data: API.OpenCap) => {
  * @param data {API.CloseCap}
  */
 export const closeCapMethod = (data: API.CloseCap) => {
-  console.log(data);
   return request<API.MethodsRes>(`/api/v1/lab/methods/recap`, {
     method: 'post',
     data,
@@ -66,7 +64,6 @@ export const closeCapMethod = (data: API.CloseCap) => {
  * @param data {API.ClawGripper}
  */
 export const clawGripperMethod = (data: API.ClawGripper) => {
-  console.log(data);
   return request<API.MethodsRes>(`/api/v1/lab/methods/chngtool`, {
     method: 'post',
     data,
@@ -77,7 +74,6 @@ export const clawGripperMethod = (data: API.ClawGripper) => {
  * @param data {API.PickTipReq}
  */
 export const pickTipMethod = (data: API.PickTipReq) => {
-  console.log(data);
   return request<API.MethodsRes>(`/api/v1/lab/methods/picktip`, {
     method: 'post',
     data,
@@ -89,7 +85,6 @@ export const pickTipMethod = (data: API.PickTipReq) => {
  * @param data {API.LiquidMovementReq}
  */
 export const liquidMovementMethod = (data: API.LiquidMovementReq) => {
-  console.log(data);
   return request<API.MethodsRes>(`/api/v1/lab/methods/trnsliquid`, {
     method: 'post',
     data,

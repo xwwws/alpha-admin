@@ -1,11 +1,12 @@
+import { currentUser as queryCurrentUser } from '@/api/user';
 import { AvatarDropdown, AvatarName } from '@/components';
-import { currentUser as queryCurrentUser } from '@/services/ant-design-pro/api';
 // @ts-ignore
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from 'umi';
 import { history } from 'umi';
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
+
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 
@@ -14,16 +15,15 @@ const loginPath = '/user/login';
  * */
 interface IgetInitialState {
   settings?: Partial<LayoutSettings>;
-  currentUser?: API.CurrentUser;
+  currentUser?: API.UserInfoRes;
   loading?: boolean;
-  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
+  fetchUserInfo?: () => Promise<API.UserInfoRes | undefined>;
 }
+
 export async function getInitialState(): Promise<IgetInitialState> {
   const fetchUserInfo = async () => {
     try {
-      const msg = await queryCurrentUser({
-        skipErrorHandler: true,
-      });
+      const msg = await queryCurrentUser();
       return msg.data;
     } catch (error) {
       console.log(error);
@@ -54,6 +54,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     // actionsRender: () => [<Question key="doc" />, <SelectLang key="SelectLang" />],
     actionsRender: () => [],
     avatarProps: {
+      // @ts-ignore
       src: initialState?.currentUser?.avatar,
       title: <AvatarName />,
       render: (_, avatarChildren) => {
