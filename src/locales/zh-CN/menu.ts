@@ -16,4 +16,6 @@ export default {
   'menu.steps.addSolvent': '添加溶剂',
   'menu.steps.pipette': '移液',
   'menu.steps.addSolid': '加固',
+  'menu.experiment': '实验',
+  'menu.experiment.experimentList': '实验列表',
 };

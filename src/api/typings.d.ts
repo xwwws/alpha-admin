@@ -2,10 +2,16 @@
 /* eslint-disable */
 
 export declare namespace API {
-  type Pages = {
+  interface PagesReq {
     limit?: string | number;
     page?: string | number;
-  };
+  }
+
+  interface PagesRes<T> {
+    total: number;
+    currentPage: number;
+    data: T[];
+  }
 
   /**
    * method相关
@@ -68,7 +74,6 @@ export declare namespace API {
     tip_length: number;
     drop_pre: boolean;
   };
-
   // 移液
   type LiquidMovementReq = {
     src_area: MoveParams;
@@ -80,14 +85,12 @@ export declare namespace API {
     interval: number | string;
     speed: number | string;
   };
-
   // 移动固体料仓
   type SolidMovementReq = {
     src_area: MoveParams;
     dst_area: MoveParams;
     height: number | string;
   };
-
   // 搅拌加固
   type doAddSolidReq = {
     area_name: string;
@@ -97,9 +100,8 @@ export declare namespace API {
     tolerance: number | string;
   };
   /**
-   * 步骤相关
+   * steps相关
    */
-
   // 添加溶剂
   type AddSolvent = {
     src_area: MoveParams;
@@ -130,6 +132,24 @@ export declare namespace API {
     weight: string | number;
     tolerance: string | number;
   };
+  /**
+   * experiments 相关
+   */
+  declare namespace Experiments {
+    type List = {
+      bottle_area: {
+        name: string;
+        x: number;
+        y: number;
+        z: number;
+      };
+      bottle_height: number;
+      created_at: string;
+      id: string | number;
+      name: string;
+      status: string;
+    };
+  }
 
   /**
    * 用户相关

@@ -4,7 +4,7 @@ import { request } from '@umijs/max';
 
 /**
  * 添加溶剂
- * @param data {API.AddSolReq}
+ * @param data {API.AddSolvent}
  */
 export const addSolvent = (data: API.AddSolvent) => {
   return request<API.MethodsRes>(`/api/v1/lab/steps/addsolventstep`, {

@@ -1,4 +1,5 @@
-﻿import { methods } from './routes/methods';
+﻿import { experiments } from './routes/experiments';
+import { methods } from './routes/methods';
 import { steps } from './routes/steps';
 
 // 文档地址  https://v3.umijs.org/zh-CN/plugins/plugin-layout
@@ -58,6 +59,7 @@ export default [
   },
   ...methods,
   ...steps,
+  ...experiments,
   {
     path: '/',
     redirect: '/welcome',
