@@ -3,18 +3,19 @@ import React, { useState } from 'react';
 // @ts-ignore
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 // @ts-ignore
-import { addSolMethod } from '@/api/experiment';
+import { pipette } from '@/api/steps';
 import MethodsView from '@/pages/Methods/components/MethodsView';
 // @ts-ignore
+import { API } from '@/api/typings';
 import { Button, Card, Form, Input, Select } from 'antd';
 
 const formItemLayout = {
-  labelCol: { span: 8 },
-  wrapperCol: { span: 16 },
-};
-const contentItemLayout = {
   labelCol: { span: 4 },
   wrapperCol: { span: 20 },
+};
+const contentItemLayout = {
+  labelCol: { span: 12 },
+  wrapperCol: { span: 12 },
 };
 
 interface IConditions {
@@ -26,9 +27,13 @@ interface IConditions {
   dst_area_x: string | number;
   dst_area_y: string | number;
   dst_area_z: string | number;
+  tip_length: string | number;
+  total: string | number;
+  take_once: string | number;
+  spit_once: string | number;
+  interval: string | number;
+  height: string | number;
   speed: string | number;
-  weight: string | number;
-  accuracy: string | number;
 }
 
 const formRules = {
@@ -39,27 +44,17 @@ const formRules = {
     { pattern: /^\d+$/, message: '坐标输入错误' },
     { max: 10, message: '坐标长度过长' },
   ],
-  speed: [
-    { required: true, message: '请输入速度' },
-    { pattern: /^\d+$/, message: '速度应为数字' },
-    { max: 10, message: '速度过快' },
-  ],
-  weight: [
-    { required: true, message: '请输入比重' },
-    { pattern: /^\d+$/, message: '比重应为数字' },
-    { max: 10, message: '比重过高' },
-  ],
-  accuracy: [
-    { required: true, message: '请输入精准度' },
-    { pattern: /^\d+$/, message: '精准度应为数字' },
-    { max: 10, message: '精准度有误' },
+  height: [
+    { required: true, message: '请输入高度' },
+    { pattern: /^\d+$/, message: '高度应为数字' },
+    { max: 10, message: '高度过高' },
   ],
 };
 const formItemStyle = {};
 const formStyle = {
   width: '100%',
   display: 'grid',
-  gridTemplateColumns: '280px 1fr 1fr 1fr',
+  gridTemplateColumns: '1fr 1fr 1fr 1fr',
   gap: '10px',
 };
 const Index: React.FC = () => {
@@ -69,7 +64,7 @@ const Index: React.FC = () => {
   const onFinish = async (val: IConditions) => {
     try {
       setLoading(true);
-      const params: API.AddSolReq = {
+      const params: API.Pipette = {
         src_area: {
           name: val.src_area_name,
           x: val.src_area_x,
@@ -82,11 +77,15 @@ const Index: React.FC = () => {
           y: val.dst_area_y,
           z: val.dst_area_z,
         },
-        accuracy: val.accuracy,
+        tip_length: val.tip_length,
+        total: val.total,
+        take_once: val.take_once,
+        height: val.height,
+        spit_once: val.spit_once,
         speed: val.speed,
-        weight: val.weight,
+        interval: val.interval,
       };
-      const res = await addSolMethod(params);
+      const res = await pipette(params);
       setLoading(false);
       setReadResult(JSON.stringify(res.result));
     } catch (err) {
@@ -107,85 +106,104 @@ const Index: React.FC = () => {
     >
       <Form.Item
         style={formItemStyle}
+        {...contentItemLayout}
         name="src_area_name"
         label="托盘区域"
         rules={formRules.src_area_name}
       >
         <Select options={[{ label: 'OP11', value: 'OP11' }]} />
       </Form.Item>
-      <Form.Item
-        style={formItemStyle}
-        {...contentItemLayout}
-        name="src_area_x"
-        label="x"
-        rules={formRules.coordinates}
-      >
+      <Form.Item style={formItemStyle} name="src_area_x" label="x" rules={formRules.coordinates}>
+        <Input />
+      </Form.Item>
+      <Form.Item style={formItemStyle} name="src_area_y" label="y" rules={formRules.coordinates}>
+        <Input />
+      </Form.Item>
+      <Form.Item style={formItemStyle} name="src_area_z" label="z" rules={formRules.coordinates}>
         <Input />
       </Form.Item>
       <Form.Item
         style={formItemStyle}
         {...contentItemLayout}
-        name="src_area_y"
-        label="y"
-        rules={formRules.coordinates}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        style={formItemStyle}
-        {...contentItemLayout}
-        name="src_area_z"
-        label="z"
-        rules={formRules.coordinates}
-      >
-        <Input />
-      </Form.Item>
-      <Form.Item
-        style={formItemStyle}
         name="dst_area_name"
         label="目标托盘区域"
         rules={formRules.dst_area_name}
       >
         <Select options={[{ label: 'OP11', value: 'OP11' }]} />
       </Form.Item>
-      <Form.Item
-        style={formItemStyle}
-        {...contentItemLayout}
-        name="dst_area_x"
-        label="x"
-        rules={formRules.coordinates}
-      >
+      <Form.Item style={formItemStyle} name="dst_area_x" label="x" rules={formRules.coordinates}>
         <Input />
       </Form.Item>
-      <Form.Item
-        style={formItemStyle}
-        {...contentItemLayout}
-        name="dst_area_y"
-        label="y"
-        rules={formRules.coordinates}
-      >
+      <Form.Item style={formItemStyle} name="dst_area_y" label="y" rules={formRules.coordinates}>
         <Input />
       </Form.Item>
-      <Form.Item
-        style={formItemStyle}
-        {...contentItemLayout}
-        name="dst_area_z"
-        label="z"
-        rules={formRules.coordinates}
-      >
+      <Form.Item style={formItemStyle} name="dst_area_z" label="z" rules={formRules.coordinates}>
         <Input />
       </Form.Item>
 
-      <Form.Item style={formItemStyle} name="speed" label="速度" rules={formRules.speed}>
+      <Form.Item
+        style={formItemStyle}
+        {...contentItemLayout}
+        name="tip_length"
+        label="枪头长度"
+        rules={formRules.height}
+      >
         <Input addonAfter="cm" />
       </Form.Item>
-      <Form.Item style={formItemStyle} name="weight" label="比重" rules={formRules.weight}>
+      <Form.Item
+        style={formItemStyle}
+        {...contentItemLayout}
+        name="height"
+        label="高度"
+        rules={formRules.height}
+      >
         <Input addonAfter="cm" />
       </Form.Item>
-      <Form.Item style={formItemStyle} name="accuracy" label="精确度" rules={formRules.accuracy}>
-        <Input addonAfter="cm" />
+      <Form.Item
+        style={formItemStyle}
+        {...contentItemLayout}
+        name="total"
+        label="移液总量"
+        rules={formRules.height}
+      >
+        <Input addonAfter="ml" />
       </Form.Item>
-
+      <Form.Item
+        style={formItemStyle}
+        {...contentItemLayout}
+        name="take_once"
+        label="单次吸液量"
+        rules={formRules.height}
+      >
+        <Input addonAfter="ml" />
+      </Form.Item>
+      <Form.Item
+        style={formItemStyle}
+        {...contentItemLayout}
+        name="spit_once"
+        label="单次吐液量"
+        rules={formRules.height}
+      >
+        <Input addonAfter="ml" />
+      </Form.Item>
+      <Form.Item
+        style={formItemStyle}
+        {...contentItemLayout}
+        name="interval"
+        label="吐液间隔时长"
+        rules={formRules.height}
+      >
+        <Input addonAfter="s" />
+      </Form.Item>
+      <Form.Item
+        style={formItemStyle}
+        {...contentItemLayout}
+        name="speed"
+        label="吸液吐液速度"
+        rules={formRules.height}
+      >
+        <Input addonAfter="s" />
+      </Form.Item>
       <Form.Item wrapperCol={{ offset: 4 }}>
         <Button type={'primary'} htmlType="submit">
           确定

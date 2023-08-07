@@ -53,7 +53,7 @@ const formRules = {
   accuracy: [
     { required: true, message: '请输入精准度' },
     { pattern: /^\d+$/, message: '精准度应为数字' },
-    { max: 10, message: '精准度过高' },
+    { max: 10, message: '精准度有误' },
   ],
 };
 const formItemStyle = {};

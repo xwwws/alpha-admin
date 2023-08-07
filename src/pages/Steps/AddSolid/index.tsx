@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 // @ts-ignore
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 // @ts-ignore
-import { addSolMethod } from '@/api/experiment';
+import { addSolid } from '@/api/steps';
+import { API } from '@/api/typings';
 import MethodsView from '@/pages/Methods/components/MethodsView';
 // @ts-ignore
 import { Button, Card, Form, Input, Select } from 'antd';
@@ -28,7 +29,9 @@ interface IConditions {
   dst_area_z: string | number;
   speed: string | number;
   weight: string | number;
-  accuracy: string | number;
+  tolerance: string | number;
+  height: string | number;
+  angel: string | number;
 }
 
 const formRules = {
@@ -49,7 +52,17 @@ const formRules = {
     { pattern: /^\d+$/, message: '比重应为数字' },
     { max: 10, message: '比重过高' },
   ],
-  accuracy: [
+  height: [
+    { required: true, message: '请输入比高度' },
+    { pattern: /^\d+$/, message: '高度应为数字' },
+    { max: 10, message: '高度过高' },
+  ],
+  angel: [
+    { required: true, message: '请输入比角度' },
+    { pattern: /^\d+$/, message: '角度应为数字' },
+    { max: 3, message: '角度不正确' },
+  ],
+  tolerance: [
     { required: true, message: '请输入精准度' },
     { pattern: /^\d+$/, message: '精准度应为数字' },
     { max: 10, message: '精准度有误' },
@@ -69,7 +82,7 @@ const Index: React.FC = () => {
   const onFinish = async (val: IConditions) => {
     try {
       setLoading(true);
-      const params: API.AddSolReq = {
+      const params: API.AddSolid = {
         src_area: {
           name: val.src_area_name,
           x: val.src_area_x,
@@ -82,11 +95,13 @@ const Index: React.FC = () => {
           y: val.dst_area_y,
           z: val.dst_area_z,
         },
-        accuracy: val.accuracy,
+        tolerance: val.tolerance,
         speed: val.speed,
         weight: val.weight,
+        height: val.height,
+        angel: val.angel,
       };
-      const res = await addSolMethod(params);
+      const res = await addSolid(params);
       setLoading(false);
       setReadResult(JSON.stringify(res.result));
     } catch (err) {
@@ -182,8 +197,14 @@ const Index: React.FC = () => {
       <Form.Item style={formItemStyle} name="weight" label="比重" rules={formRules.weight}>
         <Input addonAfter="cm" />
       </Form.Item>
-      <Form.Item style={formItemStyle} name="accuracy" label="精确度" rules={formRules.accuracy}>
+      <Form.Item style={formItemStyle} name="tolerance" label="精确度" rules={formRules.tolerance}>
         <Input addonAfter="cm" />
+      </Form.Item>
+      <Form.Item style={formItemStyle} name="height" label="高度" rules={formRules.height}>
+        <Input addonAfter="cm" />
+      </Form.Item>
+      <Form.Item style={formItemStyle} name="angel" label="角度" rules={formRules.angel}>
+        <Input addonAfter="°" />
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 4 }}>

@@ -72,8 +72,8 @@ export declare namespace API {
   // 移液
   type LiquidMovementReq = {
     src_area: MoveParams;
-    tip_length: number | string;
     dst_area: MoveParams;
+    tip_length: number | string;
     total: number | string;
     take_once: number | string;
     spit_once: number | string;
@@ -100,13 +100,35 @@ export declare namespace API {
    * 步骤相关
    */
 
-  // 加液
+  // 添加溶剂
   type AddSolvent = {
     src_area: MoveParams;
     dst_area: MoveParams;
     speed: string | number;
     weight: string | number;
     accuracy: string | number;
+  };
+  // 移液
+  type Pipette = {
+    src_area: MoveParams;
+    dst_area: MoveParams;
+    speed: string | number;
+    total: string | number;
+    take_once: string | number;
+    spit_once: string | number;
+    interval: string | number;
+    height: string | number;
+    tip_length: string | number;
+  };
+  // 添加固体
+  type AddSolid = {
+    src_area: MoveParams;
+    dst_area: MoveParams;
+    speed: string | number;
+    height: string | number;
+    angel: string | number;
+    weight: string | number;
+    tolerance: string | number;
   };
 
   /**

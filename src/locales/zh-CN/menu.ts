@@ -14,4 +14,6 @@ export default {
   'menu.methods.solidMovement': '移动固体料仓',
   'menu.steps': '步骤',
   'menu.steps.addSolvent': '添加溶剂',
+  'menu.steps.pipette': '移液',
+  'menu.steps.addSolid': '加固',
 };
