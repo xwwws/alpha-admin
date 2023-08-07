@@ -1,4 +1,5 @@
 ﻿import { methods } from './routes/methods';
+import { steps } from './routes/steps';
 
 // 文档地址  https://v3.umijs.org/zh-CN/plugins/plugin-layout
 //config/route.ts
@@ -56,6 +57,7 @@ export default [
     component: './Welcome',
   },
   ...methods,
+  ...steps,
   {
     path: '/',
     redirect: '/welcome',

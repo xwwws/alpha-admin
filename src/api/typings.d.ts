@@ -96,6 +96,18 @@ export declare namespace API {
     weight: number | string;
     tolerance: number | string;
   };
+  /**
+   * 步骤相关
+   */
+
+  // 加液
+  type AddSolvent = {
+    src_area: MoveParams;
+    dst_area: MoveParams;
+    speed: string | number;
+    weight: string | number;
+    accuracy: string | number;
+  };
 
   /**
    * 用户相关

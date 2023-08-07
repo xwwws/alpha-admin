@@ -12,4 +12,6 @@ export default {
   'menu.methods.pickTip': '抬起枪头',
   'menu.methods.liquidMovement': '移液',
   'menu.methods.solidMovement': '移动固体料仓',
+  'menu.steps': '步骤',
+  'menu.steps.addSolvent': '添加溶剂',
 };
