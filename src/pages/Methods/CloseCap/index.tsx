@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 // @ts-ignore
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 // @ts-ignore
-import { openCapMethod } from '@/api/experiment';
-import MethodsView from '@/pages/Experiment/components/MethodsView';
+import { closeCapMethod } from '@/api/experiment';
+import MethodsView from '@/pages/Methods/components/MethodsView';
 // @ts-ignore
 import { Button, Card, Form, Input, Select } from 'antd';
 
@@ -50,12 +50,12 @@ const Index: React.FC = () => {
   const onFinish = async (val: IConditions) => {
     try {
       setLoading(true);
-      const params: API.OpenCap = {
+      const params: API.CloseCap = {
         area_name: val.area_name,
         y: val.y,
         height: val.height,
       };
-      const res = await openCapMethod(params);
+      const res = await closeCapMethod(params);
       setLoading(false);
       setReadResult(JSON.stringify(res.result));
     } catch (err) {

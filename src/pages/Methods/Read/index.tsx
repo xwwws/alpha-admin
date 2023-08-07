@@ -2,7 +2,8 @@
 import React, { useState } from 'react';
 // @ts-ignore
 import { readMethod } from '@/api/experiment';
-import MethodsView from '@/pages/Experiment/components/MethodsView';
+import MethodsView from '@/pages/Methods/components/MethodsView';
+// @ts-ignore
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 // @ts-ignore
 import { Card, Form, Select } from 'antd';

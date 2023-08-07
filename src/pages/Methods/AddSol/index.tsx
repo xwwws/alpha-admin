@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 // @ts-ignore
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 // @ts-ignore
-import { moveMethod } from '@/api/experiment';
-import MethodsView from '@/pages/Experiment/components/MethodsView';
+import { addSolMethod } from '@/api/experiment';
+import MethodsView from '@/pages/Methods/components/MethodsView';
 // @ts-ignore
 import { Button, Card, Form, Input, Select } from 'antd';
 
@@ -26,7 +26,9 @@ interface IConditions {
   dst_area_x: string | number;
   dst_area_y: string | number;
   dst_area_z: string | number;
-  height: string | number;
+  speed: string | number;
+  weight: string | number;
+  accuracy: string | number;
 }
 
 const formRules = {
@@ -37,10 +39,20 @@ const formRules = {
     { pattern: /^\d+$/, message: '坐标输入错误' },
     { max: 10, message: '坐标长度过长' },
   ],
-  height: [
-    { required: true, message: '请输入高度' },
-    { pattern: /^\d+$/, message: '高度应为数字' },
-    { max: 10, message: '高度过高' },
+  speed: [
+    { required: true, message: '请输入速度' },
+    { pattern: /^\d+$/, message: '速度应为数字' },
+    { max: 10, message: '速度过快' },
+  ],
+  weight: [
+    { required: true, message: '请输入比重' },
+    { pattern: /^\d+$/, message: '比重应为数字' },
+    { max: 10, message: '比重过高' },
+  ],
+  accuracy: [
+    { required: true, message: '请输入精准度' },
+    { pattern: /^\d+$/, message: '精准度应为数字' },
+    { max: 10, message: '精准度过高' },
   ],
 };
 const formItemStyle = {};
@@ -57,7 +69,7 @@ const Index: React.FC = () => {
   const onFinish = async (val: IConditions) => {
     try {
       setLoading(true);
-      const params: API.MoveReq = {
+      const params: API.AddSolReq = {
         src_area: {
           name: val.src_area_name,
           x: val.src_area_x,
@@ -70,9 +82,11 @@ const Index: React.FC = () => {
           y: val.dst_area_y,
           z: val.dst_area_z,
         },
-        height: val.height,
+        accuracy: val.accuracy,
+        speed: val.speed,
+        weight: val.weight,
       };
-      const res = await moveMethod(params);
+      const res = await addSolMethod(params);
       setLoading(false);
       setReadResult(JSON.stringify(res.result));
     } catch (err) {
@@ -162,9 +176,16 @@ const Index: React.FC = () => {
         <Input />
       </Form.Item>
 
-      <Form.Item style={formItemStyle} name="height" label="高度" rules={formRules.height}>
+      <Form.Item style={formItemStyle} name="speed" label="速度" rules={formRules.speed}>
         <Input addonAfter="cm" />
       </Form.Item>
+      <Form.Item style={formItemStyle} name="weight" label="比重" rules={formRules.weight}>
+        <Input addonAfter="cm" />
+      </Form.Item>
+      <Form.Item style={formItemStyle} name="accuracy" label="精确度" rules={formRules.accuracy}>
+        <Input addonAfter="cm" />
+      </Form.Item>
+
       <Form.Item wrapperCol={{ offset: 4 }}>
         <Button type={'primary'} htmlType="submit">
           确定

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 // @ts-ignore
 import { clawGripperMethod } from '@/api/experiment';
-import MethodsView from '@/pages/Experiment/components/MethodsView';
+import MethodsView from '@/pages/Methods/components/MethodsView';
 // @ts-ignore
 import { Button, Card, Form, Select } from 'antd';
 

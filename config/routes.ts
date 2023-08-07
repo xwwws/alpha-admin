@@ -1,4 +1,4 @@
-﻿import { experimentRoutes } from './routes/experimentRoutes';
+﻿import { methods } from './routes/methods';
 
 // 文档地址  https://v3.umijs.org/zh-CN/plugins/plugin-layout
 //config/route.ts
@@ -55,7 +55,7 @@ export default [
     icon: 'smile',
     component: './Welcome',
   },
-  ...experimentRoutes,
+  ...methods,
   {
     path: '/',
     redirect: '/welcome',

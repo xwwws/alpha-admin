@@ -1,76 +1,76 @@
-export const experimentRoutes = [
+export const methods = [
   {
-    path: '/experiment',
-    name: 'experiment',
+    path: '/methods',
+    name: 'methods',
     icon: 'crown',
     // access: 'canAdmin',
 
     routes: [
       {
-        path: '/experiment',
-        redirect: '/experiment/read',
+        path: '/methods',
+        redirect: '/Methods/read',
       },
       // 读值
       {
         path: 'read',
         name: 'read',
-        component: './Experiment/Read',
+        component: './Methods/Read',
       },
       // 等待
       {
         path: 'sleep',
         name: 'sleep',
-        component: './Experiment/Sleep',
+        component: './Methods/Sleep',
       },
       // 移动
       {
         path: 'move',
         name: 'move',
-        component: './Experiment/Move',
+        component: './Methods/Move',
       },
       // 加液
       {
         path: 'add-sol',
         name: 'addSol',
-        component: './Experiment/AddSol',
+        component: './Methods/AddSol',
       },
       // 开盖
       {
         path: 'open-cap',
         name: 'openCap',
-        component: './Experiment/OpenCap',
+        component: './Methods/OpenCap',
       },
       // 加盖
       {
         path: 'close-cap',
         name: 'closeCap',
-        component: './Experiment/CloseCap',
+        component: './Methods/CloseCap',
       },
       // 更换夹爪
       {
         path: 'claw-gripper',
         name: 'clawGripper',
-        component: './Experiment/ClawGripper',
+        component: './Methods/ClawGripper',
       },
       // 抬起枪头
       {
         path: 'pick-tip',
         name: 'pickTip',
-        component: './Experiment/PickTip',
+        component: './Methods/PickTip',
       },
 
       // 移液
       {
         path: 'liquid-movement',
         name: 'liquidMovement',
-        component: './Experiment/LiquidMovement',
+        component: './Methods/LiquidMovement',
       },
 
       // 移动固体料仓
       {
         path: 'solid-movement',
         name: 'solidMovement',
-        component: './Experiment/SolidMovement',
+        component: './Methods/SolidMovement',
       },
     ],
   },
