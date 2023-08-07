@@ -6,6 +6,7 @@ import { PageContainer } from '@ant-design/pro-layout/es/components/PageContaine
 import { addSolMethod } from '@/api/experiment';
 import MethodsView from '@/pages/Methods/components/MethodsView';
 // @ts-ignore
+import { API } from '@/api/typings';
 import { Button, Card, Form, Input, Select } from 'antd';
 
 const formItemLayout = {
