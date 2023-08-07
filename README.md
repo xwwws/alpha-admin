@@ -11,6 +11,15 @@
 
 ## git 代码提交规范:
 
+<style>
+.important{
+  font-size: 12px;
+  color: red; 
+  font-weight: 900;
+}
+</style>
+<p  class="important"> 代码提交强制使用以下规则,  本项目已经安装husky, 请规范使用 </p>
+
 | type | 作用 |
 | --- | --- |
 | feat | 新增特性(feature) |
@@ -31,14 +40,19 @@
 
 ```javascript
 {
-  ...
+...
   define: {
-    'process.env': {
+    'process.env'
+  :
+    {
       API_SERVER: 'http://10.0.0.33:9000',
-        ENV: 'dev',
-    },
+        ENV
+    :
+      'dev',
+    }
+  ,
   }
-  ...
+...
 }
 
 ```
