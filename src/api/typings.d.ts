@@ -81,6 +81,22 @@ declare namespace API {
     speed: number | string;
   };
 
+  // 移动固体料仓
+  type SolidMovementReq = {
+    src_area: MoveParams;
+    dst_area: MoveParams;
+    height: number | string;
+  };
+
+  // 搅拌加固
+  type doAddSolidReq = {
+    area_name: string;
+    speed: number | string;
+    angel: number | string;
+    weight: number | string;
+    tolerance: number | string;
+  };
+
   /**
    * 用户相关
    */
@@ -99,5 +115,8 @@ declare namespace API {
 
   type UserInfoRes = {
     username: string;
+    avatar: string;
   };
+
+  type LogoutReq = {};
 }

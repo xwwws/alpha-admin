@@ -49,7 +49,7 @@ const Index: React.FC = () => {
       onFinish={onFinish}
     >
       <Form.Item name="seconds" label="等待" rules={formRules.seconds}>
-        <Input addonAfter="秒" defaultValue="mysite" />
+        <Input addonAfter="秒" />
       </Form.Item>
       <Form.Item>
         <Button type={'primary'} htmlType="submit">

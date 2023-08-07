@@ -64,6 +64,13 @@ export const experimentRoutes = [
         name: 'liquidMovement',
         component: './Experiment/LiquidMovement',
       },
+
+      // 移动固体料仓
+      {
+        path: 'solid-movement',
+        name: 'solidMovement',
+        component: './Experiment/SolidMovement',
+      },
     ],
   },
 ];

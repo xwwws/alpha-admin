@@ -1,3 +1,5 @@
+import { API } from '@/api/typings';
+
 /**
  * 登录
  * @param data {API.UserLoginReq}
@@ -27,6 +29,20 @@ export const currentUser = (): Promise<API.response<API.UserInfoRes>> => {
       username: 'wangzhen',
       avatar: 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png',
     },
+  });
+  // return request<API.MethodsRes>(`/api/user/info`, {
+  //   method: 'post',
+  //   data,
+  // });
+};
+/**
+ * 退出登录
+ */
+export const outLogin = (): Promise<API.response<API.LogoutReq>> => {
+  return Promise.resolve({
+    status: 'ok',
+    code: 200,
+    data: {},
   });
   // return request<API.MethodsRes>(`/api/user/info`, {
   //   method: 'post',

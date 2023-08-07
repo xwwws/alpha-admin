@@ -1,3 +1,5 @@
+// @ts-ignore
+import { API } from '@/api/typings';
 import { request } from '@umijs/max';
 /**
  * 读值
@@ -86,6 +88,27 @@ export const pickTipMethod = (data: API.PickTipReq) => {
  */
 export const liquidMovementMethod = (data: API.LiquidMovementReq) => {
   return request<API.MethodsRes>(`/api/v1/lab/methods/trnsliquid`, {
+    method: 'post',
+    data,
+  });
+};
+
+/**
+ * 移动固体料仓
+ * @param data {API.SolidMovementReq}
+ */
+export const solidMovementMethod = (data: API.SolidMovementReq) => {
+  return request<API.MethodsRes>(`/api/v1/lab/methods/mvsolid`, {
+    method: 'post',
+    data,
+  });
+};
+/**
+ * 搅拌加固
+ * @param data {API.doAddSolidReq}
+ */
+export const doAddSolidMethod = (data: API.doAddSolidReq) => {
+  return request<API.MethodsRes>(`/api/v1/lab/methods/doaddsolid`, {
     method: 'post',
     data,
   });

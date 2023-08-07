@@ -11,4 +11,5 @@ export default {
   'menu.experiment.clawGripper': '更换夹爪',
   'menu.experiment.pickTip': '抬起枪头',
   'menu.experiment.liquidMovement': '移液',
+  'menu.experiment.solidMovement': '移动固体料仓',
 };
