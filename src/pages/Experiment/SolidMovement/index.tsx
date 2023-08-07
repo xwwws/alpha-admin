@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 // @ts-ignore
 import { solidMovementMethod } from '@/api/experiment';
+import { API } from '@/api/typings';
 import MethodsView from '@/pages/Experiment/components/MethodsView';
 // @ts-ignore
-import { API } from '@/api/typings';
 import { Button, Card, Form, Input, Select } from 'antd';
 
 const formItemLayout = {

@@ -1,7 +1,7 @@
 // @ts-ignore
 /* eslint-disable */
 
-declare namespace API {
+export declare namespace API {
   type Pages = {
     limit?: string | number;
     page?: string | number;
@@ -104,11 +104,13 @@ declare namespace API {
     username: string;
     password: string;
   };
+
   interface response<T> {
     status: 'ok' | 'err';
     code: number;
     data: T;
   }
+
   interface UserLoginRes {
     token: string;
   }

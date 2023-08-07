@@ -4,6 +4,7 @@ export const experimentRoutes = [
     name: 'experiment',
     icon: 'crown',
     // access: 'canAdmin',
+
     routes: [
       {
         path: '/experiment',
