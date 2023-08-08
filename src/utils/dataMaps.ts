@@ -1,9 +1,11 @@
 import { ReactNode } from 'react';
-interface IExpState {
+
+export interface IExpState {
   label: string;
   value: string;
   status: 'Success' | 'Error' | 'Processing' | 'Warning' | 'Default';
 }
+
 /**
  * 实验状态
  */

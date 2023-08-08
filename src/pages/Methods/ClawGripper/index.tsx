@@ -1,5 +1,5 @@
 // @ts-ignore
-import { clawGripperMethod } from '@/api/experiment';
+import { clawGripperMethod } from '@/api/methods';
 import MethodsView from '@/pages/Methods/components/MethodsView';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 import { Button, Card, Form, Select } from 'antd';

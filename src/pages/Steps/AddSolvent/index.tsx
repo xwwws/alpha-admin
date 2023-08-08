@@ -1,4 +1,4 @@
-import { addSolMethod } from '@/api/experiment';
+import { addSolMethod } from '@/api/methods';
 import MethodsView from '@/pages/Methods/components/MethodsView';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 import { Button, Card, Form, Input, Select } from 'antd';

@@ -3,6 +3,7 @@ export const experiments = [
     path: '/experiment',
     name: 'experiment',
     icon: 'AreaChartOutlined',
+    hideChildrenInMenu: true,
     // access: 'canAdmin',
 
     routes: [
@@ -11,10 +12,24 @@ export const experiments = [
         redirect: '/experiment/list',
       },
       // 实验列表
+
       {
-        path: 'list',
+        path: '/experiment/list',
         name: 'experimentList',
         component: './Experiments/List',
+      },
+
+      // 实验详情
+      {
+        path: '/experiment/:id/detail',
+        name: 'experimentDetail',
+        component: './Experiments/Detail',
+      },
+      // 实验记录
+      {
+        path: '/experiment/:id/record',
+        name: 'experimentRecord',
+        component: './Experiments/Record',
       },
     ],
   },

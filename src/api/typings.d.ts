@@ -149,6 +149,30 @@ declare namespace API {
       name: string;
       status: string;
     };
+
+    interface ExperimentRecordItem {
+      name: string;
+      kwargs:
+        | MoveReq
+        | AddSolReq
+        | OpenCap
+        | CloseCap
+        | ClawGripper
+        | PickTipReq
+        | LiquidMovementReq
+        | SolidMovementReq
+        | doAddSolidReq
+        | object;
+    }
+
+    type ExperimentRecordRes = {
+      id: string | number;
+      name: string;
+      bottle_area: Coordinates;
+      bottle_height: 0;
+      steps_data: ExperimentRecordItem[];
+      status: string;
+    };
   }
 
   /**

@@ -1,11 +1,62 @@
-import { getExperimentList } from '@/api/experiments';
-import { experimentStatesMap, expState2ValueEnum } from '@/utils/dataMaps';
+import { cancelExperimentById, getExperimentList, runExperimentById } from '@/api/experiments';
+import { expState2ValueEnum, experimentStatesMap } from '@/utils/dataMaps';
+import { BellFilled, PlayCircleFilled, ReadFilled, StopFilled } from '@ant-design/icons';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, Card } from 'antd';
+import type { ActionType } from '@ant-design/pro-table';
+import { Button, Card, Tooltip, message } from 'antd';
 import dayjs from 'dayjs';
-import React from 'react';
+import React, { useRef } from 'react';
+import { useNavigate } from 'umi';
+
 const List: React.FC = () => {
+  const tableRef = useRef<ActionType>();
+  const [messageApi, contextHolder] = message.useMessage();
+  const navigate = useNavigate();
+  /**
+   * 执行实验
+   * @param id
+   */
+  async function handleRun(id: string | number) {
+    messageApi.open({
+      key: 'run',
+      type: 'loading',
+      content: '正在加载...',
+    });
+    try {
+      const flag: boolean = await runExperimentById(id);
+      tableRef.current?.reload();
+      if (flag) {
+        messageApi.open({
+          key: 'run',
+          type: 'success',
+          content: '实验开始执行',
+          duration: 1.5,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+    }
+  }
+
+  /**
+   * 取消实验
+   * @param id
+   */
+  async function handleCancel(id: string | number) {
+    try {
+      const flag: boolean = await cancelExperimentById(id);
+      tableRef.current?.reload();
+      if (flag) {
+        messageApi.success('已取消');
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+    }
+  }
+
   const requestTableData = async () => {
     const res = await getExperimentList({ limit: 100 });
     return {
@@ -74,10 +125,56 @@ const List: React.FC = () => {
       title: '操作',
       dataIndex: 'actions',
       align: 'center',
-      render: (text) => {
+      width: '150px',
+      render: (text, record, index, action) => {
         return (
           <>
-            <Button type={'link'}>adf</Button>
+            {
+              //  待提交  展示执行按钮
+              record.status === 'draft' && (
+                <Tooltip placement="top" title="运行">
+                  <Button
+                    type={'link'}
+                    icon={<PlayCircleFilled />}
+                    onClick={() => handleRun(record.id)}
+                  ></Button>
+                </Tooltip>
+              )
+            }
+            {
+              //  等待执行 执行中   展示执行按钮
+              (record.status === 'waiting' || record.status === 'doing') && (
+                <Tooltip placement="top" title="取消">
+                  <Button
+                    type={'link'}
+                    icon={<StopFilled />}
+                    onClick={() => handleCancel(record.id)}
+                  ></Button>
+                </Tooltip>
+              )
+            }
+            {/*实验详情一直展示*/}
+            <Tooltip placement="top" title="实验详情">
+              <Button
+                type={'link'}
+                icon={<BellFilled />}
+                onClick={() => navigate(`/experiment/${record.id}/detail`)}
+              ></Button>
+            </Tooltip>
+            {
+              //  成功  失败  取消  展示实验记录
+              (record.status === 'succeed' ||
+                record.status === 'failed' ||
+                record.status === 'canceled') && (
+                <Tooltip placement="top" title="实验记录">
+                  <Button
+                    type={'link'}
+                    icon={<ReadFilled />}
+                    onClick={() => navigate(`/experiment/${record.id}/record`)}
+                  ></Button>
+                </Tooltip>
+              )
+            }
           </>
         );
       },
@@ -85,9 +182,16 @@ const List: React.FC = () => {
   ];
   return (
     <>
+      {contextHolder}
       <PageContainer>
         <Card>
-          <ProTable columns={columns} options={false} rowKey="id" request={requestTableData} />
+          <ProTable
+            actionRef={tableRef}
+            columns={columns}
+            options={false}
+            rowKey="id"
+            request={requestTableData}
+          />
         </Card>
       </PageContainer>
     </>

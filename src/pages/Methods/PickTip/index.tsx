@@ -1,5 +1,5 @@
 // @ts-ignore
-import { pickTipMethod } from '@/api/experiment';
+import { pickTipMethod } from '@/api/methods';
 import MethodsView from '@/pages/Methods/components/MethodsView';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 import { Button, Card, Form, Input, Select, Switch } from 'antd';

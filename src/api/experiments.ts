@@ -13,3 +13,37 @@ export const getExperimentList = (params: API.PagesReq) => {
     params,
   });
 };
+
+/**
+ * 执行实验
+ * @param id string
+ * @param data {} object
+ */
+export const runExperimentById = (id: string | number, data?: object | undefined) => {
+  return request<boolean>(`/api/v1/expt/expts/${id}/run`, {
+    method: 'post',
+    data,
+  });
+};
+/**
+ * 取消实验
+ * @param id string
+ * @param data {} object
+ */
+export const cancelExperimentById = (id: string | number, data?: object | undefined) => {
+  return request<boolean>(`/api/v1/expt/expts/${id}/cancel`, {
+    method: 'post',
+    data,
+  });
+};
+/**
+ * 查询实验记录
+ * @param id string
+ * @param data {} object
+ */
+export const getExperimentDetailsById = (id: string | number, data?: object | undefined) => {
+  return request<API.Experiments.ExperimentRecordRes>(`/api/v1/expt/expts/${id}`, {
+    method: 'get',
+    data,
+  });
+};

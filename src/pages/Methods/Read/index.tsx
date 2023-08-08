@@ -1,5 +1,5 @@
 // @ts-ignore
-import { readMethod } from '@/api/experiment';
+import { readMethod } from '@/api/methods';
 import MethodsView from '@/pages/Methods/components/MethodsView';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 import { Card, Form, Select } from 'antd';
