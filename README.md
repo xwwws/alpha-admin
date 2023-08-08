@@ -71,4 +71,7 @@ console.log(process.env.API_SERVER); // http://10.0.0.33:9000
 
 ## !!!暂未解决问题
 
-可能由于 react he antd 版本不匹配问题 ts 会经常报错 请暂时使用 `// ts-ignore` 编辑器不报错 后续调整
+- [x] ~~已解决~~
+- [ ] 未解决
+
+- [x] ~~可能由于 react he antd 版本不匹配问题 ts 会经常报错 请暂时使用 `// ts-ignore` 编辑器不报错 后续调整~~

@@ -1,12 +1,9 @@
 // @ts-ignore
-import React, { useState } from 'react';
-// @ts-ignore
-import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
-// @ts-ignore
 import { clawGripperMethod } from '@/api/experiment';
 import MethodsView from '@/pages/Methods/components/MethodsView';
-// @ts-ignore
+import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 import { Button, Card, Form, Select } from 'antd';
+import React, { useState } from 'react';
 
 const formItemLayout = {
   labelCol: { span: 8 },

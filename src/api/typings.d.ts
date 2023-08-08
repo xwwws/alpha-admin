@@ -1,7 +1,7 @@
 // @ts-ignore
 /* eslint-disable */
 
-export declare namespace API {
+declare namespace API {
   interface PagesReq {
     limit?: string | number;
     page?: string | number;
@@ -173,6 +173,6 @@ export declare namespace API {
     username: string;
     avatar: string;
   };
-
+  LoginResult;
   type LogoutReq = {};
 }

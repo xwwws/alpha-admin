@@ -1,14 +1,12 @@
 import { outLogin } from '@/api/user';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
-import { history, useModel } from 'umi';
-// @ts-ignore
 import { Spin } from 'antd';
 import { stringify } from 'querystring';
 import type { MenuInfo } from 'rc-menu/lib/interface';
-// @ts-ignore
 import React, { useCallback } from 'react';
 import { flushSync } from 'react-dom';
+import { history, useModel } from 'umi';
 import HeaderDropdown from '../HeaderDropdown';
 
 export type GlobalHeaderRightProps = {

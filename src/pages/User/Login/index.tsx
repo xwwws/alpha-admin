@@ -1,18 +1,14 @@
 import { login } from '@/api/user';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
-// @ts-ignore
 import { LoginForm, ProFormText } from '@ant-design/pro-components';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { FormattedMessage, Helmet, history, useIntl, useModel } from 'umi';
 
-// @ts-ignore
 import { Alert, message, Tabs } from 'antd';
-import Settings from '../../../../config/defaultSettings';
-// @ts-ignore
 import React, { useState } from 'react';
+import Settings from '../../../../config/defaultSettings';
 
-// @ts-ignore
 import { flushSync } from 'react-dom';
 
 const LoginMessage: React.FC<{ content: string }> = ({ content }) => {

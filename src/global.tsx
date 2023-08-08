@@ -1,6 +1,5 @@
-import { useIntl } from 'umi';
-// @ts-ignore
 import { Button, message, notification } from 'antd';
+import { useIntl } from 'umi';
 import defaultSettings from '../config/defaultSettings';
 
 const { pwa } = defaultSettings;

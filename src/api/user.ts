@@ -1,5 +1,3 @@
-import { API } from '@/api/typings';
-
 /**
  * 登录
  * @param data {API.UserLoginReq}

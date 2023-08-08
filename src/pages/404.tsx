@@ -1,8 +1,6 @@
-import { history } from 'umi';
-// @ts-ignore
 import { Button, Result } from 'antd';
-// @ts-ignore
 import React from 'react';
+import { history } from 'umi';
 
 const NoFoundPage: React.FC = () => (
   <Result

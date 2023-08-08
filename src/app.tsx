@@ -1,6 +1,5 @@
 import { currentUser as queryCurrentUser } from '@/api/user';
 import { AvatarDropdown, AvatarName } from '@/components';
-// @ts-ignore
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from 'umi';
 import { history } from 'umi';

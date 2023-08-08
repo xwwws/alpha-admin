@@ -1,11 +1,8 @@
 // @ts-ignore
-import React from 'react';
-// @ts-ignore
-import type { ReactNode } from 'react';
-// @ts-ignore
 import { SmileOutlined } from '@ant-design/icons';
-// @ts-ignore
 import { Result, Spin } from 'antd';
+import type { ReactNode } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 type IProps = {
   isLoading?: boolean;

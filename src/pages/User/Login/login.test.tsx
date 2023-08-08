@@ -2,7 +2,6 @@
 import { act, fireEvent, render } from '@testing-library/react';
 import React from 'react';
 
-// @ts-ignore
 import { startMock } from '@@/requestRecordMock';
 
 const waitTime = (time: number = 100) => {

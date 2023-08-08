@@ -1,6 +1,5 @@
 import { QuestionCircleOutlined } from '@ant-design/icons';
 import { SelectLang as UmiSelectLang } from 'umi';
-// @ts-ignore
 
 export type SiderTheme = 'light' | 'dark';
 

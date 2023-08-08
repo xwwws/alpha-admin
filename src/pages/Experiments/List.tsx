@@ -1,16 +1,10 @@
-// @ts-ignore
-import React from 'react';
-// @ts-ignore
 import { getExperimentList } from '@/api/experiments';
-import { Badge, Button, Card } from 'antd';
-// @ts-ignore
-import { PageContainer, ProTable } from '@ant-design/pro-components';
-// @ts-ignore
-import { API } from '@/api/typings';
-import type { ProColumns } from '@ant-design/pro-components';
-// @ts-ignore
 import { experimentStatesMap } from '@/utils/dataMaps';
+import type { ProColumns } from '@ant-design/pro-components';
+import { PageContainer, ProTable } from '@ant-design/pro-components';
+import { Badge, Button, Card } from 'antd';
 import dayjs from 'dayjs';
+import React from 'react';
 const List: React.FC = () => {
   const requestTableData = async () => {
     const res = await getExperimentList({ limit: 100 });
