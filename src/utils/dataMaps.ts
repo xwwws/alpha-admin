@@ -1,8 +1,42 @@
-export const experimentStatesMap: { label: string; value: string }[] = [
-  { label: '待提交', value: 'draft' },
-  { label: '等待执行', value: 'waiting' },
-  { label: '执行中', value: 'doing' },
-  { label: '成功', value: 'succeed' },
-  { label: '失败', value: 'failed' },
-  { label: '已取消', value: 'canceled' },
+import { ReactNode } from 'react';
+interface IExpState {
+  label: string;
+  value: string;
+  status: 'Success' | 'Error' | 'Processing' | 'Warning' | 'Default';
+}
+/**
+ * 实验状态
+ */
+export const experimentStatesMap: IExpState[] = [
+  { label: '待提交', value: 'draft', status: 'Processing' },
+  { label: '等待执行', value: 'waiting', status: 'Processing' },
+  { label: '执行中', value: 'doing', status: 'Processing' },
+  { label: '成功', value: 'succeed', status: 'Success' },
+  { label: '失败', value: 'failed', status: 'Error' },
+  { label: '已取消', value: 'canceled', status: 'Default' },
 ];
+
+interface IValueEnum {
+  [key: string]:
+    | ReactNode
+    | {
+        text: ReactNode;
+        status: 'Success' | 'Error' | 'Processing' | 'Warning' | 'Default';
+      };
+}
+
+/**
+ * 实验状态 => valueEnum
+ * @param state {IExpState[]}
+ * @returns valueEnum {IValueEnum}
+ */
+export const expState2ValueEnum = (state: IExpState[]): IValueEnum => {
+  const valueEnum: IValueEnum = {};
+  state.forEach((item) => {
+    valueEnum[item.value] = {
+      text: item.label,
+      status: item.status,
+    };
+  });
+  return valueEnum;
+};

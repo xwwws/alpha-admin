@@ -1,8 +1,8 @@
 import { getExperimentList } from '@/api/experiments';
-import { experimentStatesMap } from '@/utils/dataMaps';
+import { experimentStatesMap, expState2ValueEnum } from '@/utils/dataMaps';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Badge, Button, Card } from 'antd';
+import { Button, Card } from 'antd';
 import dayjs from 'dayjs';
 import React from 'react';
 const List: React.FC = () => {
@@ -64,45 +64,20 @@ const List: React.FC = () => {
       title: '状态',
       dataIndex: 'status',
       align: 'center',
-      render: (text) => {
-        const currentState = experimentStatesMap.find((item) => item.value === text);
-        let badgeStatus: string = '';
-        switch (currentState?.value) {
-          case 'draft':
-            badgeStatus = 'blue';
-            break;
-          case 'waiting':
-            badgeStatus = 'gold';
-            break;
-          case 'doing':
-            badgeStatus = 'geekblue';
-            break;
-          case 'succeed':
-            badgeStatus = 'green';
-            break;
-          case 'canceled':
-            badgeStatus = 'gray';
-            break;
-          case 'failed':
-            badgeStatus = 'red';
-            break;
-        }
-        return (
-          <>
-            <Badge color={badgeStatus} text={currentState?.label} />
-          </>
-        );
-      },
+      valueType: 'select',
+
+      valueEnum: expState2ValueEnum(experimentStatesMap),
     },
 
     {
+      hideInSearch: true,
       title: '操作',
       dataIndex: 'actions',
       align: 'center',
       render: (text) => {
         return (
           <>
-            <Button type={'text'}>adf</Button>
+            <Button type={'link'}>adf</Button>
           </>
         );
       },
