@@ -7,11 +7,20 @@ import { request } from '@umijs/max';
 export const getExperimentList = (params: API.PagesReq) => {
   return request<API.Experiments.List[]>(`/api/v1/expt/expts`, {
     method: 'get',
-    // data,
     params,
   });
 };
 
+/**
+ * 创建实验
+ * @param data {API.Experiments.CreateExperimentReq}
+ */
+export const createExperiment = (data: API.Experiments.CreateExperimentReq) => {
+  return request<API.Experiments.CreateExperimentRes>(`/api/v1/expt/expts`, {
+    method: 'post',
+    data,
+  });
+};
 /**
  * 执行实验
  * @param id string

@@ -1,15 +1,19 @@
+import { createExperiment } from '@/api/experiments';
 import { getStepsMap } from '@/api/public';
 import CreateStepItem from '@/pages/Experiments/components/CreateStepItem';
 import { CenterHolderStyle, formItemLayout } from '@/utils';
 import { PlusOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
-import { Button, Card, Form, Input, message } from 'antd';
+import { Button, Card, Form, Input, Select, message } from 'antd';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'umi';
 
 const Create: React.FC = () => {
   const [form] = Form.useForm();
   const [stepsMap, setStepsMap] = useState<any>();
+  const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const navigate = useNavigate();
   const formRules = {
     name: [{ required: true, message: '请输入实验名称' }],
     bottle_area_name: [{ required: true, message: '请输入试剂名称' }],
@@ -30,18 +34,118 @@ const Create: React.FC = () => {
       setStepsMap(res);
     })();
   }, []);
-
+  /**
+   * 将表单数据格式化为创建实验参数
+   * @param values
+   * @return {API.Experiments.CreateExperimentReq}
+   */
+  const fmtRequestParams = (values: any): API.Experiments.CreateExperimentReq => {
+    const params: API.Experiments.CreateExperimentReq = {
+      name: values.name,
+      bottle_height: values.bottle_height,
+      bottle_area: {
+        name: values.bottle_area_name,
+        x: values.bottle_area_x,
+        y: values.bottle_area_y,
+        z: values.bottle_area_z,
+      },
+      steps_data: [],
+    };
+    // 根据不同情况处理不同数据
+    // TODO 优化代码 看起来不这么多
+    values.steps_data.forEach((item: any) => {
+      switch (item.step_name) {
+        case 'add_solvent_step':
+          params.steps_data.push({
+            name: item.step_name,
+            kwargs: {
+              src_area: {
+                name: item.src_area_name,
+                x: item.src_area_x,
+                y: item.src_area_y,
+                z: item.src_area_z,
+              },
+              dst_area: {
+                name: item.dst_area_name,
+                x: item.dst_area_x,
+                y: item.dst_area_y,
+                z: item.dst_area_z,
+              },
+              speed: item.speed,
+              weight: item.weight,
+              accuracy: item.accuracy,
+            },
+          });
+          break;
+        case 'pipette_step':
+          params.steps_data.push({
+            name: item.step_name,
+            kwargs: {
+              src_area: {
+                name: item.src_area_name,
+                x: item.src_area_x,
+                y: item.src_area_y,
+                z: item.src_area_z,
+              },
+              dst_area: {
+                name: item.dst_area_name,
+                x: item.dst_area_x,
+                y: item.dst_area_y,
+                z: item.dst_area_z,
+              },
+              speed: item.speed,
+              total: item.total,
+              take_once: item.take_once,
+              spit_once: item.spit_once,
+              interval: item.interval,
+              height: item.height,
+              tip_length: item.tip_length,
+            },
+          });
+          break;
+        case 'add_solid_step':
+          params.steps_data.push({
+            name: item.step_name,
+            kwargs: {
+              src_area: {
+                name: item.src_area_name,
+                x: item.src_area_x,
+                y: item.src_area_y,
+                z: item.src_area_z,
+              },
+              dst_area: {
+                name: item.dst_area_name,
+                x: item.dst_area_x,
+                y: item.dst_area_y,
+                z: item.dst_area_z,
+              },
+              speed: item.speed,
+              weight: item.weight,
+              angel: item.angel,
+              tolerance: item.tolerance,
+              height: item.height,
+            },
+          });
+          break;
+      }
+    });
+    return params;
+  };
   /**
    * 表单验证成功回调
    * @param values
    */
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
     console.log('Received values of form:', values);
-    console.log(values.steps_data);
     if (!values.steps_data || values.steps_data?.length === 0) {
       messageApi.warning('请添加步骤');
       return;
     }
+    setSubmitLoading(true);
+    await createExperiment(fmtRequestParams(values));
+    messageApi.success('创建成功');
+    navigate('/experiment/list');
+    setSubmitLoading(false);
   };
   const formList = (
     <Form.List name="steps_data">
@@ -84,7 +188,7 @@ const Create: React.FC = () => {
               label="试剂瓶名称"
               rules={formRules.bottle_area_name}
             >
-              <Input />
+              <Select options={[{ label: 'OP11', value: 'OP11' }]} />
             </Form.Item>
 
             <Form.Item name="bottle_area_x" label="x" rules={formRules.coordinates}>
@@ -105,7 +209,7 @@ const Create: React.FC = () => {
             {formList}
             <Form.Item wrapperCol={{ span: 24 }}>
               <CenterHolderStyle>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" loading={submitLoading}>
                   提交
                 </Button>
               </CenterHolderStyle>

@@ -32,7 +32,7 @@ const CreateStepItem: React.FC<IProps> = (props) => {
         <Col span={10}>
           <Form.Item
             {...restField}
-            name={[name, 'step-name']}
+            name={[name, 'step_name']}
             label="步骤"
             rules={[{ required: true, message: '请选择步骤' }]}
           >

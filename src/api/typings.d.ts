@@ -39,14 +39,14 @@ declare namespace API {
   };
   // 移动
   type MoveReq = {
-    src_area: MoveParams;
-    dst_area: MoveParams;
+    src_area: Coordinates;
+    dst_area: Coordinates;
     height: string | number;
   };
   // 加液
   type AddSolReq = {
-    src_area: MoveParams;
-    dst_area: MoveParams;
+    src_area: Coordinates;
+    dst_area: Coordinates;
     speed: string | number;
     weight: string | number;
     accuracy: string | number;
@@ -70,14 +70,14 @@ declare namespace API {
   };
   // 抬起枪头
   type PickTipReq = {
-    tip_area: MoveParams;
+    tip_area: Coordinates;
     tip_length: number;
     drop_pre: boolean;
   };
   // 移液
   type LiquidMovementReq = {
-    src_area: MoveParams;
-    dst_area: MoveParams;
+    src_area: Coordinates;
+    dst_area: Coordinates;
     tip_length: number | string;
     total: number | string;
     take_once: number | string;
@@ -87,8 +87,8 @@ declare namespace API {
   };
   // 移动固体料仓
   type SolidMovementReq = {
-    src_area: MoveParams;
-    dst_area: MoveParams;
+    src_area: Coordinates;
+    dst_area: Coordinates;
     height: number | string;
   };
   // 搅拌加固
@@ -104,16 +104,16 @@ declare namespace API {
    */
   // 添加溶剂
   type AddSolvent = {
-    src_area: MoveParams;
-    dst_area: MoveParams;
+    src_area: Coordinates;
+    dst_area: Coordinates;
     speed: string | number;
     weight: string | number;
     accuracy: string | number;
   };
   // 移液
   type Pipette = {
-    src_area: MoveParams;
-    dst_area: MoveParams;
+    src_area: Coordinates;
+    dst_area: Coordinates;
     speed: string | number;
     total: string | number;
     take_once: string | number;
@@ -124,8 +124,8 @@ declare namespace API {
   };
   // 添加固体
   type AddSolid = {
-    src_area: MoveParams;
-    dst_area: MoveParams;
+    src_area: Coordinates;
+    dst_area: Coordinates;
     speed: string | number;
     height: string | number;
     angel: string | number;
@@ -173,6 +173,29 @@ declare namespace API {
       steps_data: ExperimentRecordItem[];
       status: string;
     };
+
+    //  实验状态
+    interface ExperimentStatus {
+      status: 'draft' | 'waiting' | 'doing' | 'succeed' | 'failed' | 'canceled';
+    }
+
+    // 创建实验步骤
+    interface CreateExperimentStep {
+      name: string;
+      kwargs: AddSolid | Pipette | AddSolvent;
+    }
+
+    // 创建实验
+    interface CreateExperimentReq {
+      name: string;
+      bottle_area: Coordinates;
+      bottle_height: string | number;
+      steps_data: CreateExperimentStep[];
+    }
+
+    interface CreateExperimentRes extends CreateExperimentReq, ExperimentStatus {
+      id: string | number;
+    }
   }
 
   /**
