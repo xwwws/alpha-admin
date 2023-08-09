@@ -1,5 +1,3 @@
-// @ts-ignore
-import { API } from '@/api/typings';
 import { request } from '@umijs/max';
 /**
  * 读值

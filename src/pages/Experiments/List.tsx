@@ -1,14 +1,24 @@
 import { cancelExperimentById, getExperimentList, runExperimentById } from '@/api/experiments';
 import { expState2ValueEnum, experimentStatesMap } from '@/utils/dataMaps';
-import { BellFilled, PlayCircleFilled, ReadFilled, StopFilled } from '@ant-design/icons';
+import {
+  BellFilled,
+  PlayCircleFilled,
+  PlusOutlined,
+  ReadFilled,
+  StopFilled,
+} from '@ant-design/icons';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ActionType } from '@ant-design/pro-table';
 import { Button, Card, Tooltip, message } from 'antd';
 import dayjs from 'dayjs';
 import React, { useRef } from 'react';
+import styled from 'styled-components';
 import { useNavigate } from 'umi';
-
+const ButtonWarpStyle = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+`;
 const List: React.FC = () => {
   const tableRef = useRef<ActionType>();
   const [messageApi, contextHolder] = message.useMessage();
@@ -185,6 +195,15 @@ const List: React.FC = () => {
       {contextHolder}
       <PageContainer>
         <Card>
+          <ButtonWarpStyle>
+            <Button
+              icon={<PlusOutlined />}
+              type={'primary'}
+              onClick={() => navigate('/experiment/create')}
+            >
+              创建实验
+            </Button>
+          </ButtonWarpStyle>
           <ProTable
             actionRef={tableRef}
             columns={columns}

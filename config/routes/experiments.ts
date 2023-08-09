@@ -19,6 +19,13 @@ export const experiments = [
         component: './Experiments/List',
       },
 
+      // 创建实验
+      {
+        path: '/experiment/create',
+        name: 'experimentCreate',
+        component: './Experiments/Create',
+      },
+
       // 实验详情
       {
         path: '/experiment/:id/detail',

@@ -1,5 +1,6 @@
 import { addSolMethod } from '@/api/methods';
 import MethodsView from '@/pages/Methods/components/MethodsView';
+import type { IForm } from '@/pages/typings';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 import { Button, Card, Form, Input, Select } from 'antd';
 import React, { useState } from 'react';
@@ -27,7 +28,7 @@ interface IConditions {
   accuracy: string | number;
 }
 
-const formRules = {
+const formRules: IForm.IFormRules = {
   src_area_name: [{ required: true, message: '请选择托盘区域' }],
   dst_area_name: [{ required: true, message: '请选择托盘区域' }],
   coordinates: [

@@ -17,6 +17,7 @@ export default {
   'menu.steps.pipette': '移液',
   'menu.steps.addSolid': '加固',
   'menu.experiment': '实验',
+  'menu.experiment.experimentCreate': '创建实验',
   'menu.experiment.experimentList': '实验列表',
   'menu.experiment.experimentDetail': '实验详情',
   'menu.experiment.experimentRecord': '实验记录',
