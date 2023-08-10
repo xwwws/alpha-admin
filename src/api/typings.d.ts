@@ -6,6 +6,10 @@ declare namespace API {
     limit?: string | number;
     page?: string | number;
   }
+  interface Enum {
+    name: string;
+    label: string;
+  }
 
   interface PagesRes<T> {
     total: number;
@@ -106,31 +110,31 @@ declare namespace API {
   type AddSolvent = {
     src_area: Coordinates;
     dst_area: Coordinates;
-    speed: string | number;
-    weight: string | number;
-    accuracy: string | number;
+    speed?: string | number;
+    weight?: string | number;
+    accuracy?: string | number;
   };
   // 移液
   type Pipette = {
-    src_area: Coordinates;
-    dst_area: Coordinates;
-    speed: string | number;
-    total: string | number;
-    take_once: string | number;
-    spit_once: string | number;
-    interval: string | number;
-    height: string | number;
-    tip_length: string | number;
+    src_area?: Coordinates;
+    dst_area?: Coordinates;
+    speed?: string | number;
+    total?: string | number;
+    take_once?: string | number;
+    spit_once?: string | number;
+    interval?: string | number;
+    height?: string | number;
+    tip_length?: string | number;
   };
   // 添加固体
   type AddSolid = {
-    src_area: Coordinates;
-    dst_area: Coordinates;
-    speed: string | number;
-    height: string | number;
-    angel: string | number;
-    weight: string | number;
-    tolerance: string | number;
+    src_area?: Coordinates;
+    dst_area?: Coordinates;
+    speed?: string | number;
+    height?: string | number;
+    angel?: string | number;
+    weight?: string | number;
+    tolerance?: string | number;
   };
   /**
    * experiments 相关
@@ -167,7 +171,7 @@ declare namespace API {
     // 创建实验步骤
     interface CreateExperimentStep {
       name: string;
-      kwargs: AddSolid | Pipette | AddSolvent;
+      kwargs: AddSolid & Pipette & AddSolvent;
     }
 
     // 创建实验

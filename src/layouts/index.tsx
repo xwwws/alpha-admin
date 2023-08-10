@@ -1,4 +1,3 @@
-// @ts-ignore
 import { Outlet } from '@@/exports';
 import React from 'react';
 interface IProp {

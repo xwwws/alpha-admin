@@ -44,12 +44,24 @@ export const cancelExperimentById = (id: string | number, data?: object | undefi
   });
 };
 /**
- * 查询实验记录
+ * 查询实验详情
  * @param id string
  * @param data {} object
  */
 export const getExperimentDetailsById = (id: string | number, data?: object | undefined) => {
   return request<API.Experiments.ExperimentRecordRes>(`/api/v1/expt/expts/${id}`, {
+    method: 'get',
+    data,
+  });
+};
+
+/**
+ * 查询实验记录
+ * @param id string
+ * @param data {} object
+ */
+export const getExperimentLogsById = (id: string | number, data?: object | undefined) => {
+  return request<API.Experiments.ExperimentRecordRes>(`/api/v1/expt/expts/${id}/logs`, {
     method: 'get',
     data,
   });

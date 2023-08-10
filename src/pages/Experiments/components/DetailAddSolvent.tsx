@@ -11,12 +11,12 @@ interface IProps {
 
 const DetailAddSolvent: React.FC<IProps> = (props) => {
   const { record } = props;
-  const { stepsMap } = useModel('useExperimentModel');
+  const { steps } = useModel('useExperimentModel');
   const descriptionInfo: DescriptionsProps[`items`] = [
     {
       key: '1',
       label: '步骤名称',
-      children: stepsMap.find((item) => item.value === record.name).label,
+      children: steps.find((item) => item.value === record.name).label,
       span: 4,
     },
     { key: '2', label: '托盘区域', children: record.kwargs.src_area.name },
