@@ -1,16 +1,14 @@
 import { createExperiment } from '@/api/experiments';
-import { getStepsMap } from '@/api/public';
 import CreateStepItem from '@/pages/Experiments/components/CreateStepItem';
 import { CenterHolderStyle, formItemLayout } from '@/utils';
 import { PlusOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
 import { Button, Card, Form, Input, Select, message } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'umi';
 
 const Create: React.FC = () => {
   const [form] = Form.useForm();
-  const [stepsMap, setStepsMap] = useState<any>();
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
@@ -28,12 +26,6 @@ const Create: React.FC = () => {
       { max: 6, message: '数值过大' },
     ],
   };
-  useEffect(() => {
-    (async () => {
-      const res = await getStepsMap();
-      setStepsMap(res);
-    })();
-  }, []);
   /**
    * 将表单数据格式化为创建实验参数
    * @param values
@@ -155,7 +147,6 @@ const Create: React.FC = () => {
             <CreateStepItem
               key={key}
               index={key}
-              stepsMap={stepsMap}
               name={name}
               restField={restField}
               onDelete={() => remove(name)}

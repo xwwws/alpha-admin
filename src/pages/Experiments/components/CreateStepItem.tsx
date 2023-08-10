@@ -5,11 +5,11 @@ import { MinusCircleOutlined } from '@ant-design/icons';
 import { Card, Col, Form, Row, Select } from 'antd';
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useModel } from 'umi';
 
 interface IProps {
   name: number;
   restField: { fieldKey?: number | undefined };
-  stepsMap: any[];
   onDelete: () => void;
   index: number;
 
@@ -21,8 +21,9 @@ const ToolsBox = styled.div`
   flex-direction: row-reverse;
 `;
 const CreateStepItem: React.FC<IProps> = (props) => {
-  const { onDelete, restField, stepsMap, name } = props;
+  const { onDelete, restField, name } = props;
   const [step, setStep] = useState<string>();
+  const { stepsMap } = useModel('useExperimentModel');
   return (
     <Card style={{ marginBottom: '20px' }}>
       <ToolsBox>

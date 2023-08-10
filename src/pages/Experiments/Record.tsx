@@ -69,9 +69,9 @@ const Record: React.FC<IProps> = (props) => {
           title={`实验名称: ${recordInfo?.name}`}
           bordered
           column={2}
-          items={items}
           labelStyle={{ width: '180px', textAlign: 'center' }}
           size={'small'}
+          items={items}
         />
         {recordInfo?.steps_data.map((item, index) => (
           <RecordItem key={index} record={item} />
