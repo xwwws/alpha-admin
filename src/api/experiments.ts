@@ -49,7 +49,7 @@ export const cancelExperimentById = (id: string | number, data?: object | undefi
  * @param data {} object
  */
 export const getExperimentDetailsById = (id: string | number, data?: object | undefined) => {
-  return request<API.Experiments.ExperimentRecordRes>(`/api/v1/expt/expts/${id}`, {
+  return request<API.Experiments.ExperimentDetailsRes>(`/api/v1/expt/expts/${id}`, {
     method: 'get',
     data,
   });
@@ -61,7 +61,7 @@ export const getExperimentDetailsById = (id: string | number, data?: object | un
  * @param data {} object
  */
 export const getExperimentLogsById = (id: string | number, data?: object | undefined) => {
-  return request<API.Experiments.ExperimentRecordRes>(`/api/v1/expt/expts/${id}/logs`, {
+  return request<API.Experiments.ExperimentRecordRes[]>(`/api/v1/expt/expts/${id}/logs`, {
     method: 'get',
     data,
   });

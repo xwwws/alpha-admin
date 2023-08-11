@@ -154,13 +154,23 @@ declare namespace API {
       status: string;
     };
 
-    type ExperimentRecordRes = {
+    type ExperimentDetailsRes = {
       id: string | number;
       name: string;
       bottle_area: Coordinates;
       bottle_height: 0;
       steps_data: CreateExperimentStep[];
       status: string;
+    };
+
+    type ExperimentRecordRes = {
+      id: string | number;
+      action: string;
+      args: string[];
+      start_time: string;
+      end_time: string;
+      label: string;
+      result: any[];
     };
 
     //  实验状态

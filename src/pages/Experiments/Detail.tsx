@@ -13,7 +13,7 @@ interface IProps {
 }
 
 const Detail: React.FC<IProps> = (props) => {
-  const [recordInfo, setRecordInfo] = useState<API.Experiments.ExperimentRecordRes>();
+  const [recordInfo, setRecordInfo] = useState<API.Experiments.ExperimentDetailsRes>();
   const [currentState, setCurrentState] = useState<IExpState>();
   const { id } = useParams();
   useEffect(() => {
