@@ -5,6 +5,7 @@ import { IForm } from '@/pages/typings';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 import { Button, Card, Form, Input, Select } from 'antd';
 import React, { useState } from 'react';
+import { useModel } from 'umi';
 
 const formItemLayout = {
   labelCol: { span: 4 },
@@ -57,6 +58,7 @@ const Index: React.FC = () => {
   const [form] = Form.useForm();
   const [readResult, setReadResult] = useState<any>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const { areas } = useModel('useExperimentModel');
   const onFinish = async (val: IConditions) => {
     try {
       setLoading(true);
@@ -107,7 +109,7 @@ const Index: React.FC = () => {
         label="托盘区域"
         rules={formRules.src_area_name}
       >
-        <Select options={[{ label: 'OP11', value: 'OP11' }]} />
+        <Select options={areas} />
       </Form.Item>
       <Form.Item style={formItemStyle} name="src_area_x" label="x" rules={formRules.coordinates}>
         <Input />
@@ -122,10 +124,10 @@ const Index: React.FC = () => {
         style={formItemStyle}
         {...contentItemLayout}
         name="dst_area_name"
-        label="目标托盘区域"
+        label="目标区域"
         rules={formRules.dst_area_name}
       >
-        <Select options={[{ label: 'OP11', value: 'OP11' }]} />
+        <Select options={areas} />
       </Form.Item>
       <Form.Item style={formItemStyle} name="dst_area_x" label="x" rules={formRules.coordinates}>
         <Input />

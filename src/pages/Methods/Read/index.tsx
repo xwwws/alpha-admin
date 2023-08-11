@@ -1,9 +1,10 @@
 // @ts-ignore
-import { readMethod } from '@/api/methods';
+import { getReadNodeList, readMethod } from '@/api/methods';
 import MethodsView from '@/pages/Methods/components/MethodsView';
+import { ITypes } from '@/pages/typings';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 import { Card, Form, Select } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const formItemLayout = {
   labelCol: { span: 10 },
@@ -18,6 +19,7 @@ const Index: React.FC = () => {
   const [form] = Form.useForm();
   const [readResult, setReadResult] = useState<any>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const [nodes, setNodes] = useState<ITypes.EnumType[]>([]);
   const onFormChange = async (val: IConditions) => {
     try {
       setLoading(true);
@@ -29,6 +31,13 @@ const Index: React.FC = () => {
       console.log(err);
     }
   };
+  useEffect(() => {
+    (async () => {
+      const res = await getReadNodeList();
+      console.log(res);
+      setNodes(res.map((item): ITypes.EnumType => ({ label: item.name, value: item.n_id })));
+    })();
+  }, []);
   // 顶部查询模块
   const searchModel = (
     <Form
@@ -39,11 +48,7 @@ const Index: React.FC = () => {
       onValuesChange={onFormChange}
     >
       <Form.Item name="node_index" label="节点id">
-        <Select
-          allowClear={true}
-          style={{ width: `150px` }}
-          options={[{ label: '任务1', value: 1 }]}
-        ></Select>
+        <Select allowClear={true} style={{ width: `150px` }} options={nodes}></Select>
       </Form.Item>
     </Form>
   );

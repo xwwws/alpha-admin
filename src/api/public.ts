@@ -16,3 +16,11 @@ export const getMethodsMap = () => {
     method: 'get',
   });
 };
+/**
+ * 获取area
+ */
+export const getAreasMap = () => {
+  return request<API.Enum[]>(`/api/v1/lab/areas/all`, {
+    method: 'get',
+  });
+};

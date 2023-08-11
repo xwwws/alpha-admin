@@ -4,6 +4,7 @@ import MethodsView from '@/pages/Methods/components/MethodsView';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 import { Button, Card, Form, Input, Select, Switch } from 'antd';
 import React, { useState } from 'react';
+import { useModel } from 'umi';
 
 const formItemLayout = {
   labelCol: { span: 8 },
@@ -47,6 +48,7 @@ const Index: React.FC = () => {
   const [form] = Form.useForm();
   const [readResult, setReadResult] = useState<any>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const { areas } = useModel('useExperimentModel');
   const onFinish = async (val: IConditions) => {
     console.log(val);
     try {
@@ -88,7 +90,7 @@ const Index: React.FC = () => {
         label="枪头区域"
         rules={formRules.tip_area_name}
       >
-        <Select options={[{ label: 'OP11', value: 'OP11' }]} />
+        <Select options={areas} />
       </Form.Item>
       <Form.Item
         style={formItemStyle}

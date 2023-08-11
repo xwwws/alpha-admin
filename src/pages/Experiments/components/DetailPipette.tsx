@@ -22,7 +22,7 @@ const DetailPipette: React.FC<IProps> = (props) => {
     { key: '3', label: 'x', children: record.kwargs.src_area.x },
     { key: '4', label: 'y', children: record.kwargs.src_area.y },
     { key: '5', label: 'z', children: record.kwargs.src_area.z },
-    { key: '6', label: '目标托盘区域', children: record.kwargs.dst_area.name },
+    { key: '6', label: '目标区域', children: record.kwargs.dst_area.name },
     { key: '7', label: 'x', children: record.kwargs.dst_area.x },
     { key: '8', label: 'y', children: record.kwargs.dst_area.y },
     { key: '9', label: 'z', children: record.kwargs.dst_area.z },

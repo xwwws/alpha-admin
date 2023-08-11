@@ -4,6 +4,7 @@ import MethodsView from '@/pages/Methods/components/MethodsView';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 import { Button, Card, Form, Select } from 'antd';
 import React, { useState } from 'react';
+import { useModel } from 'umi';
 
 const formItemLayout = {
   labelCol: { span: 8 },
@@ -34,6 +35,7 @@ const Index: React.FC = () => {
   const [form] = Form.useForm();
   const [readResult, setReadResult] = useState<any>('');
   const [loading, setLoading] = useState<boolean>(false);
+  const { areas } = useModel('useExperimentModel');
   const onFinish = async (val: IConditions) => {
     try {
       setLoading(true);
@@ -61,10 +63,10 @@ const Index: React.FC = () => {
       onFinish={onFinish}
     >
       <Form.Item style={formItemStyle} name="src_tool" label="当前夹爪" rules={formRules.src_tool}>
-        <Select options={[{ label: 'OP11', value: 'OP11' }]} />
+        <Select options={areas} />
       </Form.Item>
       <Form.Item style={formItemStyle} name="dst_tool" label="目标夹爪" rules={formRules.dst_tool}>
-        <Select options={[{ label: 'OP11', value: 'OP11' }]} />
+        <Select options={areas} />
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 4 }}>

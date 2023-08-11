@@ -67,7 +67,7 @@ const AddSolventStep: React.FC<IProps> = (props) => {
           <Form.Item
             labelCol={{ span: 8 }}
             name={[name, 'dst_area_name']}
-            label="目标托盘区域"
+            label="目标区域"
             rules={formRules.dst_area_name}
           >
             <Select options={[{ label: 'OP11', value: 'OP11' }]} />

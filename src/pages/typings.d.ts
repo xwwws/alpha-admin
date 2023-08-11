@@ -5,3 +5,10 @@ declare namespace IForm {
     [propName: string]: FormRule[];
   }
 }
+
+declare namespace ITypes {
+  interface EnumType {
+    label: string;
+    value: string | number;
+  }
+}

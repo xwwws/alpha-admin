@@ -76,7 +76,7 @@ const AddSolid: React.FC<IProps> = (props) => {
         <Col span={12}>
           <Form.Item
             name={[name, 'dst_area_name']}
-            label="目标托盘区域"
+            label="目标区域"
             rules={formRules.dst_area_name}
           >
             <Select options={[{ label: 'OP11', value: 'OP11' }]} />

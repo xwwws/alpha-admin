@@ -1,4 +1,5 @@
 import { request } from '@umijs/max';
+
 /**
  * 读值
  * @param data {API.ReadReq}
@@ -101,13 +102,12 @@ export const solidMovementMethod = (data: API.SolidMovementReq) => {
     data,
   });
 };
+
 /**
- * 搅拌加固
- * @param data {API.doAddSolidReq}
+ * 获取读值信息
  */
-export const doAddSolidMethod = (data: API.doAddSolidReq) => {
-  return request<API.MethodsRes>(`/api/v1/lab/methods/doaddsolid`, {
-    method: 'post',
-    data,
+export const getReadNodeList = () => {
+  return request<{ name: string; n_id: string | number }[]>(`/api/v1/lab/methods/node_indexs`, {
+    method: 'get',
   });
 };
