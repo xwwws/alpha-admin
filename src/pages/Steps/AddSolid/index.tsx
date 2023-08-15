@@ -1,4 +1,3 @@
-// @ts-ignore
 import { addSolid } from '@/api/steps';
 import MethodsView from '@/pages/Methods/components/MethodsView';
 import { IForm } from '@/pages/typings';

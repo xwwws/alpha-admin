@@ -129,7 +129,6 @@ const List: React.FC = () => {
 
       valueEnum: expState2ValueEnum(experimentStatesMap),
     },
-
     {
       hideInSearch: true,
       title: '操作',

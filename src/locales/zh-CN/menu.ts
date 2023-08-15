@@ -21,4 +21,6 @@ export default {
   'menu.experiment.experimentList': '实验列表',
   'menu.experiment.experimentDetail': '实验详情',
   'menu.experiment.experimentRecord': '实验记录',
+  'menu.reagent': '试剂',
+  'menu.reagent.reagentList': '试剂列表',
 };
