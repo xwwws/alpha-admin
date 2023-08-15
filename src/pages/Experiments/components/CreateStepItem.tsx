@@ -23,7 +23,7 @@ const ToolsBox = styled.div`
 const CreateStepItem: React.FC<IProps> = (props) => {
   const { onDelete, restField, name } = props;
   const [step, setStep] = useState<string>();
-  const { stepsMap } = useModel('useExperimentModel');
+  const { steps } = useModel('useExperimentModel');
   return (
     <Card style={{ marginBottom: '20px' }}>
       <ToolsBox>
@@ -37,7 +37,7 @@ const CreateStepItem: React.FC<IProps> = (props) => {
             label="步骤"
             rules={[{ required: true, message: '请选择步骤' }]}
           >
-            <Select options={stepsMap} onChange={setStep} placeholder="请选择步骤" />
+            <Select options={steps} onChange={setStep} placeholder="请选择步骤" />
           </Form.Item>
         </Col>
       </Row>
