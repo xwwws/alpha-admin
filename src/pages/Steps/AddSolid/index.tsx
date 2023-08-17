@@ -99,9 +99,9 @@ const Index: React.FC = () => {
         height: val.height,
         angel: val.angel,
       };
-      const res = await addSolid(params);
+      const { data } = await addSolid(params);
       setLoading(false);
-      setReadResult(JSON.stringify(res.result));
+      setReadResult(JSON.stringify(data.result));
     } catch (err) {
       setLoading(false);
       console.log(err);

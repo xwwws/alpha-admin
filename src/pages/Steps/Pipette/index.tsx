@@ -83,9 +83,9 @@ const Index: React.FC = () => {
         speed: val.speed,
         interval: val.interval,
       };
-      const res = await pipette(params);
+      const { data } = await pipette(params);
       setLoading(false);
-      setReadResult(JSON.stringify(res.result));
+      setReadResult(JSON.stringify(data.result));
     } catch (err) {
       setLoading(false);
       console.log(err);
