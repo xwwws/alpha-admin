@@ -71,9 +71,9 @@ const Index: React.FC = () => {
         },
         height: val.height,
       };
-      const res = await moveMethod(params);
+      const { data } = await moveMethod(params);
       setLoading(false);
-      setReadResult(JSON.stringify(res.result));
+      setReadResult(JSON.stringify(data.result));
     } catch (err) {
       setLoading(false);
       console.log(err);

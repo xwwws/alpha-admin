@@ -28,9 +28,9 @@ const Index: React.FC = () => {
     console.log(val);
     try {
       setLoading(true);
-      const res = await sleepMethod(val);
+      const { data } = await sleepMethod(val);
       setLoading(false);
-      setReadResult(JSON.stringify(res.result));
+      setReadResult(JSON.stringify(data.result));
     } catch (err) {
       setLoading(false);
       console.log(err);

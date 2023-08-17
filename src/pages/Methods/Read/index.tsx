@@ -1,4 +1,3 @@
-// @ts-ignore
 import { getReadNodeList, readMethod } from '@/api/methods';
 import MethodsView from '@/pages/Methods/components/MethodsView';
 import { ITypes } from '@/pages/typings';
@@ -25,7 +24,7 @@ const Index: React.FC = () => {
       setLoading(true);
       const res = await readMethod(val);
       setLoading(false);
-      setReadResult(JSON.stringify(res.result));
+      setReadResult(JSON.stringify(res.data.result));
     } catch (err) {
       setLoading(false);
       console.log(err);
@@ -34,8 +33,7 @@ const Index: React.FC = () => {
   useEffect(() => {
     (async () => {
       const res = await getReadNodeList();
-      console.log(res);
-      setNodes(res.map((item): ITypes.EnumType => ({ label: item.name, value: item.n_id })));
+      setNodes(res.data.map((item): ITypes.EnumType => ({ label: item.name, value: item.n_id })));
     })();
   }, []);
   // 顶部查询模块
@@ -48,7 +46,12 @@ const Index: React.FC = () => {
       onValuesChange={onFormChange}
     >
       <Form.Item name="node_index" label="节点id">
-        <Select allowClear={true} style={{ width: `150px` }} options={nodes}></Select>
+        <Select
+          allowClear={true}
+          style={{ width: `150px` }}
+          options={nodes}
+          placeholder={'请选择节点'}
+        />
       </Form.Item>
     </Form>
   );

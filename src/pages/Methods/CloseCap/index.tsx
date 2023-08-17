@@ -54,9 +54,9 @@ const Index: React.FC = () => {
         y: val.y,
         height: val.height,
       };
-      const res = await closeCapMethod(params);
+      const { data } = await closeCapMethod(params);
       setLoading(false);
-      setReadResult(JSON.stringify(res.result));
+      setReadResult(JSON.stringify(data.result));
     } catch (err) {
       setLoading(false);
       console.log(err);

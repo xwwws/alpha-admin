@@ -63,9 +63,9 @@ const Index: React.FC = () => {
         tip_length: val.tip_length,
         drop_pre: val.drop_pre,
       };
-      const res = await pickTipMethod(params);
+      const { data } = await pickTipMethod(params);
       setLoading(false);
-      setReadResult(JSON.stringify(res.result));
+      setReadResult(JSON.stringify(data.result));
     } catch (err) {
       setLoading(false);
       console.log(err);

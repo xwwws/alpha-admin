@@ -1,5 +1,8 @@
-// @ts-ignore
-/* eslint-disable */
+declare interface Response<T> {
+  code: number;
+  data: T;
+  msg: string;
+}
 
 declare namespace API {
   interface PagesReq {
@@ -219,6 +222,7 @@ declare namespace API {
     username: string;
     avatar: string;
   };
-  LoginResult;
-  type LogoutReq = {};
+  interface LogoutReq {
+    [key: any]: any;
+  }
 }

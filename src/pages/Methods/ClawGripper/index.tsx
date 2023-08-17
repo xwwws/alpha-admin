@@ -43,9 +43,9 @@ const Index: React.FC = () => {
         dst_tool: val.dst_tool,
         src_tool: val.src_tool,
       };
-      const res = await clawGripperMethod(params);
+      const { data } = await clawGripperMethod(params);
       setLoading(false);
-      setReadResult(JSON.stringify(res.result));
+      setReadResult(JSON.stringify(data.result));
     } catch (err) {
       setLoading(false);
       console.log(err);

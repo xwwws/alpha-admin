@@ -3,24 +3,24 @@ import { request } from '@umijs/max';
 /**
  * 获取steps
  */
-export const getStepsMap = () => {
-  return request<API.Enum[]>(`/api/v1/lab/steps/all`, {
+export const getStepsMap = (): Promise<Response<API.Enum[]>> => {
+  return request(`/api/v1/lab/steps/all`, {
     method: 'get',
   });
 };
 /**
  * 获取methods
  */
-export const getMethodsMap = () => {
-  return request<API.Enum[]>(`/api/v1/lab/methods/all`, {
+export const getMethodsMap = (): Promise<Response<API.Enum[]>> => {
+  return request(`/api/v1/lab/methods/all`, {
     method: 'get',
   });
 };
 /**
  * 获取area
  */
-export const getAreasMap = () => {
-  return request<API.Enum[]>(`/api/v1/lab/areas/all`, {
+export const getAreasMap = (): Promise<Response<API.Enum[]>> => {
+  return request(`/api/v1/lab/areas/all`, {
     method: 'get',
   });
 };

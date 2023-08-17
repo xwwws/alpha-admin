@@ -8,8 +8,8 @@ export default function useExperimentModel() {
    */
   const [steps, setSteps] = useState<ITypes.EnumType[]>([]);
   const initSteps = useCallback(async () => {
-    const res = await getStepsMap();
-    setSteps(res.map((item): ITypes.EnumType => ({ label: item.label, value: item.name })));
+    const { data } = await getStepsMap();
+    setSteps(data.map((item): ITypes.EnumType => ({ label: item.label, value: item.name })));
   }, []);
 
   /**
@@ -17,8 +17,8 @@ export default function useExperimentModel() {
    */
   const [methods, setMethods] = useState<ITypes.EnumType[]>([]);
   const initMethods = useCallback(async () => {
-    const res = await getMethodsMap();
-    setMethods(res.map((item): ITypes.EnumType => ({ label: item.label, value: item.name })));
+    const { data } = await getMethodsMap();
+    setMethods(data.map((item): ITypes.EnumType => ({ label: item.label, value: item.name })));
   }, []);
 
   /**
@@ -26,15 +26,15 @@ export default function useExperimentModel() {
    */
   const [areas, setAreas] = useState<ITypes.EnumType[]>([]);
   const initAreas = useCallback(async () => {
-    const res = await getAreasMap();
-    setAreas(res.map((item): ITypes.EnumType => ({ label: item.label, value: item.name })));
+    const { data } = await getAreasMap();
+    setAreas(data.map((item): ITypes.EnumType => ({ label: item.label, value: item.name })));
   }, []);
 
   useEffect(() => {
     if (steps.length === 0) initSteps();
     if (methods.length === 0) initMethods();
     if (areas.length === 0) initAreas();
-  }, [steps, methods]);
+  }, [steps, methods, areas]);
   return {
     // steps 相关
     steps,

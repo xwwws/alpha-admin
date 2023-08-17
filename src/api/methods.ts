@@ -1,11 +1,20 @@
 import { request } from '@umijs/max';
 
 /**
+ * 获取读值信息
+ */
+export const getReadNodeList = (): Promise<Response<{ name: string; n_id: string | number }[]>> => {
+  return request(`/api/v1/lab/methods/node_indexs`, {
+    method: 'get',
+  });
+};
+
+/**
  * 读值
  * @param data {API.ReadReq}
  */
-export const readMethod = (data: API.ReadReq) => {
-  return request<API.MethodsRes>(`/api/v1/lab/methods/read`, {
+export const readMethod = (data: API.ReadReq): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/methods/read`, {
     method: 'post',
     data,
   });
@@ -14,8 +23,8 @@ export const readMethod = (data: API.ReadReq) => {
  * 等待
  * @param data {API.sleepReq}
  */
-export const sleepMethod = (data: API.sleepReq) => {
-  return request<API.MethodsRes>(`/api/v1/lab/methods/sleep`, {
+export const sleepMethod = (data: API.sleepReq): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/methods/sleep`, {
     method: 'post',
     data,
   });
@@ -24,8 +33,8 @@ export const sleepMethod = (data: API.sleepReq) => {
  * 移动
  * @param data {API.MoveReq}
  */
-export const moveMethod = (data: API.MoveReq) => {
-  return request<API.MethodsRes>(`/api/v1/lab/methods/movething`, {
+export const moveMethod = (data: API.MoveReq): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/methods/movething`, {
     method: 'post',
     data,
   });
@@ -34,8 +43,8 @@ export const moveMethod = (data: API.MoveReq) => {
  * 加液
  * @param data {API.AddSolReq}
  */
-export const addSolMethod = (data: API.AddSolReq) => {
-  return request<API.MethodsRes>(`/api/v1/lab/methods/addsol`, {
+export const addSolMethod = (data: API.AddSolReq): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/methods/addsol`, {
     method: 'post',
     data,
   });
@@ -44,8 +53,8 @@ export const addSolMethod = (data: API.AddSolReq) => {
  * 开盖
  * @param data {API.OpenCap}
  */
-export const openCapMethod = (data: API.OpenCap) => {
-  return request<API.MethodsRes>(`/api/v1/lab/methods/uncap`, {
+export const openCapMethod = (data: API.OpenCap): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/methods/uncap`, {
     method: 'post',
     data,
   });
@@ -54,8 +63,8 @@ export const openCapMethod = (data: API.OpenCap) => {
  * 加盖
  * @param data {API.CloseCap}
  */
-export const closeCapMethod = (data: API.CloseCap) => {
-  return request<API.MethodsRes>(`/api/v1/lab/methods/recap`, {
+export const closeCapMethod = (data: API.CloseCap): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/methods/recap`, {
     method: 'post',
     data,
   });
@@ -64,8 +73,8 @@ export const closeCapMethod = (data: API.CloseCap) => {
  * 更换夹爪
  * @param data {API.ClawGripper}
  */
-export const clawGripperMethod = (data: API.ClawGripper) => {
-  return request<API.MethodsRes>(`/api/v1/lab/methods/chngtool`, {
+export const clawGripperMethod = (data: API.ClawGripper): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/methods/chngtool`, {
     method: 'post',
     data,
   });
@@ -74,8 +83,8 @@ export const clawGripperMethod = (data: API.ClawGripper) => {
  * 抬起枪头
  * @param data {API.PickTipReq}
  */
-export const pickTipMethod = (data: API.PickTipReq) => {
-  return request<API.MethodsRes>(`/api/v1/lab/methods/picktip`, {
+export const pickTipMethod = (data: API.PickTipReq): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/methods/picktip`, {
     method: 'post',
     data,
   });
@@ -85,8 +94,10 @@ export const pickTipMethod = (data: API.PickTipReq) => {
  * 移动液体
  * @param data {API.LiquidMovementReq}
  */
-export const liquidMovementMethod = (data: API.LiquidMovementReq) => {
-  return request<API.MethodsRes>(`/api/v1/lab/methods/trnsliquid`, {
+export const liquidMovementMethod = (
+  data: API.LiquidMovementReq,
+): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/methods/trnsliquid`, {
     method: 'post',
     data,
   });
@@ -96,18 +107,11 @@ export const liquidMovementMethod = (data: API.LiquidMovementReq) => {
  * 移动固体料仓
  * @param data {API.SolidMovementReq}
  */
-export const solidMovementMethod = (data: API.SolidMovementReq) => {
-  return request<API.MethodsRes>(`/api/v1/lab/methods/mvsolid`, {
+export const solidMovementMethod = (
+  data: API.SolidMovementReq,
+): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/methods/mvsolid`, {
     method: 'post',
     data,
-  });
-};
-
-/**
- * 获取读值信息
- */
-export const getReadNodeList = () => {
-  return request<{ name: string; n_id: string | number }[]>(`/api/v1/lab/methods/node_indexs`, {
-    method: 'get',
   });
 };

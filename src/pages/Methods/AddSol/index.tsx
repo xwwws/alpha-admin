@@ -85,9 +85,9 @@ const Index: React.FC = () => {
         speed: val.speed,
         weight: val.weight,
       };
-      const res = await addSolMethod(params);
+      const { data } = await addSolMethod(params);
       setLoading(false);
-      setReadResult(JSON.stringify(res.result));
+      setReadResult(JSON.stringify(data.result));
     } catch (err) {
       setLoading(false);
       console.log(err);
