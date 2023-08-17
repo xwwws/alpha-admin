@@ -19,8 +19,8 @@ const Detail: React.FC<IProps> = (props) => {
   useEffect(() => {
     (async () => {
       const res = await getExperimentDetailsById(id as string | number);
-      setRecordInfo(res);
-      setCurrentState(experimentStatesMap.find((item) => item.value === res.status));
+      setRecordInfo(res.data);
+      setCurrentState(experimentStatesMap.find((item) => item.value === res.data.status));
     })();
   }, [id]);
   const items: DescriptionsProps[`items`] = [

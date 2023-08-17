@@ -21,7 +21,7 @@ const Record: React.FC<IProps> = (props) => {
   useEffect(() => {
     (async () => {
       const res = await getExperimentLogsById(id as string);
-      setRecord(res);
+      setRecord(res.data);
     })();
   }, [id]);
   return (

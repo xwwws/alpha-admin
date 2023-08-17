@@ -5,7 +5,7 @@ import { request } from '@umijs/max';
  * @param params {API.AddSolvent}
  */
 export const getExperimentList = (params: API.PagesReq) => {
-  return request<API.Experiments.List[]>(`/api/v1/expt/expts`, {
+  return request<Response<API.Experiments.List[]>>(`/api/v1/expt/expts`, {
     method: 'get',
     params,
   });
@@ -16,7 +16,7 @@ export const getExperimentList = (params: API.PagesReq) => {
  * @param data {API.Experiments.CreateExperimentReq}
  */
 export const createExperiment = (data: API.Experiments.CreateExperimentReq) => {
-  return request<API.Experiments.CreateExperimentRes>(`/api/v1/expt/expts`, {
+  return request<Response<API.Experiments.CreateExperimentRes>>(`/api/v1/expt/expts`, {
     method: 'post',
     data,
   });
@@ -27,7 +27,7 @@ export const createExperiment = (data: API.Experiments.CreateExperimentReq) => {
  * @param data {} object
  */
 export const runExperimentById = (id: string | number, data?: object | undefined) => {
-  return request<boolean>(`/api/v1/expt/expts/${id}/run`, {
+  return request<Response<boolean>>(`/api/v1/expt/expts/${id}/run`, {
     method: 'post',
     data,
   });
@@ -38,7 +38,7 @@ export const runExperimentById = (id: string | number, data?: object | undefined
  * @param data {} object
  */
 export const cancelExperimentById = (id: string | number, data?: object | undefined) => {
-  return request<boolean>(`/api/v1/expt/expts/${id}/cancel`, {
+  return request<Response<boolean>>(`/api/v1/expt/expts/${id}/cancel`, {
     method: 'post',
     data,
   });
@@ -49,7 +49,7 @@ export const cancelExperimentById = (id: string | number, data?: object | undefi
  * @param data {} object
  */
 export const getExperimentDetailsById = (id: string | number, data?: object | undefined) => {
-  return request<API.Experiments.ExperimentDetailsRes>(`/api/v1/expt/expts/${id}`, {
+  return request<Response<API.Experiments.ExperimentDetailsRes>>(`/api/v1/expt/expts/${id}`, {
     method: 'get',
     data,
   });
@@ -61,7 +61,7 @@ export const getExperimentDetailsById = (id: string | number, data?: object | un
  * @param data {} object
  */
 export const getExperimentLogsById = (id: string | number, data?: object | undefined) => {
-  return request<API.Experiments.ExperimentRecordRes[]>(`/api/v1/expt/expts/${id}/logs`, {
+  return request<Response<API.Experiments.ExperimentRecordRes[]>>(`/api/v1/expt/expts/${id}/logs`, {
     method: 'get',
     data,
   });

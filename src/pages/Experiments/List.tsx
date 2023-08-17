@@ -34,9 +34,9 @@ const List: React.FC = () => {
       content: '正在加载...',
     });
     try {
-      const flag: boolean = await runExperimentById(id);
+      const { data } = await runExperimentById(id);
       tableRef.current?.reload();
-      if (flag) {
+      if (data) {
         messageApi.open({
           key: 'run',
           type: 'success',
@@ -56,9 +56,9 @@ const List: React.FC = () => {
    */
   async function handleCancel(id: string | number) {
     try {
-      const flag: boolean = await cancelExperimentById(id);
+      const { data } = await cancelExperimentById(id);
       tableRef.current?.reload();
-      if (flag) {
+      if (data) {
         messageApi.success('已取消');
       }
     } catch (err) {
@@ -70,12 +70,12 @@ const List: React.FC = () => {
   const requestTableData = async () => {
     const res = await getExperimentList({ limit: 100 });
     return {
-      data: res,
+      data: res.data,
       // success 请返回 true，
       // 不然 table 会停止解析数据，即使有数据
       success: true,
       // 不传会使用 data 的长度，如果是分页一定要传
-      total: res.length,
+      total: res.data.length,
     };
   };
   const columns: ProColumns<API.Experiments.List>[] = [

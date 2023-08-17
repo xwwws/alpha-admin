@@ -128,7 +128,6 @@ const Create: React.FC = () => {
    * @param values
    */
   const onFinish = async (values: any) => {
-    console.log('Received values of form:', values);
     if (!values.steps_data || values.steps_data?.length === 0) {
       messageApi.warning('请添加步骤');
       return;
