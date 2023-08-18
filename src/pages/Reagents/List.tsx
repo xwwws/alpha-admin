@@ -43,8 +43,8 @@ const List: React.FC<IProps> = (props) => {
     tableRef.current?.reload();
   };
   const columns: ProColumns<API.Reagents.List>[] = [
-    { hideInSearch: true, title: '药品名', dataIndex: 'name', align: 'center' },
     { hideInSearch: true, title: 'ID', dataIndex: 'id', align: 'center' },
+    { hideInSearch: true, title: '药品名', dataIndex: 'name', align: 'center' },
     { hideInSearch: true, title: '序号', dataIndex: 'number', align: 'center' },
     { hideInSearch: true, title: '副序列', dataIndex: 'deputy_number', align: 'center' },
     { hideInSearch: true, title: 'CAS号', dataIndex: 'cas', align: 'center' },
@@ -60,8 +60,6 @@ const List: React.FC<IProps> = (props) => {
     { hideInSearch: true, title: '沸点(℃)', dataIndex: 'boiling_point', align: 'center' },
     { hideInSearch: true, title: '熔点(℃)', dataIndex: 'melting_point', align: 'center' },
     { hideInSearch: true, title: '制备时间', dataIndex: 'preparation_time', align: 'center' },
-    { hideInSearch: true, title: '项目', dataIndex: 'projectName', align: 'center' },
-    { hideInSearch: true, title: '试剂代号', dataIndex: 'code', align: 'center' },
     {
       hideInSearch: true,
       title: '操作',
