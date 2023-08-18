@@ -68,19 +68,18 @@ const List: React.FC = () => {
   }
 
   const requestTableData = async (params: { pageSize: number; current: number }) => {
-    console.log(params);
     const query = {
       page_size: params.pageSize,
       page: params.current,
     };
     const res = await getExperimentList(query);
     return {
-      data: res.data,
+      data: res.data.data,
       // success 请返回 true，
       // 不然 table 会停止解析数据，即使有数据
       success: true,
       // 不传会使用 data 的长度，如果是分页一定要传
-      total: res.data.length,
+      total: res.data.total,
     };
   };
   const columns: ProColumns<API.Experiments.List>[] = [
@@ -132,7 +131,6 @@ const List: React.FC = () => {
       dataIndex: 'status',
       align: 'center',
       valueType: 'select',
-
       valueEnum: expState2ValueEnum(experimentStatesMap),
     },
     {

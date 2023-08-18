@@ -5,7 +5,7 @@ import { request } from '@umijs/max';
  * @param params {API.AddSolvent}
  */
 export const getExperimentList = (params: API.PagesReq) => {
-  return request<Response<API.Experiments.List[]>>(`/api/v1/expt/expts`, {
+  return request<Response<API.PagesRes<API.Experiments.List>>>(`/api/v1/expt/expts`, {
     method: 'get',
     params,
   });
