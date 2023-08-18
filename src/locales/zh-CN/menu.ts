@@ -23,4 +23,6 @@ export default {
   'menu.experiment.experimentRecord': '实验记录',
   'menu.reagent': '试剂',
   'menu.reagent.reagentList': '试剂列表',
+  'menu.reagent.create': '创建试剂',
+  'menu.reagent.edit': '修改试剂',
 };

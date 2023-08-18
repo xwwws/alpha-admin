@@ -1,5 +1,6 @@
 import { createExperiment } from '@/api/experiments';
 import CreateStepItem from '@/pages/Experiments/components/CreateStepItem';
+import { IForm } from '@/pages/typings';
 import { CenterHolderStyle, formItemLayout } from '@/utils';
 import { PlusOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
@@ -12,7 +13,7 @@ const Create: React.FC = () => {
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
   const navigate = useNavigate();
-  const formRules = {
+  const formRules: IForm.IFormRules = {
     name: [{ required: true, message: '请输入实验名称' }],
     bottle_area_name: [{ required: true, message: '请输入试剂名称' }],
     coordinates: [

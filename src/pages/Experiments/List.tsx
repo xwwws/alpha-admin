@@ -67,8 +67,13 @@ const List: React.FC = () => {
     }
   }
 
-  const requestTableData = async () => {
-    const res = await getExperimentList({ limit: 100 });
+  const requestTableData = async (params: { pageSize: number; current: number }) => {
+    console.log(params);
+    const query = {
+      page_size: params.pageSize,
+      page: params.current,
+    };
+    const res = await getExperimentList(query);
     return {
       data: res.data,
       // success 请返回 true，
@@ -80,7 +85,7 @@ const List: React.FC = () => {
   };
   const columns: ProColumns<API.Experiments.List>[] = [
     {
-      // hideInSearch: true,
+      hideInSearch: true,
       title: '实验名称',
       dataIndex: 'name',
       align: 'center',
@@ -122,6 +127,7 @@ const List: React.FC = () => {
       align: 'center',
     },
     {
+      hideInSearch: true,
       title: '状态',
       dataIndex: 'status',
       align: 'center',
@@ -204,6 +210,9 @@ const List: React.FC = () => {
             </Button>
           </ButtonWarpStyle>
           <ProTable
+            pagination={{
+              pageSize: 10,
+            }}
             actionRef={tableRef}
             columns={columns}
             options={false}

@@ -6,8 +6,15 @@ declare interface Response<T> {
 
 declare namespace API {
   interface PagesReq {
-    limit?: string | number;
+    page_size?: string | number;
     page?: string | number;
+  }
+  interface PagesRes<T> {
+    data: T[];
+    total: number;
+    total_pages: number;
+    page: number;
+    page_size: number;
   }
   interface Enum {
     name: string;
@@ -97,14 +104,6 @@ declare namespace API {
     src_area: Coordinates;
     dst_area: Coordinates;
     height: number | string;
-  };
-  // 搅拌加固
-  type doAddSolidReq = {
-    area_name: string;
-    speed: number | string;
-    angel: number | string;
-    weight: number | string;
-    tolerance: number | string;
   };
   /**
    * steps相关
@@ -199,7 +198,40 @@ declare namespace API {
       id: string | number;
     }
   }
-
+  /**
+   * reagents 试剂相关
+   */
+  declare namespace Reagents {
+    type List = {
+      id: number;
+      number: number;
+      deputy_number: number;
+      name: string;
+      cas: string;
+      solute_molecular_weight: string;
+      solvent: string;
+      solution_density: string;
+      concentration: string;
+      boiling_point: string;
+      melting_point: string;
+      preparation_time: string;
+      created_at: string;
+      updated_at: string;
+    };
+    type Create = {
+      number: string | number;
+      deputy_number: string | number;
+      name: string;
+      cas: string;
+      solute_molecular_weight: string | number;
+      solvent: string;
+      solution_density: string | number;
+      concentration: string | number;
+      boiling_point: string | number;
+      melting_point: string | number;
+      preparation_time: string;
+    };
+  }
   /**
    * 用户相关
    */

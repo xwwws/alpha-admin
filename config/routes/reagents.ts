@@ -15,7 +15,19 @@ export const reagents = [
       {
         path: '/reagent/list',
         name: 'reagentList',
-        component: './reagents/List',
+        component: './Reagents/List',
+      },
+      // 创建试剂
+      {
+        path: '/reagent/create',
+        name: 'create',
+        component: './Reagents/Create',
+      },
+      // 创建试剂
+      {
+        path: '/reagent/edit/:id',
+        name: 'edit',
+        component: './Reagents/Create',
       },
     ],
   },
