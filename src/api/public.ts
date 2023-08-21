@@ -19,8 +19,11 @@ export const getMethodsMap = (): Promise<Response<API.Enum[]>> => {
 /**
  * 获取area
  */
-export const getAreasMap = (): Promise<Response<API.Enum[]>> => {
+export const getAreasMap = (area_type?: string | undefined): Promise<Response<API.Area_Enum[]>> => {
   return request(`/api/v1/lab/areas/all`, {
     method: 'get',
+    params: {
+      area_type,
+    },
   });
 };

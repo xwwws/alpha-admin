@@ -53,7 +53,7 @@ const ReagentsForm: React.FC<IProps> = (props) => {
         await editReagent(params.id as string, val);
         setLoading(false);
         messageApi.success('添加溶剂成功');
-        navigate('/reagent');
+        navigate('/exp/reagent');
       } catch (err) {
         console.log(err);
       } finally {
@@ -64,7 +64,7 @@ const ReagentsForm: React.FC<IProps> = (props) => {
         await createReagent(val);
         setLoading(false);
         messageApi.success('添加溶剂成功');
-        navigate('/reagent');
+        navigate('/exp/reagent');
       } catch (err) {
         console.log(err);
       } finally {
@@ -81,9 +81,11 @@ const ReagentsForm: React.FC<IProps> = (props) => {
         onFinish={submit}
         style={{ width: '700px', margin: '0 auto' }}
       >
-        <Form.Item label={'id'}>
-          <strong>{params.id}</strong>
-        </Form.Item>
+        {params.id && (
+          <Form.Item label={'id'}>
+            <strong>{params.id}</strong>
+          </Form.Item>
+        )}
         <Form.Item label={'序号'} name={'number'} rules={formRules.number}>
           <Input></Input>
         </Form.Item>

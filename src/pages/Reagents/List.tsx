@@ -98,7 +98,7 @@ const List: React.FC<IProps> = (props) => {
             <Button
               icon={<PlusOutlined />}
               type={'primary'}
-              onClick={() => navigate('/reagent/create')}
+              onClick={() => navigate('/exp/reagent/create')}
             >
               创建试剂
             </Button>

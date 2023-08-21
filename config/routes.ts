@@ -65,7 +65,7 @@ export default [
     path: '/exp',
     name: 'exp',
     icon: 'AreaChartOutlined',
-    routes: [...experiments, ...reagents, ...trays],
+    routes: [...reagents, ...trays, ...experiments],
   },
 
   {

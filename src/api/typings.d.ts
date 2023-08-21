@@ -20,6 +20,9 @@ declare namespace API {
     name: string;
     label: string;
   }
+  interface Area_Enum extends Enum {
+    area_type: string;
+  }
 
   interface PagesRes<T> {
     total: number;
@@ -230,6 +233,36 @@ declare namespace API {
       boiling_point: string | number;
       melting_point: string | number;
       preparation_time: string;
+    };
+  }
+
+  /**
+   * Trays 托盘相关
+   */
+  declare namespace Trays {
+    type positions = {
+      id: number;
+      area_name: string;
+      area_type: string;
+      x: number;
+      y: number;
+      z: number;
+      reagent_id: number;
+      reagent_name: string;
+      quantity: string;
+      unit: string;
+      created_at: string;
+      updated_at: string;
+    };
+    type CreateReq = {
+      area_name: string;
+      area_type: string;
+      x: 0;
+      y: 0;
+      z: 0;
+      reagent_id: 0;
+      quantity: 0;
+      unit: string;
     };
   }
   /**

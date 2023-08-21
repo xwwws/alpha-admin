@@ -1,22 +1,131 @@
-import { getAreasTypes } from '@/api/trays';
+import { getAreasMap } from '@/api/public';
+import { deletePosition, getAreasPositionsByAreaType, getAreasTypes } from '@/api/trays';
+import TraysArea from '@/pages/Trays/TraysArea';
+import AddPosition from '@/pages/Trays/components/AddPosition';
+import BindReagentToPosition from '@/pages/Trays/components/BindReagentToPosition';
+import { PlusOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
-import { Card } from 'antd';
-import React, { useEffect } from 'react';
+import { Button, Card, Tabs, message } from 'antd';
+import React, { useEffect, useState } from 'react';
 
 interface IProps {
   [key: string]: any;
 }
 
 const List: React.FC<IProps> = (props) => {
+  const [areaTypes, setAreaTypes] = useState<any[]>([]);
+  const [caches, setCaches] = useState<any[]>([]);
+  const [trayLoading, setTrayLoading] = useState<boolean>(false);
+  const [trays, setTrays] = useState<API.Trays.positions[]>([]);
+  const [isShowModal, setIsShowModal] = useState<boolean>(false);
+  const [isShowAddModal, setIsShowAddModal] = useState<boolean>(false);
+  const [trayPositionId, setTrayPositionId] = useState<string | number>(0);
+  const [activeCache, setActiveCache] = useState<string>('');
+  const [messageApi, contextHolder] = message.useMessage();
+
+  const handleCacheChange = async (key: string) => {
+    setActiveCache(key);
+    if (key) {
+      setTrayLoading(trayLoading);
+      const res = await getAreasPositionsByAreaType(key);
+      setTrays(res.data);
+      setTrayLoading(false);
+    }
+  };
+  const handleTabsChange = async (key: string): Promise<void> => {
+    if (key) {
+      const res = await getAreasMap(key);
+      handleCacheChange(res.data[0]?.name);
+      setCaches(res.data);
+    }
+  };
   useEffect(() => {
+    // 查询工位列表
     (async () => {
       const res = await getAreasTypes();
-      console.log(res);
+      const activeIndex: number = 1;
+      handleTabsChange(res.data[activeIndex]?.value);
+      setAreaTypes(res.data);
     })();
   }, []);
+
+  const handleBindReagent = (item: API.Trays.positions) => {
+    setIsShowModal(true);
+    setTrayPositionId(item.id);
+  };
+
+  const handleDeleteReagent = async (item: API.Trays.positions) => {
+    await deletePosition(item.id);
+    await handleCacheChange(activeCache);
+    messageApi.success('已删除');
+  };
+
+  const addSuccess = async () => {
+    setIsShowAddModal(false);
+    await handleCacheChange(activeCache);
+  };
+
   return (
-    <PageContainer>
-      <Card>List</Card>
+    <PageContainer
+      tabList={areaTypes.map((item, index) => ({
+        tab: item.label,
+        key: item.value,
+        active: index === 0,
+        closable: false,
+      }))}
+      tabProps={{
+        type: 'editable-card',
+        hideAdd: true,
+        onChange: handleTabsChange,
+      }}
+      extra={[
+        <Button
+          key={'add'}
+          icon={<PlusOutlined />}
+          type={'primary'}
+          onClick={() => setIsShowAddModal(true)}
+        >
+          添加工位
+        </Button>,
+      ]}
+    >
+      <Card>
+        <Tabs
+          tabPosition={'left'}
+          items={caches.map((item) => {
+            return {
+              label: item.label,
+              key: item.name,
+              children: (
+                <div>
+                  <TraysArea
+                    loading={trayLoading}
+                    key={item.name}
+                    trays={trays}
+                    bindReagent={handleBindReagent}
+                    deleteReagent={handleDeleteReagent}
+                  />
+                </div>
+              ),
+            };
+          })}
+          onChange={handleCacheChange}
+        ></Tabs>
+        {/*给工位绑定试剂*/}
+        <BindReagentToPosition
+          isOpen={isShowModal}
+          close={() => setIsShowModal(false)}
+          trayPositionId={trayPositionId}
+        />
+        {/*添加工位*/}
+        <AddPosition
+          isOpen={isShowAddModal}
+          close={() => setIsShowAddModal(false)}
+          areaTypes={areaTypes}
+          success={addSuccess}
+        />
+      </Card>
+      {contextHolder}
     </PageContainer>
   );
 };
