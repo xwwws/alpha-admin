@@ -1,6 +1,6 @@
 export const reagents = [
   {
-    path: '/reagent',
+    path: '/exp/reagent',
     name: 'reagent',
     icon: 'AreaChartOutlined',
     hideChildrenInMenu: true,
@@ -8,24 +8,24 @@ export const reagents = [
 
     routes: [
       {
-        path: '/reagent',
-        redirect: '/reagent/list',
+        path: '/exp/reagent',
+        redirect: '/exp/reagent/list',
       },
       // 试剂列表
       {
-        path: '/reagent/list',
+        path: '/exp/reagent/list',
         name: 'reagentList',
         component: './Reagents/List',
       },
       // 创建试剂
       {
-        path: '/reagent/create',
+        path: '/exp/reagent/create',
         name: 'create',
         component: './Reagents/Create',
       },
       // 创建试剂
       {
-        path: '/reagent/edit/:id',
+        path: '/exp/reagent/edit/:id',
         name: 'edit',
         component: './Reagents/Create',
       },

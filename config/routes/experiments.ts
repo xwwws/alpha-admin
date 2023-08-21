@@ -1,6 +1,6 @@
 export const experiments = [
   {
-    path: '/experiment',
+    path: '/exp/experiment',
     name: 'experiment',
     icon: 'AreaChartOutlined',
     hideChildrenInMenu: true,
@@ -8,33 +8,33 @@ export const experiments = [
 
     routes: [
       {
-        path: '/experiment',
-        redirect: '/experiment/list',
+        path: '/exp/experiment',
+        redirect: '/exp/experiment/list',
       },
       // 实验列表
 
       {
-        path: '/experiment/list',
+        path: '/exp/experiment/list',
         name: 'experimentList',
         component: './Experiments/List',
       },
 
       // 创建实验
       {
-        path: '/experiment/create',
+        path: '/exp/experiment/create',
         name: 'experimentCreate',
         component: './Experiments/Create',
       },
 
       // 实验详情
       {
-        path: '/experiment/:id/detail',
+        path: '/exp/experiment/:id/detail',
         name: 'experimentDetail',
         component: './Experiments/Detail',
       },
       // 实验记录
       {
-        path: '/experiment/:id/record',
+        path: '/exp/experiment/:id/record',
         name: 'experimentRecord',
         component: './Experiments/Record',
       },

@@ -2,6 +2,7 @@
 import { methods } from './routes/methods';
 import { reagents } from './routes/reagents';
 import { steps } from './routes/steps';
+import { trays } from './routes/trays';
 
 // 文档地址  https://v3.umijs.org/zh-CN/plugins/plugin-layout
 //config/route.ts
@@ -60,8 +61,13 @@ export default [
   },
   ...methods,
   ...steps,
-  ...experiments,
-  ...reagents,
+  {
+    path: '/exp',
+    name: 'exp',
+    icon: 'AreaChartOutlined',
+    routes: [...experiments, ...reagents, ...trays],
+  },
+
   {
     path: '/',
     redirect: '/welcome',
