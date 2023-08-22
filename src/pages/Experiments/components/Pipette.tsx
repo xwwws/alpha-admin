@@ -4,7 +4,7 @@ import React from 'react';
 
 interface IProps {
   name: string | number;
-
+  reagent: API.ReagentsInfo | undefined;
   [key: string]: any;
 }
 
@@ -40,22 +40,22 @@ const Pipette: React.FC<IProps> = (props) => {
             label="托盘区域"
             rules={formRules.src_area_name}
           >
-            <Select options={[{ label: 'OP11', value: 'OP11' }]} />
+            <Select disabled options={[{ label: 'OP11', value: 'OP11' }]} />
           </Form.Item>
         </Col>
         <Col span={4}>
           <Form.Item name={[name, 'src_area_x']} label="x" rules={formRules.coordinates}>
-            <Input />
+            <Input disabled />
           </Form.Item>
         </Col>
         <Col span={4}>
           <Form.Item name={[name, 'src_area_y']} label="y" rules={formRules.coordinates}>
-            <Input />
+            <Input disabled />
           </Form.Item>
         </Col>
         <Col span={4}>
           <Form.Item name={[name, 'src_area_z']} label="z" rules={formRules.coordinates}>
-            <Input />
+            <Input disabled />
           </Form.Item>
         </Col>
         <Col span={12}>

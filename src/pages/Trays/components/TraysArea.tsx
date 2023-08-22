@@ -27,7 +27,6 @@ const TraysArea: React.FC<IProps> = (props) => {
       gap: 20px;
       align-items: center;
       justify-items: center;
-      min-height: 400px;
 
       .trayItem {
         display: flex;

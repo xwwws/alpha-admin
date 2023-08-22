@@ -141,6 +141,21 @@ declare namespace API {
     weight?: string | number;
     tolerance?: string | number;
   };
+  type ReagentsInfo = {
+    id: number;
+    area_name: string;
+    area_type: string;
+    x: string | number;
+    y: string | number;
+    z: string | number;
+    reagent_id: string | number;
+    reagent_name: string;
+    quantity: string | number;
+    unit: string;
+    created_at: string;
+    updated_at: string;
+  };
+
   /**
    * experiments 相关
    */
@@ -186,6 +201,7 @@ declare namespace API {
     // 创建实验步骤
     interface CreateExperimentStep {
       name: string;
+      reagent_id: string | number;
       kwargs: AddSolid & Pipette & AddSolvent;
     }
 

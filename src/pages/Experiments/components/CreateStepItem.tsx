@@ -1,13 +1,17 @@
+import { getReagentsByStep } from '@/api/steps';
 import AddSolid from '@/pages/Experiments/components/AddSolid';
 import AddSolventStep from '@/pages/Experiments/components/AddSolventStep';
 import Pipette from '@/pages/Experiments/components/Pipette';
+import { CenterHolderStyle } from '@/utils';
 import { MinusCircleOutlined } from '@ant-design/icons';
-import { Card, Col, Form, Row, Select } from 'antd';
+import type { FormInstance } from 'antd';
+import { Card, Col, Form, Row, Select, Spin } from 'antd';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useModel } from 'umi';
 
 interface IProps {
+  form: FormInstance<any>;
   name: number;
   restField: { fieldKey?: number | undefined };
   onDelete: () => void;
@@ -21,9 +25,26 @@ const ToolsBox = styled.div`
   flex-direction: row-reverse;
 `;
 const CreateStepItem: React.FC<IProps> = (props) => {
-  const { onDelete, restField, name } = props;
+  const { onDelete, restField, name, form } = props;
   const [step, setStep] = useState<string>();
+  const [reagents, setReagents] = useState<API.ReagentsInfo[]>([]);
+  const [reagent, setReagent] = useState<API.ReagentsInfo>();
   const { steps } = useModel('useExperimentModel');
+  const handleStepChange = async (val: string) => {
+    setStep('loading');
+    form.setFieldValue(['steps_data', name, 'reagent_id'], '');
+    const res = await getReagentsByStep(val);
+    setReagents(res.data);
+    setStep(val);
+  };
+  const handleReagentChange = (val: string | number) => {
+    const curReagent = reagents.find((item) => item.reagent_id === val);
+    form.setFieldValue(['steps_data', name, 'src_area_name'], curReagent?.area_name);
+    form.setFieldValue(['steps_data', name, 'src_area_x'], `${curReagent?.x}`);
+    form.setFieldValue(['steps_data', name, 'src_area_y'], `${curReagent?.y}`);
+    form.setFieldValue(['steps_data', name, 'src_area_z'], `${curReagent?.z}`);
+    setReagent(reagents.find((item) => item.reagent_id === val));
+  };
   return (
     <Card style={{ marginBottom: '20px' }}>
       <ToolsBox>
@@ -37,16 +58,37 @@ const CreateStepItem: React.FC<IProps> = (props) => {
             label="步骤"
             rules={[{ required: true, message: '请选择步骤' }]}
           >
-            <Select options={steps} onChange={setStep} placeholder="请选择步骤" />
+            <Select options={steps} onChange={handleStepChange} placeholder="请选择步骤" />
+          </Form.Item>
+
+          <Form.Item
+            {...restField}
+            name={[name, 'reagent_id']}
+            label="试剂"
+            rules={[{ required: true, message: '请选择试剂' }]}
+          >
+            <Select
+              options={reagents.map((item) => ({
+                label: item.reagent_name,
+                value: item.reagent_id,
+              }))}
+              onChange={handleReagentChange}
+              placeholder="请选择步骤"
+            />
           </Form.Item>
         </Col>
       </Row>
+      {step === 'loading' && (
+        <CenterHolderStyle>
+          <Spin />
+        </CenterHolderStyle>
+      )}
       {/*添加溶剂*/}
-      {step === 'add_solvent_step' && <AddSolventStep name={name} />}
+      {step === 'add_solvent_step' && <AddSolventStep reagent={reagent} name={name} />}
       {/*加液*/}
-      {step === 'pipette_step' && <Pipette name={name} />}
+      {step === 'pipette_step' && <Pipette reagent={reagent} name={name} />}
       {/*加固*/}
-      {step === 'add_solid_step' && <AddSolid name={name} />}
+      {step === 'add_solid_step' && <AddSolid reagent={reagent} name={name} />}
     </Card>
   );
 };

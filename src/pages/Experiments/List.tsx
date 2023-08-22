@@ -202,7 +202,7 @@ const List: React.FC = () => {
             <Button
               icon={<PlusOutlined />}
               type={'primary'}
-              onClick={() => navigate('/experiment/create')}
+              onClick={() => navigate('/exp/experiment/create')}
             >
               创建实验
             </Button>

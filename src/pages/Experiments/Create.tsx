@@ -50,6 +50,7 @@ const Create: React.FC = () => {
       switch (item.step_name) {
         case 'add_solvent_step':
           params.steps_data.push({
+            reagent_id: item.reagent_id,
             name: item.step_name,
             kwargs: {
               src_area: {
@@ -72,6 +73,7 @@ const Create: React.FC = () => {
           break;
         case 'pipette_step':
           params.steps_data.push({
+            reagent_id: item.reagent_id,
             name: item.step_name,
             kwargs: {
               src_area: {
@@ -98,6 +100,7 @@ const Create: React.FC = () => {
           break;
         case 'add_solid_step':
           params.steps_data.push({
+            reagent_id: item.reagent_id,
             name: item.step_name,
             kwargs: {
               src_area: {
@@ -136,7 +139,7 @@ const Create: React.FC = () => {
     setSubmitLoading(true);
     await createExperiment(fmtRequestParams(values));
     messageApi.success('创建成功');
-    navigate('/experiment/list');
+    navigate('/exp/experiment/list');
     setSubmitLoading(false);
   };
   const formList = (
@@ -145,6 +148,7 @@ const Create: React.FC = () => {
         <>
           {fields.map(({ key, name, ...restField }) => (
             <CreateStepItem
+              form={form}
               key={key}
               index={key}
               name={name}
