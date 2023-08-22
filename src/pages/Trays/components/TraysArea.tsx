@@ -23,7 +23,6 @@ const TraysArea: React.FC<IProps> = (props) => {
 
     .trays {
       display: grid;
-      justify
       grid-template-columns: repeat(${maxCol}, 120px);
       gap: 20px;
       align-items: center;

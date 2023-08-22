@@ -1,8 +1,8 @@
 import { getAreasMap } from '@/api/public';
 import { deletePosition, getAreasPositionsByAreaType, getAreasTypes } from '@/api/trays';
-import TraysArea from '@/pages/Trays/TraysArea';
 import AddPosition from '@/pages/Trays/components/AddPosition';
 import BindReagentToPosition from '@/pages/Trays/components/BindReagentToPosition';
+import TraysArea from '@/pages/Trays/components/TraysArea';
 import { PlusOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
 import { Button, Card, Tabs, message } from 'antd';
@@ -17,7 +17,7 @@ const List: React.FC<IProps> = (props) => {
   const [caches, setCaches] = useState<any[]>([]);
   const [trayLoading, setTrayLoading] = useState<boolean>(false);
   const [trays, setTrays] = useState<API.Trays.positions[]>([]);
-  const [isShowModal, setIsShowModal] = useState<boolean>(false);
+  const [isShowBindModal, setIsShowBindModal] = useState<boolean>(false);
   const [isShowAddModal, setIsShowAddModal] = useState<boolean>(false);
   const [trayPositionId, setTrayPositionId] = useState<string | number>(0);
   const [activeCache, setActiveCache] = useState<string>('');
@@ -43,14 +43,13 @@ const List: React.FC<IProps> = (props) => {
     // 查询工位列表
     (async () => {
       const res = await getAreasTypes();
-      const activeIndex: number = 1;
-      handleTabsChange(res.data[activeIndex]?.value);
+      handleTabsChange(res.data[0]?.value);
       setAreaTypes(res.data);
     })();
   }, []);
 
   const handleBindReagent = (item: API.Trays.positions) => {
-    setIsShowModal(true);
+    setIsShowBindModal(true);
     setTrayPositionId(item.id);
   };
 
@@ -60,11 +59,15 @@ const List: React.FC<IProps> = (props) => {
     messageApi.success('已删除');
   };
 
-  const addSuccess = async () => {
+  const addSuccess = () => {
     setIsShowAddModal(false);
-    await handleCacheChange(activeCache);
+    handleCacheChange(activeCache);
   };
 
+  const bindSuccess = () => {
+    setIsShowBindModal(false);
+    handleCacheChange(activeCache);
+  };
   return (
     <PageContainer
       tabList={areaTypes.map((item, index) => ({
@@ -113,9 +116,10 @@ const List: React.FC<IProps> = (props) => {
         ></Tabs>
         {/*给工位绑定试剂*/}
         <BindReagentToPosition
-          isOpen={isShowModal}
-          close={() => setIsShowModal(false)}
+          isOpen={isShowBindModal}
+          close={() => setIsShowBindModal(false)}
           trayPositionId={trayPositionId}
+          success={bindSuccess}
         />
         {/*添加工位*/}
         <AddPosition

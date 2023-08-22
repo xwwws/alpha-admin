@@ -17,12 +17,17 @@ const formRules: IForm.IFormRules = {
   unit: [{ required: true, message: '请填写单位' }],
 };
 const BindReagentToPosition: React.FC<IProps> = (props) => {
-  const { isOpen, trayPositionId, close } = props;
+  const { isOpen, trayPositionId, close, success } = props;
   const [form] = Form.useForm();
   const [reagents, setReagents] = useState<API.Reagents.List[]>([]);
+  const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
+
   const confirm = async () => {
     const value = await form.validateFields();
-    const res = await setReagentToPosition(trayPositionId, value);
+    setConfirmLoading(true);
+    await setReagentToPosition(trayPositionId, value);
+    setConfirmLoading(false);
+    success();
   };
   useEffect(() => {
     (async () => {
@@ -32,9 +37,15 @@ const BindReagentToPosition: React.FC<IProps> = (props) => {
   }, []);
   return (
     <>
-      <Modal title={'添加试剂'} open={isOpen} onOk={confirm} onCancel={close}>
+      <Modal
+        title={'添加试剂'}
+        open={isOpen}
+        confirmLoading={confirmLoading}
+        onOk={confirm}
+        onCancel={close}
+      >
         <Form form={form} initialValues={{ unit: 'g' }}>
-          <Form.Item label={'试剂id'} name={'reagent_id'} rules={formRules.reagent_id}>
+          <Form.Item label={'试剂'} name={'reagent_id'} rules={formRules.reagent_id}>
             <Select
               options={reagents.map((item) => ({ label: item.name, value: item.id }))}
             ></Select>
