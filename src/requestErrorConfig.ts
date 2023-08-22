@@ -1,7 +1,7 @@
-﻿import type { RequestOptions } from '@@/plugin-request/request';
+﻿import { CLEAR_TOKEN, CLEAR_USER, GET_TOKEN } from '@/utils/auth';
+import type { RequestOptions } from '@@/plugin-request/request';
 import type { RequestConfig } from '@umijs/max';
 import { message, notification } from 'antd';
-
 // 错误处理方案： 错误类型
 enum ErrorShowType {
   SILENT = 0,
@@ -75,6 +75,11 @@ export const errorConfig: RequestConfig = {
         console.log(error);
         // TODO 所有错误报错处理
         message.error(`error: ${error.response.data.msg}`);
+        if (error.response.data.code === 403) {
+          CLEAR_TOKEN();
+          CLEAR_USER();
+          location.reload();
+        }
       } else if (error.request) {
         // 请求已经成功发起，但没有收到响应
         // \`error.request\` 在浏览器中是 XMLHttpRequest 的实例，
@@ -90,8 +95,11 @@ export const errorConfig: RequestConfig = {
   // 请求拦截器
   requestInterceptors: [
     (config: RequestOptions) => {
-      // 拦截请求配置，进行个性化处理。
-      return { ...config };
+      const token = GET_TOKEN();
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+      return { ...config, headers };
     },
   ],
 
@@ -100,6 +108,7 @@ export const errorConfig: RequestConfig = {
     (response) => {
       // 拦截响应数据，进行个性化处理
       const { data } = response as unknown as ResponseStructure;
+
       if (data?.msg !== 'ok') {
         message.error(data.msg);
       }

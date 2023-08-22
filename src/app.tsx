@@ -1,5 +1,5 @@
-import { currentUser as queryCurrentUser } from '@/api/user';
 import { AvatarDropdown, AvatarName } from '@/components';
+import { getUser } from '@/utils/auth';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from 'umi';
 import { history } from 'umi';
@@ -20,12 +20,11 @@ interface IgetInitialState {
 }
 
 export async function getInitialState(): Promise<IgetInitialState> {
-  const fetchUserInfo = async () => {
+  const fetchUserInfo = async (): Promise<API.UserInfoRes | undefined> => {
     try {
-      const msg = await queryCurrentUser();
-      return msg.data;
+      const user = await getUser();
+      return user as API.UserInfoRes;
     } catch (error) {
-      console.log(error);
       history.push(loginPath);
     }
     return undefined;
@@ -53,7 +52,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     // actionsRender: () => [<Question key="doc" />, <SelectLang key="SelectLang" />],
     actionsRender: () => [],
     avatarProps: {
-      // @ts-ignore
       src: initialState?.currentUser?.avatar,
       title: <AvatarName />,
       render: (_, avatarChildren) => {
@@ -68,6 +66,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     // footerRender: () => <Footer />,
     onPageChange: () => {
       const { location } = history;
+      console.log(initialState);
       // 如果没有登录，重定向到 login
       if (!initialState?.currentUser && location.pathname !== loginPath) {
         history.push(loginPath);

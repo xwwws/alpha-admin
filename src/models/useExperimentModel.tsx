@@ -1,6 +1,6 @@
 import { getAreasMap, getMethodsMap, getStepsMap } from '@/api/public';
 import { ITypes } from '@/pages/typings';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 export default function useExperimentModel() {
   /**
@@ -30,11 +30,11 @@ export default function useExperimentModel() {
     setAreas(data.map((item): ITypes.EnumType => ({ label: item.label, value: item.name })));
   }, []);
 
-  useEffect(() => {
-    if (steps.length === 0) initSteps();
-    if (methods.length === 0) initMethods();
-    if (areas.length === 0) initAreas();
-  }, [steps, methods, areas]);
+  // useEffect(() => {
+  //   if (steps.length === 0) initSteps();
+  //   if (methods.length === 0) initMethods();
+  //   if (areas.length === 0) initAreas();
+  // }, [steps, methods, areas]);
   return {
     // steps 相关
     steps,

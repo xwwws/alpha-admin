@@ -9,6 +9,7 @@ import { Alert, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import Settings from '../../../../config/defaultSettings';
 
+import { setUser } from '@/utils/auth';
 import { flushSync } from 'react-dom';
 
 const LoginMessage: React.FC<{ content: string }> = ({ content }) => {
@@ -25,10 +26,9 @@ const LoginMessage: React.FC<{ content: string }> = ({ content }) => {
 };
 
 const Login: React.FC = () => {
-  const [userLoginState, setUserLoginState] = useState<API.LoginResult>({});
+  const [userLoginState, setUserLoginState] = useState<string>('');
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
-
   const containerClassName = useEmotionCss(() => {
     return {
       display: 'flex',
@@ -43,45 +43,31 @@ const Login: React.FC = () => {
 
   const intl = useIntl();
 
-  const fetchUserInfo = async () => {
-    const userInfo = await initialState?.fetchUserInfo?.();
-    if (userInfo) {
-      flushSync(() => {
-        setInitialState((s) => ({
-          ...s,
-          currentUser: userInfo,
-        }));
-      });
-    }
-  };
-
   const handleSubmit = async (values: API.UserLoginReq) => {
     try {
       // 登录
-      const msg = await login(values);
-      if (msg.status === 'ok') {
-        const defaultLoginSuccessMessage = intl.formatMessage({
-          id: 'pages.login.success',
-          defaultMessage: '登录成功！',
+      const res = await login(values);
+      if (res.msg === 'ok') {
+        message.success('登录成功');
+        const user = await setUser(res.data);
+        flushSync(() => {
+          setInitialState((s) => {
+            return {
+              ...s,
+              currentUser: user as API.UserInfoRes,
+            };
+          });
         });
-        message.success(defaultLoginSuccessMessage);
-        await fetchUserInfo();
         const urlParams = new URL(window.location.href).searchParams;
         history.push(urlParams.get('redirect') || '/');
         return;
       }
       // 如果失败去设置用户错误信息
-      setUserLoginState(msg);
+      setUserLoginState(res.msg);
     } catch (error) {
-      const defaultLoginFailureMessage = intl.formatMessage({
-        id: 'pages.login.failure',
-        defaultMessage: '登录失败，请重试！',
-      });
       console.log(error);
-      message.error(defaultLoginFailureMessage);
     }
   };
-  const { status, type: loginType } = userLoginState;
 
   return (
     <div className={containerClassName}>
@@ -94,7 +80,6 @@ const Login: React.FC = () => {
           - {Settings.title}
         </title>
       </Helmet>
-      {/*<Lang />*/}
       <div
         style={{
           flex: '1',
@@ -109,9 +94,6 @@ const Login: React.FC = () => {
           logo={<img alt="logo" src="/logo.png" />}
           title="计算化学合成平台监管系统"
           subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
-          initialValues={{
-            autoLogin: true,
-          }}
           actions={[]}
           onFinish={async (values) => {
             await handleSubmit(values as API.UserLoginReq);
@@ -139,14 +121,7 @@ const Login: React.FC = () => {
             ]}
           />
 
-          {status === 'error' && (
-            <LoginMessage
-              content={intl.formatMessage({
-                id: 'pages.login.accountLogin.errorMessage',
-                defaultMessage: '用户名或密码错误',
-              })}
-            />
-          )}
+          {userLoginState !== '' && <LoginMessage content={userLoginState} />}
           {type === 'account' && (
             <>
               <ProFormText
@@ -172,7 +147,7 @@ const Login: React.FC = () => {
                 ]}
               />
               <ProFormText.Password
-                name="password"
+                name="passwd"
                 fieldProps={{
                   size: 'large',
                   prefix: <LockOutlined />,

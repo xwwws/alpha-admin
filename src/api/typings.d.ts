@@ -286,17 +286,18 @@ declare namespace API {
    */
   type UserLoginReq = {
     username: string;
-    password: string;
+    passwd: string;
   };
 
   interface response<T> {
-    status: 'ok' | 'err';
     code: number;
+    msg: string;
     data: T;
   }
 
   interface UserLoginRes {
     token: string;
+    username: string;
   }
 
   type UserInfoRes = {
