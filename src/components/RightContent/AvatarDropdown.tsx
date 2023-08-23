@@ -1,4 +1,5 @@
 import { outLogin } from '@/api/user';
+import { CLEAR_TOKEN, CLEAR_USER } from '@/utils/auth';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { Spin } from 'antd';
@@ -63,6 +64,8 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
       switch (key) {
         // 退出登录
         case 'logout':
+          CLEAR_TOKEN();
+          CLEAR_USER();
           flushSync(() => {
             setInitialState((s) => ({ ...s, currentUser: undefined }));
           });

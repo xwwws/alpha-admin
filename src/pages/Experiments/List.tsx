@@ -171,7 +171,7 @@ const List: React.FC = () => {
               <Button
                 type={'link'}
                 icon={<BellFilled />}
-                onClick={() => navigate(`/experiment/${record.id}/detail`)}
+                onClick={() => navigate(`/exp/experiment/${record.id}/detail`)}
               ></Button>
             </Tooltip>
             {
@@ -183,7 +183,7 @@ const List: React.FC = () => {
                   <Button
                     type={'link'}
                     icon={<ReadFilled />}
-                    onClick={() => navigate(`/experiment/${record.id}/record`)}
+                    onClick={() => navigate(`/exp/experiment/${record.id}/record`)}
                   ></Button>
                 </Tooltip>
               )

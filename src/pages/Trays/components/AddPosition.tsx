@@ -21,12 +21,12 @@ interface IProps {
 const formRules: IForm.IFormRules = {
   area_name: [{ required: true, message: '请选择区域名称' }],
   area_type: [{ required: true, message: '请选择区域类型' }],
-  reagent_id: [{ required: true, message: '请选择试剂' }],
+  reagent_id: [{ required: false, message: '请选择试剂' }],
   quantity: [
-    { required: true, message: '请输入试剂量' },
+    { required: false, message: '请输入试剂量' },
     { pattern: /^\d+(.\d+)?$/, message: '输入错误' },
   ],
-  unit: [{ required: true, message: '请填写单位' }],
+  unit: [{ required: false, message: '请填写单位' }],
   areaType: [{ required: true, message: '请选择区域类型' }],
   coordinates: [
     { required: true, message: '请输入坐标' },

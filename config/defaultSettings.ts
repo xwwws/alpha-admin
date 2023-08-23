@@ -11,7 +11,7 @@ const Settings: ProLayoutProps & {
   navTheme: 'light',
   colorPrimary: '#1890ff',
   layout: 'mix',
-  contentWidth: 'Fixed', //  定宽:  Fixed 流式: Fluid
+  contentWidth: 'Fluid', //  定宽:  Fixed 流式: Fluid
   fixedHeader: true,
   fixSiderbar: true,
   pwa: true,

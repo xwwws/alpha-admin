@@ -26,6 +26,7 @@ const LoginMessage: React.FC<{ content: string }> = ({ content }) => {
 };
 
 const Login: React.FC = () => {
+  const { initAreas, initMethods, initSteps } = useModel('useExperimentModel');
   const [userLoginState, setUserLoginState] = useState<string>('');
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
@@ -59,6 +60,9 @@ const Login: React.FC = () => {
           });
         });
         const urlParams = new URL(window.location.href).searchParams;
+        initAreas();
+        initSteps();
+        initMethods();
         history.push(urlParams.get('redirect') || '/');
         return;
       }

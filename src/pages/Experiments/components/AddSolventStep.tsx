@@ -1,4 +1,5 @@
 import { IForm } from '@/pages/typings';
+import { useModel } from '@@/exports';
 import { Col, Form, Input, Row, Select } from 'antd';
 import React from 'react';
 
@@ -9,6 +10,8 @@ interface IProps {
 }
 
 const AddSolventStep: React.FC<IProps> = (props) => {
+  const { areas } = useModel('useExperimentModel');
+
   const { name } = props;
   const formRules: IForm.IFormRules = {
     src_area_name: [{ required: true, message: '请选择托盘区域' }],
@@ -43,7 +46,7 @@ const AddSolventStep: React.FC<IProps> = (props) => {
             label="托盘区域"
             rules={formRules.src_area_name}
           >
-            <Select disabled options={[{ label: 'OP11', value: 'OP11' }]} />
+            <Select disabled options={[]} />
           </Form.Item>
         </Col>
 
@@ -70,7 +73,7 @@ const AddSolventStep: React.FC<IProps> = (props) => {
             label="目标区域"
             rules={formRules.dst_area_name}
           >
-            <Select options={[{ label: 'OP11', value: 'OP11' }]} />
+            <Select options={areas} />
           </Form.Item>
         </Col>
         <Col span={4}>

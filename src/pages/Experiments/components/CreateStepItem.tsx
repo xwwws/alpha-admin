@@ -32,11 +32,14 @@ const CreateStepItem: React.FC<IProps> = (props) => {
   const { steps } = useModel('useExperimentModel');
   const handleStepChange = async (val: string) => {
     setStep('loading');
-    form.setFieldValue(['steps_data', name, 'reagent_id'], '');
+    // form.setFieldValue(['steps_data', name, 'reagent_id'], '');
+    // 这个步骤中的所有表单
+    form.setFieldValue(['steps_data', name], { step_name: val });
     const res = await getReagentsByStep(val);
     setReagents(res.data);
     setStep(val);
   };
+
   const handleReagentChange = (val: string | number) => {
     const curReagent = reagents.find((item) => item.reagent_id === val);
     form.setFieldValue(['steps_data', name, 'src_area_name'], curReagent?.area_name);
@@ -73,7 +76,7 @@ const CreateStepItem: React.FC<IProps> = (props) => {
                 value: item.reagent_id,
               }))}
               onChange={handleReagentChange}
-              placeholder="请选择步骤"
+              placeholder="请选择试剂"
             />
           </Form.Item>
         </Col>

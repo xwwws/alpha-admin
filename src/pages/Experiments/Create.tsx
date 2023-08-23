@@ -1,21 +1,29 @@
 import { createExperiment } from '@/api/experiments';
+import { getAreasMap } from '@/api/public';
 import CreateStepItem from '@/pages/Experiments/components/CreateStepItem';
 import { IForm } from '@/pages/typings';
 import { CenterHolderStyle, formItemLayout } from '@/utils';
 import { PlusOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
 import { Button, Card, Form, Input, Select, message } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'umi';
 
 const Create: React.FC = () => {
   const [form] = Form.useForm();
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const [messageApi, contextHolder] = message.useMessage();
+  const [reaction, setReaction] = useState<{ label: string; value: string }[]>([]);
   const navigate = useNavigate();
+  useEffect(() => {
+    (async () => {
+      const res = await getAreasMap('reaction');
+      setReaction(res.data.map((item) => ({ label: item.label, value: item.name })));
+    })();
+  }, []);
   const formRules: IForm.IFormRules = {
     name: [{ required: true, message: '请输入实验名称' }],
-    bottle_area_name: [{ required: true, message: '请输入试剂名称' }],
+    bottle_area_name: [{ required: true, message: '请选择反应器工位' }],
     coordinates: [
       { required: true, message: '请输入坐标' },
       { pattern: /^\d+$/, message: '坐标输入错误' },
@@ -180,10 +188,10 @@ const Create: React.FC = () => {
             </Form.Item>
             <Form.Item
               name="bottle_area_name"
-              label="试剂瓶名称"
+              label="反应器工位"
               rules={formRules.bottle_area_name}
             >
-              <Select options={[{ label: 'OP11', value: 'OP11' }]} />
+              <Select options={reaction} />
             </Form.Item>
 
             <Form.Item name="bottle_area_x" label="x" rules={formRules.coordinates}>
