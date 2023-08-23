@@ -77,7 +77,7 @@ export const methods = [
       {
         path: 'doperistaltic',
         name: 'doperistaltic',
-        component: './Methods/Doperistaltic',
+        component: './Methods/DoPeristaltic',
       },
       // 搅拌3
       {

@@ -110,7 +110,7 @@ declare namespace API {
   };
 
   // 蠕动泵加液
-  type Doperistaltic = {
+  type DoPeristaltic = {
     src_area: Coordinates;
     speed?: string | number;
     weight?: string | number;
@@ -154,6 +154,22 @@ declare namespace API {
     weight?: string | number;
     tolerance?: string | number;
   };
+
+  // 蠕动泵加液
+  type DoPeristalticStep = {
+    src_area?: Coordinates;
+    dst_area?: Coordinates;
+    speed?: string | number;
+    weight?: string | number;
+    accuracy?: string | number;
+  };
+
+  // 搅拌3
+  type Mix3Step = {
+    dst_area?: Coordinates;
+    time?: string | number;
+  };
+
   type ReagentsInfo = {
     id: number;
     area_name: string;

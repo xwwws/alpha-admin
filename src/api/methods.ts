@@ -120,7 +120,7 @@ export const solidMovementMethod = (
  * 蠕动泵加液
  * @param
  */
-export const doperistaltic = (data: API.Doperistaltic): Promise<Response<API.MethodsRes>> => {
+export const doperistaltic = (data: API.DoPeristaltic): Promise<Response<API.MethodsRes>> => {
   return request(`/api/v1/lab/methods/doperistaltic`, {
     method: 'post',
     data,

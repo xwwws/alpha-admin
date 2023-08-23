@@ -28,6 +28,18 @@ export const steps = [
         name: 'addSolid',
         component: './Steps/AddSolid',
       },
+      // 蠕动泵加液
+      {
+        path: 'doperistaltic',
+        name: 'doperistaltic',
+        component: './Steps/DoPeristaltic',
+      },
+      // 搅拌3
+      {
+        path: 'mix3',
+        name: 'mix3',
+        component: './Steps/Mix3',
+      },
     ],
   },
 ];

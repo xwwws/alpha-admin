@@ -38,3 +38,26 @@ export const getReagentsByStep = (step_name: string): Promise<Response<API.Reage
     method: 'post',
   });
 };
+
+/**
+ * 蠕动泵加液
+ * @param data
+ */
+export const doperistalticStep = (
+  data: API.DoPeristalticStep,
+): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/steps/doperistalticstep`, {
+    method: 'post',
+    data,
+  });
+};
+/**
+ * 搅拌3
+ * @param data
+ */
+export const mix3Step = (data: API.Mix3Step): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/steps/heatingstirstep`, {
+    method: 'post',
+    data,
+  });
+};

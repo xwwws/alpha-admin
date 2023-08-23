@@ -16,8 +16,8 @@ export default {
     '/api': {
       // 要代理的地址
       // target: 'http://10.0.0.33:9000',
-      // target: 'http://121.199.78.17:5010',
-      target: 'http://10.0.0.53:8000',
+      target: 'http://121.199.78.17:5010',
+      // target: 'http://10.0.0.53:8000',
       changeOrigin: true,
     },
   },

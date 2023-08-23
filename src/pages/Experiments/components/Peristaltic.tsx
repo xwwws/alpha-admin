@@ -32,17 +32,7 @@ const AddSolid: React.FC<IProps> = (props) => {
       { pattern: /^\d+$/, message: '比重应为数字' },
       { max: 10, message: '比重过高' },
     ],
-    height: [
-      { required: true, message: '请输入比高度' },
-      { pattern: /^\d+$/, message: '高度应为数字' },
-      { max: 10, message: '高度过高' },
-    ],
-    angel: [
-      { required: true, message: '请输入比角度' },
-      { pattern: /^\d+$/, message: '角度应为数字' },
-      { max: 3, message: '角度不正确' },
-    ],
-    tolerance: [
+    accuracy: [
       { required: true, message: '请输入精准度' },
       { pattern: /^\d+$/, message: '精准度应为数字' },
       { max: 10, message: '精准度有误' },
@@ -113,18 +103,8 @@ const AddSolid: React.FC<IProps> = (props) => {
           </Form.Item>
         </Col>
         <Col span={8}>
-          <Form.Item name={[name, 'tolerance']} label="精确度" rules={formRules.tolerance}>
+          <Form.Item name={[name, 'accuracy']} label="精确度" rules={formRules.accuracy}>
             <Input />
-          </Form.Item>
-        </Col>
-        <Col span={8}>
-          <Form.Item name={[name, 'height']} label="高度" rules={formRules.height}>
-            <Input addonAfter="cm" />
-          </Form.Item>
-        </Col>
-        <Col span={8}>
-          <Form.Item name={[name, 'angel']} label="角度" rules={formRules.angel}>
-            <Input addonAfter="°" />
           </Form.Item>
         </Col>
       </Row>

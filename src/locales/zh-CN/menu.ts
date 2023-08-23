@@ -18,6 +18,8 @@ export default {
   'menu.steps.addSolvent': '添加溶剂',
   'menu.steps.pipette': '移液',
   'menu.steps.addSolid': '加固',
+  'menu.steps.doperistaltic': '蠕动泵加液',
+  'menu.steps.mix3': '搅拌3',
   'menu.exp': '实验',
   'menu.exp.experiment': '实验列表',
   'menu.exp.experiment.experimentCreate': '创建实验',

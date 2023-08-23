@@ -1,5 +1,4 @@
-// @ts-ignore
-import { doperistaltic } from '@/api/methods';
+import { mix3Step } from '@/api/steps';
 import MethodsView from '@/pages/Methods/components/MethodsView';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 import { Button, Card, Form, Input, Select } from 'antd';
@@ -16,36 +15,24 @@ const contentItemLayout = {
 };
 
 interface IConditions {
-  src_area_name: string;
-  src_area_x: string | number;
-  src_area_y: string | number;
-  src_area_z: string | number;
-  speed: string | number;
-  weight: string | number;
-  accuracy: string | number;
+  dst_area_name: string;
+  dst_area_x: string | number;
+  dst_area_y: string | number;
+  dst_area_z: string | number;
+  time: string | number;
 }
 
 const formRules = {
-  src_area_name: [{ required: true, message: '请选择目标区域' }],
+  area_name: [{ required: true, message: '请选择目标区域' }],
+  time: [
+    { required: true, message: '搅拌时间' },
+    { pattern: /^\d+$/, message: '搅拌时间应为数字' },
+    { max: 10, message: '输入错误' },
+  ],
   coordinates: [
     { required: true, message: '请输入坐标' },
     { pattern: /^\d+$/, message: '坐标输入错误' },
     { max: 10, message: '坐标长度过长' },
-  ],
-  speed: [
-    { required: true, message: '请输入速度' },
-    { pattern: /^\d+$/, message: '速度应为数字' },
-    { max: 10, message: '速度过快' },
-  ],
-  weight: [
-    { required: true, message: '请输入比重' },
-    { pattern: /^\d+$/, message: '比重应为数字' },
-    { max: 10, message: '比重过高' },
-  ],
-  accuracy: [
-    { required: true, message: '请输入精准度' },
-    { pattern: /^\d+$/, message: '精准度应为数字' },
-    { max: 10, message: '精准度有误' },
   ],
 };
 const formItemStyle = {};
@@ -62,19 +49,18 @@ const Index: React.FC = () => {
   const { areas } = useModel('useExperimentModel');
   const onFinish = async (val: IConditions) => {
     try {
+      console.log(val);
       setLoading(true);
-      const params: API.Doperistaltic = {
-        src_area: {
-          name: val.src_area_name,
-          x: val.src_area_x,
-          y: val.src_area_y,
-          z: val.src_area_z,
+      const params: API.Mix3Step = {
+        dst_area: {
+          name: val.dst_area_name,
+          x: val.dst_area_x,
+          y: val.dst_area_y,
+          z: val.dst_area_z,
         },
-        speed: val.speed,
-        accuracy: val.accuracy,
-        weight: val.weight,
+        time: val.time,
       };
-      const { data } = await doperistaltic(params);
+      const { data } = await mix3Step(params);
       setLoading(false);
       setReadResult(JSON.stringify(data.result));
     } catch (err) {
@@ -97,16 +83,16 @@ const Index: React.FC = () => {
     >
       <Form.Item
         style={formItemStyle}
-        name="src_area_name"
+        name="dst_area_name"
         label="目标区域"
-        rules={formRules.src_area_name}
+        rules={formRules.area_name}
       >
         <Select options={areas} />
       </Form.Item>
       <Form.Item
         style={formItemStyle}
         {...contentItemLayout}
-        name="src_area_x"
+        name="dst_area_x"
         label="x"
         rules={formRules.coordinates}
       >
@@ -115,7 +101,7 @@ const Index: React.FC = () => {
       <Form.Item
         style={formItemStyle}
         {...contentItemLayout}
-        name="src_area_y"
+        name="dst_area_y"
         label="y"
         rules={formRules.coordinates}
       >
@@ -124,21 +110,14 @@ const Index: React.FC = () => {
       <Form.Item
         style={formItemStyle}
         {...contentItemLayout}
-        name="src_area_z"
+        name="dst_area_z"
         label="z"
         rules={formRules.coordinates}
       >
         <Input />
       </Form.Item>
-
-      <Form.Item style={formItemStyle} name="speed" label="速度" rules={formRules.speed}>
-        <Input />
-      </Form.Item>
-      <Form.Item style={formItemStyle} name="weight" label="重量" rules={formRules.weight}>
-        <Input />
-      </Form.Item>
-      <Form.Item style={formItemStyle} name="accuracy" label="精确度" rules={formRules.accuracy}>
-        <Input />
+      <Form.Item style={formItemStyle} name="time" label="时间" rules={formRules.time}>
+        <Input addonAfter="s" />
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 4 }}>
