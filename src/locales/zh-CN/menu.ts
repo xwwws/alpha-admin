@@ -12,6 +12,8 @@ export default {
   'menu.methods.pickTip': '抬起枪头',
   'menu.methods.liquidMovement': '移液',
   'menu.methods.solidMovement': '移动固体料仓',
+  'menu.methods.doperistaltic': '蠕动泵加液',
+  'menu.methods.mix3': '搅拌3',
   'menu.steps': '步骤',
   'menu.steps.addSolvent': '添加溶剂',
   'menu.steps.pipette': '移液',

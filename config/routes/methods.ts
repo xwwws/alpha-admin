@@ -72,6 +72,19 @@ export const methods = [
         name: 'solidMovement',
         component: './Methods/SolidMovement',
       },
+
+      // 蠕动泵加液
+      {
+        path: 'doperistaltic',
+        name: 'doperistaltic',
+        component: './Methods/Doperistaltic',
+      },
+      // 搅拌3
+      {
+        path: 'mix3',
+        name: 'mix3',
+        component: './Methods/Mix3',
+      },
     ],
   },
 ];

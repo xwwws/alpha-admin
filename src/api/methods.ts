@@ -115,3 +115,25 @@ export const solidMovementMethod = (
     data,
   });
 };
+
+/**
+ * 蠕动泵加液
+ * @param
+ */
+export const doperistaltic = (data: API.Doperistaltic): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/methods/doperistaltic`, {
+    method: 'post',
+    data,
+  });
+};
+
+/**
+ * 搅拌3
+ * @param
+ */
+export const mix3 = (data: API.Mix3): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/methods/methddomix3`, {
+    method: 'post',
+    data,
+  });
+};

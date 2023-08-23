@@ -108,6 +108,19 @@ declare namespace API {
     dst_area: Coordinates;
     height: number | string;
   };
+
+  // 蠕动泵加液
+  type Doperistaltic = {
+    src_area: Coordinates;
+    speed?: string | number;
+    weight?: string | number;
+    accuracy?: string | number;
+  };
+  // 搅拌3
+  type Mix3 = {
+    area_name: string;
+    time: string | number;
+  };
   /**
    * steps相关
    */

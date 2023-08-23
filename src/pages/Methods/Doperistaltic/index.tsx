@@ -1,8 +1,8 @@
 // @ts-ignore
-import { pickTipMethod } from '@/api/methods';
+import { doperistaltic } from '@/api/methods';
 import MethodsView from '@/pages/Methods/components/MethodsView';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
-import { Button, Card, Form, Input, Select, Switch } from 'antd';
+import { Button, Card, Form, Input, Select } from 'antd';
 import React, { useState } from 'react';
 import { useModel } from 'umi';
 
@@ -16,25 +16,36 @@ const contentItemLayout = {
 };
 
 interface IConditions {
-  tip_area_name: string;
-  tip_area_x: string | number;
-  tip_area_y: string | number;
-  tip_area_z: string | number;
-  tip_length: number;
-  drop_pre: boolean;
+  src_area_name: string;
+  src_area_x: string | number;
+  src_area_y: string | number;
+  src_area_z: string | number;
+  speed: string | number;
+  weight: string | number;
+  accuracy: string | number;
 }
 
 const formRules = {
-  tip_area_name: [{ required: true, message: '请选择枪头区域' }],
+  src_area_name: [{ required: true, message: '请选择目标区域' }],
   coordinates: [
     { required: true, message: '请输入坐标' },
     { pattern: /^\d+$/, message: '坐标输入错误' },
     { max: 10, message: '坐标长度过长' },
   ],
-  tip_length: [
-    { required: true, message: '请输入枪头长度' },
-    { pattern: /^\d+$/, message: '长度应为数字' },
-    { max: 10, message: '数字过长' },
+  speed: [
+    { required: true, message: '请输入速度' },
+    { pattern: /^\d+$/, message: '速度应为数字' },
+    { max: 10, message: '速度过快' },
+  ],
+  weight: [
+    { required: true, message: '请输入比重' },
+    { pattern: /^\d+$/, message: '比重应为数字' },
+    { max: 10, message: '比重过高' },
+  ],
+  accuracy: [
+    { required: true, message: '请输入精准度' },
+    { pattern: /^\d+$/, message: '精准度应为数字' },
+    { max: 10, message: '精准度有误' },
   ],
 };
 const formItemStyle = {};
@@ -52,17 +63,18 @@ const Index: React.FC = () => {
   const onFinish = async (val: IConditions) => {
     try {
       setLoading(true);
-      const params: API.PickTipReq = {
-        tip_area: {
-          name: val.tip_area_name,
-          x: val.tip_area_x,
-          y: val.tip_area_y,
-          z: val.tip_area_z,
+      const params: API.Doperistaltic = {
+        src_area: {
+          name: val.src_area_name,
+          x: val.src_area_x,
+          y: val.src_area_y,
+          z: val.src_area_z,
         },
-        tip_length: val.tip_length,
-        drop_pre: val.drop_pre,
+        speed: val.speed,
+        accuracy: val.accuracy,
+        weight: val.weight,
       };
-      const { data } = await pickTipMethod(params);
+      const { data } = await doperistaltic(params);
       setLoading(false);
       setReadResult(JSON.stringify(data.result));
     } catch (err) {
@@ -85,16 +97,16 @@ const Index: React.FC = () => {
     >
       <Form.Item
         style={formItemStyle}
-        name="tip_area_name"
-        label="枪头区域"
-        rules={formRules.tip_area_name}
+        name="src_area_name"
+        label="目标区域"
+        rules={formRules.src_area_name}
       >
         <Select options={areas} />
       </Form.Item>
       <Form.Item
         style={formItemStyle}
         {...contentItemLayout}
-        name="tip_area_x"
+        name="src_area_x"
         label="x"
         rules={formRules.coordinates}
       >
@@ -103,7 +115,7 @@ const Index: React.FC = () => {
       <Form.Item
         style={formItemStyle}
         {...contentItemLayout}
-        name="tip_area_y"
+        name="src_area_y"
         label="y"
         rules={formRules.coordinates}
       >
@@ -112,24 +124,23 @@ const Index: React.FC = () => {
       <Form.Item
         style={formItemStyle}
         {...contentItemLayout}
-        name="tip_area_z"
+        name="src_area_z"
         label="z"
         rules={formRules.coordinates}
       >
         <Input />
       </Form.Item>
 
-      <Form.Item
-        style={formItemStyle}
-        name="tip_length"
-        label="枪头长度"
-        rules={formRules.tip_length}
-      >
-        <Input addonAfter="cm" />
+      <Form.Item style={formItemStyle} name="speed" label="速度" rules={formRules.speed}>
+        <Input />
       </Form.Item>
-      <Form.Item style={formItemStyle} valuePropName="checked" name="drop_pre" label="是否卸下">
-        <Switch />
+      <Form.Item style={formItemStyle} name="weight" label="重量" rules={formRules.weight}>
+        <Input />
       </Form.Item>
+      <Form.Item style={formItemStyle} name="accuracy" label="精确度" rules={formRules.accuracy}>
+        <Input />
+      </Form.Item>
+
       <Form.Item wrapperCol={{ offset: 4 }}>
         <Button type={'primary'} htmlType="submit">
           确定

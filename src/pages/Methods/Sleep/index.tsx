@@ -25,7 +25,6 @@ const Index: React.FC = () => {
   const [readResult, setReadResult] = useState<any>('');
   const [loading, setLoading] = useState<boolean>(false);
   const onFinish = async (val: IConditions) => {
-    console.log(val);
     try {
       setLoading(true);
       const { data } = await sleepMethod(val);
