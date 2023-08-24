@@ -38,11 +38,12 @@ const CreateStepItem: React.FC<IProps> = (props) => {
     // 这个步骤中的所有表单
     form.setFieldValue(['steps_data', name], { step_name: val });
     // heating_stir_step  不用试剂id
-    setReagentShow(true);
     if (val !== 'heating_stir_step') {
-      setReagentShow(false);
+      setReagentShow(true);
       const res = await getReagentsByStep(val);
       setReagents(res.data);
+    } else {
+      setReagentShow(false);
     }
     setStep(val);
   };

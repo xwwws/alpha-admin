@@ -126,8 +126,8 @@ declare namespace API {
    */
   // 添加溶剂
   type AddSolvent = {
-    src_area: Coordinates;
-    dst_area: Coordinates;
+    src_area?: Coordinates;
+    dst_area?: Coordinates;
     speed?: string | number;
     weight?: string | number;
     accuracy?: string | number;
@@ -226,12 +226,11 @@ declare namespace API {
     interface ExperimentStatus {
       status: 'draft' | 'waiting' | 'doing' | 'succeed' | 'failed' | 'canceled';
     }
-
     // 创建实验步骤
     interface CreateExperimentStep {
       name: string;
-      reagent_id: string | number;
-      kwargs: AddSolid & Pipette & AddSolvent;
+      reagent_id?: string | number;
+      kwargs: AddSolid & Pipette & AddSolvent & Mix3Step & DoPeristalticStep;
     }
 
     // 创建实验

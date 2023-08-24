@@ -12,7 +12,6 @@ import { useNavigate } from 'umi';
 const Create: React.FC = () => {
   const [form] = Form.useForm();
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
-  const [messageApi, contextHolder] = message.useMessage();
   const [reaction, setReaction] = useState<{ label: string; value: string }[]>([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -131,6 +130,45 @@ const Create: React.FC = () => {
             },
           });
           break;
+        //   蠕动泵加液
+        case 'do_peristaltic_step':
+          params.steps_data.push({
+            reagent_id: item.reagent_id,
+            name: item.step_name,
+            kwargs: {
+              src_area: {
+                name: item.src_area_name,
+                x: item.src_area_x,
+                y: item.src_area_y,
+                z: item.src_area_z,
+              },
+              dst_area: {
+                name: item.dst_area_name,
+                x: item.dst_area_x,
+                y: item.dst_area_y,
+                z: item.dst_area_z,
+              },
+              speed: item.speed,
+              weight: item.weight,
+              accuracy: item.accuracy,
+            },
+          });
+          break;
+        //   加热搅拌
+        case 'heating_stir_step':
+          params.steps_data.push({
+            name: item.step_name,
+            kwargs: {
+              dst_area: {
+                name: item.dst_area_name,
+                x: item.dst_area_x,
+                y: item.dst_area_y,
+                z: item.dst_area_z,
+              },
+              time: item.time,
+            },
+          });
+          break;
       }
     });
     return params;
@@ -141,12 +179,12 @@ const Create: React.FC = () => {
    */
   const onFinish = async (values: any) => {
     if (!values.steps_data || values.steps_data?.length === 0) {
-      messageApi.warning('请添加步骤');
+      message.warning('请添加步骤');
       return;
     }
     setSubmitLoading(true);
     await createExperiment(fmtRequestParams(values));
-    messageApi.success('创建成功');
+    message.success('创建成功');
     navigate('/exp/experiment/list');
     setSubmitLoading(false);
   };
@@ -206,7 +244,7 @@ const Create: React.FC = () => {
               <Input />
             </Form.Item>
 
-            <Form.Item name="bottle_height" label="高度" rules={formRules.bottle_height}>
+            <Form.Item name="bottle_height" label="瓶型" rules={formRules.bottle_height}>
               <Input />
             </Form.Item>
             {formList}
@@ -219,7 +257,6 @@ const Create: React.FC = () => {
             </Form.Item>
           </Form>
         </Card>
-        {contextHolder}
       </PageContainer>
     </>
   );
