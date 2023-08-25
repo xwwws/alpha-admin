@@ -8,7 +8,7 @@ import { CenterHolderStyle } from '@/utils';
 import { MinusCircleOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Card, Col, Form, Row, Select, Spin } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useModel } from 'umi';
 
@@ -33,6 +33,10 @@ const CreateStepItem: React.FC<IProps> = (props) => {
   const [reagent, setReagent] = useState<API.ReagentsInfo>();
   const [reagentShow, setReagentShow] = useState<boolean>(false);
   const { steps } = useModel('useExperimentModel');
+  const step_name = Form.useWatch(['steps_data',name,'step_name'], form);
+  useEffect(() => {
+    setStep(step_name)
+  }, [step_name]);
   const handleStepChange = async (val: string) => {
     setStep('loading');
     // 这个步骤中的所有表单

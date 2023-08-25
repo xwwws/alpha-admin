@@ -1,4 +1,4 @@
-import { createExperiment } from '@/api/experiments';
+import { createExperiment, getExperimentDetailsById } from '@/api/experiments';
 import { getAreasMap } from '@/api/public';
 import CreateStepItem from '@/pages/Experiments/components/CreateStepItem';
 import { IForm } from '@/pages/typings';
@@ -8,17 +8,29 @@ import { PageContainer } from '@ant-design/pro-components';
 import { Button, Card, Form, Input, Select, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'umi';
+import { useSearchParams } from "@@/exports";
+import { fmtRequestParams, fmtResToFormData } from "@/pages/Experiments/hooks/experimentHooks";
 
 const Create: React.FC = () => {
   const [form] = Form.useForm();
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const [reaction, setReaction] = useState<{ label: string; value: string }[]>([]);
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   useEffect(() => {
     (async () => {
       const res = await getAreasMap('reaction');
       setReaction(res.data.map((item) => ({ label: item.label, value: item.name })));
     })();
+    const copyId = searchParams.get('id')
+    if(copyId) {
+      (async () => {
+        const res = await getExperimentDetailsById(copyId)
+        form.setFieldsValue(fmtResToFormData(res.data))
+
+
+      })()
+    }
   }, []);
   const formRules: IForm.IFormRules = {
     name: [{ required: true, message: '请输入实验名称' }],
@@ -33,145 +45,6 @@ const Create: React.FC = () => {
       { pattern: /^\d+(.\d+)?$/, message: '输入错误' },
       { max: 6, message: '数值过大' },
     ],
-  };
-  /**
-   * 将表单数据格式化为创建实验参数
-   * @param values
-   * @return {API.Experiments.CreateExperimentReq}
-   */
-  const fmtRequestParams = (values: any): API.Experiments.CreateExperimentReq => {
-    const params: API.Experiments.CreateExperimentReq = {
-      name: values.name,
-      bottle_height: values.bottle_height,
-      bottle_area: {
-        name: values.bottle_area_name,
-        x: values.bottle_area_x,
-        y: values.bottle_area_y,
-        z: values.bottle_area_z,
-      },
-      steps_data: [],
-    };
-    // 根据不同情况处理不同数据
-    // TODO 优化代码 看起来不这么多
-    values.steps_data.forEach((item: any) => {
-      switch (item.step_name) {
-        case 'add_solvent_step':
-          params.steps_data.push({
-            reagent_id: item.reagent_id,
-            name: item.step_name,
-            kwargs: {
-              src_area: {
-                name: item.src_area_name,
-                x: item.src_area_x,
-                y: item.src_area_y,
-                z: item.src_area_z,
-              },
-              dst_area: {
-                name: item.dst_area_name,
-                x: item.dst_area_x,
-                y: item.dst_area_y,
-                z: item.dst_area_z,
-              },
-              speed: item.speed,
-              weight: item.weight,
-              accuracy: item.accuracy,
-            },
-          });
-          break;
-        case 'pipette_step':
-          params.steps_data.push({
-            reagent_id: item.reagent_id,
-            name: item.step_name,
-            kwargs: {
-              src_area: {
-                name: item.src_area_name,
-                x: item.src_area_x,
-                y: item.src_area_y,
-                z: item.src_area_z,
-              },
-              dst_area: {
-                name: item.dst_area_name,
-                x: item.dst_area_x,
-                y: item.dst_area_y,
-                z: item.dst_area_z,
-              },
-              speed: item.speed,
-              total: item.total,
-              take_once: item.take_once,
-              spit_once: item.spit_once,
-              interval: item.interval,
-              height: item.height,
-              tip_length: item.tip_length,
-            },
-          });
-          break;
-        case 'add_solid_step':
-          params.steps_data.push({
-            reagent_id: item.reagent_id,
-            name: item.step_name,
-            kwargs: {
-              src_area: {
-                name: item.src_area_name,
-                x: item.src_area_x,
-                y: item.src_area_y,
-                z: item.src_area_z,
-              },
-              dst_area: {
-                name: item.dst_area_name,
-                x: item.dst_area_x,
-                y: item.dst_area_y,
-                z: item.dst_area_z,
-              },
-              speed: item.speed,
-              weight: item.weight,
-              angel: item.angel,
-              tolerance: item.tolerance,
-              height: item.height,
-            },
-          });
-          break;
-        //   蠕动泵加液
-        case 'do_peristaltic_step':
-          params.steps_data.push({
-            reagent_id: item.reagent_id,
-            name: item.step_name,
-            kwargs: {
-              src_area: {
-                name: item.src_area_name,
-                x: item.src_area_x,
-                y: item.src_area_y,
-                z: item.src_area_z,
-              },
-              dst_area: {
-                name: item.dst_area_name,
-                x: item.dst_area_x,
-                y: item.dst_area_y,
-                z: item.dst_area_z,
-              },
-              speed: item.speed,
-              weight: item.weight,
-              accuracy: item.accuracy,
-            },
-          });
-          break;
-        //   加热搅拌
-        case 'heating_stir_step':
-          params.steps_data.push({
-            name: item.step_name,
-            kwargs: {
-              dst_area: {
-                name: item.dst_area_name,
-                x: item.dst_area_x,
-                y: item.dst_area_y,
-                z: item.dst_area_z,
-              },
-              time: item.time,
-            },
-          });
-          break;
-      }
-    });
-    return params;
   };
   /**
    * 表单验证成功回调

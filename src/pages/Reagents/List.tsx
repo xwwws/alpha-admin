@@ -11,11 +11,6 @@ import { useNavigate } from 'umi';
 interface IProps {
   [key: string]: any;
 }
-
-const ButtonWarpStyle = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
-`;
 const List: React.FC<IProps> = (props) => {
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
   const [currentItem, setCurrentItem] = useState<API.Reagents.List>();
@@ -92,17 +87,18 @@ const List: React.FC<IProps> = (props) => {
   ];
   return (
     <>
-      <PageContainer>
+      <PageContainer
+        extra={[
+          <Button
+            key={'add'}
+            icon={<PlusOutlined />}
+            type={'primary'}
+            onClick={() => navigate('/exp/reagent/create')}
+          >
+            创建实验
+          </Button>,
+        ]}>
         <Card>
-          <ButtonWarpStyle>
-            <Button
-              icon={<PlusOutlined />}
-              type={'primary'}
-              onClick={() => navigate('/exp/reagent/create')}
-            >
-              创建试剂
-            </Button>
-          </ButtonWarpStyle>
           <ProTable
             pagination={{
               pageSize: 10,

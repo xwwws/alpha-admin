@@ -2,6 +2,7 @@ import { cancelExperimentById, getExperimentList, runExperimentById } from '@/ap
 import { expState2ValueEnum, experimentStatesMap } from '@/utils/dataMaps';
 import {
   BellFilled,
+  CopyFilled,
   PlayCircleFilled,
   PlusOutlined,
   ReadFilled,
@@ -183,6 +184,18 @@ const List: React.FC = () => {
                 </Tooltip>
               )
             }
+
+            {/*复制实验 一直展示*/}
+            <Tooltip placement="top" title="复制实验">
+              <Button
+                type={'link'}
+                icon={<CopyFilled />}
+                onClick={() => navigate({
+                  pathname: `/exp/experiment/create`,
+                  search: `?id=${record.id}`
+                })}
+              ></Button>
+            </Tooltip>
           </>
         );
       },
