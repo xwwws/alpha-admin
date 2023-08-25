@@ -1,5 +1,7 @@
 import DetailAddSolid from '@/pages/Experiments/components/DetailAddSolid';
 import DetailAddSolvent from '@/pages/Experiments/components/DetailAddSolvent';
+import DetailDoPeristaltic from '@/pages/Experiments/components/DetailDoPeristaltic';
+import DetailMix3 from '@/pages/Experiments/components/DetailMix3';
 import DetailPipette from '@/pages/Experiments/components/DetailPipette';
 import React from 'react';
 import styled from 'styled-components';
@@ -21,6 +23,10 @@ const RecordItem: React.FC<IProps> = (props) => {
       {record.name === 'pipette_step' && <DetailPipette record={record} />}
       {/*加固*/}
       {record.name === 'add_solid_step' && <DetailAddSolid record={record} />}
+      {/*蠕动泵加液*/}
+      {record.name === 'do_peristaltic_step' && <DetailDoPeristaltic record={record} />}
+      {/*搅拌3*/}
+      {record.name === 'heating_stir_step' && <DetailMix3 record={record} />}
     </RecordItemStyle>
   );
 };

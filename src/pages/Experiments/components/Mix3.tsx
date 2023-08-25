@@ -24,7 +24,7 @@ const AddSolid: React.FC<IProps> = (props) => {
     ],
     time: [
       { required: true, message: '请输入时间' },
-      { pattern: /^\d+$/, message: '时间应为数字' },
+      { pattern: /^\d+(.\d+)?$/, message: '输入错误' },
       { max: 10, message: '输入有误' },
     ],
   };

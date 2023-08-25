@@ -41,27 +41,27 @@ const formRules: IForm.IFormRules = {
   ],
   speed: [
     { required: true, message: '请输入速度' },
-    { pattern: /^\d+$/, message: '速度应为数字' },
+    { pattern: /^\d+(.\d+)?$/, message: '输入错误' },
     { max: 10, message: '速度过快' },
   ],
   weight: [
     { required: true, message: '请输入比重' },
-    { pattern: /^\d+$/, message: '比重应为数字' },
+    { pattern: /^\d+(.\d+)?$/, message: '输入错误' },
     { max: 10, message: '比重过高' },
   ],
   height: [
     { required: true, message: '请输入比高度' },
-    { pattern: /^\d+$/, message: '高度应为数字' },
+    { pattern: /^\d+(.\d+)?$/, message: '输入错误' },
     { max: 10, message: '高度过高' },
   ],
   angel: [
     { required: true, message: '请输入比角度' },
-    { pattern: /^\d+$/, message: '角度应为数字' },
+    { pattern: /^\d+(.\d+)?$/, message: '输入错误' },
     { max: 3, message: '角度不正确' },
   ],
   tolerance: [
     { required: true, message: '请输入精准度' },
-    { pattern: /^\d+$/, message: '精准度应为数字' },
+    { pattern: /^\d+(.\d+)?$/, message: '输入错误' },
     { max: 10, message: '精准度有误' },
   ],
 };

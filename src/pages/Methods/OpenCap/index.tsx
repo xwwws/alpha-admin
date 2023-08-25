@@ -30,7 +30,7 @@ const formRules = {
   ],
   height: [
     { required: true, message: '请输入高度' },
-    { pattern: /^\d+$/, message: '速度应为数字' },
+    { pattern: /^\d+(.\d+)?$/, message: '输入错误' },
     { max: 10, message: '高度过高' },
   ],
 };

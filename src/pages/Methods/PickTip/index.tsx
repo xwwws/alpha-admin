@@ -33,7 +33,7 @@ const formRules = {
   ],
   tip_length: [
     { required: true, message: '请输入枪头长度' },
-    { pattern: /^\d+$/, message: '长度应为数字' },
+    { pattern: /^\d+(.\d+)?$/, message: '输入错误' },
     { max: 10, message: '数字过长' },
   ],
 };

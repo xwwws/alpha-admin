@@ -72,7 +72,7 @@ const List: React.FC<IProps> = (props) => {
         <Button key="detail" type="link" onClick={() => showDetail(item)}>
           详情
         </Button>,
-        <Button key="edit" type="link" onClick={() => navigate(`/reagent/edit/${item.id}`)}>
+        <Button key="edit" type="link" onClick={() => navigate(`/exp/reagent/edit/${item.id}`)}>
           修改
         </Button>,
         <Popconfirm

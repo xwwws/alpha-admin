@@ -1,10 +1,13 @@
 import { getExperimentLogsById } from '@/api/experiments';
 import { PageContainer } from '@ant-design/pro-components';
-import { Card, Descriptions, Divider } from 'antd';
+import { Card, Descriptions, Divider, Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-
+const ResultStyleWarp = styled.div`
+  display: grid;
+  gap: 10px;
+`;
 interface IProps {
   [key: string]: any;
 }
@@ -17,6 +20,7 @@ const RecordStyle = styled.div`
 `;
 const Record: React.FC<IProps> = (props) => {
   const [record, setRecord] = useState<API.Experiments.ExperimentRecordRes[]>([]);
+  const s = [true, false, 0];
   const { id } = useParams();
   useEffect(() => {
     (async () => {
@@ -45,10 +49,13 @@ const Record: React.FC<IProps> = (props) => {
                     {item.args.join(' , ')}
                   </Descriptions.Item>
                   <Descriptions.Item span={24} label={'result:'}>
-                    <br />
-                    {item.result.map((resultItem, resultIndex) => (
-                      <div key={resultIndex}>{resultItem}</div>
-                    ))}
+                    <ResultStyleWarp>
+                      {item.result.map((resultItem, resultIndex) => (
+                        <div key={resultIndex}>
+                          <Tag>{`${resultItem}`}</Tag>
+                        </div>
+                      ))}
+                    </ResultStyleWarp>
                   </Descriptions.Item>
                 </Descriptions>
               </div>

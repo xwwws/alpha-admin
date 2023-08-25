@@ -16,7 +16,7 @@ interface IConditions {
 const formRules = {
   seconds: [
     { required: true, message: '请输入等待时间' },
-    { pattern: /^\d+$/, message: '请输入数字' },
+    { pattern: /^\d+(.\d+)?$/, message: '输入错误' },
     { max: 6, message: '等待时间过长' },
   ],
 };

@@ -13,12 +13,7 @@ import type { ActionType } from '@ant-design/pro-table';
 import { Button, Card, Tooltip, message } from 'antd';
 import dayjs from 'dayjs';
 import React, { useRef } from 'react';
-import styled from 'styled-components';
 import { useNavigate } from 'umi';
-const ButtonWarpStyle = styled.div`
-  display: flex;
-  flex-direction: row-reverse;
-`;
 const List: React.FC = () => {
   const tableRef = useRef<ActionType>();
   const [messageApi, contextHolder] = message.useMessage();
@@ -196,17 +191,19 @@ const List: React.FC = () => {
   return (
     <>
       {contextHolder}
-      <PageContainer>
+      <PageContainer
+        extra={[
+          <Button
+            key={'add'}
+            icon={<PlusOutlined />}
+            type={'primary'}
+            onClick={() => navigate('/exp/experiment/create')}
+          >
+            创建实验
+          </Button>,
+        ]}
+      >
         <Card>
-          <ButtonWarpStyle>
-            <Button
-              icon={<PlusOutlined />}
-              type={'primary'}
-              onClick={() => navigate('/exp/experiment/create')}
-            >
-              创建实验
-            </Button>
-          </ButtonWarpStyle>
           <ProTable
             pagination={{
               pageSize: 10,

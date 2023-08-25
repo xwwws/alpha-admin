@@ -24,7 +24,7 @@ const formRules = {
   area_name: [{ required: true, message: '请选择目标区域' }],
   time: [
     { required: true, message: '搅拌时间' },
-    { pattern: /^\d+$/, message: '搅拌时间应为数字' },
+    { pattern: /^\d+(.\d+)?$/, message: '输入错误' },
     { max: 10, message: '输入错误' },
   ],
 };

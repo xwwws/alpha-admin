@@ -43,7 +43,7 @@ const formRules: IForm.IFormRules = {
   ],
   height: [
     { required: true, message: '请输入高度' },
-    { pattern: /^\d+$/, message: '高度应为数字' },
+    { pattern: /^\d+(.\d+)?$/, message: '输入错误' },
     { max: 10, message: '高度过高' },
   ],
 };
