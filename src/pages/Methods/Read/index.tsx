@@ -43,7 +43,7 @@ const Index: React.FC = () => {
       style={{ maxWidth: 'none' }}
       onFinish={onFinish}
     >
-      <Form.Item name="node_index" label="节点id">
+      <Form.Item name="node_index" label="节点id" rules={[{required:true,message:'请选择节点'}]}>
         <Select
           allowClear={true}
           style={{ width: `150px` }}
