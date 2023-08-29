@@ -73,7 +73,7 @@ const List: React.FC<IProps> = (props) => {
           ></Button>
         </Tooltip>
         ,
-        <Tooltip placement="top" title="详情">
+        <Tooltip placement="top" title="编辑">
           <Button
             type={ 'link' }
             icon={ <EditOutlined/> }
