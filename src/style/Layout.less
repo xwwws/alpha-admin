@@ -1,9 +1,11 @@
-
+/**
+文件修改pro layout 默认样式
+ */
+.root,body,html{
+  background-color: #F4F6FA !important;
+}
 .ant-layout-sider-children{
   background-color: #fff;
-}
-.ant-pro-page-container{
-  background-color: #F4F6FA;
 }
 .ant-menu-item-selected{
   color:#2A54FF !important;
@@ -26,4 +28,15 @@
   background-color: #246EFF1a;
 }
 
-//#2A54FFFF
+.ant-pro-layout-bg-list{
+  min-height: 100vh;
+  background-color: red;
+  background-image: none !important;
+}
+.ant-layout-content{
+  min-height: 100%;
+  background-color: #F4F6FA;
+  .ant-pro-page-container{
+    background-color: #F4F6FA;
+  }
+}
