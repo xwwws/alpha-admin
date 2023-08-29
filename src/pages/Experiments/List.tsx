@@ -1,12 +1,12 @@
 import { cancelExperimentById, getExperimentList, runExperimentById } from '@/api/experiments';
 import { expState2ValueEnum, experimentStatesMap } from '@/utils/dataMaps';
 import {
-  BellFilled,
-  CopyFilled,
-  PlayCircleFilled,
+  AlignLeftOutlined,
+  CopyOutlined,
+  PlayCircleOutlined,
   PlusOutlined,
-  ReadFilled,
-  StopFilled,
+  OrderedListOutlined,
+  StopOutlined,
 } from '@ant-design/icons';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
@@ -144,7 +144,7 @@ const List: React.FC = () => {
                 <Tooltip placement="top" title="运行">
                   <Button
                     type={'link'}
-                    icon={<PlayCircleFilled />}
+                    icon={<PlayCircleOutlined />}
                     onClick={() => handleRun(record.id)}
                   ></Button>
                 </Tooltip>
@@ -156,7 +156,7 @@ const List: React.FC = () => {
                 <Tooltip placement="top" title="取消">
                   <Button
                     type={'link'}
-                    icon={<StopFilled />}
+                    icon={<StopOutlined />}
                     onClick={() => handleCancel(record.id)}
                   ></Button>
                 </Tooltip>
@@ -166,7 +166,7 @@ const List: React.FC = () => {
             <Tooltip placement="top" title="实验详情">
               <Button
                 type={'link'}
-                icon={<BellFilled />}
+                icon={<AlignLeftOutlined />}
                 onClick={() => navigate(`/exp/experiment/${record.id}/detail`)}
               ></Button>
             </Tooltip>
@@ -178,7 +178,7 @@ const List: React.FC = () => {
                 <Tooltip placement="top" title="实验记录">
                   <Button
                     type={'link'}
-                    icon={<ReadFilled />}
+                    icon={<OrderedListOutlined />}
                     onClick={() => navigate(`/exp/experiment/${record.id}/record`)}
                   ></Button>
                 </Tooltip>
@@ -189,7 +189,7 @@ const List: React.FC = () => {
             <Tooltip placement="top" title="复制实验">
               <Button
                 type={'link'}
-                icon={<CopyFilled />}
+                icon={<CopyOutlined />}
                 onClick={() => navigate({
                   pathname: `/exp/experiment/create`,
                   search: `?id=${record.id}`
@@ -221,6 +221,7 @@ const List: React.FC = () => {
             pagination={{
               pageSize: 10,
             }}
+            search={false}
             actionRef={tableRef}
             columns={columns}
             options={false}

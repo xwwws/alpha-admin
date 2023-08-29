@@ -1,9 +1,9 @@
 import { deleteReagent, getReagentDetail, getReagentList } from '@/api/reagents';
 import Detail from '@/pages/Reagents/components/Detail';
-import { PlusOutlined } from '@ant-design/icons';
+import { AlignLeftOutlined, DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
-import { Button, Card, Popconfirm } from 'antd';
+import { Button, Card, Popconfirm, Tooltip } from 'antd';
 import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'umi';
@@ -11,6 +11,7 @@ import { useNavigate } from 'umi';
 interface IProps {
   [key: string]: any;
 }
+
 const List: React.FC<IProps> = (props) => {
   const [isShowModal, setIsShowModal] = useState<boolean>(false);
   const [currentItem, setCurrentItem] = useState<API.Reagents.List>();
@@ -64,23 +65,37 @@ const List: React.FC<IProps> = (props) => {
       fixed: 'right',
       width: 120,
       render: (text, item, index) => [
-        <Button key="detail" type="link" onClick={() => showDetail(item)}>
-          详情
-        </Button>,
-        <Button key="edit" type="link" onClick={() => navigate(`/exp/reagent/edit/${item.id}`)}>
-          修改
-        </Button>,
+        <Tooltip placement="top" title="详情">
+          <Button
+            type={ 'link' }
+            icon={ <AlignLeftOutlined/> }
+            onClick={ () => showDetail(item) }
+          ></Button>
+        </Tooltip>
+        ,
+        <Tooltip placement="top" title="详情">
+          <Button
+            type={ 'link' }
+            icon={ <EditOutlined/> }
+            onClick={ () => navigate(`/exp/reagent/edit/${ item.id }`) }
+          ></Button>
+        </Tooltip>
+        ,
         <Popconfirm
           key="del"
-          title={`删除`}
-          description={`是否确认删除${item.name}?`}
+          title={ `删除` }
+          description={ `是否确认删除${ item.name }?` }
           okText="是"
           cancelText="否"
-          onConfirm={() => deleteReagents(item.id)}
+          onConfirm={ () => deleteReagents(item.id) }
         >
-          <Button type="link" danger>
-            删除
-          </Button>
+          <Tooltip placement="top" title="删除">
+          <Button
+            type={ 'link' }
+            danger
+            icon={ <DeleteOutlined/> }
+          />
+        </Tooltip>
         </Popconfirm>,
       ],
     },
@@ -88,30 +103,31 @@ const List: React.FC<IProps> = (props) => {
   return (
     <>
       <PageContainer
-        extra={[
+        extra={ [
           <Button
-            key={'add'}
-            icon={<PlusOutlined />}
-            type={'primary'}
-            onClick={() => navigate('/exp/reagent/create')}
+            key={ 'add' }
+            icon={ <PlusOutlined/> }
+            type={ 'primary' }
+            onClick={ () => navigate('/exp/reagent/create') }
           >
             创建实验
           </Button>,
-        ]}>
+        ] }>
         <Card>
           <ProTable
-            pagination={{
+            pagination={ {
               pageSize: 10,
-            }}
-            actionRef={tableRef}
-            columns={columns}
-            options={false}
+            } }
+            actionRef={ tableRef }
+            columns={ columns }
+            search={ false }
+            options={ false }
             rowKey="id"
-            request={requestTableData}
-            scroll={{ x: 2000 }}
+            request={ requestTableData }
+            scroll={ { x: 2000 } }
           />
         </Card>
-        <Detail isOpen={isShowModal} data={currentItem} close={() => setIsShowModal(false)} />
+        <Detail isOpen={ isShowModal } data={ currentItem } close={ () => setIsShowModal(false) }/>
       </PageContainer>
     </>
   );

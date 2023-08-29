@@ -18,7 +18,7 @@ const ResultStyle = styled.div`
 `;
 const MethodsView: React.FC<IProps> = (props) => {
   const { isLoading, readResult } = props;
-  const noData = <Result icon={<SmileOutlined />} title="请选择或输入操作条件" />;
+  const noData = <Result icon={<></>} title="请选择或输入操作条件" />;
 
   const result = (
     <Spin spinning={isLoading}>

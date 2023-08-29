@@ -47,7 +47,9 @@ export async function getInitialState(): Promise<IgetInitialState> {
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
+
   return {
+    bgLayout:'red',
     // 头部右侧按钮
     // actionsRender: () => [<Question key="doc" />, <SelectLang key="SelectLang" />],
     actionsRender: () => [],
@@ -78,7 +80,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     // unAccessible: <div>unAccessible</div>,
     // 增加一个 loading 的状态
     childrenRender: (children) => {
-      // if (initialState?.loading) return <PageLoading />;
       return <>{children}</>;
     },
     ...initialState?.settings,
@@ -92,4 +93,5 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
  */
 export const request = {
   ...errorConfig,
+
 };

@@ -2,14 +2,12 @@ import { getReadNodeList, readMethod } from '@/api/methods';
 import MethodsView from '@/pages/Methods/components/MethodsView';
 import { ITypes } from '@/pages/typings';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
-import { Card, Form, Select } from 'antd';
+import { Button, Card, Form, Select } from 'antd';
 import React, { useEffect, useState } from 'react';
-
 const formItemLayout = {
-  labelCol: { span: 10 },
-  wrapperCol: { span: 14 },
+  labelCol: { span: 8 },
+  wrapperCol: { span: 16 },
 };
-
 interface IConditions {
   node_index: string | number;
 }
@@ -19,7 +17,7 @@ const Index: React.FC = () => {
   const [readResult, setReadResult] = useState<any>('');
   const [loading, setLoading] = useState<boolean>(false);
   const [nodes, setNodes] = useState<ITypes.EnumType[]>([]);
-  const onFormChange = async (val: IConditions) => {
+  const onFinish = async (val: IConditions) => {
     try {
       setLoading(true);
       const res = await readMethod(val);
@@ -43,7 +41,7 @@ const Index: React.FC = () => {
       layout={'inline'}
       form={form}
       style={{ maxWidth: 'none' }}
-      onValuesChange={onFormChange}
+      onFinish={onFinish}
     >
       <Form.Item name="node_index" label="节点id">
         <Select
@@ -52,6 +50,11 @@ const Index: React.FC = () => {
           options={nodes}
           placeholder={'请选择节点'}
         />
+      </Form.Item>
+      <Form.Item wrapperCol={{ offset: 4 }}>
+        <Button type={'primary'} htmlType="submit">
+          确定
+        </Button>
       </Form.Item>
     </Form>
   );
