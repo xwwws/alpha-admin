@@ -1,49 +1,56 @@
 /**
 文件修改pro layout 默认样式
  */
-.root,body,html{
+.root, body, html {
   background-color: #F4F6FA !important;
 }
-.ant-layout-sider-children{
+
+.ant-layout-sider-children {
   background-color: #fff;
 }
-.ant-menu-item-selected{
-  color:#2A54FF !important;
+
+.ant-menu-item-selected {
+  color: #2A54FF !important;
   background-color: #246EFF1a !important;
 }
-.ant-menu-submenu-selected{
-  .ant-menu-submenu-title{
+
+.ant-menu-submenu-selected {
+  .ant-menu-submenu-title {
     color: #2A54FF !important;
     background-color: #246EFF09;
-    .ant-menu-submenu-arrow{
-      &::before,&::after{
+
+    .ant-menu-submenu-arrow {
+      &::before, &::after {
         background-color: #2A54FF;
       }
     }
   }
-  //background-color: red;
 }
+
 :where(.css-dev-only-do-not-override-zdwiyk).ant-menu-light:not(.ant-menu-horizontal) .ant-menu-submenu-title:hover,
-:where(.css-dev-only-do-not-override-7rqe5q).ant-pro-layout .ant-pro-sider .ant-menu .ant-menu-item:hover{
+:where(.css-dev-only-do-not-override-7rqe5q).ant-pro-layout .ant-pro-sider .ant-menu .ant-menu-item:hover {
   background-color: #246EFF1a;
 }
 
-.ant-pro-layout-bg-list{
+.ant-pro-layout-bg-list {
   min-height: 100vh;
-  background-color: red;
   background-image: none !important;
 }
-.ant-layout-content{
+
+.ant-layout-content {
   min-height: 100%;
   background-color: #F4F6FA;
-  .ant-pro-page-container{
+
+  .ant-pro-page-container {
     background-color: #F4F6FA;
   }
 }
-.ant-layout-header{
+
+.ant-layout-header {
   border-bottom: 1px solid #ccc !important;
   box-sizing: border-box;
-  .ant-pro-global-header{
+
+  .ant-pro-global-header {
     background-color: #fff;
     border-bottom: 1px solid #ccc;
   }

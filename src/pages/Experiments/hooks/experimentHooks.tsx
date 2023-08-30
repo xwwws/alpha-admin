@@ -151,75 +151,75 @@ export const fmtResToFormData = (data: API.Experiments.CreateExperimentReq): any
     }
     switch (item.name) {
       case 'add_solvent_step':
-        steps_data_item.src_area_name = item.kwargs.src_area?.name
-        steps_data_item.src_area_x = item.kwargs.src_area?.x
-        steps_data_item.src_area_y = item.kwargs.src_area?.y
-        steps_data_item.src_area_z = item.kwargs.src_area?.z
-        steps_data_item.src_area_z = item.kwargs.src_area?.z
-        steps_data_item.dst_area_name = item.kwargs.dst_area?.name
-        steps_data_item.dst_area_x = item.kwargs.dst_area?.x
-        steps_data_item.dst_area_y = item.kwargs.dst_area?.y
-        steps_data_item.dst_area_z = item.kwargs.dst_area?.z
-        steps_data_item.speed = item.kwargs.speed
-        steps_data_item.weight = item.kwargs.weight
-        steps_data_item.accuracy = item.kwargs.accuracy
+        steps_data_item.src_area_name = `${item.kwargs.src_area?.name}`
+        steps_data_item.src_area_x = `${item.kwargs.src_area?.x}`
+        steps_data_item.src_area_y = `${item.kwargs.src_area?.y}`
+        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`
+        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`
+        steps_data_item.dst_area_name = `${item.kwargs.dst_area?.name}`
+        steps_data_item.dst_area_x = `${item.kwargs.dst_area?.x}`
+        steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`
+        steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`
+        steps_data_item.speed = `${item.kwargs.speed}`
+        steps_data_item.weight = `${item.kwargs.weight}`
+        steps_data_item.accuracy = `${item.kwargs.accuracy}`
         break;
       case 'pipette_step':
-        steps_data_item.src_area_name = item.kwargs.src_area?.name
-        steps_data_item.src_area_x = item.kwargs.src_area?.x
-        steps_data_item.src_area_y = item.kwargs.src_area?.y
-        steps_data_item.src_area_z = item.kwargs.src_area?.z
-        steps_data_item.src_area_z = item.kwargs.src_area?.z
-        steps_data_item.dst_area_name = item.kwargs.dst_area?.name
-        steps_data_item.dst_area_x = item.kwargs.dst_area?.x
-        steps_data_item.dst_area_y = item.kwargs.dst_area?.y
-        steps_data_item.dst_area_z = item.kwargs.dst_area?.z
-        steps_data_item.speed = item.kwargs.speed
-        steps_data_item.total = item.kwargs.total
-        steps_data_item.take_once = item.kwargs.take_once
-        steps_data_item.spit_once = item.kwargs.spit_once
-        steps_data_item.interval = item.kwargs.interval
-        steps_data_item.height = item.kwargs.height
-        steps_data_item.tip_length = item.kwargs.tip_length
+        steps_data_item.src_area_name = `${item.kwargs.src_area?.name}`
+        steps_data_item.src_area_x = `${item.kwargs.src_area?.x}`
+        steps_data_item.src_area_y = `${item.kwargs.src_area?.y}`
+        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`
+        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`
+        steps_data_item.dst_area_name = `${item.kwargs.dst_area?.name}`
+        steps_data_item.dst_area_x = `${item.kwargs.dst_area?.x}`
+        steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`
+        steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`
+        steps_data_item.speed = `${item.kwargs.speed}`
+        steps_data_item.total = `${item.kwargs.total}`
+        steps_data_item.take_once = `${item.kwargs.take_once}`
+        steps_data_item.spit_once = `${item.kwargs.spit_once}`
+        steps_data_item.interval = `${item.kwargs.interval}`
+        steps_data_item.height = `${item.kwargs.height}`
+        steps_data_item.tip_length = `${item.kwargs.tip_length}`
         break;
       case 'add_solid_step':
-        steps_data_item.src_area_name = item.kwargs.src_area?.name
-        steps_data_item.src_area_x = item.kwargs.src_area?.x
-        steps_data_item.src_area_y = item.kwargs.src_area?.y
-        steps_data_item.src_area_z = item.kwargs.src_area?.z
-        steps_data_item.src_area_z = item.kwargs.src_area?.z
-        steps_data_item.dst_area_name = item.kwargs.dst_area?.name
-        steps_data_item.dst_area_x = item.kwargs.dst_area?.x
-        steps_data_item.dst_area_y = item.kwargs.dst_area?.y
-        steps_data_item.dst_area_z = item.kwargs.dst_area?.z
-        steps_data_item.speed = item.kwargs.speed
-        steps_data_item.weight = item.kwargs.weight
-        steps_data_item.angel = item.kwargs.angel
-        steps_data_item.tolerance = item.kwargs.tolerance
-        steps_data_item.height = item.kwargs.height
+        steps_data_item.src_area_name = `${item.kwargs.src_area?.name}`
+        steps_data_item.src_area_x = `${item.kwargs.src_area?.x}`
+        steps_data_item.src_area_y = `${item.kwargs.src_area?.y}`
+        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`
+        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`
+        steps_data_item.dst_area_name = `${item.kwargs.dst_area?.name}`
+        steps_data_item.dst_area_x = `${item.kwargs.dst_area?.x}`
+        steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`
+        steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`
+        steps_data_item.speed = `${item.kwargs.speed}`
+        steps_data_item.weight = `${item.kwargs.weight}`
+        steps_data_item.angel = `${item.kwargs.angel}`
+        steps_data_item.tolerance = `${item.kwargs.tolerance}`
+        steps_data_item.height = `${item.kwargs.height}`
         break;
       //   蠕动泵加液
       case 'do_peristaltic_step':
-        steps_data_item.src_area_name = item.kwargs.src_area?.name
-        steps_data_item.src_area_x = item.kwargs.src_area?.x
-        steps_data_item.src_area_y = item.kwargs.src_area?.y
-        steps_data_item.src_area_z = item.kwargs.src_area?.z
-        steps_data_item.src_area_z = item.kwargs.src_area?.z
-        steps_data_item.dst_area_name = item.kwargs.dst_area?.name
-        steps_data_item.dst_area_x = item.kwargs.dst_area?.x
-        steps_data_item.dst_area_y = item.kwargs.dst_area?.y
-        steps_data_item.dst_area_z = item.kwargs.dst_area?.z
-        steps_data_item.speed = item.kwargs.speed
-        steps_data_item.weight = item.kwargs.weight
-        steps_data_item.accuracy = item.kwargs.accuracy
+        steps_data_item.src_area_name = `${item.kwargs.src_area?.name}`
+        steps_data_item.src_area_x = `${item.kwargs.src_area?.x}`
+        steps_data_item.src_area_y = `${item.kwargs.src_area?.y}`
+        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`
+        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`
+        steps_data_item.dst_area_name = `${item.kwargs.dst_area?.name}`
+        steps_data_item.dst_area_x = `${item.kwargs.dst_area?.x}`
+        steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`
+        steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`
+        steps_data_item.speed = `${item.kwargs.speed}`
+        steps_data_item.weight = `${item.kwargs.weight}`
+        steps_data_item.accuracy = `${item.kwargs.accuracy}`
         break;
       //   加热搅拌
       case 'heating_stir_step':
-        steps_data_item.dst_area_name = item.kwargs.dst_area?.name
-        steps_data_item.dst_area_x = item.kwargs.dst_area?.x
-        steps_data_item.dst_area_y = item.kwargs.dst_area?.y
-        steps_data_item.dst_area_z = item.kwargs.dst_area?.z
-        steps_data_item.time = item.kwargs.time
+        steps_data_item.dst_area_name = `${item.kwargs.dst_area?.name}`
+        steps_data_item.dst_area_x = `${item.kwargs.dst_area?.x}`
+        steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`
+        steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`
+        steps_data_item.time = `${item.kwargs.time}`
         break;
     }
 
@@ -228,10 +228,10 @@ export const fmtResToFormData = (data: API.Experiments.CreateExperimentReq): any
   return {
     name: data.name,
     bottle_area_name: data.bottle_area.name,
-    bottle_area_x: data.bottle_area.x,
-    bottle_area_y: data.bottle_area.y,
-    bottle_area_z: data.bottle_area.z,
-    bottle_height: data.bottle_height,
+    bottle_area_x: `${data.bottle_area.x}`,
+    bottle_area_y: `${data.bottle_area.y}`,
+    bottle_area_z: `${data.bottle_area.z}`,
+    bottle_height: `${data.bottle_height}`,
     steps_data
   }
 }
