@@ -65,7 +65,7 @@ const List: React.FC<IProps> = (props) => {
       fixed: 'right',
       width: 120,
       render: (text, item, index) => [
-        <Tooltip placement="top" title="详情">
+        <Tooltip placement="top" title="详情" key={'detail'}>
           <Button
             type={ 'link' }
             icon={ <AlignLeftOutlined/> }
@@ -73,7 +73,7 @@ const List: React.FC<IProps> = (props) => {
           ></Button>
         </Tooltip>
         ,
-        <Tooltip placement="top" title="编辑">
+        <Tooltip placement="top" title="编辑" key={'edit'}>
           <Button
             type={ 'link' }
             icon={ <EditOutlined/> }
