@@ -8,7 +8,7 @@ export const methods = [
     routes: [
       {
         path: '/methods',
-        redirect: '/Methods/read',
+        redirect: '/methods/read',
       },
       // 读值
       {

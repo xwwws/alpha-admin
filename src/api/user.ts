@@ -3,7 +3,7 @@ import { request } from '@umijs/max';
  * 登录
  * @param data {API.UserLoginReq}
  */
-export const login = (data: API.UserLoginReq): Promise<API.response<API.UserLoginRes>> => {
+export const login = (data: API.UserLoginReq): Promise<Response<API.UserLoginRes>> => {
   return request(`/api/v1/auth/login`, {
     method: 'post',
     data,
@@ -13,7 +13,7 @@ export const login = (data: API.UserLoginReq): Promise<API.response<API.UserLogi
 /**
  * 退出登录
  */
-export const outLogin = (): Promise<API.response<API.LogoutReq>> => {
+export const outLogin = (): Promise<Response<API.LogoutReq>> => {
   return Promise.resolve({
     status: 'ok',
     code: 200,

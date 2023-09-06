@@ -52,7 +52,7 @@ const ReagentsForm: React.FC<IProps> = (props) => {
       try {
         await editReagent(params.id as string, val);
         setLoading(false);
-        messageApi.success('添加溶剂成功');
+        messageApi.success('修改成功');
         navigate('/exp/reagent');
       } catch (err) {
         console.log(err);

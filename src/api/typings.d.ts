@@ -9,6 +9,7 @@ declare namespace API {
     page_size?: string | number;
     page?: string | number;
   }
+
   interface PagesRes<T> {
     data: T[];
     total: number;
@@ -16,10 +17,12 @@ declare namespace API {
     page: number;
     page_size: number;
   }
+
   interface Enum {
     name: string;
     label: string;
   }
+
   interface Area_Enum extends Enum {
     area_type: string;
   }
@@ -226,6 +229,7 @@ declare namespace API {
     interface ExperimentStatus {
       status: 'draft' | 'waiting' | 'doing' | 'succeed' | 'failed' | 'canceled';
     }
+
     // 创建实验步骤
     interface CreateExperimentStep {
       name: string;
@@ -310,18 +314,47 @@ declare namespace API {
     };
   }
   /**
+   * project 相关
+   */
+  declare namespace Projects {
+    interface ListReq extends PagesReq {
+
+    }
+
+    interface List {
+      id: number;
+      name: string;
+      description: string;
+      created_at: string;
+      updated_at: string;
+    }
+
+    interface CreateProject {
+      name: string;
+      description: string;
+    }
+
+    interface EditProject extends CreateProject {
+      id?: string | number;
+    }
+
+    interface ProjectDetail {
+      "id": string | number;
+      "name": string;
+      "description": string;
+      "created_at": string;
+      "updated_at": string;
+    }
+  }
+
+
+  /**
    * 用户相关
    */
   type UserLoginReq = {
     username: string;
     passwd: string;
   };
-
-  interface response<T> {
-    code: number;
-    msg: string;
-    data: T;
-  }
 
   interface UserLoginRes {
     token: string;
@@ -332,6 +365,7 @@ declare namespace API {
     username: string;
     avatar: string;
   };
+
   interface LogoutReq {
     [key: any]: any;
   }

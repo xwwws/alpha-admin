@@ -32,4 +32,8 @@ export default {
   'menu.exp.reagent.edit': '修改试剂',
   'menu.exp.tray': '托盘绑定',
   'menu.exp.tray.trayList': '托盘列表',
+  'menu.project': '项目',
+  'menu.project.list': '项目列表',
+  'menu.project.create': '新建项目',
+  'menu.project.edit': '编辑',
 };

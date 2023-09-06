@@ -3,6 +3,7 @@ import { methods } from './routes/methods';
 import { reagents } from './routes/reagents';
 import { steps } from './routes/steps';
 import { trays } from './routes/trays';
+import { project } from "./routes/project";
 
 // 文档地址  https://v3.umijs.org/zh-CN/plugins/plugin-layout
 //config/route.ts
@@ -67,6 +68,7 @@ export default [
     icon: 'AreaChartOutlined',
     routes: [...reagents, ...trays, ...experiments],
   },
+  ...project,
 
   {
     path: '/',
