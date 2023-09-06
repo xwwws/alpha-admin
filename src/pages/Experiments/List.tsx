@@ -15,10 +15,12 @@ import { Button, Card, Tooltip, message } from 'antd';
 import dayjs from 'dayjs';
 import React, { useRef } from 'react';
 import { useNavigate } from 'umi';
+
 const List: React.FC = () => {
   const tableRef = useRef<ActionType>();
-  const [messageApi, contextHolder] = message.useMessage();
+  const [ messageApi, contextHolder ] = message.useMessage();
   const navigate = useNavigate();
+
   /**
    * 执行实验
    * @param id
@@ -144,7 +146,7 @@ const List: React.FC = () => {
                 <Tooltip placement="top" title="运行">
                   <Button
                     type={'link'}
-                    icon={<PlayCircleOutlined />}
+                    icon={<PlayCircleOutlined/>}
                     onClick={() => handleRun(record.id)}
                   ></Button>
                 </Tooltip>
@@ -156,7 +158,7 @@ const List: React.FC = () => {
                 <Tooltip placement="top" title="取消">
                   <Button
                     type={'link'}
-                    icon={<StopOutlined />}
+                    icon={<StopOutlined/>}
                     onClick={() => handleCancel(record.id)}
                   ></Button>
                 </Tooltip>
@@ -166,30 +168,23 @@ const List: React.FC = () => {
             <Tooltip placement="top" title="实验详情">
               <Button
                 type={'link'}
-                icon={<AlignLeftOutlined />}
+                icon={<AlignLeftOutlined/>}
                 onClick={() => navigate(`/exp/experiment/${record.id}/detail`)}
               ></Button>
             </Tooltip>
-            {
-              //  成功  失败  取消  展示实验记录
-              (record.status === 'succeed' ||
-                record.status === 'failed' ||
-                record.status === 'canceled') && (
-                <Tooltip placement="top" title="实验记录">
-                  <Button
-                    type={'link'}
-                    icon={<OrderedListOutlined />}
-                    onClick={() => navigate(`/exp/experiment/${record.id}/record`)}
-                  ></Button>
-                </Tooltip>
-              )
-            }
+            <Tooltip placement="top" title="实验记录">
+              <Button
+                type={'link'}
+                icon={<OrderedListOutlined/>}
+                onClick={() => navigate(`/exp/experiment/${record.id}/record`)}
+              ></Button>
+            </Tooltip>
 
             {/*复制实验 一直展示*/}
             <Tooltip placement="top" title="复制实验">
               <Button
                 type={'link'}
-                icon={<CopyOutlined />}
+                icon={<CopyOutlined/>}
                 onClick={() => navigate({
                   pathname: `/exp/experiment/create`,
                   search: `?id=${record.id}`
@@ -208,7 +203,7 @@ const List: React.FC = () => {
         extra={[
           <Button
             key={'add'}
-            icon={<PlusOutlined />}
+            icon={<PlusOutlined/>}
             type={'primary'}
             onClick={() => navigate('/exp/experiment/create')}
           >
