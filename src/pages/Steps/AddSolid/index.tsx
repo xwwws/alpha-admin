@@ -32,8 +32,8 @@ interface IConditions {
 }
 
 const formRules: IForm.IFormRules = {
-  src_area_name: [{ required: true, message: '请选择托盘区域' }],
-  dst_area_name: [{ required: true, message: '请选择托盘区域' }],
+  src_area_name: [ { required: true, message: '请选择托盘区域' } ],
+  dst_area_name: [ { required: true, message: '请选择托盘区域' } ],
   coordinates: [
     { required: true, message: '请输入坐标' },
     { pattern: /^\d+$/, message: '坐标输入错误' },
@@ -73,9 +73,9 @@ const formStyle = {
   gap: '10px',
 };
 const Index: React.FC = () => {
-  const [form] = Form.useForm();
-  const [readResult, setReadResult] = useState<any>('');
-  const [loading, setLoading] = useState<boolean>(false);
+  const [ form ] = Form.useForm();
+  const [ readResult, setReadResult ] = useState<any>('');
+  const [ loading, setLoading ] = useState<boolean>(false);
   const { areas } = useModel('useExperimentModel');
   const onFinish = async (val: IConditions) => {
     try {
@@ -124,7 +124,7 @@ const Index: React.FC = () => {
         label="托盘区域"
         rules={formRules.src_area_name}
       >
-        <Select options={areas} />
+        <Select options={areas}/>
       </Form.Item>
       <Form.Item
         style={formItemStyle}
@@ -133,7 +133,7 @@ const Index: React.FC = () => {
         label="x"
         rules={formRules.coordinates}
       >
-        <Input />
+        <Input/>
       </Form.Item>
       <Form.Item
         style={formItemStyle}
@@ -142,7 +142,7 @@ const Index: React.FC = () => {
         label="y"
         rules={formRules.coordinates}
       >
-        <Input />
+        <Input/>
       </Form.Item>
       <Form.Item
         style={formItemStyle}
@@ -151,7 +151,7 @@ const Index: React.FC = () => {
         label="z"
         rules={formRules.coordinates}
       >
-        <Input />
+        <Input/>
       </Form.Item>
       <Form.Item
         style={formItemStyle}
@@ -159,7 +159,7 @@ const Index: React.FC = () => {
         label="目标区域"
         rules={formRules.dst_area_name}
       >
-        <Select options={areas} />
+        <Select options={areas}/>
       </Form.Item>
       <Form.Item
         style={formItemStyle}
@@ -168,7 +168,7 @@ const Index: React.FC = () => {
         label="x"
         rules={formRules.coordinates}
       >
-        <Input />
+        <Input/>
       </Form.Item>
       <Form.Item
         style={formItemStyle}
@@ -177,7 +177,7 @@ const Index: React.FC = () => {
         label="y"
         rules={formRules.coordinates}
       >
-        <Input />
+        <Input/>
       </Form.Item>
       <Form.Item
         style={formItemStyle}
@@ -186,23 +186,23 @@ const Index: React.FC = () => {
         label="z"
         rules={formRules.coordinates}
       >
-        <Input />
+        <Input/>
       </Form.Item>
 
       <Form.Item style={formItemStyle} name="speed" label="速度" rules={formRules.speed}>
-        <Input addonAfter="cm" />
+        <Input/>
       </Form.Item>
       <Form.Item style={formItemStyle} name="weight" label="比重" rules={formRules.weight}>
-        <Input addonAfter="cm" />
+        <Input/>
       </Form.Item>
       <Form.Item style={formItemStyle} name="tolerance" label="精确度" rules={formRules.tolerance}>
-        <Input addonAfter="cm" />
+        <Input/>
       </Form.Item>
       <Form.Item style={formItemStyle} name="height" label="高度" rules={formRules.height}>
-        <Input addonAfter="cm" />
+        <Input/>
       </Form.Item>
       <Form.Item style={formItemStyle} name="angel" label="角度" rules={formRules.angel}>
-        <Input addonAfter="°" />
+        <Input addonAfter="°"/>
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 4 }}>
