@@ -72,7 +72,7 @@ export const getExperimentLogsById = (id: string | number, data?: object | undef
  * @param expt_id
  */
 export const deleteExperiment = (expt_id: string | number) => {
-  return request<Response<API.Experiments.ExperimentRecordRes[]>>(
+  return request<Response<any>>(
     `/api/v1/expt/expts/${expt_id}`,
     {
       method: 'delete'
