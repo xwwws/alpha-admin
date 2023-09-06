@@ -1,4 +1,4 @@
-import { cancelExperimentById, getExperimentList, runExperimentById } from '@/api/experiments';
+import { cancelExperimentById, deleteExperiment, getExperimentList, runExperimentById } from '@/api/experiments';
 import { expState2ValueEnum, experimentStatesMap } from '@/utils/dataMaps';
 import {
   AlignLeftOutlined,
@@ -7,11 +7,12 @@ import {
   PlusOutlined,
   OrderedListOutlined,
   StopOutlined,
+  DeleteOutlined,
 } from '@ant-design/icons';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ActionType } from '@ant-design/pro-table';
-import { Button, Card, Tooltip, message } from 'antd';
+import { Button, Card, Popconfirm, Tooltip, message } from 'antd';
 import dayjs from 'dayjs';
 import React, { useRef } from 'react';
 import { useNavigate } from 'umi';
@@ -64,6 +65,24 @@ const List: React.FC = () => {
     } finally {
     }
   }
+
+  /**
+   * 删除实验
+   * @param id
+   */
+  const deleteProject = async (id: string | number) => {
+    try {
+      const { data } = await deleteExperiment(id);
+      tableRef.current?.reload();
+      if (data) {
+        messageApi.success('删除');
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+    }
+
+  };
 
   const requestTableData = async (params: { pageSize: number; current: number }) => {
     const query = {
@@ -136,7 +155,7 @@ const List: React.FC = () => {
       title: '操作',
       dataIndex: 'actions',
       align: 'center',
-      width: '150px',
+      width: '180px',
       render: (text, record, index, action) => {
         return (
           <>
@@ -191,6 +210,28 @@ const List: React.FC = () => {
                 })}
               ></Button>
             </Tooltip>
+            {
+              //  只有“运行中”的实验不可删除
+              (record.status !== 'doing') &&
+              <Popconfirm
+                key="del"
+                title={`删除 ${record.name}`}
+                description={`是否确认删除${record.name}?`}
+                okText="是"
+                cancelText="否"
+                onConfirm={() => deleteProject(record.id)}
+              >
+                <Tooltip placement="top" title="删除">
+                  <Button
+                    type={'link'}
+                    danger
+                    icon={<DeleteOutlined/>}
+                  />
+                </Tooltip>
+              </Popconfirm>
+            }
+
+
           </>
         );
       },

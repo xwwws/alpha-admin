@@ -66,3 +66,16 @@ export const getExperimentLogsById = (id: string | number, data?: object | undef
     data,
   });
 };
+
+/**
+ * 删除实验
+ * @param expt_id
+ */
+export const deleteExperiment = (expt_id: string | number) => {
+  return request<Response<API.Experiments.ExperimentRecordRes[]>>(
+    `/api/v1/expt/expts/${expt_id}`,
+    {
+      method: 'delete'
+    }
+  );
+};
