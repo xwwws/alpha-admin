@@ -114,6 +114,12 @@ const List: React.FC = () => {
     },
     {
       hideInSearch: true,
+      title: '项目',
+      dataIndex: 'project_name',
+      align: 'center',
+    },
+    {
+      hideInSearch: true,
       title: '创建时间',
       dataIndex: 'created_at',
       align: 'center',
@@ -155,6 +161,7 @@ const List: React.FC = () => {
       title: '操作',
       dataIndex: 'actions',
       align: 'center',
+      fixed:'right',
       width: '180px',
       render: (text, record, index, action) => {
         return (
@@ -263,6 +270,7 @@ const List: React.FC = () => {
             options={false}
             rowKey="id"
             request={requestTableData}
+            scroll={ { x: 1300 } }
           />
         </Card>
       </PageContainer>

@@ -208,6 +208,7 @@ declare namespace API {
 
     type ExperimentDetailsRes = {
       id: string | number;
+      project_id: string | number;
       name: string;
       bottle_area: Coordinates;
       bottle_height: 0;
@@ -240,6 +241,7 @@ declare namespace API {
     // 创建实验
     interface CreateExperimentReq {
       name: string;
+      project_id: string|number;
       bottle_area: Coordinates;
       bottle_height: string | number;
       steps_data: CreateExperimentStep[];

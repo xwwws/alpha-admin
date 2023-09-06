@@ -10,11 +10,13 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'umi';
 import { useSearchParams } from "@@/exports";
 import { fmtRequestParams, fmtResToFormData } from "@/pages/Experiments/hooks/experimentHooks";
+import { getProjects } from "@/api/project";
 
 const Create: React.FC = () => {
   const [form] = Form.useForm();
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   const [reaction, setReaction] = useState<{ label: string; value: string }[]>([]);
+  const [ projects, setProjects ] = useState<{ label: string; value: string }[]>([]);
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   useEffect(() => {
@@ -22,6 +24,10 @@ const Create: React.FC = () => {
       const res = await getAreasMap('reaction');
       setReaction(res.data.map((item) => ({ label: item.label, value: item.name })));
     })();
+    (async () => {
+      const res = await getProjects({page:1,page_size:9999})
+      setProjects(res.data.data.map(pro => ({label:pro.name,value:pro.id + ''})));
+    })()
     const copyId = searchParams.get('id')
     if(copyId) {
       (async () => {
@@ -35,6 +41,7 @@ const Create: React.FC = () => {
   const formRules: IForm.IFormRules = {
     name: [{ required: true, message: '请输入实验名称' }],
     bottle_area_name: [{ required: true, message: '请选择反应器工位' }],
+    project_id: [{ required: true, message: '请选择项目' }],
     coordinates: [
       { required: true, message: '请输入坐标' },
       { pattern: /^\d+$/, message: '坐标输入错误' },
@@ -103,6 +110,13 @@ const Create: React.FC = () => {
               rules={formRules.bottle_area_name}
             >
               <Select options={reaction} />
+            </Form.Item>
+            <Form.Item
+              name="project_id"
+              label="项目"
+              rules={formRules.project_id}
+            >
+              <Select options={projects} />
             </Form.Item>
 
             <Form.Item name="bottle_area_x" label="x" rules={formRules.coordinates}>

@@ -6,6 +6,7 @@
 export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentReq => {
   const params: API.Experiments.CreateExperimentReq = {
     name: values.name,
+    project_id: values.project_id,
     bottle_height: values.bottle_height,
     bottle_area: {
       name: values.bottle_area_name,
@@ -227,6 +228,7 @@ export const fmtResToFormData = (data: API.Experiments.CreateExperimentReq): any
   })
   return {
     name: data.name,
+    project_id: `${data.project_id}`,
     bottle_area_name: data.bottle_area.name,
     bottle_area_x: `${data.bottle_area.x}`,
     bottle_area_y: `${data.bottle_area.y}`,
