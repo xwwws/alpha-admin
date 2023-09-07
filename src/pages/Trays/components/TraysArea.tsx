@@ -14,16 +14,18 @@ interface IProps {
 }
 
 const TraysArea: React.FC<IProps> = (props) => {
-  const { loading = true, trays, bindReagent, deleteReagent } = props;
-  const maxCol = Math.max(...trays.map((item) => item.x));
+  const { trays, bindReagent, deleteReagent } = props;
+  const maxCol = Math.max(...trays.map((item) => item.y));
   const TraysAreaWarp = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: auto;
+    padding: 50px 50px 50px 150px;
 
     .trays {
       display: grid;
-      grid-template-columns: repeat(${maxCol}, 120px);
+      grid-template-columns: repeat(${maxCol}, 100px);
       gap: 20px;
       align-items: center;
       justify-items: center;
@@ -32,13 +34,15 @@ const TraysArea: React.FC<IProps> = (props) => {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
         overflow: hidden;
         background-color: #ecf5ff;
         border: 1px solid #ccc;
         border-radius: 50%;
         cursor: pointer;
+        font-size: 12px;
+        text-align: center;
       }
     }
   `;
@@ -59,6 +63,8 @@ const TraysArea: React.FC<IProps> = (props) => {
                 <div>
                   <div>
                     {item.reagent_name || '暂无试剂'}
+                    <br />
+                    位置: x: {item.x}   y: {item.y}
                     <br />
                     {item.quantity} {item.unit}
                     <br />
