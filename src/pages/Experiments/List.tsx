@@ -114,6 +114,12 @@ const List: React.FC = () => {
     },
     {
       hideInSearch: true,
+      title: '创建人',
+      dataIndex: 'user_username',
+      align: 'center',
+    },
+    {
+      hideInSearch: true,
       title: '项目',
       dataIndex: 'project_name',
       align: 'center',
