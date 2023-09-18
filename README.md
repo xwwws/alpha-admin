@@ -77,3 +77,13 @@ console.log(process.env.API_SERVER); // http://10.0.0.33:9000
 - [ ] 未解决
 
 - [x] ~~可能由于 react he antd 版本不匹配问题 ts 会经常报错 请暂时使用 `// ts-ignore` 编辑器不报错 后续调整~~
+
+# 分支明细
+
+| 分 支              | 作 用             |
+|------------------|-----------------|
+| master           | 同步生产版本          |
+| develop          | 同步 同步测试版本       |
+| feature_[功能名称]| 从develop迁出,进行开发 |
+| hotfix_[日期]_[功能] | 从master迁出,紧急修复生产bug|
+
