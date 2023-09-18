@@ -62,6 +62,10 @@ const Create: React.FC = () => {
       message.warning('请添加步骤');
       return;
     }
+    if(submitLoading) {
+      message.warning('请勿重复提交')
+      return
+    }
     setSubmitLoading(true);
     await createExperiment(fmtRequestParams(values));
     message.success('创建成功');
