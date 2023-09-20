@@ -108,6 +108,14 @@ const List: React.FC = () => {
     },
     {
       hideInSearch: true,
+      title: '状态',
+      dataIndex: 'status',
+      align: 'center',
+      valueType: 'select',
+      valueEnum: expState2ValueEnum(experimentStatesMap),
+    },
+    {
+      hideInSearch: true,
       title: 'id',
       dataIndex: 'id',
       align: 'center',
@@ -156,14 +164,6 @@ const List: React.FC = () => {
     },
     {
       hideInSearch: true,
-      title: '状态',
-      dataIndex: 'status',
-      align: 'center',
-      valueType: 'select',
-      valueEnum: expState2ValueEnum(experimentStatesMap),
-    },
-    {
-      hideInSearch: true,
       title: '操作',
       dataIndex: 'actions',
       align: 'center',
@@ -173,7 +173,7 @@ const List: React.FC = () => {
         return (
           <>
             {
-              //  待提交  展示执行按钮
+              //  只有“等待提交”的实验可以提交
               record.status === 'draft' && (
                 <Tooltip placement="top" title="运行">
                   <Button
@@ -185,7 +185,7 @@ const List: React.FC = () => {
               )
             }
             {
-              //  等待执行 执行中   展示执行按钮
+              //  只有“待提交”和“等待执行”的实验可以取消
               (record.status === 'waiting' || record.status === 'doing') && (
                 <Tooltip placement="top" title="取消">
                   <Button
