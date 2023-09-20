@@ -1,5 +1,4 @@
 import { getReadNodeList, readMethod } from '@/api/methods';
-import MethodsView from '@/pages/Methods/components/MethodsView';
 import { ITypes } from '@/pages/typings';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 import { Button, Card, Form, Select } from 'antd';
@@ -31,7 +30,7 @@ const Index: React.FC = () => {
   useEffect(() => {
     (async () => {
       const res = await getReadNodeList();
-      setNodes(res.data.map((item): ITypes.EnumType => ({ label: item.name, value: item.n_id })));
+      setNodes(res.data.map((item): ITypes.EnumType => ({ label: item.name, value: item.nodeid })));
     })();
   }, []);
   // 顶部查询模块
@@ -63,9 +62,8 @@ const Index: React.FC = () => {
     <>
       <PageContainer>
         <Card>
-          <MethodsView isLoading={loading} readResult={readResult}>
-            {searchModel}
-          </MethodsView>
+          {searchModel}
+          
         </Card>
       </PageContainer>
     </>
