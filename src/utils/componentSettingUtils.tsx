@@ -29,3 +29,10 @@ export const tableTimeRender = (fmtString:string = 'YYYY-MM-DD hh:mm:ss'):TRende
   }
 
 }
+
+export enum WebSocketStatus {
+  OFF = 0, // 连接尚未建立
+  OPEN = 1, // 连接已建立，可以进行通信
+  CLOSING = 2, // 连接已建立，可以进行通信
+  CLOSED = 3, // 连接已经关闭或者连接不能打开
+}
