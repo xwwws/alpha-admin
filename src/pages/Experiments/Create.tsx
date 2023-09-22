@@ -5,7 +5,7 @@ import { IForm, ITypes } from '@/pages/typings';
 import { CenterHolderStyle, formItemLayout } from '@/utils';
 import { PlusOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
-import { Button, Card, Form, Input, Select, message } from 'antd';
+import { Button, Card, Col, Form, Input, Row, Select, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'umi';
 import { useSearchParams } from "@@/exports";
@@ -119,48 +119,63 @@ const Create: React.FC = () => {
             {...formItemLayout}
             onFinish={onFinish}
           >
-            <Form.Item name="name" label="实验名称" rules={formRules.name}>
-              <Input/>
-            </Form.Item>
-            <Form.Item
-              name="bottle_area_name"
-              label="反应器工位"
-              rules={formRules.bottle_area_name}
-            >
-              <Select options={reaction}/>
-            </Form.Item>
-            <Form.Item
-              name="project_id"
-              label="项目"
-              rules={formRules.project_id}
-            >
-              <Select options={projects}/>
-            </Form.Item>
+            <Row gutter={10}>
+              {/*row-1*/}
+              <Col span={12}>
+                <Form.Item name="name" label="实验名称" rules={formRules.name}>
+                  <Input/>
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  name="bottle_area_name"
+                  label="反应器工位"
+                  rules={formRules.bottle_area_name}
+                >
+                  <Select options={reaction}/>
+                </Form.Item>
+              </Col>
 
-            <Form.Item name="bottle_area_x" label="x" rules={formRules.coordinates}>
-              <Input/>
-            </Form.Item>
 
-            <Form.Item name="bottle_area_y" label="y" rules={formRules.coordinates}>
-              <Input/>
-            </Form.Item>
+              {/*row-2*/}
 
-            <Form.Item name="bottle_area_z" label="z" rules={formRules.coordinates}>
-              <Input/>
-            </Form.Item>
+              <Col span={12}>
+                <Form.Item
+                  name="project_id"
+                  label="项目"
+                  rules={formRules.project_id}
+                >
+                  <Select options={projects}/>
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item name="bottle_height" label="瓶型" rules={formRules.bottle_height}>
+                  <Input/>
+                </Form.Item>
+              </Col>
 
-            <Form.Item name="bottle_height" label="瓶型" rules={formRules.bottle_height}>
-              <Input/>
-            </Form.Item>
-            <Form.Item name="data_acquisitions" label="采集数据">
-              <Select options={nodes} allowClear mode={'multiple'}/>
-            </Form.Item>
-            <Form.Item
-              name="interval"
-              label="间隔"
-            >
-              <Input addonAfter="s"/>
-            </Form.Item>
+
+
+              {/*row-3*/}
+              <Col span={8}>
+                <Form.Item name="bottle_area_x" label="x" rules={formRules.coordinates}>
+                  <Input/>
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item name="bottle_area_y" label="y" rules={formRules.coordinates}>
+                  <Input/>
+                </Form.Item>
+              </Col>
+              <Col span={8}>
+                <Form.Item name="bottle_area_z" label="z" rules={formRules.coordinates}>
+                  <Input/>
+                </Form.Item>
+              </Col>
+
+            </Row>
+
+            <DataAcquisition name={['data_acquisitions']} nodes={nodes}/>
             {formList}
             <Form.Item wrapperCol={{ span: 24 }}>
               <CenterHolderStyle>

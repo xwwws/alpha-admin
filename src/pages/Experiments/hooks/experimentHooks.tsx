@@ -1,16 +1,14 @@
 /**
  * 格式化采集数据
  * @param arr
- * @param interval
  */
-const getDataAcquisitions = (arr: (number | string)[], interval: string | number): API.Experiments.IAcquisitions[] => {
-  console.log(arr);
-  arr = arr || [];
-  return arr.map(item => ({
-    nodeid: item,
-    interval: Number(interval) > 0 ? interval : 1
-  }));
-};
+// const getDataAcquisitions = (arr: ()[]): API.Experiments.IAcquisitions[] => {
+//   arr = arr || [];
+//   return arr.map(item => ({
+//     nodeid: item,
+//     interval: Number(interval) > 0 ? interval : 1
+//   }));
+// };
 /**
  * 将表单数据格式化为创建实验参数
  * @param values
@@ -21,7 +19,7 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
     name: values.name,
     project_id: values.project_id,
     bottle_height: values.bottle_height,
-    data_acquisitions: getDataAcquisitions(values.data_acquisitions, values.interval),
+    data_acquisitions: values.data_acquisitions,
     bottle_area: {
       name: values.bottle_area_name,
       x: values.bottle_area_x,
@@ -38,7 +36,7 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
         params.steps_data.push({
           reagent_id: item.reagent_id,
           name: item.step_name,
-          data_acquisitions: getDataAcquisitions(item.data_acquisitions, item.interval),
+          data_acquisitions: item.data_acquisitions,
           kwargs: {
             src_area: {
               name: item.src_area_name,
@@ -62,7 +60,7 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
         params.steps_data.push({
           reagent_id: item.reagent_id,
           name: item.step_name,
-          data_acquisitions: getDataAcquisitions(item.data_acquisitions, item.interval),
+          data_acquisitions: item.data_acquisitions,
           kwargs: {
             src_area: {
               name: item.src_area_name,
@@ -90,7 +88,7 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
         params.steps_data.push({
           reagent_id: item.reagent_id,
           name: item.step_name,
-          data_acquisitions: getDataAcquisitions(item.data_acquisitions, item.interval),
+          data_acquisitions: item.data_acquisitions,
           kwargs: {
             src_area: {
               name: item.src_area_name,
@@ -117,7 +115,7 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
         params.steps_data.push({
           reagent_id: item.reagent_id,
           name: item.step_name,
-          data_acquisitions: getDataAcquisitions(item.data_acquisitions, item.interval),
+          data_acquisitions: item.data_acquisitions,
           kwargs: {
             src_area: {
               name: item.src_area_name,
@@ -141,7 +139,7 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
       case 'heating_stir_step':
         params.steps_data.push({
           name: item.step_name,
-          data_acquisitions: getDataAcquisitions(item.data_acquisitions, item.interval),
+          data_acquisitions: item.data_acquisitions,
           kwargs: {
             dst_area: {
               name: item.dst_area_name,

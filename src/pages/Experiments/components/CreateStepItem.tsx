@@ -12,6 +12,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useModel } from 'umi';
 import { ITypes } from "@/pages/typings";
+import DataAcquisition from "@/pages/Experiments/components/DataAcquisition";
 
 interface IProps {
   form: FormInstance<any>;
@@ -106,25 +107,13 @@ const CreateStepItem: React.FC<IProps> = (props) => {
           </Col>
         )}
       </Row>
+
+
       {step && (
-        <Row gutter={10}>
-          <Col span={12}>
-            <Form.Item
-              name={[ name, 'data_acquisitions' ]}
-              label="采集数据"
-            >
-              <Select options={nodes} allowClear mode={'multiple'}/>
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
-              name={[ name, 'interval' ]}
-              label="间隔"
-            >
-              <Input addonAfter="s" />
-            </Form.Item>
-          </Col>
-        </Row>
+        <DataAcquisition
+          name={[ name, 'data_acquisitions' ]}
+          nodes={nodes}
+        />
       )}
 
 
