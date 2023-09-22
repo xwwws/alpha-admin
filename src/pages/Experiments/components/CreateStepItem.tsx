@@ -109,12 +109,7 @@ const CreateStepItem: React.FC<IProps> = (props) => {
       </Row>
 
 
-      {step && (
-        <DataAcquisition
-          name={[ name, 'data_acquisitions' ]}
-          nodes={nodes}
-        />
-      )}
+
 
 
       {step === 'loading' && (
@@ -133,6 +128,12 @@ const CreateStepItem: React.FC<IProps> = (props) => {
       {step === 'do_peristaltic_step' && <Peristaltic reagent={reagent} name={name}/>}
       {/*加热搅拌*/}
       {step === 'heating_stir_step' && <Mix3 reagent={reagent} name={name}/>}
+      {step && (
+        <DataAcquisition
+          name={[ name, 'data_acquisitions' ]}
+          nodes={nodes}
+        />
+      )}
     </Card>
   );
 };
