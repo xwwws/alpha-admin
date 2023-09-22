@@ -36,12 +36,12 @@ const Index: React.FC = () => {
 
     const echartsOption: ECOption = {
       title: {
-        text: "sdfasd",
+        text: "",
         textStyle: {}
       },
       tooltip: {
         trigger: 'item',
-        formatter: "{a}, {b}，{c}"
+        formatter: " {b}，{c}"
       },
       xAxis: {
         type: 'category',
@@ -111,7 +111,7 @@ const Index: React.FC = () => {
     // @ts-ignore
     const chartInstance = echarts.getInstanceByDom(chartRef.current);
     chartInstance && chartInstance.setOption({
-      title:{text: '123'},
+      // title:{text: '123'},
       xAxis: { type: 'category', data: Series },
       yAxis: { type: 'value' },
       series: [ { type: 'line', data: XAxis } ]
