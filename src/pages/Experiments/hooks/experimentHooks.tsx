@@ -182,6 +182,7 @@ export const fmtResToFormData = (data: API.Experiments.CreateExperimentReq): any
         steps_data_item.speed = `${item.kwargs.speed}`;
         steps_data_item.weight = `${item.kwargs.weight}`;
         steps_data_item.accuracy = `${item.kwargs.accuracy}`;
+        steps_data_item.data_acquisitions = item.data_acquisitions;
         break;
       case 'pipette_step':
         steps_data_item.src_area_name = `${item.kwargs.src_area?.name}`;
@@ -200,6 +201,7 @@ export const fmtResToFormData = (data: API.Experiments.CreateExperimentReq): any
         steps_data_item.interval = `${item.kwargs.interval}`;
         steps_data_item.height = `${item.kwargs.height}`;
         steps_data_item.tip_length = `${item.kwargs.tip_length}`;
+        steps_data_item.data_acquisitions = item.data_acquisitions;
         break;
       case 'add_solid_step':
         steps_data_item.src_area_name = `${item.kwargs.src_area?.name}`;
@@ -216,6 +218,7 @@ export const fmtResToFormData = (data: API.Experiments.CreateExperimentReq): any
         steps_data_item.angel = `${item.kwargs.angel}`;
         steps_data_item.tolerance = `${item.kwargs.tolerance}`;
         steps_data_item.height = `${item.kwargs.height}`;
+        steps_data_item.data_acquisitions = item.data_acquisitions;
         break;
       //   蠕动泵加液
       case 'do_peristaltic_step':
@@ -231,6 +234,7 @@ export const fmtResToFormData = (data: API.Experiments.CreateExperimentReq): any
         steps_data_item.speed = `${item.kwargs.speed}`;
         steps_data_item.weight = `${item.kwargs.weight}`;
         steps_data_item.accuracy = `${item.kwargs.accuracy}`;
+        steps_data_item.data_acquisitions = item.data_acquisitions;
         break;
       //   加热搅拌
       case 'heating_stir_step':
@@ -239,6 +243,7 @@ export const fmtResToFormData = (data: API.Experiments.CreateExperimentReq): any
         steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`;
         steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`;
         steps_data_item.time = `${item.kwargs.time}`;
+        steps_data_item.data_acquisitions = item.data_acquisitions;
         break;
     }
 
@@ -252,6 +257,7 @@ export const fmtResToFormData = (data: API.Experiments.CreateExperimentReq): any
     bottle_area_y: `${data.bottle_area.y}`,
     bottle_area_z: `${data.bottle_area.z}`,
     bottle_height: `${data.bottle_height}`,
+    data_acquisitions: data.data_acquisitions,
     steps_data
   };
 };

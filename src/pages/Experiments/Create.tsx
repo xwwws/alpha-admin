@@ -36,6 +36,7 @@ const Create: React.FC = () => {
     if (copyId) {
       (async () => {
         const res = await getExperimentDetailsById(copyId);
+        console.log(fmtResToFormData(res.data));
         form.setFieldsValue(fmtResToFormData(res.data));
       })();
     }
