@@ -20,6 +20,7 @@ interface IConditions {
   node_index: string | number;
 }
 const Index: React.FC = () => {
+
   const [ form ] = Form.useForm();
   const [ nodes, setNodes ] = useState<ITypes.EnumType[]>([]);
   const chartRef = useRef(null);
@@ -117,22 +118,27 @@ const Index: React.FC = () => {
       series: [ { type: 'line', data: XAxis } ]
     });
   }
+  const onFinish = async (val: IConditions) => {
+    sendMessage([ { nodeid: val.node_index, interval: 1 } ]);
+  };
+
+
   useEffect(() => {
+    // 获取下拉数据
+    (async () => {
+      const res = await getReadNodeList();
+      setNodes(res.data.map((item): ITypes.EnumType => ({ label: item.name, value: item.nodeid })));
+    })();
+    // 初始化图表
+    initChart();
+    // 订阅socket
     DispatchEvent.on('read', drawChart);
     return () => {
       DispatchEvent.off('read', drawChart);
     };
   }, []);
-  const onFinish = async (val: IConditions) => {
-    sendMessage([ { nodeid: val.node_index, interval: 1 } ]);
-  };
-  useEffect(() => {
-    (async () => {
-      const res = await getReadNodeList();
-      setNodes(res.data.map((item): ITypes.EnumType => ({ label: item.name, value: item.nodeid })));
-    })();
-    initChart();
-  }, []);
+
+
   // 顶部查询模块
   const searchModel = (
     <Form

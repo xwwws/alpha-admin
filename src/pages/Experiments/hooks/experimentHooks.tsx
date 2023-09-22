@@ -1,4 +1,17 @@
 /**
+ * 格式化采集数据
+ * @param arr
+ * @param interval
+ */
+const getDataAcquisitions = (arr: (number | string)[], interval: string | number): API.Experiments.IAcquisitions[] => {
+  console.log(arr);
+  arr = arr || [];
+  return arr.map(item => ({
+    nodeid: item,
+    interval: Number(interval) > 0 ? interval : 1
+  }));
+};
+/**
  * 将表单数据格式化为创建实验参数
  * @param values
  * @return {API.Experiments.CreateExperimentReq}
@@ -8,6 +21,7 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
     name: values.name,
     project_id: values.project_id,
     bottle_height: values.bottle_height,
+    data_acquisitions: getDataAcquisitions(values.data_acquisitions, values.interval),
     bottle_area: {
       name: values.bottle_area_name,
       x: values.bottle_area_x,
@@ -24,6 +38,7 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
         params.steps_data.push({
           reagent_id: item.reagent_id,
           name: item.step_name,
+          data_acquisitions: getDataAcquisitions(item.data_acquisitions, item.interval),
           kwargs: {
             src_area: {
               name: item.src_area_name,
@@ -47,6 +62,7 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
         params.steps_data.push({
           reagent_id: item.reagent_id,
           name: item.step_name,
+          data_acquisitions: getDataAcquisitions(item.data_acquisitions, item.interval),
           kwargs: {
             src_area: {
               name: item.src_area_name,
@@ -74,6 +90,7 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
         params.steps_data.push({
           reagent_id: item.reagent_id,
           name: item.step_name,
+          data_acquisitions: getDataAcquisitions(item.data_acquisitions, item.interval),
           kwargs: {
             src_area: {
               name: item.src_area_name,
@@ -100,6 +117,7 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
         params.steps_data.push({
           reagent_id: item.reagent_id,
           name: item.step_name,
+          data_acquisitions: getDataAcquisitions(item.data_acquisitions, item.interval),
           kwargs: {
             src_area: {
               name: item.src_area_name,
@@ -123,6 +141,7 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
       case 'heating_stir_step':
         params.steps_data.push({
           name: item.step_name,
+          data_acquisitions: getDataAcquisitions(item.data_acquisitions, item.interval),
           kwargs: {
             dst_area: {
               name: item.dst_area_name,
@@ -136,8 +155,9 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
         break;
     }
   });
+  console.log(params);
   return params;
-}
+};
 
 /**
  *  将后台实验数据格式化为form所需数据
@@ -145,87 +165,87 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
  */
 export const fmtResToFormData = (data: API.Experiments.CreateExperimentReq): any => {
   const steps_data = data.steps_data.map(item => {
-    const steps_data_item:any =  {
+    const steps_data_item: any = {
       step_name: item.name,
-      reagent_id:item.reagent_id || undefined,
+      reagent_id: item.reagent_id || undefined,
 
-    }
+    };
     switch (item.name) {
       case 'add_solvent_step':
-        steps_data_item.src_area_name = `${item.kwargs.src_area?.name}`
-        steps_data_item.src_area_x = `${item.kwargs.src_area?.x}`
-        steps_data_item.src_area_y = `${item.kwargs.src_area?.y}`
-        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`
-        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`
-        steps_data_item.dst_area_name = `${item.kwargs.dst_area?.name}`
-        steps_data_item.dst_area_x = `${item.kwargs.dst_area?.x}`
-        steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`
-        steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`
-        steps_data_item.speed = `${item.kwargs.speed}`
-        steps_data_item.weight = `${item.kwargs.weight}`
-        steps_data_item.accuracy = `${item.kwargs.accuracy}`
+        steps_data_item.src_area_name = `${item.kwargs.src_area?.name}`;
+        steps_data_item.src_area_x = `${item.kwargs.src_area?.x}`;
+        steps_data_item.src_area_y = `${item.kwargs.src_area?.y}`;
+        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`;
+        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`;
+        steps_data_item.dst_area_name = `${item.kwargs.dst_area?.name}`;
+        steps_data_item.dst_area_x = `${item.kwargs.dst_area?.x}`;
+        steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`;
+        steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`;
+        steps_data_item.speed = `${item.kwargs.speed}`;
+        steps_data_item.weight = `${item.kwargs.weight}`;
+        steps_data_item.accuracy = `${item.kwargs.accuracy}`;
         break;
       case 'pipette_step':
-        steps_data_item.src_area_name = `${item.kwargs.src_area?.name}`
-        steps_data_item.src_area_x = `${item.kwargs.src_area?.x}`
-        steps_data_item.src_area_y = `${item.kwargs.src_area?.y}`
-        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`
-        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`
-        steps_data_item.dst_area_name = `${item.kwargs.dst_area?.name}`
-        steps_data_item.dst_area_x = `${item.kwargs.dst_area?.x}`
-        steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`
-        steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`
-        steps_data_item.speed = `${item.kwargs.speed}`
-        steps_data_item.total = `${item.kwargs.total}`
-        steps_data_item.take_once = `${item.kwargs.take_once}`
-        steps_data_item.spit_once = `${item.kwargs.spit_once}`
-        steps_data_item.interval = `${item.kwargs.interval}`
-        steps_data_item.height = `${item.kwargs.height}`
-        steps_data_item.tip_length = `${item.kwargs.tip_length}`
+        steps_data_item.src_area_name = `${item.kwargs.src_area?.name}`;
+        steps_data_item.src_area_x = `${item.kwargs.src_area?.x}`;
+        steps_data_item.src_area_y = `${item.kwargs.src_area?.y}`;
+        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`;
+        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`;
+        steps_data_item.dst_area_name = `${item.kwargs.dst_area?.name}`;
+        steps_data_item.dst_area_x = `${item.kwargs.dst_area?.x}`;
+        steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`;
+        steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`;
+        steps_data_item.speed = `${item.kwargs.speed}`;
+        steps_data_item.total = `${item.kwargs.total}`;
+        steps_data_item.take_once = `${item.kwargs.take_once}`;
+        steps_data_item.spit_once = `${item.kwargs.spit_once}`;
+        steps_data_item.interval = `${item.kwargs.interval}`;
+        steps_data_item.height = `${item.kwargs.height}`;
+        steps_data_item.tip_length = `${item.kwargs.tip_length}`;
         break;
       case 'add_solid_step':
-        steps_data_item.src_area_name = `${item.kwargs.src_area?.name}`
-        steps_data_item.src_area_x = `${item.kwargs.src_area?.x}`
-        steps_data_item.src_area_y = `${item.kwargs.src_area?.y}`
-        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`
-        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`
-        steps_data_item.dst_area_name = `${item.kwargs.dst_area?.name}`
-        steps_data_item.dst_area_x = `${item.kwargs.dst_area?.x}`
-        steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`
-        steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`
-        steps_data_item.speed = `${item.kwargs.speed}`
-        steps_data_item.weight = `${item.kwargs.weight}`
-        steps_data_item.angel = `${item.kwargs.angel}`
-        steps_data_item.tolerance = `${item.kwargs.tolerance}`
-        steps_data_item.height = `${item.kwargs.height}`
+        steps_data_item.src_area_name = `${item.kwargs.src_area?.name}`;
+        steps_data_item.src_area_x = `${item.kwargs.src_area?.x}`;
+        steps_data_item.src_area_y = `${item.kwargs.src_area?.y}`;
+        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`;
+        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`;
+        steps_data_item.dst_area_name = `${item.kwargs.dst_area?.name}`;
+        steps_data_item.dst_area_x = `${item.kwargs.dst_area?.x}`;
+        steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`;
+        steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`;
+        steps_data_item.speed = `${item.kwargs.speed}`;
+        steps_data_item.weight = `${item.kwargs.weight}`;
+        steps_data_item.angel = `${item.kwargs.angel}`;
+        steps_data_item.tolerance = `${item.kwargs.tolerance}`;
+        steps_data_item.height = `${item.kwargs.height}`;
         break;
       //   蠕动泵加液
       case 'do_peristaltic_step':
-        steps_data_item.src_area_name = `${item.kwargs.src_area?.name}`
-        steps_data_item.src_area_x = `${item.kwargs.src_area?.x}`
-        steps_data_item.src_area_y = `${item.kwargs.src_area?.y}`
-        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`
-        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`
-        steps_data_item.dst_area_name = `${item.kwargs.dst_area?.name}`
-        steps_data_item.dst_area_x = `${item.kwargs.dst_area?.x}`
-        steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`
-        steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`
-        steps_data_item.speed = `${item.kwargs.speed}`
-        steps_data_item.weight = `${item.kwargs.weight}`
-        steps_data_item.accuracy = `${item.kwargs.accuracy}`
+        steps_data_item.src_area_name = `${item.kwargs.src_area?.name}`;
+        steps_data_item.src_area_x = `${item.kwargs.src_area?.x}`;
+        steps_data_item.src_area_y = `${item.kwargs.src_area?.y}`;
+        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`;
+        steps_data_item.src_area_z = `${item.kwargs.src_area?.z}`;
+        steps_data_item.dst_area_name = `${item.kwargs.dst_area?.name}`;
+        steps_data_item.dst_area_x = `${item.kwargs.dst_area?.x}`;
+        steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`;
+        steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`;
+        steps_data_item.speed = `${item.kwargs.speed}`;
+        steps_data_item.weight = `${item.kwargs.weight}`;
+        steps_data_item.accuracy = `${item.kwargs.accuracy}`;
         break;
       //   加热搅拌
       case 'heating_stir_step':
-        steps_data_item.dst_area_name = `${item.kwargs.dst_area?.name}`
-        steps_data_item.dst_area_x = `${item.kwargs.dst_area?.x}`
-        steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`
-        steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`
-        steps_data_item.time = `${item.kwargs.time}`
+        steps_data_item.dst_area_name = `${item.kwargs.dst_area?.name}`;
+        steps_data_item.dst_area_x = `${item.kwargs.dst_area?.x}`;
+        steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`;
+        steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`;
+        steps_data_item.time = `${item.kwargs.time}`;
         break;
     }
 
-    return steps_data_item
-  })
+    return steps_data_item;
+  });
   return {
     name: data.name,
     project_id: `${data.project_id}`,
@@ -235,5 +255,5 @@ export const fmtResToFormData = (data: API.Experiments.CreateExperimentReq): any
     bottle_area_z: `${data.bottle_area.z}`,
     bottle_height: `${data.bottle_height}`,
     steps_data
-  }
-}
+  };
+};

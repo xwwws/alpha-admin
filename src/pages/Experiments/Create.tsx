@@ -1,7 +1,7 @@
 import { createExperiment, getExperimentDetailsById } from '@/api/experiments';
 import { getAreasMap } from '@/api/public';
 import CreateStepItem from '@/pages/Experiments/components/CreateStepItem';
-import { IForm } from '@/pages/typings';
+import { IForm, ITypes } from '@/pages/typings';
 import { CenterHolderStyle, formItemLayout } from '@/utils';
 import { PlusOutlined } from '@ant-design/icons';
 import { PageContainer } from '@ant-design/pro-components';
@@ -11,37 +11,45 @@ import { useNavigate } from 'umi';
 import { useSearchParams } from "@@/exports";
 import { fmtRequestParams, fmtResToFormData } from "@/pages/Experiments/hooks/experimentHooks";
 import { getProjects } from "@/api/project";
+import { getReadNodeList } from "@/api/methods";
+import DataAcquisition from "@/pages/Experiments/components/DataAcquisition";
 
 const Create: React.FC = () => {
-  const [form] = Form.useForm();
-  const [submitLoading, setSubmitLoading] = useState<boolean>(false);
-  const [reaction, setReaction] = useState<{ label: string; value: string }[]>([]);
+
+  const [ form ] = Form.useForm();
+  const [ submitLoading, setSubmitLoading ] = useState<boolean>(false);
+  const [ reaction, setReaction ] = useState<{ label: string; value: string }[]>([]);
   const [ projects, setProjects ] = useState<{ label: string; value: string }[]>([]);
+  const [ nodes, setNodes ] = useState<ITypes.EnumType[]>([]);
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const [ searchParams ] = useSearchParams();
   useEffect(() => {
     (async () => {
       const res = await getAreasMap('reaction');
       setReaction(res.data.map((item) => ({ label: item.label, value: item.name })));
     })();
     (async () => {
-      const res = await getProjects({page:1,page_size:9999})
-      setProjects(res.data.data.map(pro => ({label:pro.name,value:pro.id + ''})));
-    })()
-    const copyId = searchParams.get('id')
-    if(copyId) {
+      const res = await getProjects({ page: 1, page_size: 9999 });
+      setProjects(res.data.data.map(pro => ({ label: pro.name, value: pro.id + '' })));
+    })();
+    const copyId = searchParams.get('id');
+    if (copyId) {
       (async () => {
-        const res = await getExperimentDetailsById(copyId)
-        form.setFieldsValue(fmtResToFormData(res.data))
-
-
-      })()
+        const res = await getExperimentDetailsById(copyId);
+        form.setFieldsValue(fmtResToFormData(res.data));
+      })();
     }
+
+
+    (async () => {
+      const res = await getReadNodeList();
+      setNodes(res.data.map((item): ITypes.EnumType => ({ label: item.name, value: item.nodeid })));
+    })();
   }, []);
   const formRules: IForm.IFormRules = {
-    name: [{ required: true, message: '请输入实验名称' }],
-    bottle_area_name: [{ required: true, message: '请选择反应器工位' }],
-    project_id: [{ required: true, message: '请选择项目' }],
+    name: [ { required: true, message: '请输入实验名称' } ],
+    bottle_area_name: [ { required: true, message: '请选择反应器工位' } ],
+    project_id: [ { required: true, message: '请选择项目' } ],
     coordinates: [
       { required: true, message: '请输入坐标' },
       { pattern: /^\d+$/, message: '坐标输入错误' },
@@ -62,15 +70,20 @@ const Create: React.FC = () => {
       message.warning('请添加步骤');
       return;
     }
-    if(submitLoading) {
-      message.warning('请勿重复提交')
-      return
+    if (submitLoading) {
+      message.warning('请勿重复提交');
+      return;
     }
     setSubmitLoading(true);
-    await createExperiment(fmtRequestParams(values));
-    message.success('创建成功');
-    navigate('/exp/experiment/list');
-    setSubmitLoading(false);
+    try {
+      await createExperiment(fmtRequestParams(values));
+      message.success('创建成功');
+      navigate('/exp/experiment/list');
+
+    } catch (e) {
+    } finally {
+      setSubmitLoading(false);
+    }
   };
   const formList = (
     <Form.List name="steps_data">
@@ -83,11 +96,12 @@ const Create: React.FC = () => {
               index={key}
               name={name}
               restField={restField}
+              nodes={nodes}
               onDelete={() => remove(name)}
             ></CreateStepItem>
           ))}
           <Form.Item wrapperCol={{ offset: 3 }}>
-            <Button type="dashed" onClick={add} block icon={<PlusOutlined />}>
+            <Button type="dashed" onClick={add} block icon={<PlusOutlined/>}>
               添加步骤
             </Button>
           </Form.Item>
@@ -106,37 +120,46 @@ const Create: React.FC = () => {
             onFinish={onFinish}
           >
             <Form.Item name="name" label="实验名称" rules={formRules.name}>
-              <Input />
+              <Input/>
             </Form.Item>
             <Form.Item
               name="bottle_area_name"
               label="反应器工位"
               rules={formRules.bottle_area_name}
             >
-              <Select options={reaction} />
+              <Select options={reaction}/>
             </Form.Item>
             <Form.Item
               name="project_id"
               label="项目"
               rules={formRules.project_id}
             >
-              <Select options={projects} />
+              <Select options={projects}/>
             </Form.Item>
 
             <Form.Item name="bottle_area_x" label="x" rules={formRules.coordinates}>
-              <Input />
+              <Input/>
             </Form.Item>
 
             <Form.Item name="bottle_area_y" label="y" rules={formRules.coordinates}>
-              <Input />
+              <Input/>
             </Form.Item>
 
             <Form.Item name="bottle_area_z" label="z" rules={formRules.coordinates}>
-              <Input />
+              <Input/>
             </Form.Item>
 
             <Form.Item name="bottle_height" label="瓶型" rules={formRules.bottle_height}>
-              <Input />
+              <Input/>
+            </Form.Item>
+            <Form.Item name="data_acquisitions" label="采集数据">
+              <Select options={nodes} allowClear mode={'multiple'}/>
+            </Form.Item>
+            <Form.Item
+              name="interval"
+              label="间隔"
+            >
+              <Input addonAfter="s"/>
             </Form.Item>
             {formList}
             <Form.Item wrapperCol={{ span: 24 }}>

@@ -234,16 +234,23 @@ declare namespace API {
     // 创建实验步骤
     interface CreateExperimentStep {
       name: string;
+      data_acquisitions?:IAcquisitions[];
       reagent_id?: string | number;
       kwargs: AddSolid & Pipette & AddSolvent & Mix3Step & DoPeristalticStep;
     }
 
+    interface IAcquisitions {
+      nodeid: string | number;
+      interval: string | number;
+
+    }
     // 创建实验
     interface CreateExperimentReq {
       name: string;
       project_id: string|number;
       bottle_area: Coordinates;
       bottle_height: string | number;
+      data_acquisitions?:IAcquisitions[];
       steps_data: CreateExperimentStep[];
     }
 
