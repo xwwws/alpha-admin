@@ -1,9 +1,10 @@
-import { getExperimentLogsById } from '@/api/experiments';
+import { getExperimentLogsById,  getStepsByExperimentId } from '@/api/experiments';
 import { PageContainer } from '@ant-design/pro-components';
-import { Card, Descriptions, Divider, Tag } from 'antd';
+import { Button, Card, Descriptions, Divider, Tag } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { useNavigate } from "@@/exports";
 const ResultStyleWarp = styled.div`
   display: grid;
   gap: 10px;
@@ -20,16 +21,39 @@ const RecordStyle = styled.div`
 `;
 const Record: React.FC<IProps> = (props) => {
   const [record, setRecord] = useState<API.Experiments.ExperimentRecordRes[]>([]);
+  const [steps, setSteps] = useState<API.Experiments.ExperimentStepsRes[]>([]);
   const s = [true, false, 0];
   const { id } = useParams();
+  const navigate = useNavigate()
+
   useEffect(() => {
-    (async () => {
+    // 获取实验记录
+    const getExperimentRecords =  async () => {
       const res = await getExperimentLogsById(id as string);
       setRecord(res.data);
-    })();
+    }
+    getExperimentRecords()
+
+    // 获取实验步骤信息
+    const getExperimentSteps = async () => {
+      const res = await getStepsByExperimentId(id as string);
+      setSteps(res.data)
+    }
+    getExperimentSteps()
+
+
   }, [id]);
   return (
-    <PageContainer>
+    <PageContainer
+      extra={[
+        <Button
+          key={'add'}
+          onClick={() => navigate(`/exp/experiment/${id}/detail` , {replace: true})}
+        >
+          查看实验详情
+        </Button>,
+      ]}
+    >
       <Card>
         {record.map((item, index) => {
           return (

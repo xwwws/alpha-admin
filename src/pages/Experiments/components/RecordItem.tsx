@@ -6,15 +6,33 @@ import DetailPipette from '@/pages/Experiments/components/DetailPipette';
 import React from 'react';
 import styled from 'styled-components';
 
+import { Descriptions, DescriptionsProps } from 'antd';
 interface IProps {
   record: API.Experiments.CreateExperimentStep;
 }
 
 const RecordItemStyle = styled.div`
+  display: grid;
+  gap: 10px;
   padding: 15px;
 `;
 const RecordItem: React.FC<IProps> = (props) => {
   const { record } = props;
+  const descriptionInfo: DescriptionsProps[`items`] = [
+    {
+      key: 'collectedData-1',
+      label: '采集数据:',
+      children: (
+        <div>
+          {/* @ts-ignore*/}
+          {record?.data_acquisitions.map(item => {
+            return <p>nodeid: {item.nodeid} interval: {item.interval}</p>
+            }
+          )}
+        </div>
+      ),
+    },
+  ];
   return (
     <RecordItemStyle>
       {/*添加溶剂*/}
@@ -27,6 +45,15 @@ const RecordItem: React.FC<IProps> = (props) => {
       {record.name === 'do_peristaltic_step' && <DetailDoPeristaltic record={record} />}
       {/*搅拌3*/}
       {record.name === 'heating_stir_step' && <DetailMix3 record={record} />}
+
+
+      <Descriptions
+        bordered
+        column={4}
+        labelStyle={{ width: '120px', textAlign: 'center' }}
+        size={'small'}
+        items={descriptionInfo}
+      />
     </RecordItemStyle>
   );
 };

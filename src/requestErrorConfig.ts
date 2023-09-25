@@ -108,7 +108,8 @@ export const errorConfig: RequestConfig = {
     (response) => {
       // 拦截响应数据，进行个性化处理
       const { data } = response as unknown as ResponseStructure;
-
+      // 判断是否是下载文件 没有code时  返回的是文件内容
+      if(!data.code) return response
       if (data?.msg !== 'ok') {
         message.error(data.msg);
       }

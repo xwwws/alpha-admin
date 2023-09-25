@@ -1,3 +1,4 @@
+
 declare interface Response<T> {
   code: number;
   data: T;
@@ -187,6 +188,21 @@ declare namespace API {
     created_at: string;
     updated_at: string;
   };
+  /**
+   * Steps
+   */
+  declare namespace Steps {
+    interface getMethodsByStepId {
+      id: number | string;
+      start_time: string;
+      end_time: string;
+      action: string;
+      label: string;
+      args: (string | number)[];
+      result: string[];
+    }
+  }
+
 
   /**
    * experiments 相关
@@ -205,7 +221,17 @@ declare namespace API {
       name: string;
       status: string;
     };
-
+    interface DataAcquisitionsResults {
+      name: string;
+      nodeid: number;
+      interval: number;
+      value_type: string;
+      file_url: string;
+    }
+    interface data_acquisitionParams {
+      nodeid: string | number;
+      interval: number
+    }
     type ExperimentDetailsRes = {
       id: string | number;
       project_id: string | number;
@@ -214,6 +240,8 @@ declare namespace API {
       bottle_height: 0;
       steps_data: CreateExperimentStep[];
       status: string;
+      data_acquisitions: data_acquisitionParams[];
+      data_acquisitions_results: DataAcquisitionsResults[]
     };
 
     type ExperimentRecordRes = {
@@ -226,6 +254,40 @@ declare namespace API {
       result: any[];
     };
 
+    type ExperimentStepsRes = {
+      id: string | number;
+      start_time: string
+      end_time: string
+      expt_id: number
+      reagent_id: number
+      status: string
+      content: {
+        speed: string | number;
+        weight: string | number;
+        accuracy: string | number;
+        dst_area: {
+          x: string | number;
+          y: string | number;
+          z: string | number;
+          name: string
+        };
+        src_area: {
+          x: string | number;
+          y: string | number;
+          z: string | number;
+          name: string
+        }
+      }
+      result: string[]
+      name: string
+      label: string
+      quantity_plan: number
+      quantity_real: number
+      data_acquisitions: data_acquisitionParams[]
+      data_acquisitions_results: DataAcquisitionsResults[]
+
+    };
+
     //  实验状态
     interface ExperimentStatus {
       status: 'draft' | 'waiting' | 'doing' | 'succeed' | 'failed' | 'canceled';
@@ -234,7 +296,7 @@ declare namespace API {
     // 创建实验步骤
     interface CreateExperimentStep {
       name: string;
-      data_acquisitions?:IAcquisitions[];
+      data_acquisitions?: IAcquisitions[];
       reagent_id?: string | number;
       kwargs: AddSolid & Pipette & AddSolvent & Mix3Step & DoPeristalticStep;
     }
@@ -244,13 +306,14 @@ declare namespace API {
       interval: string | number;
 
     }
+
     // 创建实验
     interface CreateExperimentReq {
       name: string;
-      project_id: string|number;
+      project_id: string | number;
       bottle_area: Coordinates;
       bottle_height: string | number;
-      data_acquisitions?:IAcquisitions[];
+      data_acquisitions?: IAcquisitions[];
       steps_data: CreateExperimentStep[];
     }
 

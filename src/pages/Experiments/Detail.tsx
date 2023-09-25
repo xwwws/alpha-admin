@@ -4,9 +4,11 @@ import type { IExpState } from '@/utils/dataMaps';
 import { experimentStatesMap } from '@/utils/dataMaps';
 import { PageContainer } from '@ant-design/pro-components';
 import type { DescriptionsProps } from 'antd';
-import { Badge, Card, Descriptions } from 'antd';
+import { Badge, Button, Card, Descriptions } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import CollectedDataWarp from "@/pages/Experiments/components/CollectedDataWarp";
+import { useNavigate } from "umi";
 
 interface IProps {
   [key: string]: any;
@@ -16,9 +18,10 @@ const Detail: React.FC<IProps> = (props) => {
   const [recordInfo, setRecordInfo] = useState<API.Experiments.ExperimentDetailsRes>();
   const [currentState, setCurrentState] = useState<IExpState>();
   const { id } = useParams();
+  const navigate = useNavigate()
   useEffect(() => {
     (async () => {
-      const res = await getExperimentDetailsById(id as string | number);
+      const res = await getExperimentDetailsById(id as string);
       setRecordInfo(res.data);
       setCurrentState(experimentStatesMap.find((item) => item.value === res.data.status));
     })();
@@ -61,9 +64,31 @@ const Detail: React.FC<IProps> = (props) => {
         </div>
       ),
     },
+    {
+      key: '7',
+      label: '采集数据:',
+      children: (
+        <div>
+          {recordInfo?.data_acquisitions_results.map(item => (
+            <p>
+              采集信息: {item.name} 间隔: {item.interval}
+            </p>
+          ))}
+        </div>
+      ),
+    },
   ];
   return (
-    <PageContainer>
+    <PageContainer
+      extra={[
+        <Button
+          key={'add'}
+          onClick={() => navigate(`/exp/experiment/${id}/record`, {replace: true})}
+        >
+          查看实验记录
+        </Button>,
+      ]}
+    >
       <Card>
         <Descriptions
           title={`实验名称: ${recordInfo?.name}`}
@@ -76,6 +101,12 @@ const Detail: React.FC<IProps> = (props) => {
         {recordInfo?.steps_data.map((item, index) => (
           <RecordItem key={index} record={item} />
         ))}
+
+
+        {/*采集数据信息*/}
+        <CollectedDataWarp
+          collected_data={recordInfo?.data_acquisitions_results as API.Experiments.DataAcquisitionsResults[]}
+        />
       </Card>
     </PageContainer>
   );

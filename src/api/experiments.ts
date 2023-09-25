@@ -67,6 +67,19 @@ export const getExperimentLogsById = (id: string | number, data?: object | undef
   });
 };
 
+
+/**
+ * 根据实验id获取步骤信息
+ * @param id string
+ */
+export const getStepsByExperimentId = (id: string | number) => {
+  return request<Response<API.Experiments.ExperimentStepsRes[]>>(`/api/v1/expt/expts/${id}/steps`, {
+    method: 'get',
+  });
+};
+
+
+
 /**
  * 删除实验
  * @param expt_id
