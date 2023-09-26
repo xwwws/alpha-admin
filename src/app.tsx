@@ -7,6 +7,7 @@ import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
 console.log(process.env, 'env')
 console.log(WS_URL, 'WS_URL')
+console.log(BASE_URL, 'BASE_URL')
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';

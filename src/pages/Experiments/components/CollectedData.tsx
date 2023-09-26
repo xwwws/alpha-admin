@@ -110,8 +110,6 @@ const CollectedData: React.FC<IProps> = (props) => {
   useEffect(() => {
     drawChart()
   }, [data]);
-
-  console.log(data);
   return (
     <CollectedDataStyle>
       <ChartBox ref={chartRef}/>

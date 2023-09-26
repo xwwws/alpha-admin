@@ -44,18 +44,9 @@ const CollectedDataWarp: React.FC<IProps> = (props) => {
   }, [ collected_data ]);
 
   const openUrl = (file_url: string) => {
-
-    console.log(REACT_APP_ENV);
-    console.log(file_url);
-    if(REACT_APP_ENV !== "dev") {
-      window.open(`${location.origin}/api/static/acquisitions/${file_url}`, '_blank');
-    } else {
-      window.open(`${FILE_BASE_URL}/api/static/acquisitions/${file_url}`, '_blank');
-      console.log(`${FILE_BASE_URL}/api/static/acquisitions/${file_url}`);
-    }
-    // const w = window.open('about:blank');
-    console.log(REACT_APP_ENV);
-    // w.location.href ='' ;
+    const url = `${location.origin}/api/static/acquisitions/${file_url}`
+    window.open(url, '_blank');
+    console.log('open url: ', url);
   };
   return (
     <CollectedDataWarpStyle>
