@@ -42,3 +42,14 @@ export const expState2ValueEnum = (state: IExpState[]): IValueEnum => {
   });
   return valueEnum;
 };
+
+
+export enum StepStatusMap {
+  'wait_pre' = 'processing',
+  'waiting' = 'processing',
+  'doing' = 'processing',
+  'succeed' = 'success',
+  'failed' = 'Error',
+  'canceled' = 'Default',
+  'canceling' = 'Default',
+}

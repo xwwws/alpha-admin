@@ -66,10 +66,12 @@ export const mix3Step = (data: API.Mix3Step): Promise<Response<API.MethodsRes>> 
 /**
  * 根据步骤id获取指令信息
  * @param step_id
+ * @param params
  */
 
-export const getMethodsByStepId = (step_id:string|number): Promise<Response<API.PagesRes<API.Steps.getMethodsByStepId[]>>> => {
+export const getMethodsByStepId = (step_id:string|number,params:API.PagesReq): Promise<Response<API.PagesRes<API.Steps.getMethodsByStepId>>> => {
   return request(`/api/v1/lab/steps/${step_id}/logs`, {
-    method: 'post',
+    method: 'get',
+    params
   });
 };
