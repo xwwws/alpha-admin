@@ -35,7 +35,7 @@ export const addSolid = (data: API.AddSolid): Promise<Response<API.MethodsRes>> 
 
 export const getReagentsByStep = (step_name: string): Promise<Response<API.ReagentsInfo[]>> => {
   return request(`/api/v1/lab/steps/${step_name}/area_positions`, {
-    method: 'post',
+    method: 'get',
   });
 };
 

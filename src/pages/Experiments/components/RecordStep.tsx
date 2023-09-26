@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { StepStatusMap } from "@/utils/dataMaps";
 import { getMethodsByStepId } from "@/api/steps";
 import RecordStepMethod from "@/pages/Experiments/components/RecordStepMethod";
+import CollectedDataWarp from "@/pages/Experiments/components/CollectedDataWarp";
 
 interface IProps {
   step: API.Experiments.ExperimentStepsRes;
@@ -14,10 +15,15 @@ interface IProps {
 }
 
 const RecordStyle = styled.div`
+  display: grid;
+  gap: 10px;
   .descriptions {
     padding: 10px 80px;
   }
-
+  .collectedDataWarp{
+    width: 85%;
+    margin: 0 auto;
+  }
   .methods {
     width: 85%;
     margin: 0 auto;
@@ -25,8 +31,13 @@ const RecordStyle = styled.div`
     gap: 10px;
 
     .title {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      color: rgba(0, 0, 0, 0.88);
+      font-weight: 600;
       font-size: 16px;
-      font-weight: 500;
+      line-height: 1.5;
 
     }
   }
@@ -60,7 +71,7 @@ const RecordStep: React.FC<IProps> = (props) => {
       const methods = res.data.data.map((item, index) => {
         return {
           key: `${index + 1}`,
-          label:`${index + 1}. ${item.label} - ${item.id}`,
+          label: `${index + 1}. ${item.label} - ${item.id}`,
           children: <RecordStepMethod method={item} index={index}/>,
         };
       });
@@ -69,7 +80,6 @@ const RecordStep: React.FC<IProps> = (props) => {
     };
     getMethods();
   }, [ step ]);
-
 
 
   return (
@@ -84,6 +94,9 @@ const RecordStep: React.FC<IProps> = (props) => {
           size={'small'}
           items={descriptionInfo}
         />
+      </div>
+      <div className="collectedDataWarp">
+        <CollectedDataWarp collected_data={step.data_acquisitions_results}/>
       </div>
       <div className="methods">
         <div className="title">指令信息</div>
