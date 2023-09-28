@@ -200,6 +200,7 @@ declare namespace API {
   // 搅拌3
   type Mix3Step = {
     dst_area?: Coordinates;
+    src_area?: Coordinates; // 不会出现
     time?: string | number;
   };
 
@@ -230,6 +231,34 @@ declare namespace API {
       args: (string | number)[];
       result: string[];
     }
+
+    enum StepName {
+      ADD_SOLVENT_STEP = add_solvent_step,
+      ADD_SOLID_STEP = add_solid_step,
+      PIPETTE_STEP = pipette_step,
+      DO_PERISTALTIC_STEP = do_peristaltic_step,
+      HEATING_STIR_STEP = heating_stir_step,
+    }
+
+    interface GetStepHisReq extends PagesReq {
+      step_name: string; // StepName
+    }
+
+    interface StepHis {
+      id: number;
+      start_time: string;
+      end_time: string;
+      expt_id: number;
+      reagent_id: number;
+      reagent_name: string;
+      status: string;
+      content: AddSolid | Pipette | AddSolvent | Mix3Step | DoPeristalticStep;
+      result: string[];
+      name: string;
+      label: string;
+      quantity_plan: number;
+      quantity_real: number;
+    }
   }
 
 
@@ -238,12 +267,7 @@ declare namespace API {
    */
   declare namespace Experiments {
     type List = {
-      bottle_area: {
-        name: string;
-        x: number;
-        y: number;
-        z: number;
-      };
+      bottle_area: Coordinates;
       bottle_height: number;
       created_at: string;
       id: string | number;
@@ -297,18 +321,8 @@ declare namespace API {
         speed: string | number;
         weight: string | number;
         accuracy: string | number;
-        dst_area: {
-          x: string | number;
-          y: string | number;
-          z: string | number;
-          name: string
-        };
-        src_area: {
-          x: string | number;
-          y: string | number;
-          z: string | number;
-          name: string
-        }
+        dst_area: Coordinates;
+        src_area: Coordinates;
       }
       result: string[]
       name: string

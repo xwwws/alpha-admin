@@ -2,44 +2,50 @@ import { Card, Tag } from 'antd';
 import React, { ReactNode } from 'react';
 import styled from 'styled-components';
 import { ProColumns, ProTable } from '@ant-design/pro-components';
-import { getMethodHisByMethods } from "@/api/methods";
+import { getStepHis } from "@/api/steps";
 import { formatColumns } from "@/utils/componentSettingUtils";
+import { experimentStatesMap, expState2ValueEnum } from "@/utils/dataMaps";
+import StepHisContent from './StepHisContent';
 
 interface IProps {
   title?: ReactNode;
-  methodMode: string; // API.Methods.MethodAction;
+  stepMode: string; //  API.Steps.StepName
   [key: string]: any;
 }
 
-const MethodsHisStyle = styled.div`
+const StepHisStyle = styled.div`
   margin-top: 20px;
 `;
-const MethodsHis: React.FC<IProps> = (props) => {
-  const { title, methodMode } = props;
-  const columns: ProColumns<API.Methods.MethodHis>[] = formatColumns<API.Methods.MethodHis>([
+const StepHis: React.FC<IProps> = (props) => {
+  const { title, stepMode } = props;
+  const columns: ProColumns<API.Steps.StepHis>[] = formatColumns<API.Steps.StepHis>([
     { title: 'ID', dataIndex: 'id' },
-    { title: 'action', dataIndex: 'action' },
+    { title: 'name', dataIndex: 'name' },
     { title: 'label', dataIndex: 'label' },
+    { title: '实验id', dataIndex: 'expt_id' },
+    { title: '试剂', dataIndex: 'reagent_name' },
+    { title: '试剂id', dataIndex: 'reagent_id' },
+    {
+      title: '状态',
+      dataIndex: 'status',
+      valueEnum: expState2ValueEnum(experimentStatesMap),
+
+    },
     { title: '开始时间', dataIndex: 'start_time' },
     { title: '结束时间', dataIndex: 'end_time' },
+    { title: '计划量', dataIndex: 'quantity_plan' },
+    { title: '实际量', dataIndex: 'quantity_real' },
     {
-      title: 'args',
-      dataIndex: 'args',
-      render: (text, record) => (
-        <>
-          {
-            record.args.map((item, index) => (
-              <>
-                <Tag color={'processing'} key={index}>{item}</Tag>
-              </>
-            ))
-          }
-        </>
-      )
+      title: 'content',
+      dataIndex: 'content',
+      width: "200px",
+      render: (text, { content }) => <StepHisContent content={content}/>
     },
+
     {
       title: 'result',
       dataIndex: 'result',
+      width: '250px',
       render: (text, record) => (
         <>
           {
@@ -54,15 +60,15 @@ const MethodsHis: React.FC<IProps> = (props) => {
     },
   ]);
   const requestMethod = async (params: { pageSize: number; current: number }) => {
-    const res = await getMethodHisByMethods(methodMode, {
-      method_action: methodMode,
+    const res = await getStepHis(stepMode, {
+      step_name: stepMode,
       page: params.current,
       page_size: params.pageSize
     });
     return { data: res.data.data, success: true, total: res.data.total };
   };
   return (
-    <MethodsHisStyle>
+    <StepHisStyle>
       <Card title={title || '指令调用历史'} size={'small'}>
         <ProTable
           key={'id'}
@@ -70,16 +76,16 @@ const MethodsHis: React.FC<IProps> = (props) => {
           search={false}
           options={false}
           request={requestMethod}
-          scroll={{ x: 1500 }}
+          scroll={{ x: 2100 }}
           pagination={{
             showSizeChanger: true,
             pageSize: 10,
-            pageSizeOptions: [10,50,100,200]
+            pageSizeOptions: [ 10, 50, 100, 200 ]
           }}
         />
       </Card>
-    </MethodsHisStyle>
+    </StepHisStyle>
   );
 };
 
-export default MethodsHis;
+export default StepHis;

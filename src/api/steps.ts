@@ -69,9 +69,22 @@ export const mix3Step = (data: API.Mix3Step): Promise<Response<API.MethodsRes>> 
  * @param params
  */
 
-export const getMethodsByStepId = (step_id:string|number,params:API.PagesReq): Promise<Response<API.PagesRes<API.Steps.getMethodsByStepId>>> => {
+export const getMethodsByStepId = (step_id: string | number, params: API.PagesReq): Promise<Response<API.PagesRes<API.Steps.getMethodsByStepId>>> => {
   return request(`/api/v1/lab/steps/${step_id}/logs`, {
     method: 'get',
     params
+  });
+};
+
+
+/**
+ * 获取步骤调用历史
+ * @param step_name // API.Steps.StepName
+ * @param params
+ */
+export const getStepHis = (step_name: string, params: API.Steps.GetStepHisReq): Promise<Response<API.PagesRes<API.Steps.StepHis>>> => {
+  return request(`/api/v1/lab/steps/${step_name}/history`, {
+    method: 'get',
+    params,
   });
 };
