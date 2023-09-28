@@ -61,7 +61,6 @@ const StepHis: React.FC<IProps> = (props) => {
   ]);
   const requestMethod = async (params: { pageSize: number; current: number }) => {
     const res = await getStepHis(stepMode, {
-      step_name: stepMode,
       page: params.current,
       page_size: params.pageSize
     });

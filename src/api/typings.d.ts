@@ -53,7 +53,6 @@ declare namespace API {
     }
 
     interface GetMethodHisByMethodReq extends PagesReq {
-      method_action: string; // MethodAction
     }
 
     interface MethodHis {
@@ -241,7 +240,6 @@ declare namespace API {
     }
 
     interface GetStepHisReq extends PagesReq {
-      step_name: string; // StepName
     }
 
     interface StepHis {

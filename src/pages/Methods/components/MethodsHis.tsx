@@ -55,7 +55,6 @@ const MethodsHis: React.FC<IProps> = (props) => {
   ]);
   const requestMethod = async (params: { pageSize: number; current: number }) => {
     const res = await getMethodHisByMethods(methodMode, {
-      method_action: methodMode,
       page: params.current,
       page_size: params.pageSize
     });
@@ -74,7 +73,7 @@ const MethodsHis: React.FC<IProps> = (props) => {
           pagination={{
             showSizeChanger: true,
             pageSize: 10,
-            pageSizeOptions: [10,50,100,200]
+            pageSizeOptions: [ 10, 50, 100, 200 ]
           }}
         />
       </Card>
