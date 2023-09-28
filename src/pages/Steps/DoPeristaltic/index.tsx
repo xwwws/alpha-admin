@@ -5,6 +5,7 @@ import { PageContainer } from '@ant-design/pro-layout/es/components/PageContaine
 import { Button, Card, Form, Input, Select } from 'antd';
 import React, { useState } from 'react';
 import { useModel } from 'umi';
+import StepHis from "@/pages/Steps/components/StepHis";
 
 const formItemLayout = {
   labelCol: { span: 8 },
@@ -203,6 +204,7 @@ const Index: React.FC = () => {
             {searchModel}
           </MethodsView>
         </Card>
+        <StepHis stepMode={'do_peristaltic_step'}/>
       </PageContainer>
     </>
   );

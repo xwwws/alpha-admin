@@ -233,11 +233,11 @@ declare namespace API {
     }
 
     enum StepName {
-      ADD_SOLVENT_STEP = add_solvent_step,
-      ADD_SOLID_STEP = add_solid_step,
-      PIPETTE_STEP = pipette_step,
-      DO_PERISTALTIC_STEP = do_peristaltic_step,
-      HEATING_STIR_STEP = heating_stir_step,
+      ADD_SOLVENT_STEP = 'add_solvent_step',
+      ADD_SOLID_STEP = 'add_solid_step',
+      PIPETTE_STEP = 'pipette_step',
+      DO_PERISTALTIC_STEP = 'do_peristaltic_step',
+      HEATING_STIR_STEP = 'heating_stir_step',
     }
 
     interface GetStepHisReq extends PagesReq {
