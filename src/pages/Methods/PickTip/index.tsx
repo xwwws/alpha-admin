@@ -5,6 +5,7 @@ import { PageContainer } from '@ant-design/pro-layout/es/components/PageContaine
 import { Button, Card, Form, Input, Select, Switch } from 'antd';
 import React, { useState } from 'react';
 import { useModel } from 'umi';
+import MethodsHis from "@/pages/Methods/components/MethodsHis";
 
 const formItemLayout = {
   labelCol: { span: 8 },
@@ -146,6 +147,8 @@ const Index: React.FC = () => {
             {searchModel}
           </MethodsView>
         </Card>
+
+        <MethodsHis methodMode={'methdPickTip'}/>
       </PageContainer>
     </>
   );

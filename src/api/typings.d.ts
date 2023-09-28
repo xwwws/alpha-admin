@@ -1,4 +1,3 @@
-
 declare interface Response<T> {
   code: number;
   data: T;
@@ -28,15 +27,45 @@ declare namespace API {
     area_type: string;
   }
 
-  interface PagesRes<T> {
-    total: number;
-    currentPage: number;
-    data: T[];
-  }
-
   /**
    * method相关
    */
+
+
+  declare namespace Methods {
+    enum MethodAction {
+      READ = 'read',
+      SLEEP = 'sleep',
+      METHD_MV_THING = 'methdMvThing',
+      METHD_ADD_SOL = 'methdAddSol',
+      METHD_UN_CAP = 'methdUncap',
+      METHD_RE_CAP = 'methdRecap',
+      METHD_CHNG_TOOL = 'methdChngTool',
+      METHD_PICK_TIP = 'methdPickTip',
+      METHD_TRNS_LIQUID = 'methdTrnsLiquid',
+      METHD_GET_PADDLE = 'methdGetPaddle',
+      METHD_PUT_PADDLE = 'methdPutPaddle',
+      METHD_DO_MIX2 = 'methdDoMix2',
+      METHD_MV_SOLID = 'methdMvSolid',
+      METHD_DO_ADD_SOLID = 'methdDoAddSolid',
+      METHD_DO_PERISTALTIC = 'methdDoPeristaltic',
+      METHD_DO_MIX3 = 'methdDoMix3',
+    }
+
+    interface GetMethodHisByMethodReq extends PagesReq {
+      method_action: string; // MethodAction
+    }
+
+    interface MethodHis {
+      id: number;
+      start_time: string;
+      end_time: string;
+      action: string;
+      label: string;
+      args: (string | number)[];
+      result: string[];
+    }
+  }
   // 读值
   type ReadReq = {
     node_index: string | number;
@@ -221,6 +250,7 @@ declare namespace API {
       name: string;
       status: string;
     };
+
     interface DataAcquisitionsResults {
       name: string;
       nodeid: number;
@@ -228,10 +258,12 @@ declare namespace API {
       value_type: string;
       file_url: string;
     }
+
     interface data_acquisitionParams {
       nodeid: string | number;
-      interval: number
+      interval: number;
     }
+
     type ExperimentDetailsRes = {
       id: string | number;
       project_id: string | number;
@@ -290,7 +322,12 @@ declare namespace API {
 
     //  实验状态
     interface ExperimentStatus {
-      status: 'draft' | 'waiting' | 'doing' | 'succeed' | 'failed' | 'canceled';
+      status: 'draft' |
+        'waiting' |
+        'doing' |
+        'succeed' |
+        'failed' |
+        'canceled';
     }
 
     // 创建实验步骤

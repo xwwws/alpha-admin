@@ -1,9 +1,9 @@
-// @ts-ignore
 import { sleepMethod } from '@/api/methods';
 import MethodsView from '@/pages/Methods/components/MethodsView';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 import { Button, Card, Form, Input } from 'antd';
 import React, { useState } from 'react';
+import MethodsHis from "@/pages/Methods/components/MethodsHis";
 
 const formItemLayout = {
   labelCol: { span: 10 },
@@ -62,7 +62,9 @@ const Index: React.FC = () => {
           <MethodsView isLoading={loading} readResult={readResult}>
             {searchModel}
           </MethodsView>
+
         </Card>
+        <MethodsHis methodMode={'sleep'}/>
       </PageContainer>
     </>
   );

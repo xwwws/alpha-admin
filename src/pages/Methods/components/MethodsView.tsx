@@ -1,5 +1,3 @@
-// @ts-ignore
-import { SmileOutlined } from '@ant-design/icons';
 import { Result, Spin } from 'antd';
 import type { ReactNode } from 'react';
 import React from 'react';

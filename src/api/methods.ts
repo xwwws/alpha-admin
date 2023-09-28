@@ -118,7 +118,7 @@ export const solidMovementMethod = (
 
 /**
  * 蠕动泵加液
- * @param
+ * @param data
  */
 export const doperistaltic = (data: API.DoPeristaltic): Promise<Response<API.MethodsRes>> => {
   return request(`/api/v1/lab/methods/doperistaltic`, {
@@ -129,11 +129,24 @@ export const doperistaltic = (data: API.DoPeristaltic): Promise<Response<API.Met
 
 /**
  * 搅拌3
- * @param
+ * @param data
  */
 export const mix3 = (data: API.Mix3): Promise<Response<API.MethodsRes>> => {
   return request(`/api/v1/lab/methods/methddomix3`, {
     method: 'post',
     data,
+  });
+};
+
+
+/**
+ * 获取指令调用历史
+ * @param method_action
+ * @param params
+ */
+export const getMethodHisByMethods = (method_action:string,params: API.Methods.GetMethodHisByMethodReq): Promise<Response<API.PagesRes<API.Methods.MethodHis>>> => {
+  return request(`/api/v1/lab/methods/${method_action}/history`, {
+    method: 'get',
+    params,
   });
 };
