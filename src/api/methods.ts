@@ -150,3 +150,14 @@ export const getMethodHisByMethods = (method_action:string,params: API.Methods.G
     params,
   });
 };
+/**
+ * 获取指令调用历史
+ * @param method_action
+ * @param params
+ */
+export const getMethodStatisticsByMethods = (method_action:string,params: API.Methods.GetMethodStatisticsByMethods): Promise<Response<API.Methods.MethodStatistics>> => {
+  return request(`/api/v1/lab/methods/${method_action}/statistics`, {
+    method: 'get',
+    params,
+  });
+};

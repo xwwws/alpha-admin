@@ -1,12 +1,12 @@
-import { Card, Tag } from 'antd';
-import React, { ReactNode } from 'react';
+import { Button, Card, DatePicker, Descriptions, Form, Tag } from 'antd';
+import React, { ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { ProColumns, ProTable } from '@ant-design/pro-components';
-import { getMethodHisByMethods } from "@/api/methods";
+import { getMethodHisByMethods, getMethodStatisticsByMethods } from "@/api/methods";
 import { formatColumns } from "@/utils/componentSettingUtils";
+import dayjs from 'dayjs';
 
 interface IProps {
-  title?: ReactNode;
   methodMode: string; // API.Methods.MethodAction;
   [key: string]: any;
 }
@@ -14,13 +14,66 @@ interface IProps {
 const MethodsHisStyle = styled.div`
   margin-top: 20px;
 `;
+const StatisticsWarpStyle = styled.div`
+  margin: 0 auto 20px;
+  .form{
+    margin-bottom: 20px;
+  }
+`;
 const MethodsHis: React.FC<IProps> = (props) => {
-  const { title, methodMode } = props;
+  const { methodMode } = props;
+
+  // 指令数据统计数据信息
+  const [ statistics, setStatistics ] = useState<API.Methods.MethodStatistics>({
+    times: 0,
+    duration: ''
+  });
+
+  // 指令数据统计搜索框
+  const [ statisticsForm, setStatisticsForm ] = useState<any[]>(['','']);
+  const [form] = Form.useForm()
+
+  // 指令数据统计表单提交
+  const formFinish = (values:any) => {
+    if(values.time) {
+      setStatisticsForm([dayjs(values.time[0]).format('YYYY-MM-DD hh:mm:ss'),dayjs(values.time[1]).format('YYYY-MM-DD hh:mm:ss')])
+    } else {
+      setStatisticsForm(['',''])
+    }
+  }
+
+  // 获取指令数据统计
+  useEffect(() => {
+    const getStatistics = async () => {
+      const params:API.Methods.GetMethodStatisticsByMethods = {}
+      if(statisticsForm[0] && statisticsForm[1]) {
+        params.start_time_before = statisticsForm[0]
+        params.start_time_after = statisticsForm[1]
+      }
+      const res = await getMethodStatisticsByMethods(methodMode, params);
+      setStatistics(res.data);
+    };
+    getStatistics();
+  }, [statisticsForm]);
+
+  // table columns
   const columns: ProColumns<API.Methods.MethodHis>[] = formatColumns<API.Methods.MethodHis>([
     { title: 'ID', dataIndex: 'id' },
     { title: 'action', dataIndex: 'action' },
     { title: 'label', dataIndex: 'label' },
-    { title: '开始时间', dataIndex: 'start_time' },
+    {
+      title: '开始时间',
+      valueType: 'dateTimeRange',
+      dataIndex: 'start_time',
+      search: {
+        transform: (value: any) => {
+          return {
+            start_time_before: value[0],
+            start_time_after: value[1],
+          };
+        }
+      }
+    },
     { title: '结束时间', dataIndex: 'end_time' },
     {
       title: 'args',
@@ -30,7 +83,7 @@ const MethodsHis: React.FC<IProps> = (props) => {
           {
             record.args.map((item, index) => (
               <>
-                <Tag color={'processing'} key={index}>{item}</Tag>
+                <Tag color={'orange'} key={index}>{item}</Tag>
               </>
             ))
           }
@@ -53,27 +106,55 @@ const MethodsHis: React.FC<IProps> = (props) => {
       )
     },
   ]);
+  // 获取table数据
   const requestMethod = async (params: { pageSize: number; current: number }) => {
     const res = await getMethodHisByMethods(methodMode, {
       page: params.current,
-      page_size: params.pageSize
+      page_size: params.pageSize,
+      start_time_after: '12',
+      start_time_before: '12'
     });
     return { data: res.data.data, success: true, total: res.data.total };
   };
   return (
     <MethodsHisStyle>
-      <Card title={title || '指令调用历史'} size={'small'}>
+      <StatisticsWarpStyle>
+        <Card title={'指令执行数据统计'}  size={'small'}>
+          <div className="form">
+            <Form layout="inline" form={form} onFinish={formFinish}>
+              <Form.Item label={'指令执行时间'} name={'time'}>
+                <DatePicker.RangePicker
+                  showTime
+                  placeholder={['开始时间', '结束时间']}
+                />
+              </Form.Item>
+              <Form.Item >
+                <Button type={"primary"} htmlType={"submit"}>查询</Button>
+              </Form.Item>
+            </Form>
+          </div>
+          <Descriptions colon={false} column={24}>
+            <Descriptions.Item span={12} label={'执行次数:'}>
+              {statistics.times}
+            </Descriptions.Item>
+            <Descriptions.Item span={12} label={'运行时长:'}>
+              {statistics.duration}
+            </Descriptions.Item>
+          </Descriptions>
+        </Card>
+      </StatisticsWarpStyle>
+      <Card title={'指令调用历史'} size={'small'}>
         <ProTable
           key={'id'}
           columns={columns}
-          search={false}
           options={false}
           request={requestMethod}
           scroll={{ x: 1500 }}
           pagination={{
-            showSizeChanger: true,
+            showSizeChanger: false,
+            // pageSizeOptions: [ 10, 50, 100, 200 ],
+            showQuickJumper: true,
             pageSize: 10,
-            pageSizeOptions: [ 10, 50, 100, 200 ]
           }}
         />
       </Card>

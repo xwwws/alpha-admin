@@ -51,7 +51,7 @@ const StepHis: React.FC<IProps> = (props) => {
           {
             record.result.map((item, index) => (
               <>
-                <Tag color={'processing'} key={index}>{item}</Tag>
+                <Tag color={'orange'} key={index}>{item}</Tag>
               </>
             ))
           }
@@ -77,9 +77,10 @@ const StepHis: React.FC<IProps> = (props) => {
           request={requestMethod}
           scroll={{ x: 2100 }}
           pagination={{
-            showSizeChanger: true,
+            showSizeChanger: false,
+            pageSizeOptions: [ 10, 50, 100, 200 ],
             pageSize: 10,
-            pageSizeOptions: [ 10, 50, 100, 200 ]
+            showQuickJumper: true,
           }}
         />
       </Card>

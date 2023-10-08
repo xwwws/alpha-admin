@@ -1,3 +1,4 @@
+
 declare interface Response<T> {
   code: number;
   data: T;
@@ -53,6 +54,13 @@ declare namespace API {
     }
 
     interface GetMethodHisByMethodReq extends PagesReq {
+      start_time_after: string;
+      start_time_before: string;
+
+    }
+    interface GetMethodStatisticsByMethods {
+      start_time_after?: string;
+      start_time_before?: string;
     }
 
     interface MethodHis {
@@ -63,6 +71,10 @@ declare namespace API {
       label: string;
       args: (string | number)[];
       result: string[];
+    }
+    interface MethodStatistics {
+      duration: number | string;
+      times: number | string;
     }
   }
   // 读值

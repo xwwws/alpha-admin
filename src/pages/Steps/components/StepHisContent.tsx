@@ -1,6 +1,5 @@
 import { Descriptions } from 'antd';
 import React, { ReactNode } from 'react';
-import styled from 'styled-components';
 
 interface IProps {
   content: API.AddSolid | API.Pipette | API.AddSolvent | API.Mix3Step | API.DoPeristalticStep;

@@ -10,6 +10,7 @@ import * as echarts from "echarts";
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
 import {setReadXAxis,setReadSeries} from '@/redux/slices/readValueSlice'
+import MethodsHis from "@/pages/Methods/components/MethodsHis";
 
 const formItemLayout = {
   labelCol: { span: 8 },
@@ -171,6 +172,7 @@ const Index: React.FC = () => {
           {searchModel}
           <div ref={chartRef} style={{ width: '100%', height: 400 }}/>
         </Card>
+        <MethodsHis methodMode={'read'}/>
       </PageContainer>
     </>
   );
