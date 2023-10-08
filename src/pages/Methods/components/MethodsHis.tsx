@@ -72,6 +72,9 @@ const MethodsHis: React.FC<IProps> = (props) => {
             start_time_after: value[1],
           };
         }
+      },
+      render: (text, record) => {
+        return record.start_time
       }
     },
     { title: '结束时间', dataIndex: 'end_time' },

@@ -33,6 +33,9 @@ const StepHis: React.FC<IProps> = (props) => {
       title: '开始时间',
       dataIndex: 'start_time',
       valueType: 'dateTimeRange',
+      render: (text, record) => {
+        return record.start_time
+      },
       search: {
         transform: (value: any) => {
           return {
