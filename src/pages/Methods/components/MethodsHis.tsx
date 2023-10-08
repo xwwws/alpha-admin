@@ -107,12 +107,12 @@ const MethodsHis: React.FC<IProps> = (props) => {
     },
   ]);
   // 获取table数据
-  const requestMethod = async (params: { pageSize: number; current: number }) => {
+  const requestMethod = async (params: any) => {
     const res = await getMethodHisByMethods(methodMode, {
       page: params.current,
       page_size: params.pageSize,
-      start_time_after: '12',
-      start_time_before: '12'
+      start_time_before: params.start_time_before,
+      start_time_after: params.start_time_after,
     });
     return { data: res.data.data, success: true, total: res.data.total };
   };

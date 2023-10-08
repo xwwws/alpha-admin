@@ -8,7 +8,6 @@ import { experimentStatesMap, expState2ValueEnum } from "@/utils/dataMaps";
 import StepHisContent from './StepHisContent';
 
 interface IProps {
-  title?: ReactNode;
   stepMode: string; //  API.Steps.StepName
   [key: string]: any;
 }
@@ -29,9 +28,20 @@ const StepHis: React.FC<IProps> = (props) => {
       title: '状态',
       dataIndex: 'status',
       valueEnum: expState2ValueEnum(experimentStatesMap),
-
     },
-    { title: '开始时间', dataIndex: 'start_time' },
+    {
+      title: '开始时间',
+      dataIndex: 'start_time',
+      valueType: 'dateTimeRange',
+      search: {
+        transform: (value: any) => {
+          return {
+            start_time_before: value[0],
+            start_time_after: value[1],
+          };
+        }
+      }
+    },
     { title: '结束时间', dataIndex: 'end_time' },
     { title: '计划量', dataIndex: 'quantity_plan' },
     { title: '实际量', dataIndex: 'quantity_real' },
@@ -41,7 +51,6 @@ const StepHis: React.FC<IProps> = (props) => {
       width: "200px",
       render: (text, { content }) => <StepHisContent content={content}/>
     },
-
     {
       title: 'result',
       dataIndex: 'result',
@@ -59,20 +68,21 @@ const StepHis: React.FC<IProps> = (props) => {
       )
     },
   ]);
-  const requestMethod = async (params: { pageSize: number; current: number }) => {
+  const requestMethod = async (params: any) => {
     const res = await getStepHis(stepMode, {
       page: params.current,
-      page_size: params.pageSize
+      page_size: params.pageSize,
+      start_time_before: params.start_time_before,
+      start_time_after: params.start_time_after,
     });
     return { data: res.data.data, success: true, total: res.data.total };
   };
   return (
     <StepHisStyle>
-      <Card title={title || '指令调用历史'} size={'small'}>
+      <Card title={'步骤调用历史'} size={'small'}>
         <ProTable
           key={'id'}
           columns={columns}
-          search={false}
           options={false}
           request={requestMethod}
           scroll={{ x: 2100 }}

@@ -252,6 +252,8 @@ declare namespace API {
     }
 
     interface GetStepHisReq extends PagesReq {
+      start_time_before: string;
+      start_time_after: string;
     }
 
     interface StepHis {
