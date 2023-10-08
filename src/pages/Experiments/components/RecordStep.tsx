@@ -60,8 +60,8 @@ const RecordStep: React.FC<IProps> = (props) => {
     },
     { key: '3', label: '开始时间', children: step.start_time },
     { key: '4', label: '结束时间', children: step.end_time },
-    { key: '5', label: '计划量', children: step.quantity_plan },
-    { key: '6', label: '实际量', children: step.quantity_real },
+    { key: '5', label: '计划量', children: `${step.quantity_plan} g` },
+    { key: '6', label: '实际量', children: `${step.quantity_real} g` },
   ];
 
 
@@ -76,7 +76,6 @@ const RecordStep: React.FC<IProps> = (props) => {
         };
       });
       setMethodsCollapse(methods);
-
     };
     getMethods();
   }, [ step ]);

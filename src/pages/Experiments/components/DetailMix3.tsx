@@ -19,11 +19,17 @@ const DetailAddSolvent: React.FC<IProps> = (props) => {
       children: steps.find((item) => item.value === record.name)?.label,
       span: 4,
     },
+    {
+      key: '1-1',
+      label: '试剂名称',
+      children: record.reagent_name,
+      span: 4,
+    },
     { key: '6', label: '目标区域', children: record.kwargs.dst_area?.name },
     { key: '7', label: 'x', children: record.kwargs.dst_area?.x },
     { key: '8', label: 'y', children: record.kwargs.dst_area?.y },
     { key: '9', label: 'z', children: record.kwargs.dst_area?.z },
-    { key: '12', label: '时间', children: `${record.kwargs.time}` },
+    { key: '12', label: '时间', children: `${record.kwargs.time} s` },
   ];
   return (
     <>

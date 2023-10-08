@@ -91,7 +91,7 @@ const Pipette: React.FC<IProps> = (props) => {
             label="枪头长度"
             rules={formRules.height}
           >
-            <Input addonAfter="cm" />
+            <Input addonAfter="mm" />
           </Form.Item>
         </Col>
         <Col span={8}>
@@ -101,7 +101,7 @@ const Pipette: React.FC<IProps> = (props) => {
             label="高度"
             rules={formRules.height}
           >
-            <Input addonAfter="cm" />
+            <Input addonAfter="mm" />
           </Form.Item>
         </Col>
         <Col span={8}>
@@ -111,7 +111,7 @@ const Pipette: React.FC<IProps> = (props) => {
             label="移液总量"
             rules={formRules.height}
           >
-            <Input addonAfter="ml" />
+            <Input addonAfter="ul" />
           </Form.Item>
         </Col>
         <Col span={8}>
@@ -121,7 +121,7 @@ const Pipette: React.FC<IProps> = (props) => {
             label="单次吸液量"
             rules={formRules.height}
           >
-            <Input addonAfter="ml" />
+            <Input addonAfter="ul" />
           </Form.Item>
         </Col>
         <Col span={8}>
@@ -131,7 +131,7 @@ const Pipette: React.FC<IProps> = (props) => {
             label="单次吐液量"
             rules={formRules.height}
           >
-            <Input addonAfter="ml" />
+            <Input addonAfter="ul" />
           </Form.Item>
         </Col>
         <Col span={8}>
@@ -151,7 +151,7 @@ const Pipette: React.FC<IProps> = (props) => {
             label="吸液吐液速度"
             rules={formRules.height}
           >
-            <Input addonAfter="s" />
+            <Input addonAfter="ul/s" />
           </Form.Item>
         </Col>
       </Row>

@@ -46,7 +46,7 @@ const ReagentsForm: React.FC<IProps> = (props) => {
     }
   }, [location, params, isEdit]);
   const submit = async (val: API.Reagents.Create) => {
-    val.preparation_time = dayjs(val.preparation_time).format('YYYY-MM-DD hh:mm:ss');
+    val.preparation_time = dayjs(val.preparation_time).format('YYYY-MM-DDThh:mm:ss');
     setLoading(true);
     if (isEdit) {
       try {

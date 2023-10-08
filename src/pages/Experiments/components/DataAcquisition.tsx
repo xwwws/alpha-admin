@@ -34,7 +34,6 @@ const DataAcquisition: React.FC<IProps> = (props) => {
                 采集数据
               </Button>
             </ButtonWarp>
-
             {fields.map((subField) => (
               <Row gutter={10} style={{ margin: '5px 0' }}>
                 <Col span={11}>

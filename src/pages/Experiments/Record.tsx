@@ -28,23 +28,6 @@ const Record: React.FC<IProps> = (props) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return (
     <PageContainer
       extra={[

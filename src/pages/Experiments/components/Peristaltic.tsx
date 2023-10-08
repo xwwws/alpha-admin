@@ -94,17 +94,17 @@ const AddSolid: React.FC<IProps> = (props) => {
         </Col>
         <Col span={8}>
           <Form.Item name={[name, 'speed']} label="速度" rules={formRules.speed}>
-            <Input />
+            <Input addonAfter="ul/s" />
           </Form.Item>
         </Col>
-        <Col span={8}>
-          <Form.Item name={[name, 'weight']} label="比重" rules={formRules.weight}>
-            <Input />
+        <Col span={6}>
+          <Form.Item name={[name, 'weight']} labelCol={{span:10}} label="质量" rules={formRules.weight}>
+            <Input addonAfter={'g'}/>
           </Form.Item>
         </Col>
-        <Col span={8}>
+        <Col span={10}>
           <Form.Item name={[name, 'accuracy']} label="精确度" rules={formRules.accuracy}>
-            <Input />
+            <Input addonAfter={'%'}/>
           </Form.Item>
         </Col>
       </Row>

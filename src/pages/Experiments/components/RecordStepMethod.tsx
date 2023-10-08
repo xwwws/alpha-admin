@@ -18,8 +18,9 @@ const RecordStepMethod: React.FC<IProps> = (props) => {
   const {method,index} = props
   // 步骤信息
   const descriptionInfo: DescriptionsProps[`items`] = [
-    { key: '1', label: 'action', children: method.action },
-    { key: '2', label: 'args', children: method.args.join(',') ,span:2},
+    { key: '1', label: 'action', children: method.action,span:3 },
+    { key: '1-1', label: '试剂名称', children: method.reagent_name,span:3 },
+    { key: '2', label: 'args', children: method.args.join(',') ,span:3},
     { key: '3', label: '开始时间', children: method.start_time },
     { key: '4', label: '结束时间', children: method.end_time ,span:2},
     { key: '5', label: '结果', children: method.result.map((item,index) => (

@@ -177,13 +177,13 @@ const Index: React.FC = () => {
       </Form.Item>
 
       <Form.Item style={formItemStyle} name="speed" label="速度" rules={formRules.speed}>
-        <Input addonAfter="cm" />
+        <Input addonAfter="ul/s" />
       </Form.Item>
       <Form.Item style={formItemStyle} name="weight" label="比重" rules={formRules.weight}>
-        <Input addonAfter="cm" />
+        <Input addonAfter="mm" />
       </Form.Item>
       <Form.Item style={formItemStyle} name="accuracy" label="精确度" rules={formRules.accuracy}>
-        <Input addonAfter="cm" />
+        <Input addonAfter="mm" />
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 4 }}>

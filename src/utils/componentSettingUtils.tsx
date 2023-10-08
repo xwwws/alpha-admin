@@ -27,7 +27,7 @@ interface TRenderTime {
  * @param fmtString
  * @return TRenderTime
  */
-export const tableTimeRender = (fmtString:string = 'YYYY-MM-DD hh:mm:ss'):TRenderTime => {
+export const tableTimeRender = (fmtString:string = 'YYYY-MM-DDThh:mm:ss'):TRenderTime => {
   return (text:string):ReactNode => {
     return <span>{dayjs(text).format(fmtString)}</span>;
   }

@@ -73,12 +73,17 @@ const StepHis: React.FC<IProps> = (props) => {
     },
   ]);
   const requestMethod = async (params: any) => {
-    const res = await getStepHis(stepMode, {
+
+    const paramsData:API.Steps.GetStepHisReq = {
       page: params.current,
       page_size: params.pageSize,
-      start_time_before: dayjs(params.start_time_before).format('YYYY-MM-DD hh:mm:ss'),
-      start_time_after: dayjs(params.start_time_after).format('YYYY-MM-DD hh:mm:ss'),
-    });
+    }
+    if(params.start_time_before && params.start_time_after) {
+      paramsData.start_time_before = dayjs(params.start_time_before).format('YYYY-MM-DDThh:mm:ss')
+      paramsData.start_time_after = dayjs(params.start_time_after).format('YYYY-MM-DDThh:mm:ss')
+    }
+
+    const res = await getStepHis(stepMode, paramsData);
     return { data: res.data.data, success: true, total: res.data.total };
   };
   return (

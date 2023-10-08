@@ -103,28 +103,28 @@ const AddSolid: React.FC<IProps> = (props) => {
           </Form.Item>
         </Col>
         <Col span={8}>
-          <Form.Item name={[name, 'speed']} label="速度" rules={formRules.speed}>
-            <Input />
+          <Form.Item name={[name, 'speed']} labelCol={{span:10}} label="速度" rules={formRules.speed}>
+            <Input addonAfter="g/s" />
           </Form.Item>
         </Col>
         <Col span={8}>
-          <Form.Item name={[name, 'weight']} label="比重" rules={formRules.weight}>
-            <Input />
+          <Form.Item name={[name, 'weight']} labelCol={{span:10}} label="质量" rules={formRules.weight}>
+            <Input addonAfter="g" />
           </Form.Item>
         </Col>
         <Col span={8}>
-          <Form.Item name={[name, 'tolerance']} label="精确度" rules={formRules.tolerance}>
-            <Input />
+          <Form.Item name={[name, 'tolerance']} labelCol={{span:10}} label="精确度" rules={formRules.tolerance}>
+            <Input addonAfter="%" />
           </Form.Item>
         </Col>
         <Col span={8}>
-          <Form.Item name={[name, 'height']} label="高度" rules={formRules.height}>
-            <Input addonAfter="cm" />
+          <Form.Item name={[name, 'height']} labelCol={{span:10}} label="高度" rules={formRules.height}>
+            <Input addonAfter="mm" />
           </Form.Item>
         </Col>
         <Col span={8}>
-          <Form.Item name={[name, 'angel']} label="角度" rules={formRules.angel}>
-            <Input addonAfter="°" />
+          <Form.Item name={[name, 'angel']} labelCol={{span:10}} label="角度" rules={formRules.angel}>
+            <Input addonAfter="rad" />
           </Form.Item>
         </Col>
       </Row>

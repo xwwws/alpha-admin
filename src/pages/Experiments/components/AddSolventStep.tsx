@@ -94,17 +94,17 @@ const AddSolventStep: React.FC<IProps> = (props) => {
 
         <Col span={8}>
           <Form.Item name={[name, 'speed']} label="速度" rules={formRules.speed}>
-            <Input addonAfter="cm" />
+            <Input addonAfter="mm/s" />
           </Form.Item>
         </Col>
-        <Col span={8}>
-          <Form.Item name={[name, 'weight']} label="比重" rules={formRules.weight}>
-            <Input addonAfter="cm" />
+        <Col span={6}>
+          <Form.Item name={[name, 'weight']} labelCol={{span:10}} label="容积" rules={formRules.weight}>
+            <Input addonAfter="ml" />
           </Form.Item>
         </Col>
-        <Col span={8}>
+        <Col span={10}>
           <Form.Item name={[name, 'accuracy']} label="精确度" rules={formRules.accuracy}>
-            <Input addonAfter="cm" />
+            <Input addonAfter="%" />
           </Form.Item>
         </Col>
       </Row>

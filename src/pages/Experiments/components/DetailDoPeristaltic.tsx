@@ -19,6 +19,12 @@ const DetailAddSolvent: React.FC<IProps> = (props) => {
       children: steps.find((item) => item.value === record.name)?.label,
       span: 4,
     },
+    {
+      key: '1-1',
+      label: '试剂名称',
+      children: record.reagent_name,
+      span: 4,
+    },
     { key: '2', label: '托盘区域', children: record.kwargs.src_area?.name },
     { key: '3', label: 'x', children: record.kwargs.src_area?.x },
     { key: '4', label: 'y', children: record.kwargs.src_area?.y },
@@ -27,9 +33,9 @@ const DetailAddSolvent: React.FC<IProps> = (props) => {
     { key: '7', label: 'x', children: record.kwargs.dst_area?.x },
     { key: '8', label: 'y', children: record.kwargs.dst_area?.y },
     { key: '9', label: 'z', children: record.kwargs.dst_area?.z },
-    { key: '10', label: '速度', children: record.kwargs.speed },
-    { key: '11', label: '比重', children: record.kwargs.weight },
-    { key: '12', label: '精确度', children: record.kwargs.accuracy },
+    { key: '10', label: '速度', children:  `${ record.kwargs.speed } ul/s` },
+    { key: '11', label: '质量', children:  `${ record.kwargs.weight } g` },
+    { key: '12', label: '精确度', children: `${ record.kwargs.accuracy } %` },
   ];
   return (
     <>

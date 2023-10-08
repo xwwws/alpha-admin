@@ -54,8 +54,8 @@ declare namespace API {
     }
 
     interface GetMethodHisByMethodReq extends PagesReq {
-      start_time_after: string;
-      start_time_before: string;
+      start_time_after?: string;
+      start_time_before?: string;
 
     }
     interface GetMethodStatisticsByMethods {
@@ -235,6 +235,8 @@ declare namespace API {
   declare namespace Steps {
     interface getMethodsByStepId {
       id: number | string;
+      reagent_id: number | string;
+      reagent_name: number | string;
       start_time: string;
       end_time: string;
       action: string;
@@ -252,8 +254,8 @@ declare namespace API {
     }
 
     interface GetStepHisReq extends PagesReq {
-      start_time_before: string;
-      start_time_after: string;
+      start_time_before?: string;
+      start_time_after?: string;
     }
 
     interface StepHis {
@@ -361,6 +363,7 @@ declare namespace API {
       name: string;
       data_acquisitions?: IAcquisitions[];
       reagent_id?: string | number;
+      reagent_name?: string | number;
       kwargs: AddSolid & Pipette & AddSolvent & Mix3Step & DoPeristalticStep;
     }
 

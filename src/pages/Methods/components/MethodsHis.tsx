@@ -37,7 +37,7 @@ const MethodsHis: React.FC<IProps> = (props) => {
   // 指令数据统计表单提交
   const formFinish = (values: any) => {
     if (values.time) {
-      setStatisticsForm([ dayjs(values.time[0]).format('YYYY-MM-DD hh:mm:ss'), dayjs(values.time[1]).format('YYYY-MM-DD hh:mm:ss') ]);
+      setStatisticsForm([ dayjs(values.time[0]).format('YYYY-MM-DDThh:mm:ss'), dayjs(values.time[1]).format('YYYY-MM-DDThh:mm:ss') ]);
     } else {
       setStatisticsForm([ '', '' ]);
     }
@@ -47,6 +47,7 @@ const MethodsHis: React.FC<IProps> = (props) => {
   useEffect(() => {
     const getStatistics = async () => {
       const params: API.Methods.GetMethodStatisticsByMethods = {};
+
       if (statisticsForm[0] && statisticsForm[1]) {
         params.start_time_before = statisticsForm[0];
         params.start_time_after = statisticsForm[1];
@@ -112,12 +113,16 @@ const MethodsHis: React.FC<IProps> = (props) => {
   ]);
   // 获取table数据
   const requestMethod = async (params: any) => {
-    const res = await getMethodHisByMethods(methodMode, {
+
+    const paramsData:API.Methods.GetMethodHisByMethodReq = {
       page: params.current,
       page_size: params.pageSize,
-      start_time_before: dayjs(params.start_time_before).format('YYYY-MM-DD hh:mm:ss'),
-      start_time_after: dayjs(params.start_time_after).format('YYYY-MM-DD hh:mm:ss'),
-    });
+    }
+    if(params.start_time_before && params.start_time_after) {
+      paramsData.start_time_before = dayjs(params.start_time_before).format('YYYY-MM-DDThh:mm:ss')
+      paramsData.start_time_after = dayjs(params.start_time_after).format('YYYY-MM-DDThh:mm:ss')
+    }
+    const res = await getMethodHisByMethods(methodMode, paramsData);
     return { data: res.data.data, success: true, total: res.data.total };
   };
   return (
