@@ -16,7 +16,8 @@ const MethodsHisStyle = styled.div`
 `;
 const StatisticsWarpStyle = styled.div`
   margin: 0 auto 20px;
-  .form{
+
+  .form {
     margin-bottom: 20px;
   }
 `;
@@ -30,31 +31,31 @@ const MethodsHis: React.FC<IProps> = (props) => {
   });
 
   // 指令数据统计搜索框
-  const [ statisticsForm, setStatisticsForm ] = useState<any[]>(['','']);
-  const [form] = Form.useForm()
+  const [ statisticsForm, setStatisticsForm ] = useState<any[]>([ '', '' ]);
+  const [ form ] = Form.useForm();
 
   // 指令数据统计表单提交
-  const formFinish = (values:any) => {
-    if(values.time) {
-      setStatisticsForm([dayjs(values.time[0]).format('YYYY-MM-DD hh:mm:ss'),dayjs(values.time[1]).format('YYYY-MM-DD hh:mm:ss')])
+  const formFinish = (values: any) => {
+    if (values.time) {
+      setStatisticsForm([ dayjs(values.time[0]).format('YYYY-MM-DD hh:mm:ss'), dayjs(values.time[1]).format('YYYY-MM-DD hh:mm:ss') ]);
     } else {
-      setStatisticsForm(['',''])
+      setStatisticsForm([ '', '' ]);
     }
-  }
+  };
 
   // 获取指令数据统计
   useEffect(() => {
     const getStatistics = async () => {
-      const params:API.Methods.GetMethodStatisticsByMethods = {}
-      if(statisticsForm[0] && statisticsForm[1]) {
-        params.start_time_before = statisticsForm[0]
-        params.start_time_after = statisticsForm[1]
+      const params: API.Methods.GetMethodStatisticsByMethods = {};
+      if (statisticsForm[0] && statisticsForm[1]) {
+        params.start_time_before = statisticsForm[0];
+        params.start_time_after = statisticsForm[1];
       }
       const res = await getMethodStatisticsByMethods(methodMode, params);
       setStatistics(res.data);
     };
     getStatistics();
-  }, [statisticsForm]);
+  }, [ statisticsForm ]);
 
   // table columns
   const columns: ProColumns<API.Methods.MethodHis>[] = formatColumns<API.Methods.MethodHis>([
@@ -74,7 +75,7 @@ const MethodsHis: React.FC<IProps> = (props) => {
         }
       },
       render: (text, record) => {
-        return record.start_time
+        return record.start_time;
       }
     },
     { title: '结束时间', dataIndex: 'end_time' },
@@ -114,24 +115,24 @@ const MethodsHis: React.FC<IProps> = (props) => {
     const res = await getMethodHisByMethods(methodMode, {
       page: params.current,
       page_size: params.pageSize,
-      start_time_before: params.start_time_before,
-      start_time_after: params.start_time_after,
+      start_time_before: dayjs(params.start_time_before).format('YYYY-MM-DD hh:mm:ss'),
+      start_time_after: dayjs(params.start_time_after).format('YYYY-MM-DD hh:mm:ss'),
     });
     return { data: res.data.data, success: true, total: res.data.total };
   };
   return (
     <MethodsHisStyle>
       <StatisticsWarpStyle>
-        <Card title={'指令执行数据统计'}  size={'small'}>
+        <Card title={'指令执行数据统计'} size={'small'}>
           <div className="form">
             <Form layout="inline" form={form} onFinish={formFinish}>
               <Form.Item label={'指令执行时间'} name={'time'}>
                 <DatePicker.RangePicker
                   showTime
-                  placeholder={['开始时间', '结束时间']}
+                  placeholder={[ '开始时间', '结束时间' ]}
                 />
               </Form.Item>
-              <Form.Item >
+              <Form.Item>
                 <Button type={"primary"} htmlType={"submit"}>查询</Button>
               </Form.Item>
             </Form>

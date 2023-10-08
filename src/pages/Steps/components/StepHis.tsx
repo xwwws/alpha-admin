@@ -6,6 +6,7 @@ import { getStepHis } from "@/api/steps";
 import { formatColumns } from "@/utils/componentSettingUtils";
 import { experimentStatesMap, expState2ValueEnum } from "@/utils/dataMaps";
 import StepHisContent from './StepHisContent';
+import dayjs from 'dayjs';
 
 interface IProps {
   stepMode: string; //  API.Steps.StepName
@@ -34,7 +35,7 @@ const StepHis: React.FC<IProps> = (props) => {
       dataIndex: 'start_time',
       valueType: 'dateTimeRange',
       render: (text, record) => {
-        return record.start_time
+        return record.start_time;
       },
       search: {
         transform: (value: any) => {
@@ -75,8 +76,8 @@ const StepHis: React.FC<IProps> = (props) => {
     const res = await getStepHis(stepMode, {
       page: params.current,
       page_size: params.pageSize,
-      start_time_before: params.start_time_before,
-      start_time_after: params.start_time_after,
+      start_time_before: dayjs(params.start_time_before).format('YYYY-MM-DD hh:mm:ss'),
+      start_time_after: dayjs(params.start_time_after).format('YYYY-MM-DD hh:mm:ss'),
     });
     return { data: res.data.data, success: true, total: res.data.total };
   };
