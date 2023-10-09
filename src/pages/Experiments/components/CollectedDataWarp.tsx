@@ -46,7 +46,6 @@ const CollectedDataWarp: React.FC<IProps> = (props) => {
   const openUrl = (file_url: string) => {
     const url = `${location.origin}/api/static/acquisitions/${file_url}`
     window.open(url, '_blank');
-    console.log('open url: ', url);
   };
   return (
     <CollectedDataWarpStyle>
