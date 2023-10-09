@@ -181,7 +181,7 @@ const Index: React.FC = () => {
             {searchModel}
           </MethodsView>
         </Card>
-        <MethodsHis methodMode={'methdMvSolid'}/>
+        <MethodsHis methodMode={'methdMvThing'}/>
       </PageContainer>
     </>
   );

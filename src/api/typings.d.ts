@@ -326,11 +326,12 @@ declare namespace API {
 
     type ExperimentStepsRes = {
       id: string | number;
-      start_time: string
-      end_time: string
-      expt_id: number
-      reagent_id: number
-      status: string
+      start_time: string;
+      end_time: string;
+      reagent_name: string;
+      expt_id: number;
+      reagent_id: number;
+      status: string;
       content: {
         speed: string | number;
         weight: string | number;

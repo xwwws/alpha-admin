@@ -14,13 +14,21 @@ import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ActionType } from '@ant-design/pro-table';
 import { Button, Card, Popconfirm, Tooltip, message } from 'antd';
 import dayjs from 'dayjs';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'umi';
+import { getProjects } from "@/api/project";
+
+interface IProjectIdsMap {
+  [key: string]: {
+    text: string
+  };
+}
 
 const List: React.FC = () => {
   const tableRef = useRef<ActionType>();
   const [ messageApi, contextHolder ] = message.useMessage();
   const navigate = useNavigate();
+  const [ projectIdsMap, setProjectIdsMap ] = useState<IProjectIdsMap>({});
 
   /**
    * 执行实验
@@ -84,10 +92,12 @@ const List: React.FC = () => {
 
   };
 
-  const requestTableData = async (params: { pageSize: number; current: number }) => {
+  const requestTableData = async (params: { pageSize: number; current: number, project_id: number | string }) => {
+    console.log(params);
     const query = {
       page_size: params.pageSize,
       page: params.current,
+      project_id: params.project_id
     };
     const res = await getExperimentList(query);
     return {
@@ -99,6 +109,20 @@ const List: React.FC = () => {
       total: res.data.total,
     };
   };
+  useEffect(() => {
+    const getProjectIds = async () => {
+      const res = await getProjects({ page_size: 9999 });
+      const projects: IProjectIdsMap = {};
+      res.data.data.forEach(item => {
+        if (!projects[item.id]) {
+          projects[item.id] = { text: item.name };
+        }
+      });
+      console.log(projects);
+      setProjectIdsMap(projects);
+    };
+    getProjectIds();
+  }, []);
   const columns: ProColumns<API.Experiments.List>[] = [
     {
       hideInSearch: true,
@@ -127,9 +151,18 @@ const List: React.FC = () => {
       align: 'center',
     },
     {
-      hideInSearch: true,
+      hideInSearch: false,
       title: '项目',
       dataIndex: 'project_name',
+      valueType: 'select',
+      valueEnum: projectIdsMap,
+      search: {
+        transform: (value: any) => {
+          return {
+            project_id: value
+          };
+        }
+      },
       align: 'center',
     },
     {
@@ -167,7 +200,7 @@ const List: React.FC = () => {
       title: '操作',
       dataIndex: 'actions',
       align: 'center',
-      fixed:'right',
+      fixed: 'right',
       width: '180px',
       render: (text, record, index, action) => {
         return (
@@ -270,13 +303,12 @@ const List: React.FC = () => {
             pagination={{
               pageSize: 10,
             }}
-            search={false}
             actionRef={tableRef}
             columns={columns}
             options={false}
             rowKey="id"
             request={requestTableData}
-            scroll={ { x: 1300 } }
+            scroll={{ x: 1300 }}
           />
         </Card>
       </PageContainer>

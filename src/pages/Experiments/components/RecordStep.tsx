@@ -58,6 +58,7 @@ const RecordStep: React.FC<IProps> = (props) => {
         <Badge status={StepStatusMap[step.status]} text={step.status}/>
       ),
     },
+    { key: '2-1', label: '试剂名称', children: step.reagent_name, span: 2 },
     { key: '3', label: '开始时间', children: step.start_time },
     { key: '4', label: '结束时间', children: step.end_time },
     { key: '5', label: '计划量', children: `${step.quantity_plan} g` },
