@@ -143,10 +143,10 @@ const MethodsHis: React.FC<IProps> = (props) => {
             </Form>
           </div>
           <Descriptions colon={false} column={24}>
-            <Descriptions.Item span={12} label={'执行次数:'}>
+            <Descriptions.Item span={12} label={'执行次数'}>
               {statistics.times}
             </Descriptions.Item>
-            <Descriptions.Item span={12} label={'运行时长:'}>
+            <Descriptions.Item span={12} label={'运行时长'}>
               {statistics.duration}
             </Descriptions.Item>
           </Descriptions>

@@ -21,14 +21,13 @@ const RecordItem: React.FC<IProps> = (props) => {
   const descriptionInfo: DescriptionsProps[`items`] = [
     {
       key: 'collectedData-1',
-      label: '采集数据:',
+      label: '采集数据',
       children: (
         <div>
           {/* @ts-ignore*/}
-          {record?.data_acquisitions.map(item => {
-            return <p>nodeid: {item.nodeid} interval: {item.interval}</p>
-            }
-          )}
+          {record?.data_acquisitions?.map((item,index) => (
+            <p key={index}>nodeid: {item.nodeid} interval: {item.interval}</p>
+          ))}
         </div>
       ),
     },

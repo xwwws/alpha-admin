@@ -46,12 +46,12 @@ export const cancelExperimentById = (id: string | number, data?: object | undefi
 /**
  * 查询实验详情
  * @param id string
- * @param data {} object
+ * @param params {} object
  */
-export const getExperimentDetailsById = (id: string | number, data?: object | undefined) => {
+export const getExperimentDetailsById = (id: string | number, params?: { sibling?: string }) => {
   return request<Response<API.Experiments.ExperimentDetailsRes>>(`/api/v1/expt/expts/${id}`, {
     method: 'get',
-    data,
+    params,
   });
 };
 
@@ -71,13 +71,14 @@ export const getExperimentLogsById = (id: string | number, data?: object | undef
 /**
  * 根据实验id获取步骤信息
  * @param id string
+ * @param params
  */
-export const getStepsByExperimentId = (id: string | number) => {
-  return request<Response<API.Experiments.ExperimentStepsRes[]>>(`/api/v1/expt/expts/${id}/steps`, {
+export const getStepsByExperimentId = (id: string | number, params?: { sibling?: string }) => {
+  return request<Response<API.Experiments.ExperimentStepsRes>>(`/api/v1/expt/expts/${id}/steps`, {
     method: 'get',
+    params
   });
 };
-
 
 
 /**
@@ -92,3 +93,15 @@ export const deleteExperiment = (expt_id: string | number) => {
     }
   );
 };
+
+/**
+ * 更新实验备注
+ * @param expt_id
+ * @param data
+ */
+export const updateDescription = (expt_id: string | number,data: {description: string}) => {
+  return request<Response<any>>(`/api/v1/expt/expts/${expt_id}/description`,{
+    method: 'put',
+    data
+  })
+}

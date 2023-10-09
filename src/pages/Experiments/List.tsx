@@ -8,6 +8,7 @@ import {
   OrderedListOutlined,
   StopOutlined,
   DeleteOutlined,
+  EditOutlined,
 } from '@ant-design/icons';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
@@ -17,6 +18,7 @@ import dayjs from 'dayjs';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'umi';
 import { getProjects } from "@/api/project";
+import EditExpDesc from "@/pages/Experiments/components/EditExpDesc";
 
 interface IProjectIdsMap {
   [key: string]: {
@@ -29,6 +31,8 @@ const List: React.FC = () => {
   const [ messageApi, contextHolder ] = message.useMessage();
   const navigate = useNavigate();
   const [ projectIdsMap, setProjectIdsMap ] = useState<IProjectIdsMap>({});
+  const [ curExpId, setCurExpId ] = useState<string | number>('');
+  const [ isShowEditDescModal, setIsShowEditDescModal ] = useState<boolean>(false);
 
   /**
    * 执行实验
@@ -93,7 +97,6 @@ const List: React.FC = () => {
   };
 
   const requestTableData = async (params: { pageSize: number; current: number, project_id: number | string }) => {
-    console.log(params);
     const query = {
       page_size: params.pageSize,
       page: params.current,
@@ -118,11 +121,18 @@ const List: React.FC = () => {
           projects[item.id] = { text: item.name };
         }
       });
-      console.log(projects);
       setProjectIdsMap(projects);
     };
     getProjectIds();
   }, []);
+
+  const editExpDesc = (record: API.Experiments.List) => {
+    const { id } = record;
+    setCurExpId(id);
+    setIsShowEditDescModal(true);
+
+
+  };
   const columns: ProColumns<API.Experiments.List>[] = [
     {
       hideInSearch: true,
@@ -194,6 +204,29 @@ const List: React.FC = () => {
       title: '试剂瓶高度',
       dataIndex: 'bottle_height',
       align: 'center',
+    },
+    {
+      hideInSearch: true,
+      title: '备注',
+      width: '300',
+      dataIndex: 'description',
+      align: 'center',
+      render: (text, record) => {
+        return <>
+          <div>
+            {text || ''}
+            <Tooltip placement="top" title="编辑备注">
+              <Button
+                type={'link'}
+                size={'small'}
+                icon={<EditOutlined/>}
+                onClick={() => editExpDesc(record)}
+              />
+            </Tooltip>
+          </div>
+
+        </>;
+      }
     },
     {
       hideInSearch: true,
@@ -308,10 +341,19 @@ const List: React.FC = () => {
             options={false}
             rowKey="id"
             request={requestTableData}
-            scroll={{ x: 1300 }}
+            scroll={{ x: 1600 }}
           />
         </Card>
       </PageContainer>
+      <EditExpDesc
+        onCancel={() => setIsShowEditDescModal(false)}
+        onSuccess={() => {
+          setIsShowEditDescModal(false)
+          tableRef.current?.reload();
+        }}
+        expId={curExpId}
+        isShow={isShowEditDescModal}
+      />
     </>
   );
 };

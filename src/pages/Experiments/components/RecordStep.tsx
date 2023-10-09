@@ -8,7 +8,7 @@ import RecordStepMethod from "@/pages/Experiments/components/RecordStepMethod";
 import CollectedDataWarp from "@/pages/Experiments/components/CollectedDataWarp";
 
 interface IProps {
-  step: API.Experiments.ExperimentStepsRes;
+  step: API.Experiments.ExperimentStepsResItem;
   index: number;
 
   [key: string]: any;

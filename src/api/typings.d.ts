@@ -1,4 +1,3 @@
-
 declare interface Response<T> {
   code: number;
   data: T;
@@ -58,6 +57,7 @@ declare namespace API {
       start_time_before?: string;
 
     }
+
     interface GetMethodStatisticsByMethods {
       start_time_after?: string;
       start_time_before?: string;
@@ -72,6 +72,7 @@ declare namespace API {
       args: (string | number)[];
       result: string[];
     }
+
     interface MethodStatistics {
       duration: number | string;
       times: number | string;
@@ -311,7 +312,8 @@ declare namespace API {
       steps_data: CreateExperimentStep[];
       status: string;
       data_acquisitions: data_acquisitionParams[];
-      data_acquisitions_results: DataAcquisitionsResults[]
+      data_acquisitions_results: DataAcquisitionsResults[];
+      description: string;
     };
 
     type ExperimentRecordRes = {
@@ -324,7 +326,12 @@ declare namespace API {
       result: any[];
     };
 
-    type ExperimentStepsRes = {
+    interface ExperimentStepsRes {
+      id: string | number;
+      step_data: ExperimentStepsResItem[];
+    }
+
+    type ExperimentStepsResItem = {
       id: string | number;
       start_time: string;
       end_time: string;

@@ -10,27 +10,27 @@ interface IProps {
 
   [key: string]: any;
 }
+
 const CollectedDataStyle = styled.div`
 
 
-`
+`;
 const ChartBox = styled.div`
   width: 100%;
   height: 400px;
-`
+`;
 
 const CollectedData: React.FC<IProps> = (props) => {
 
   const { data } = props;
   const chartRef = useRef(null);
-
   const drawChart = () => {
     const color = '#2fc49a';
     const myChart = echarts.init(chartRef.current);
 
     const echartsOption: ECOption = {
       title: {
-        text: `${data.name[0]} 信息`,
+        text: data.name ? `${data.name[0]} 信息` : '暂无信息',
         left: 'center',
         textStyle: {
           fontSize: "15",
@@ -51,14 +51,14 @@ const CollectedData: React.FC<IProps> = (props) => {
       xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: data.server_time.map((item: string) => dayjs(item as string).format('MM/DD hh:mm:ss'))
+        data: data.server_time ? data.server_time.map((item: string) => dayjs(item as string).format('MM/DD hh:mm:ss')) : []
       },
       yAxis: {
         type: 'value'
       },
       series: [
         {
-          data: data.value.map((item:string) => Number(item as string)),
+          data: data.value ? data.value.map((item: string) => Number(item as string)) : [],
           type: 'line',
           itemStyle: {
             // @ts-ignore
@@ -108,8 +108,8 @@ const CollectedData: React.FC<IProps> = (props) => {
     myChart.setOption(echartsOption);
   };
   useEffect(() => {
-    drawChart()
-  }, [data]);
+    drawChart();
+  }, [ data ]);
   return (
     <CollectedDataStyle>
       <ChartBox ref={chartRef}/>

@@ -51,7 +51,7 @@ const CollectedDataWarp: React.FC<IProps> = (props) => {
     <CollectedDataWarpStyle>
       <div className="title">数据采集信息</div>
       {collectedDataList.map((item,index) => {
-        return <Card hoverable>
+        return <Card hoverable key={index}>
           <div className="downloadWarp">
             <Button icon={<DownloadOutlined/>} onClick={() => openUrl(collected_data[index].file_url)}>下载</Button>
           </div>
