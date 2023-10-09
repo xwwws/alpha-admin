@@ -6,6 +6,7 @@ import { StepStatusMap } from "@/utils/dataMaps";
 import { getMethodsByStepId } from "@/api/steps";
 import RecordStepMethod from "@/pages/Experiments/components/RecordStepMethod";
 import CollectedDataWarp from "@/pages/Experiments/components/CollectedDataWarp";
+import { CalculateDuration } from "@/utils";
 
 interface IProps {
   step: API.Experiments.ExperimentStepsResItem;
@@ -17,13 +18,16 @@ interface IProps {
 const RecordStyle = styled.div`
   display: grid;
   gap: 10px;
+
   .descriptions {
     padding: 10px 80px;
   }
-  .collectedDataWarp{
+
+  .collectedDataWarp {
     width: 85%;
     margin: 0 auto;
   }
+
   .methods {
     width: 85%;
     margin: 0 auto;
@@ -61,6 +65,7 @@ const RecordStep: React.FC<IProps> = (props) => {
     { key: '2-1', label: '试剂名称', children: step.reagent_name, span: 2 },
     { key: '3', label: '开始时间', children: step.start_time },
     { key: '4', label: '结束时间', children: step.end_time },
+    { key: '4-1', label: '运行时长', children: CalculateDuration(step.start_time, step.end_time), span: 2 },
     { key: '5', label: '计划量', children: `${step.quantity_plan} g` },
     { key: '6', label: '实际量', children: `${step.quantity_real} g` },
   ];
