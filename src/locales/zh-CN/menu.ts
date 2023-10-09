@@ -1,5 +1,6 @@
 export default {
   'menu.login': '登录页',
+  'menu.changePwd': '修改密码',
   'menu.welcome': '欢迎',
   'menu.methods': '实验指令',
   'menu.methods.read': '读值',

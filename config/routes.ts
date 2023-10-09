@@ -4,6 +4,7 @@ import { reagents } from './routes/reagents';
 import { steps } from './routes/steps';
 import { trays } from './routes/trays';
 import { project } from "./routes/project";
+import { account } from "./routes/accounts";
 
 // 文档地址  https://v3.umijs.org/zh-CN/plugins/plugin-layout
 //config/route.ts
@@ -52,6 +53,12 @@ export default [
         path: '/user/login',
         component: './User/Login',
       },
+    ],
+  },
+  {
+    path: '/account',
+    routes: [
+      ...account
     ],
   },
   {

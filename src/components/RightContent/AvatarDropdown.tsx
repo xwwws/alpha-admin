@@ -72,7 +72,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
           loginOut();
           break;
         default:
-          history.push(`/account/${key}`);
+          history.push(`${key}`);
       }
     },
     [setInitialState],
@@ -105,14 +105,9 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu, childre
     ...(menu
       ? [
           {
-            key: 'center',
+            key: '/account/change-pwd',
             icon: <UserOutlined />,
-            label: '个人中心',
-          },
-          {
-            key: 'settings',
-            icon: <SettingOutlined />,
-            label: '个人设置',
+            label: '修改密码',
           },
           {
             type: 'divider' as const,

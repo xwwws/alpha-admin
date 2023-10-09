@@ -13,14 +13,21 @@ export const login = (data: API.UserLoginReq): Promise<Response<API.UserLoginRes
 /**
  * 退出登录
  */
-export const outLogin = (): Promise<Response<API.LogoutReq>> => {
+export const outLogin = (): any => {
   return Promise.resolve({
     status: 'ok',
     code: 200,
     data: {},
   });
-  // return request<API.MethodsRes>(`/api/user/info`, {
-  //   method: 'post',
-  //   data,
-  // });
 };
+
+/**
+ * 修改密码
+ * @param data
+ */
+export const changePass = (data: {passwd:string}) => {
+  return request<any>('/api/v1/auth/changepass',{
+    method: 'post',
+    data
+  })
+}
