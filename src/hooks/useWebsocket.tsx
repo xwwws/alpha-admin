@@ -57,7 +57,11 @@ const useWebsocket = () => {
 
   const socketInit = () => {
     try {
-      const url = `${webSocketUrl}/ws/sub`;
+      let url = `ws://${location.host}/ws/sub`;
+      // 本地环境连接从 config 环境变量配置
+      if(REACT_APP_ENV === 'dev') {
+        url = `${webSocketUrl}/ws/sub`;
+      }
       const socketObj = new WebSocket(url);
       socketObj.addEventListener("open", socketOnOpen);
       socketObj.addEventListener("close", socketOnClose);

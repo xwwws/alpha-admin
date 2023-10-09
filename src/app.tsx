@@ -5,9 +5,12 @@ import type { RunTimeLayoutConfig } from 'umi';
 import { history } from 'umi';
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
-console.log('env',process.env)
-console.log('WS_URL',WS_URL)
-console.log('BASE_URL',BASE_URL)
+
+console.log(REACT_APP_ENV);
+if(REACT_APP_ENV === 'dev') {
+  console.log('WS_URL',WS_URL)
+  console.log('BASE_URL',BASE_URL)
+}
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';

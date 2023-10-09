@@ -1,5 +1,6 @@
 
 const { REACT_APP_ENV } = process.env;
+console.log(REACT_APP_ENV);
 export default  {
   define: {
     REACT_APP_ENV,
