@@ -27,7 +27,7 @@ const RecordStepMethod: React.FC<IProps> = (props) => {
     { key: '2', label: 'args', children: method.args.join(','), span: 3 },
     { key: '3', label: '开始时间', children: method.start_time },
     { key: '4', label: '结束时间', children: method.end_time, span: 2 },
-    { key: '4-1', label: '运行时长', children: CalculateDuration(method.start_time, method.end_time), span: 3 },
+    { key: '4-1', label: '运行时长', children: method.duration, span: 3 },
     {
       key: '5', label: '结果', children: method.result.map((item, index) => (
         <TagWarp key={index}>

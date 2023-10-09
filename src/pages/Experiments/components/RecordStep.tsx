@@ -65,7 +65,7 @@ const RecordStep: React.FC<IProps> = (props) => {
     { key: '2-1', label: '试剂名称', children: step.reagent_name, span: 2 },
     { key: '3', label: '开始时间', children: step.start_time },
     { key: '4', label: '结束时间', children: step.end_time },
-    { key: '4-1', label: '运行时长', children: CalculateDuration(step.start_time, step.end_time), span: 2 },
+    { key: '4-1', label: '运行时长', children: step.duration, span: 2 },
     { key: '5', label: '计划量', children: `${step.quantity_plan} g` },
     { key: '6', label: '实际量', children: `${step.quantity_real} g` },
   ];

@@ -238,6 +238,7 @@ declare namespace API {
       id: number | string;
       reagent_id: number | string;
       reagent_name: number | string;
+      duration: string;
       start_time: string;
       end_time: string;
       action: string;
@@ -335,6 +336,7 @@ declare namespace API {
       id: string | number;
       start_time: string;
       end_time: string;
+      duration: string;
       reagent_name: string;
       expt_id: number;
       reagent_id: number;
