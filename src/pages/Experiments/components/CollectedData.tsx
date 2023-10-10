@@ -57,7 +57,7 @@ const CollectedData: React.FC<IProps> = (props) => {
       },
       series: [
         {
-          data: data.value ? data.value.map((item: string) => Number(item as string)) : [],
+          data: data.value ? data.value.map((item: string) => Math.round(Number(item as string) * 1000) / 1000) : [],
           type: 'line',
           itemStyle: {
             // @ts-ignore
