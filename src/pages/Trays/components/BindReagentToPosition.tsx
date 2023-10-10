@@ -41,7 +41,6 @@ const BindReagentToPosition: React.FC<IProps> = (props) => {
     })();
   }, []);
   useEffect(() => {
-    console.log(trayPositionInfo);
     form.setFieldsValue({
       reagent_id: trayPositionInfo.reagent_id || '',
       quantity: trayPositionInfo.quantity || '',

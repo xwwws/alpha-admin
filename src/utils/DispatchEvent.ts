@@ -33,7 +33,6 @@ class DispatchEvent implements Event {
 
   }
   off(name:string, cb:Function){
-    console.log('off', name);
     let events = this.events[name]
     if(events && cb){
       let index = events.findIndex(event=> event === cb)

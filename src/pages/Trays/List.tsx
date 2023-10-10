@@ -59,7 +59,6 @@ const List: React.FC<IProps> = (props) => {
   }, []);
 
   const handleBindReagent = (item: API.Trays.positions) => {
-    console.log(item);
     setTrayPositionInfo({
       id: item.id,
       reagent_name: item.reagent_name,

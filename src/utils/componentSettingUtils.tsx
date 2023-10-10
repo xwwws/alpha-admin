@@ -14,7 +14,7 @@ export function formatColumns<T>(columns: ProColumns<T>[]): ProColumns<T>[] {
       ...item
     }
   })
-  // TODO log table columns
+  // log table columns
   // console.log(result);
   return result
 }

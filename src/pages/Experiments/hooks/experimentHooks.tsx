@@ -153,7 +153,6 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
         break;
     }
   });
-  console.log(params);
   return params;
 };
 
