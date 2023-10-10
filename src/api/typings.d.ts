@@ -286,6 +286,7 @@ declare namespace API {
       bottle_area: Coordinates;
       bottle_height: number;
       created_at: string;
+      description: string;
       id: string | number;
       name: string;
       status: string;

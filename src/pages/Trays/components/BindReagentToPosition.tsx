@@ -7,7 +7,12 @@ import React, { useEffect, useState } from 'react';
 interface IProps {
   isOpen: boolean;
   close: () => void;
-  trayPositionId: string | number;
+  trayPositionInfo: {
+    id: number | string;
+    reagent_name: string | number | undefined;
+    quantity?: string | number | undefined;
+    reagent_id?: string | number | undefined;
+  };
 
   [key: string]: any;
 }
@@ -17,7 +22,7 @@ const formRules: IForm.IFormRules = {
   unit: [{ required: true, message: '请填写单位' }],
 };
 const BindReagentToPosition: React.FC<IProps> = (props) => {
-  const { isOpen, trayPositionId, close, success } = props;
+  const { isOpen, trayPositionInfo, close, success } = props;
   const [form] = Form.useForm();
   const [reagents, setReagents] = useState<API.Reagents.List[]>([]);
   const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
@@ -25,7 +30,7 @@ const BindReagentToPosition: React.FC<IProps> = (props) => {
   const confirm = async () => {
     const value = await form.validateFields();
     setConfirmLoading(true);
-    await setReagentToPosition(trayPositionId, value);
+    await setReagentToPosition(trayPositionInfo.id, value);
     setConfirmLoading(false);
     success();
   };
@@ -35,6 +40,13 @@ const BindReagentToPosition: React.FC<IProps> = (props) => {
       setReagents(res.data.data);
     })();
   }, []);
+  useEffect(() => {
+    console.log(trayPositionInfo);
+    form.setFieldsValue({
+      reagent_id: trayPositionInfo.reagent_id || '',
+      quantity: trayPositionInfo.quantity || '',
+    })
+  }, [trayPositionInfo]);
   return (
     <>
       <Modal

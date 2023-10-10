@@ -13,15 +13,25 @@ interface IProps {
 }
 
 const List: React.FC<IProps> = (props) => {
-  const [areaTypes, setAreaTypes] = useState<any[]>([]);
-  const [caches, setCaches] = useState<any[]>([]);
-  const [trayLoading, setTrayLoading] = useState<boolean>(false);
-  const [trays, setTrays] = useState<API.Trays.positions[]>([]);
-  const [isShowBindModal, setIsShowBindModal] = useState<boolean>(false);
-  const [isShowAddModal, setIsShowAddModal] = useState<boolean>(false);
-  const [trayPositionId, setTrayPositionId] = useState<string | number>(0);
-  const [activeCache, setActiveCache] = useState<string>('');
-  const [messageApi, contextHolder] = message.useMessage();
+  const [ areaTypes, setAreaTypes ] = useState<any[]>([]);
+  const [ caches, setCaches ] = useState<any[]>([]);
+  const [ trayLoading, setTrayLoading ] = useState<boolean>(false);
+  const [ trays, setTrays ] = useState<API.Trays.positions[]>([]);
+  const [ isShowBindModal, setIsShowBindModal ] = useState<boolean>(false);
+  const [ isShowAddModal, setIsShowAddModal ] = useState<boolean>(false);
+  const [ trayPositionInfo, setTrayPositionInfo ] = useState<{
+    id: number | string;
+    reagent_name: string | number | undefined;
+    quantity?: string | number | undefined;
+    reagent_id?: string | number | undefined;
+  }>({
+    id: '',
+    reagent_name: '',
+    quantity: '',
+    reagent_id: '',
+  });
+  const [ activeCache, setActiveCache ] = useState<string>('');
+  const [ messageApi, contextHolder ] = message.useMessage();
 
   const handleCacheChange = async (key: string) => {
     setActiveCache(key);
@@ -49,8 +59,14 @@ const List: React.FC<IProps> = (props) => {
   }, []);
 
   const handleBindReagent = (item: API.Trays.positions) => {
+    console.log(item);
+    setTrayPositionInfo({
+      id: item.id,
+      reagent_name: item.reagent_name,
+      quantity: item.quantity,
+      reagent_id: item.reagent_id,
+    });
     setIsShowBindModal(true);
-    setTrayPositionId(item.id);
   };
 
   const handleDeleteReagent = async (item: API.Trays.positions) => {
@@ -84,7 +100,7 @@ const List: React.FC<IProps> = (props) => {
       extra={[
         <Button
           key={'add'}
-          icon={<PlusOutlined />}
+          icon={<PlusOutlined/>}
           type={'primary'}
           onClick={() => setIsShowAddModal(true)}
         >
@@ -118,7 +134,7 @@ const List: React.FC<IProps> = (props) => {
         <BindReagentToPosition
           isOpen={isShowBindModal}
           close={() => setIsShowBindModal(false)}
-          trayPositionId={trayPositionId}
+          trayPositionInfo={trayPositionInfo}
           success={bindSuccess}
         />
         {/*添加工位*/}

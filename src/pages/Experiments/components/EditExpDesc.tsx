@@ -4,7 +4,7 @@ import { updateDescription } from "@/api/experiments";
 
 interface IProps {
   isShow: boolean;
-  expId: string | number;
+  expInfo: { id: string | number, description: string };
   onCancel: () => void;
   onSuccess: () => void;
 
@@ -12,17 +12,17 @@ interface IProps {
 }
 
 const EditExpDesc: React.FC<IProps> = (props) => {
-  const { isShow, expId, onCancel,onSuccess } = props;
+  const { isShow, expInfo, onCancel, onSuccess } = props;
   const [ form ] = Form.useForm();
   const onOk = async () => {
     const formData = await form.validateFields();
-    const res = await updateDescription(expId, formData);
-    onSuccess()
+    await updateDescription(expInfo.id, formData);
+    onSuccess();
   };
 
   useEffect(() => {
-    console.log(expId);
-  }, [ isShow, expId ]);
+    form.setFieldsValue({ description: expInfo.description });
+  }, [ isShow, expInfo.description ]);
   return (
     <>
       <Modal
@@ -37,7 +37,7 @@ const EditExpDesc: React.FC<IProps> = (props) => {
           form={form}
           preserve={false}
         >
-          <Form.Item name={'description'} label={'备注'} rules={[ { required: true, message: '请填写备注信息' } ]}>
+          <Form.Item name={'description'} label={'备注'}>
             <Input.TextArea
               autoSize={{ minRows: 2, maxRows: 6 }}
               showCount

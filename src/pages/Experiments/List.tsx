@@ -31,7 +31,7 @@ const List: React.FC = () => {
   const [ messageApi, contextHolder ] = message.useMessage();
   const navigate = useNavigate();
   const [ projectIdsMap, setProjectIdsMap ] = useState<IProjectIdsMap>({});
-  const [ curExpId, setCurExpId ] = useState<string | number>('');
+  const [ activeExpEditRemark, setActiveExpEditRemark ] = useState<{ id: string | number, description: string }>({id:'',description:''});
   const [ isShowEditDescModal, setIsShowEditDescModal ] = useState<boolean>(false);
 
   /**
@@ -127,8 +127,10 @@ const List: React.FC = () => {
   }, []);
 
   const editExpDesc = (record: API.Experiments.List) => {
-    const { id } = record;
-    setCurExpId(id);
+    const { id, description } = record;
+    setActiveExpEditRemark({
+      id,description
+    });
     setIsShowEditDescModal(true);
 
 
@@ -348,10 +350,10 @@ const List: React.FC = () => {
       <EditExpDesc
         onCancel={() => setIsShowEditDescModal(false)}
         onSuccess={() => {
-          setIsShowEditDescModal(false)
+          setIsShowEditDescModal(false);
           tableRef.current?.reload();
         }}
-        expId={curExpId}
+        expInfo={activeExpEditRemark}
         isShow={isShowEditDescModal}
       />
     </>
