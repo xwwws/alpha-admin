@@ -41,3 +41,20 @@ export const CalculateDuration = (start: number | string, end: number | string):
   const duration = `${Math.floor(durationSecond / 60)} 分 ${durationSecond % 60} 秒`;
   return duration + '';
 };
+
+/**
+ * 数字四舍五入保留 {length} 个小数
+ * @param num 数字
+ * @param length  小数位数
+ * @constructor
+ */
+export const MathRound = (num: number, length: number = 2) => {
+  if (length <= 0) return num;
+  let multiple = 1;
+  let i = 0;
+  while (i < 2) {
+    multiple *= 10;
+    i++;
+  }
+  return Math.round(num * multiple) / multiple;
+};

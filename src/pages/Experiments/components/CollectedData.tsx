@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { ECOption } from "@/types/echart";
 import * as echarts from "echarts";
 import dayjs from 'dayjs';
+import { MathRound } from "@/utils";
 
 
 interface IProps {
@@ -57,7 +58,7 @@ const CollectedData: React.FC<IProps> = (props) => {
       },
       series: [
         {
-          data: data.value ? data.value.map((item: string) => Math.round(Number(item as string) * 1000) / 1000) : [],
+          data: data.value ? data.value.map((item: string) => MathRound(Number(item as string), 2)) : [],
           type: 'line',
           itemStyle: {
             // @ts-ignore
