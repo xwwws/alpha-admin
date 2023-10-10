@@ -51,7 +51,7 @@ const Record: React.FC<IProps> = (props) => {
           onPreOrNext={handlePrevOrNext}
         />
         {steps.map((item, index) => (
-          <RecordStep index={index} step={item}/>
+          <RecordStep key={index} index={index} step={item}/>
         ))}
 
       </Card>

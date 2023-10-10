@@ -467,7 +467,7 @@ declare namespace API {
    */
   declare namespace Projects {
     interface ListReq extends PagesReq {
-
+      [key: string]: any;
     }
 
     interface List {

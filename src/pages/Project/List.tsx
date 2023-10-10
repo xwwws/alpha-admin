@@ -76,6 +76,7 @@ const List: React.FC<IProps> = (props) => {
     <PageContainer
       extra={ [
         <Button
+          key={'create'}
           type="primary"
           icon={ <PlusOutlined/> }
           onClick={ () => navigate('/project/create') }

@@ -2,9 +2,9 @@
  * 发布订阅
  * */
 interface Event {
-  on: (name: string, cb: Function) => void,
+  on: (name: string, cb: () => void) => void,
   emit: (name: string, ...args: Array<any>) => void,
-  off: (name: string, cb: Function) => void,
+  off: (name: string, cb: () => void) => void,
 
 }
 
