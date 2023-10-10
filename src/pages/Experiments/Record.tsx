@@ -10,7 +10,7 @@ interface IProps {
   [key: string]: any;
 }
 
-const Record: React.FC<IProps> = (props) => {
+const Record: React.FC<IProps> = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
