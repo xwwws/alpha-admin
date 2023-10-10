@@ -37,7 +37,7 @@ const MethodsHis: React.FC<IProps> = (props) => {
   // 指令数据统计表单提交
   const formFinish = (values: any) => {
     if (values.time) {
-      setStatisticsForm([ dayjs(values.time[0]).format('YYYY-MM-DDThh:mm:ss'), dayjs(values.time[1]).format('YYYY-MM-DDThh:mm:ss') ]);
+      setStatisticsForm([ dayjs(values.time[0]).format('YYYY-MM-DDTHH:mm:ss'), dayjs(values.time[1]).format('YYYY-MM-DDTHH:mm:ss') ]);
     } else {
       setStatisticsForm([ '', '' ]);
     }
@@ -119,8 +119,8 @@ const MethodsHis: React.FC<IProps> = (props) => {
       page_size: params.pageSize,
     }
     if(params.start_time_before && params.start_time_after) {
-      paramsData.start_time_before = dayjs(params.start_time_before).format('YYYY-MM-DDThh:mm:ss')
-      paramsData.start_time_after = dayjs(params.start_time_after).format('YYYY-MM-DDThh:mm:ss')
+      paramsData.start_time_before = dayjs(params.start_time_before).format('YYYY-MM-DDTHH:mm:ss')
+      paramsData.start_time_after = dayjs(params.start_time_after).format('YYYY-MM-DDTHH:mm:ss')
     }
     const res = await getMethodHisByMethods(methodMode, paramsData);
     return { data: res.data.data, success: true, total: res.data.total };

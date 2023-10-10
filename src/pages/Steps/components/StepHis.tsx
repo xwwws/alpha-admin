@@ -79,8 +79,8 @@ const StepHis: React.FC<IProps> = (props) => {
       page_size: params.pageSize,
     }
     if(params.start_time_before && params.start_time_after) {
-      paramsData.start_time_before = dayjs(params.start_time_before).format('YYYY-MM-DDThh:mm:ss')
-      paramsData.start_time_after = dayjs(params.start_time_after).format('YYYY-MM-DDThh:mm:ss')
+      paramsData.start_time_before = dayjs(params.start_time_before).format('YYYY-MM-DDTHH:mm:ss')
+      paramsData.start_time_after = dayjs(params.start_time_after).format('YYYY-MM-DDTHH:mm:ss')
     }
 
     const res = await getStepHis(stepMode, paramsData);

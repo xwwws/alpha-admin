@@ -181,7 +181,7 @@ const List: React.FC = () => {
       dataIndex: 'created_at',
       align: 'center',
       render: (text, item, index) => {
-        return <span>{dayjs(text as string).format('YYYY-MM-DDThh:mm:ss')}</span>;
+        return <span>{dayjs(text as string).format('YYYY-MM-DDTHH:mm:ss')}</span>;
       },
     },
     {

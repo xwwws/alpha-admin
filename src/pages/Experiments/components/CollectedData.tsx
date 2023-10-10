@@ -21,7 +21,6 @@ const ChartBox = styled.div`
 `;
 
 const CollectedData: React.FC<IProps> = (props) => {
-
   const { data } = props;
   const chartRef = useRef(null);
   const drawChart = () => {
@@ -51,7 +50,7 @@ const CollectedData: React.FC<IProps> = (props) => {
       xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: data.server_time ? data.server_time.map((item: string) => dayjs(item as string).format('MM/DD hh:mm:ss')) : []
+        data: data.server_time ? data.server_time.map((item: string) => dayjs(item as string).format('MM/DD HH:mm:ss')) : []
       },
       yAxis: {
         type: 'value'
