@@ -97,9 +97,8 @@ const useWebsocket = () => {
     // 当前状态正在连接中 断开连接
     if (socketState === socketStatus.CONNECTING) {
       await disConnect();
-    } else {
-      await socketInit(url);
     }
+    await socketInit(url);
   }
 
   /**

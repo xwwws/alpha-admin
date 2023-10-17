@@ -8,8 +8,6 @@ import DispatchEvent from "@/utils/DispatchEvent";
 import { ECOption } from "@/types/echart";
 import * as echarts from "echarts";
 import dayjs from 'dayjs';
-import { useDispatch, useSelector } from 'react-redux';
-import { setReadXAxis, setReadSeries } from '@/redux/slices/readValueSlice';
 import MethodsHis from "@/pages/Methods/components/MethodsHis";
 import { webSocketUrl } from "@/utils";
 
@@ -27,11 +25,8 @@ const Index: React.FC = () => {
   const [ form ] = Form.useForm();
   const [ nodes, setNodes ] = useState<ITypes.EnumType[]>([]);
   const chartRef = useRef(null);
-  // @ts-ignore
-  const { readXAxis, readSeries } = useSelector(state => state.readValue);
-  const dispatch = useDispatch();
-  const XAxis: number[] = [];
-  const Series: string[] = [];
+  let XAxis: number[] = [];
+  let Series: string[] = [];
 
 
   let url = `ws://${location.host}/ws/sub`;
@@ -43,7 +38,7 @@ const Index: React.FC = () => {
   const initChart = () => {
     const color = '#2fc49a';
     const myChart = echarts.init(chartRef.current);
-
+    myChart.clear()
     const echartsOption: ECOption = {
       title: {
         text: "",
@@ -76,10 +71,10 @@ const Index: React.FC = () => {
           label: {
             show: true,
             position: 'top',
-            formatter: function (params) { // params 是当前数据项的参数
-              // @ts-ignore
-              return params.value[1]; // 显示 y 值
-            }
+            // @ts-ignore
+            // formatter: function (params) { // params 是当前数据项的参数
+            //   return params.value; // 显示 y 值
+            // }
           },
           // 折线图 线条颜色
           lineStyle: {
@@ -116,18 +111,24 @@ const Index: React.FC = () => {
   const drawChart = (msg: IMsgGet) => {
     XAxis.push(msg.value);
     Series.push(dayjs(msg.server_time).format("hh:mm:ss"));
-    dispatch(setReadXAxis([ ...readXAxis, msg.value ]));
-    dispatch(setReadSeries([ ...readSeries, dayjs(msg.server_time).format("hh:mm:ss") ]));
     // @ts-ignore
     const chartInstance = echarts.getInstanceByDom(chartRef.current);
-    chartInstance && chartInstance.setOption({
-      // title:{text: '123'},
+    const newOptions = {
       xAxis: { type: 'category', data: Series },
       yAxis: { type: 'value' },
       series: [ { type: 'line', data: XAxis } ]
-    });
+    };
+    console.log(Series);
+    console.log(XAxis);
+    chartInstance && chartInstance.setOption(newOptions);
   };
+
+  /**
+   * 开始读值
+   * @param val
+   */
   const onFinish = async (val: IConditions) => {
+    initChart()
     const curNode = nodes.find(item => item.value === val.node_index);
     const reg = /(Int)|(Float)/;
     // 判断当前选择的节点的返回值是否是数字  可以展示到图表中
@@ -143,7 +144,6 @@ const Index: React.FC = () => {
     (async () => {
       const res = await getReadNodeList();
       setNodes(res.data.map((item): ITypes.EnumType => ({
-        // ...item,
         label: item.label,
         value: item.nodeid,
         value_type: item.value_type,
