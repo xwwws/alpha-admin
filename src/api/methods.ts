@@ -3,7 +3,7 @@ import { request } from '@umijs/max';
 /**
  * 获取读值信息
  */
-export const getReadNodeList = (): Promise<Response<{ name: string; nodeid: string | number }[]>> => {
+export const getReadNodeList = (): Promise<Response<API.Methods.ReadNode[]>> => {
   return request(`/api/v1/lab/methods/node_indexs`, {
     method: 'get',
   });

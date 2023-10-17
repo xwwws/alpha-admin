@@ -10,5 +10,6 @@ declare namespace ITypes {
   interface EnumType {
     label: string;
     value: string | number;
+    [key: string]: any;
   }
 }

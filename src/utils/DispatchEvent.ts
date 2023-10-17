@@ -22,11 +22,11 @@ class DispatchEvent implements Event {
     this.events[name].push(cb);
   }
 
-  emit(name: string, ...args: Array<any>) {
-    if (!this.events[name]) {
-      console.error("该事件不存在，下次再来");
+  emit(eventName: string, ...args: Array<any>) {
+    if (!this.events[eventName]) {
+      console.info(`[${eventName}] event is not found,(${eventName}) 不存在`);
     } else {
-      this.events[name].forEach(cb => {
+      this.events[eventName].forEach(cb => {
         cb.apply(this, args);
       });
     }

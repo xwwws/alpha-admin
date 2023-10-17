@@ -58,3 +58,25 @@ export const MathRound = (num: number, length: number = 2) => {
   }
   return Math.round(num * multiple) / multiple;
 };
+
+
+/**
+ * 所有环境
+ */
+enum BuildEnv {
+  DEV = "dev",
+  PROD = "prod",
+  TEST = "test",
+}
+
+/**
+ * 当前运行环境
+ */
+export const BUILD_ENV = REACT_APP_ENV as BuildEnv;
+
+
+export const webSocketUrl = {
+  [BuildEnv.DEV]: WS_URL,
+  [BuildEnv.PROD]: WS_URL,
+  [BuildEnv.TEST]: WS_URL,
+}[BUILD_ENV];

@@ -52,6 +52,15 @@ declare namespace API {
       METHD_DO_MIX3 = 'methdDoMix3',
     }
 
+    interface ReadNode {
+      name: string;
+      nodeid: string | number;
+      label: string;
+      server_time: string;
+      value: string | number;
+      value_type: string | number;
+    }
+
     interface GetMethodHisByMethodReq extends PagesReq {
       start_time_after?: string;
       start_time_before?: string;

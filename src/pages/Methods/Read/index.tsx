@@ -3,14 +3,15 @@ import { ITypes } from '@/pages/typings';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
 import { Button, Card, Form, Select } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
-import useWebsocket, { IMsgGet } from "@/hooks/useWebsocket";
+import useWebsocket, { IMsgGet, SocketEventEnum } from "@/hooks/useWebsocket";
 import DispatchEvent from "@/utils/DispatchEvent";
 import { ECOption } from "@/types/echart";
 import * as echarts from "echarts";
 import dayjs from 'dayjs';
 import { useDispatch, useSelector } from 'react-redux';
-import {setReadXAxis,setReadSeries} from '@/redux/slices/readValueSlice'
+import { setReadXAxis, setReadSeries } from '@/redux/slices/readValueSlice';
 import MethodsHis from "@/pages/Methods/components/MethodsHis";
+import { webSocketUrl } from "@/utils";
 
 const formItemLayout = {
   labelCol: { span: 8 },
@@ -20,18 +21,25 @@ const formItemLayout = {
 interface IConditions {
   node_index: string | number;
 }
+
 const Index: React.FC = () => {
 
   const [ form ] = Form.useForm();
   const [ nodes, setNodes ] = useState<ITypes.EnumType[]>([]);
   const chartRef = useRef(null);
   // @ts-ignore
-  const {readXAxis, readSeries} = useSelector(state => state.readValue)
-  const dispatch = useDispatch()
-  const XAxis: number[] = []
-  const Series: string[] = []
+  const { readXAxis, readSeries } = useSelector(state => state.readValue);
+  const dispatch = useDispatch();
+  const XAxis: number[] = [];
+  const Series: string[] = [];
 
-  const { sendMessage } = useWebsocket();
+
+  let url = `ws://${location.host}/ws/sub`;
+  // 本地环境连接从 config 环境变量配置
+  if (REACT_APP_ENV === 'dev') {
+    url = `${webSocketUrl}/ws/sub`;
+  }
+  const { sendMessage, connect } = useWebsocket();
   const initChart = () => {
     const color = '#2fc49a';
     const myChart = echarts.init(chartRef.current);
@@ -106,10 +114,10 @@ const Index: React.FC = () => {
   };
 
   const drawChart = (msg: IMsgGet) => {
-    XAxis.push(msg.value)
-    Series.push(dayjs(msg.server_time).format("hh:mm:ss"))
-    dispatch(setReadXAxis([ ...readXAxis, msg.value ]))
-    dispatch(setReadSeries([ ...readSeries, dayjs(msg.server_time).format("hh:mm:ss") ]))
+    XAxis.push(msg.value);
+    Series.push(dayjs(msg.server_time).format("hh:mm:ss"));
+    dispatch(setReadXAxis([ ...readXAxis, msg.value ]));
+    dispatch(setReadSeries([ ...readSeries, dayjs(msg.server_time).format("hh:mm:ss") ]));
     // @ts-ignore
     const chartInstance = echarts.getInstanceByDom(chartRef.current);
     chartInstance && chartInstance.setOption({
@@ -118,24 +126,35 @@ const Index: React.FC = () => {
       yAxis: { type: 'value' },
       series: [ { type: 'line', data: XAxis } ]
     });
-  }
-  const onFinish = async (val: IConditions) => {
-    sendMessage([ { nodeid: val.node_index, interval: 1 } ]);
   };
-
+  const onFinish = async (val: IConditions) => {
+    const curNode = nodes.find(item => item.value === val.node_index);
+    const reg = /(Int)|(Float)/;
+    // 判断当前选择的节点的返回值是否是数字  可以展示到图表中
+    if (reg.test(curNode?.value_type)) {
+      await connect(url);
+      sendMessage([ { nodeid: val.node_index, interval: 1 } ]);
+    } else {
+    }
+  };
 
   useEffect(() => {
     // 获取下拉数据
     (async () => {
       const res = await getReadNodeList();
-      setNodes(res.data.map((item): ITypes.EnumType => ({ label: item.name, value: item.nodeid })));
+      setNodes(res.data.map((item): ITypes.EnumType => ({
+        // ...item,
+        label: item.label,
+        value: item.nodeid,
+        value_type: item.value_type,
+      })));
     })();
     // 初始化图表
     initChart();
     // 订阅socket
-    DispatchEvent.on('read', drawChart);
+    DispatchEvent.on(SocketEventEnum.MSG, drawChart);
     return () => {
-      DispatchEvent.off('read', drawChart);
+      DispatchEvent.off(SocketEventEnum.MSG, drawChart);
     };
   }, []);
 
@@ -161,6 +180,10 @@ const Index: React.FC = () => {
         <Button type={'primary'} htmlType="submit">
           确定
         </Button>
+
+        {/*<Button type={'primary'} onClick={disConnect}>*/}
+        {/*  断开*/}
+        {/*</Button>*/}
       </Form.Item>
     </Form>
   );

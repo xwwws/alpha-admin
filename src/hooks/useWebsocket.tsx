@@ -1,7 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { WebSocketStatus } from "@/utils/componentSettingUtils";
 import DispatchEvent from "@/utils/DispatchEvent";
-import {message} from 'antd'
+import { message } from 'antd';
+import { resolvePath } from "@@/exports";
 
 interface ISendMessage {
   nodeid: string | number;
@@ -17,82 +18,100 @@ export interface IMsgGet {
   value_type: number;
 }
 
-enum BuildEnv {
-  dev = "dev",
-  prod = "prod",
-  test = "test",
+const socketStatus = {
+  INIT: 'init',
+  CONNECTING: 'connecting',
+  DIS_CONNECT: 'disConnect',
+  ERROR: 'error',
+};
+
+export enum SocketEventEnum {
+  OPEN = "SOCKET_OPEN",
+  CLOSE = "SOCKET_CLOSE",
+  ERROR = "SOCKET_ERROR",
+  MSG = "SOCKET_MSG",
+
 }
-
-export const BUILD_ENV = REACT_APP_ENV as BuildEnv;
-
-const webSocketUrl = {
-  [BuildEnv.dev]: WS_URL,
-  [BuildEnv.prod]: WS_URL,
-  [BuildEnv.test]: WS_URL,
-}[BUILD_ENV];
 
 const useWebsocket = () => {
   const socket = useRef<WebSocket>();
+  /**
+   * socket状态
+   *  init 初始化
+   *  connecting 连接中
+   */
+  const [ socketState, setSocketState ] = useState<string>('init');
 
-  // 链接成功回调
+  // 连接成功回调
   const socketOnOpen = () => {
-    console.log('socket连接成功');
-  }
+    setSocketState(socketStatus.CONNECTING);
+    DispatchEvent.emit(SocketEventEnum.OPEN);
+  };
   // 关闭链接回调
   const socketOnClose = () => {
-    console.log('socket关闭');
-  }
+    setSocketState(socketStatus.DIS_CONNECT);
+    DispatchEvent.emit(SocketEventEnum.CLOSE);
+  };
   // 出错回调
-  const socketOnError = (err:any) => {
-    message.error("socket连接失败,请重试")
-    console.log('socket出错',err);
-  }
+  const socketOnError = (err: any) => {
+    setSocketState(socketStatus.ERROR);
+    message.error("socket连接失败,请重试");
+    DispatchEvent.emit(SocketEventEnum.ERROR, err);
+  };
   // 接收消息回调
   const socketOnMessage = (event: { data: string }) => {
     const { data } = event;
     const resData: IMsgGet = JSON.parse(data);
-    DispatchEvent.emit('read', resData)
+    DispatchEvent.emit(SocketEventEnum.MSG, resData);
+  };
 
-  }
-
-  const socketInit = () => {
-    try {
-      let url = `ws://${location.host}/ws/sub`;
-      // 本地环境连接从 config 环境变量配置
-      if(REACT_APP_ENV === 'dev') {
-        url = `${webSocketUrl}/ws/sub`;
-      }
+  function socketInit(url: string) {
+    return new Promise((resolve, reject) => {
       const socketObj = new WebSocket(url);
       socketObj.addEventListener("open", socketOnOpen);
       socketObj.addEventListener("close", socketOnClose);
       socketObj.addEventListener("error", socketOnError);
       socketObj.addEventListener("message", socketOnMessage);
       socket.current = socketObj;
-    } catch (e) {
-      console.log(e);
-    }
+      // 当socket 连接成功时  触发事件
+      DispatchEvent.on(SocketEventEnum.OPEN, resolve);
+    });
   }
 
-  // 进入页面链接socket
-  useEffect(() => {
-    socketInit();
-    return () => {
-      socket?.current?.close()
-    }
-  }, []);
-  const sendMessage = (msg: ISendMessage[]) => {
+  /**
+   * send socket
+   * @param msg
+   */
+  function sendMessage(msg: ISendMessage[]) {
     if (socket?.current?.readyState === WebSocketStatus.OPEN) {
       socket?.current?.send(JSON.stringify(msg));
     } else {
-      console.error('socket 尚未连接!')
+      console.error('socket 尚未连接!');
     }
-  };
-  const connect = () => {
-    socketInit()
   }
-  const disConnect = () => {
-    socket?.current?.close()
+
+  /**
+   * 连接或重新连接socket
+   */
+  async function connect(url: string) {
+    // 当前状态正在连接中 断开连接
+    if (socketState === socketStatus.CONNECTING) {
+      await disConnect();
+    } else {
+      await socketInit(url);
+    }
   }
+
+  /**
+   * 断开连接
+   */
+  async function disConnect() {
+    return new Promise((resolve, reject) => {
+      socket?.current?.close();
+      DispatchEvent.on(SocketEventEnum.CLOSE, resolve);
+    });
+  }
+
   return {
     sendMessage,
     connect,
