@@ -24,21 +24,19 @@ class DispatchEvent implements Event {
 
   emit(eventName: string, ...args: Array<any>) {
     if (!this.events[eventName]) {
-      console.info(`[${eventName}] event is not found,(${eventName}) 不存在`);
+      console.info(`[${eventName}] event is not found,(${eventName}不存在)`);
     } else {
-      this.events[eventName].forEach(cb => {
-        cb.apply(this, args);
-      });
+      this.events[eventName].forEach(cb => cb.apply(this, args));
     }
-
   }
-  off(name:string, cb:Function){
-    let events = this.events[name]
-    if(events && cb){
-      let index = events.findIndex(event=> event === cb)
-      index > -1 && events.splice(index,1)
+
+  off(name: string, cb: Function) {
+    let events = this.events[name];
+    if (events && cb) {
+      let index = events.findIndex(event => event === cb);
+      index > -1 && events.splice(index, 1);
     } else {
-      console.log("该事件已被删除")
+      console.log("该事件已被删除");
     }
   }
 }

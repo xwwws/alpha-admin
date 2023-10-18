@@ -79,7 +79,7 @@ const useWebsocket = () => {
   }
 
   /**
-   * send socket
+   * send socket msg
    * @param msg
    */
   function sendMessage(msg: ISendMessage[]) {
