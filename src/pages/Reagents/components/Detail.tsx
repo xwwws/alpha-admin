@@ -5,6 +5,7 @@ interface IProps {
   isOpen: boolean;
   data: API.Reagents.List | undefined;
   close: () => void;
+
   [key: string]: any;
 }
 

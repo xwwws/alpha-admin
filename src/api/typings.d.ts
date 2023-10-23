@@ -471,6 +471,48 @@ declare namespace API {
       unit: string;
     };
   }
+
+  /**
+   * ReactionVessel 反应容器相关
+   */
+  declare namespace ReactionVessel {
+    interface List {
+      id: number;
+      label: string;
+      vessel_name: string;
+      serial_number: number;
+      recyclable: boolean;
+      used_times: number;
+      discarded_at: string;
+      in_use: true;
+      area_position_id: number;
+      bottle_area: {
+        area_name: string;
+        x: string | number;
+        y: string | number;
+        z: string | number;
+      } | null;
+      created_at: string;
+      updated_at: string;
+    }
+
+    interface Create {
+      label: string;
+      bottle_area: Coordinates;
+    }
+    interface Detail extends List{}
+    interface Update {
+      in_use?: false;
+      discarded?: true;
+      bottle_area?: {
+        name: string;
+        x: string | number;
+        y: string | number;
+        z: string | number;
+      } | null;
+    }
+  }
+
   /**
    * project 相关
    */

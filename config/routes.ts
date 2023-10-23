@@ -1,6 +1,7 @@
 ﻿import { experiments } from './routes/experiments';
 import { methods } from './routes/methods';
 import { reagents } from './routes/reagents';
+import { reactionVessels } from './routes/reactionVessels';
 import { steps } from './routes/steps';
 import { trays } from './routes/trays';
 import { project } from "./routes/project";
@@ -73,7 +74,12 @@ export default [
     path: '/exp',
     name: 'exp',
     icon: 'AreaChartOutlined',
-    routes: [...reagents, ...trays, ...experiments],
+    routes: [
+      ...reagents,
+      ...trays,
+      ...experiments,
+      ...reactionVessels
+    ],
   },
   ...project,
 
