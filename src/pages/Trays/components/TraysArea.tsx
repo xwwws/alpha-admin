@@ -68,14 +68,15 @@ const TraysArea: React.FC<IProps> = (props) => {
                     <br />
                     {item.quantity} {item.unit}
                     <br />
-                    <Tooltip title="删除工作区">
-                      <Button
-                        type={'link'}
-                        style={{ color: 'red' }}
-                        icon={<DeleteOutlined />}
-                        onClick={() => deleteReagent(item)}
-                      ></Button>
-                    </Tooltip>
+                    {/*不要删除按钮 防止误操作*/}
+                    {/*<Tooltip title="删除工作区">*/}
+                    {/*  <Button*/}
+                    {/*    type={'link'}*/}
+                    {/*    style={{ color: 'red' }}*/}
+                    {/*    icon={<DeleteOutlined />}*/}
+                    {/*    onClick={() => deleteReagent(item)}*/}
+                    {/*  ></Button>*/}
+                    {/*</Tooltip>*/}
                     <Tooltip title="绑定试剂">
                       <Button
                         type={'link'}
