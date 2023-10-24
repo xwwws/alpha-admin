@@ -1,4 +1,4 @@
-import { Badge, Collapse, Descriptions, Divider } from 'antd';
+import { Badge, Button, Collapse, Descriptions, Divider, Tooltip, message } from 'antd';
 import type { CollapseProps, DescriptionsProps } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -7,6 +7,8 @@ import { getMethodsByStepId } from "@/api/steps";
 import RecordStepMethod from "@/pages/Experiments/components/RecordStepMethod";
 import CollectedDataWarp from "@/pages/Experiments/components/CollectedDataWarp";
 import { CalculateDuration } from "@/utils";
+import { FastForwardOutlined, ReloadOutlined } from '@ant-design/icons';
+import { reRunExpStep, skipRunExpStep } from "@/api/experiments";
 
 interface IProps {
   step: API.Experiments.ExperimentStepsResItem;
@@ -42,9 +44,12 @@ const RecordStyle = styled.div`
       font-weight: 600;
       font-size: 16px;
       line-height: 1.5;
-
     }
   }
+`;
+const StatusStyle = styled.div`
+  display: flex;
+  gap: 10px;
 `;
 const RecordStep: React.FC<IProps> = (props) => {
   const { step, index } = props;
@@ -52,14 +57,53 @@ const RecordStep: React.FC<IProps> = (props) => {
   // const [ methods, setMethods ] = useState<API.Steps.getMethodsByStepId[]>([]);
   const [ methodsCollapse, setMethodsCollapse ] = useState<CollapseProps['items']>([]);
 
-
+  const getMethods = async () => {
+    const res = await getMethodsByStepId(step.id, { page: 1, page_size: 99999 });
+    const methods = res.data.data.map((item, index) => {
+      return {
+        key: `${index + 1}`,
+        label: `${index + 1}. ${item.label} - ${item.id}`,
+        children: <RecordStepMethod method={item} index={index}/>,
+      };
+    });
+    setMethodsCollapse(methods);
+  };
+  const handleReExpStep = async (id: string|number) => {
+    await reRunExpStep(id)
+    await getMethods()
+    message.success('已重新执行')
+  };
+  const handleSkipRunExpStep = async (id: string|number) => {
+    await skipRunExpStep(id)
+    await getMethods()
+    message.success('已跳过该步骤执行')
+  };
   // 步骤信息
   const descriptionInfo: DescriptionsProps[`items`] = [
     { key: '1', label: '步骤id', children: step.id },
     {
       key: '2', label: '状态', children: (
-        // @ts-ignore
-        <Badge status={StepStatusMap[step.status]} text={step.status}/>
+        <StatusStyle>
+          {/*@ts-ignore*/}
+          <Badge status={StepStatusMap[step.status]} text={step.status}/>
+          {step.status === 'failed' && <>
+            <Tooltip placement="top" title="重新执行">
+              <Button
+                size={'small'}
+                icon={<ReloadOutlined/>}
+                onClick={() => handleReExpStep(step.id)}
+              ></Button>
+            </Tooltip>
+            <Tooltip placement="top" title="跳过">
+              <Button
+                size={'small'}
+                icon={<FastForwardOutlined/>}
+                onClick={() => handleSkipRunExpStep(step.id)}
+              ></Button>
+            </Tooltip>
+          </>
+          }
+        </StatusStyle>
       ),
     },
     { key: '2-1', label: '试剂名称', children: step.reagent_name, span: 2 },
@@ -72,17 +116,6 @@ const RecordStep: React.FC<IProps> = (props) => {
 
 
   useEffect(() => {
-    const getMethods = async () => {
-      const res = await getMethodsByStepId(step.id, { page: 1, page_size: 99999 });
-      const methods = res.data.data.map((item, index) => {
-        return {
-          key: `${index + 1}`,
-          label: `${index + 1}. ${item.label} - ${item.id}`,
-          children: <RecordStepMethod method={item} index={index}/>,
-        };
-      });
-      setMethodsCollapse(methods);
-    };
     getMethods();
   }, [ step ]);
 

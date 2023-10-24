@@ -1,4 +1,10 @@
-import { cancelExperimentById, deleteExperiment, getExperimentList, runExperimentById } from '@/api/experiments';
+import {
+  cancelExperimentById,
+  deleteExperiment,
+  getExperimentList, reRunExp,
+  runExperimentById,
+  updateExecStatus
+} from '@/api/experiments';
 import { expState2ValueEnum, experimentStatesMap } from '@/utils/dataMaps';
 import {
   AlignLeftOutlined,
@@ -9,11 +15,16 @@ import {
   StopOutlined,
   DeleteOutlined,
   EditOutlined,
+  PauseCircleTwoTone,
+  PlayCircleTwoTone,
+  MoreOutlined,
+  RedoOutlined,
 } from '@ant-design/icons';
 import type { ProColumns } from '@ant-design/pro-components';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ActionType } from '@ant-design/pro-table';
-import { Button, Card, Popconfirm, Tooltip, message } from 'antd';
+import { Button, Card, Dropdown, Form, Popconfirm, Tooltip, message } from 'antd';
+import type { MenuProps } from 'antd';
 import dayjs from 'dayjs';
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'umi';
@@ -31,9 +42,12 @@ const List: React.FC = () => {
   const [ messageApi, contextHolder ] = message.useMessage();
   const navigate = useNavigate();
   const [ projectIdsMap, setProjectIdsMap ] = useState<IProjectIdsMap>({});
-  const [ activeExpEditRemark, setActiveExpEditRemark ] = useState<{ id: string | number, description: string }>({id:'',description:''});
+  const [ activeExpEditRemark, setActiveExpEditRemark ] = useState<{
+    id: string | number,
+    description: string
+  }>({ id: '', description: '' });
+  const [ execStatusLoading, setExecStatusLoading ] = useState<boolean>(false);
   const [ isShowEditDescModal, setIsShowEditDescModal ] = useState<boolean>(false);
-
   /**
    * 执行实验
    * @param id
@@ -46,6 +60,29 @@ const List: React.FC = () => {
     });
     try {
       const { data } = await runExperimentById(id);
+      tableRef.current?.reload();
+      if (data) {
+        messageApi.open({
+          key: 'run',
+          type: 'success',
+          content: '实验开始执行',
+          duration: 1.5,
+        });
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+    }
+  }
+
+  async function handleReRun(id: string | number) {
+    messageApi.open({
+      key: 'run',
+      type: 'loading',
+      content: '正在加载...',
+    });
+    try {
+      const { data } = await reRunExp(id);
       tableRef.current?.reload();
       if (data) {
         messageApi.open({
@@ -129,12 +166,36 @@ const List: React.FC = () => {
   const editExpDesc = (record: API.Experiments.List) => {
     const { id, description } = record;
     setActiveExpEditRemark({
-      id,description
+      id, description
     });
     setIsShowEditDescModal(true);
 
 
   };
+  const dropDownItems: MenuProps['items'] = [
+    {
+      label: '暂停所有实验',
+      key: 'pause',
+      icon: <PauseCircleTwoTone/>,
+    },
+    {
+      label: '启动所有实验',
+      key: 'running',
+      icon: <PlayCircleTwoTone/>,
+    },
+  ];
+  const dropDownClick: MenuProps['onClick'] = async ({ key }) => {
+    try {
+      setExecStatusLoading(true);
+      await updateExecStatus({ status: key });
+      message.success(`${key === 'pause' ? '暂停' : '启动'}所有实验`);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setExecStatusLoading(false)
+    }
+  };
+
   const columns: ProColumns<API.Experiments.List>[] = [
     {
       hideInSearch: true,
@@ -241,6 +302,18 @@ const List: React.FC = () => {
         return (
           <>
             {
+              //  只有“出错”的实验可以重新运行
+              record.status === 'failed' && (
+                <Tooltip placement="top" title="运行">
+                  <Button
+                    type={'link'}
+                    icon={<RedoOutlined />}
+                    onClick={() => handleReRun(record.id)}
+                  ></Button>
+                </Tooltip>
+              )
+            }
+            {
               //  只有“等待提交”的实验可以提交
               record.status === 'draft' && (
                 <Tooltip placement="top" title="运行">
@@ -324,13 +397,30 @@ const List: React.FC = () => {
       <PageContainer
         extra={[
           <Button
-            key={'add'}
+            key="add"
             icon={<PlusOutlined/>}
             type={'primary'}
             onClick={() => navigate('/exp/experiment/create')}
           >
             创建实验
           </Button>,
+          <Dropdown
+            key="dropdown"
+            trigger={[ 'click' ]}
+            menu={{
+              items: dropDownItems,
+              onClick: dropDownClick
+            }}
+          >
+            <Button
+              key="btn"
+              onClick={(e) => e.preventDefault()}
+              loading={execStatusLoading}
+            >
+              更多<MoreOutlined/>
+            </Button>
+          </Dropdown>
+
         ]}
       >
         <Card>

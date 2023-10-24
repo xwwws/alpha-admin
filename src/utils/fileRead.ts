@@ -3,7 +3,8 @@ import { getFile } from "@/api/readFile";
 export interface Icsv {
   [key:string]: string[]
 }
-export const readCSV = async (csv_url: string) => {
+export const readCSV = async (csv_url: string):Promise<Icsv> => {
+  if(!csv_url) return {  }
   const result:Icsv = {}
   const CSVString = await getFile(csv_url)
   const CSVData = CSVString.split('\n')
@@ -26,5 +27,6 @@ export const readCSV = async (csv_url: string) => {
       result[headerItem].push(csvDataRecord[headerIndex])
     })
   })
+  console.log('result',result);
   return result
 }

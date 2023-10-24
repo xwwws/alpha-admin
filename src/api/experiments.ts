@@ -105,3 +105,46 @@ export const updateDescription = (expt_id: string | number,data: {description: s
     data
   })
 }
+
+
+/**
+ * 暂停或启动所有实验
+ * @param params
+ */
+
+export const updateExecStatus = (params: {status: string}) => {
+  return request<Response<any>>(`/api/v1/expt/expts/exec_status`,{
+    method: 'post',
+    params
+  })
+}
+
+/**
+ * 重新执行错误实验
+ * @param expt_id
+ */
+export const reRunExp = (expt_id: string | number) => {
+  return request<Response<any>>(`/api/v1/expt/expts/${expt_id}/rerun`,{
+    method: 'post'
+  })
+}
+
+/**
+ * 重新执行错误步骤
+ * @param step_id
+ */
+export const reRunExpStep = (step_id: string | number) => {
+  return request<Response<any>>(`/api/v1/expt/expts/step/${step_id}/rerun`,{
+    method: 'post'
+  })
+}
+
+/**
+ * 跳过错误步骤
+ * @param step_id
+ */
+export const skipRunExpStep = (step_id: string | number) => {
+  return request<Response<any>>(`/api/v1/expt/expts/step/${step_id}/succeed`,{
+    method: 'post'
+  })
+}
