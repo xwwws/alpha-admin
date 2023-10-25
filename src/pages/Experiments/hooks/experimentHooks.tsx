@@ -15,6 +15,7 @@
  * @return {API.Experiments.CreateExperimentReq}
  */
 export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentReq => {
+  console.log(values);
   const params: API.Experiments.CreateExperimentReq = {
     name: values.name,
     project_id: values.project_id,
@@ -25,6 +26,12 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
       x: values.bottle_area_x,
       y: values.bottle_area_y,
       z: values.bottle_area_z,
+    },
+    recycle_area: {
+      name: values.recycle_area_name,
+      x: values.recycle_area_x,
+      y: values.recycle_area_y,
+      z: values.recycle_area_z,
     },
     steps_data: [],
   };

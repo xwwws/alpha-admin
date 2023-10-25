@@ -127,18 +127,10 @@ const Create: React.FC = () => {
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item
-                  name="bottle_area_name"
-                  label="反应器工位"
-                  rules={formRules.bottle_area_name}
-                >
-                  <Select options={reaction}/>
-                </Form.Item>
               </Col>
 
 
               {/*row-2*/}
-
               <Col span={12}>
                 <Form.Item
                   name="project_id"
@@ -157,18 +149,55 @@ const Create: React.FC = () => {
 
 
               {/*row-3*/}
-              <Col span={8}>
+
+              <Col span={12}>
+                <Form.Item
+                  labelCol={{span: 8}}
+                  name="bottle_area_name"
+                  label="反应器工位"
+                  rules={formRules.bottle_area_name}
+                >
+                  <Select options={reaction}/>
+                </Form.Item>
+              </Col>
+              <Col span={4}>
                 <Form.Item name="bottle_area_x" label="x" rules={formRules.coordinates}>
                   <Input/>
                 </Form.Item>
               </Col>
-              <Col span={8}>
+              <Col span={4}>
                 <Form.Item name="bottle_area_y" label="y" rules={formRules.coordinates}>
                   <Input/>
                 </Form.Item>
               </Col>
-              <Col span={8}>
+              <Col span={4}>
                 <Form.Item name="bottle_area_z" label="z" rules={formRules.coordinates}>
+                  <Input/>
+                </Form.Item>
+              </Col>
+              {/*row-4*/}
+
+              <Col span={12}>
+                <Form.Item
+                  labelCol={{span: 8}}
+                  name="recycle_area_name"
+                  label="回收工位"
+                >
+                  <Select options={reaction}/>
+                </Form.Item>
+              </Col>
+              <Col span={4}>
+                <Form.Item name="recycle_area_x" label="x">
+                  <Input/>
+                </Form.Item>
+              </Col>
+              <Col span={4}>
+                <Form.Item name="recycle_area_y" label="y">
+                  <Input/>
+                </Form.Item>
+              </Col>
+              <Col span={4}>
+                <Form.Item name="recycle_area_z" label="z">
                   <Input/>
                 </Form.Item>
               </Col>

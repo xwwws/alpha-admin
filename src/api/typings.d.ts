@@ -398,6 +398,7 @@ declare namespace API {
       name: string;
       project_id: string | number;
       bottle_area: Coordinates;
+      recycle_area: Coordinates;
       bottle_height: string | number;
       data_acquisitions?: IAcquisitions[];
       steps_data: CreateExperimentStep[];
