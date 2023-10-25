@@ -36,25 +36,29 @@ const CreateStepItem: React.FC<IProps> = (props) => {
   const [ reagent, setReagent ] = useState<API.ReagentsInfo>();
   const [ reagentShow, setReagentShow ] = useState<boolean>(false);
   const { steps } = useModel('useExperimentModel');
-  const step_name = Form.useWatch([ 'steps_data', name, 'step_name' ], form);
-  useEffect(() => {
-    setStep(step_name);
-  }, [ step_name ]);
-  const handleStepChange = async (val: string) => {
-    setStep('loading');
-    // 这个步骤中的所有表单
-    form.setFieldValue([ 'steps_data', name ], { step_name: val });
+  const getReagents = async (step: string) => {
     // heating_stir_step  不用试剂id
-    if (val !== 'heating_stir_step') {
+    if (step !== 'heating_stir_step') {
       setReagentShow(true);
-      const res = await getReagentsByStep(val);
+      const res = await getReagentsByStep(step);
       setReagents(res.data);
     } else {
       setReagentShow(false);
     }
+  }
+  const handleStepChange = async (val: string) => {
+    setStep('loading');
+    // 这个步骤中的所有表单
+    form.setFieldValue([ 'steps_data', name ], { step_name: val });
+    await getReagents(val)
     setStep(val);
   };
 
+  const step_name = Form.useWatch([ 'steps_data', name, 'step_name' ], form);
+  useEffect(() => {
+    step_name && setStep(step_name);
+    step_name && getReagents(step_name);
+  }, [ step_name ]);
   const handleReagentChange = (val: string | number) => {
     const curReagent = reagents.find((item) => item.reagent_id === val);
     form.setFieldValue([ 'steps_data', name, 'src_area_name' ], curReagent?.area_name);
@@ -107,9 +111,6 @@ const CreateStepItem: React.FC<IProps> = (props) => {
           </Col>
         )}
       </Row>
-
-
-
 
 
       {step === 'loading' && (
