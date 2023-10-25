@@ -45,12 +45,12 @@ const CreateStepItem: React.FC<IProps> = (props) => {
     } else {
       setReagentShow(false);
     }
-  }
+  };
   const handleStepChange = async (val: string) => {
     setStep('loading');
     // 这个步骤中的所有表单
     form.setFieldValue([ 'steps_data', name ], { step_name: val });
-    await getReagents(val)
+    await getReagents(val);
     setStep(val);
   };
 
