@@ -120,8 +120,8 @@ const Detail: React.FC<IProps> = (props) => {
           <Descriptions.Item label="是否空闲">
             {detail?.in_use ? <Tag color="orange">繁忙</Tag> : <Tag color="success">空闲</Tag>}
           </Descriptions.Item>
-          <Descriptions.Item label="是否可循环使用">
-            {detail?.recyclable ? <Tag color="default">不可循环使用</Tag> : <Tag color="success">可循环使用</Tag>}
+          <Descriptions.Item label="是否可回收">
+            {detail?.recyclable ? <Tag color="success">可回收</Tag> : <Tag color="default">不可回收</Tag>}
           </Descriptions.Item>
           <Descriptions.Item label="废弃时间">{detail?.discarded_at}</Descriptions.Item>
           <Descriptions.Item label="创建时间">{detail?.created_at}</Descriptions.Item>

@@ -29,7 +29,7 @@ export const createReactionVessel = (data: API.ReactionVessel.Create) => {
  * @param id
  */
 export const deleteReactionVessel = (id: string | number) => {
-  return request<Response<any>>(`/api/v1/expt/area_positions/${id}`, {
+  return request<Response<any>>(`/api/v1/expt/vessels/${id}`, {
     method: 'delete',
   });
 };

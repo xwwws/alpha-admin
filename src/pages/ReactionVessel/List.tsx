@@ -27,13 +27,13 @@ const List: React.FC<IProps> = (props) => {
     };
   };
   const deleteVessel = async (item: API.ReactionVessel.List) => {
-    await deleteReactionVessel(item.id)
-    message.success(`${item.vessel_name}已删除`)
-    tableRef.current?.reload()
-  }
+    await deleteReactionVessel(item.id);
+    message.success(`${item.vessel_name}已删除`);
+    tableRef.current?.reload();
+  };
   const showDetail = () => {
 
-  }
+  };
   const columns: ProColumns<API.ReactionVessel.List>[] = formatColumns<API.ReactionVessel.List>([
     { title: 'ID', dataIndex: 'id' },
     { title: '容器名称', dataIndex: 'vessel_name' },
@@ -41,11 +41,11 @@ const List: React.FC<IProps> = (props) => {
     { title: '位置id', dataIndex: 'area_position_id' },
     { title: 'label', dataIndex: 'label' },
     {
-      title: '是否可循环使用',
+      title: '是否可回收',
       width: '200px',
       dataIndex: 'recyclable',
       render: recyclable => (
-        recyclable ? <Tag color="default">不可循环使用</Tag> : <Tag color="success">可循环使用</Tag>
+        recyclable ? <Tag color="success">可回收</Tag> : <Tag color="default">不可回收</Tag>
       )
     },
     {
@@ -62,7 +62,7 @@ const List: React.FC<IProps> = (props) => {
     {
       title: '操作',
       fixed: 'right',
-      render: (text,record,index) => [
+      render: (text, record, index) => [
 
         <Tooltip placement="top" title="详情" key={'detail'}>
           <Button
