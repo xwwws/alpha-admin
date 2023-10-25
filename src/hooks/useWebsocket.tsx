@@ -4,13 +4,15 @@ import DispatchEvent from "@/utils/DispatchEvent";
 import { message } from 'antd';
 import { resolvePath } from "@@/exports";
 
-interface ISendMessage {
+export interface ISendMessage {
   nodeid: string | number;
   interval: string | number;
 }
 
 export interface IMsgGet {
   current_time: string;
+  description: string;
+  label: string;
   name: string;
   nodeid: number;
   server_time: string;

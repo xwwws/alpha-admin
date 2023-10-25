@@ -6,6 +6,7 @@ import { steps } from './routes/steps';
 import { trays } from './routes/trays';
 import { project } from "./routes/project";
 import { account } from "./routes/accounts";
+import { devices } from "./routes/devices";
 
 // 文档地址  https://v3.umijs.org/zh-CN/plugins/plugin-layout
 //config/route.ts
@@ -67,6 +68,15 @@ export default [
     name: 'welcome',
     icon: 'smile',
     component: './Welcome',
+  },
+  {
+    path: '/device',
+    name: 'device',
+    icon: 'HddOutlined',
+    hideChildrenInMenu: true,
+    routes: [
+      ...devices
+    ],
   },
   ...methods,
   ...steps,
