@@ -31,6 +31,10 @@ declare namespace API {
    * method相关
    */
 
+  interface data_acquisitionParams {
+    nodeid: string | number;
+    interval: number;
+  }
 
   declare namespace Methods {
     enum MethodAction {
@@ -185,6 +189,7 @@ declare namespace API {
     speed?: string | number;
     weight?: string | number;
     accuracy?: string | number;
+    data_acquisitions?: data_acquisitionParams[];
   };
   // 移液
   type Pipette = {
@@ -197,6 +202,7 @@ declare namespace API {
     interval?: string | number;
     height?: string | number;
     tip_length?: string | number;
+    data_acquisitions?: data_acquisitionParams[];
   };
   // 添加固体
   type AddSolid = {
@@ -207,6 +213,7 @@ declare namespace API {
     angel?: string | number;
     weight?: string | number;
     tolerance?: string | number;
+    data_acquisitions?: data_acquisitionParams[];
   };
 
   // 蠕动泵加液
@@ -216,6 +223,7 @@ declare namespace API {
     speed?: string | number;
     weight?: string | number;
     accuracy?: string | number;
+    data_acquisitions?: data_acquisitionParams[];
   };
 
   // 搅拌3
@@ -223,6 +231,7 @@ declare namespace API {
     dst_area?: Coordinates;
     src_area?: Coordinates; // 不会出现
     time?: string | number;
+    data_acquisitions?: data_acquisitionParams[];
   };
 
   type ReagentsInfo = {
@@ -307,11 +316,6 @@ declare namespace API {
       interval: number;
       value_type: string;
       file_url: string;
-    }
-
-    interface data_acquisitionParams {
-      nodeid: string | number;
-      interval: number;
     }
 
     type ExperimentDetailsRes = {

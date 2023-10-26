@@ -3,10 +3,11 @@ import { pipette } from '@/api/steps';
 import MethodsView from '@/pages/Methods/components/MethodsView';
 import { IForm } from '@/pages/typings';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
-import { Button, Card, Form, Input, Select } from 'antd';
+import { Button, Card, Col, Form, Input, Row, Select } from 'antd';
 import React, { useState } from 'react';
 import { useModel } from 'umi';
 import StepHis from "@/pages/Steps/components/StepHis";
+import DataAcquisition from "@/pages/components/DataAcquisition";
 
 const formItemLayout = {
   labelCol: { span: 4 },
@@ -33,10 +34,12 @@ interface IConditions {
   interval: string | number;
   height: string | number;
   speed: string | number;
+  data_acquisitions: API.data_acquisitionParams[];
 }
+
 const formRules: IForm.IFormRules = {
-  src_area_name: [{ required: true, message: '请选择托盘区域' }],
-  dst_area_name: [{ required: true, message: '请选择托盘区域' }],
+  src_area_name: [ { required: true, message: '请选择托盘区域' } ],
+  dst_area_name: [ { required: true, message: '请选择托盘区域' } ],
   coordinates: [
     { required: true, message: '请输入坐标' },
     { pattern: /^\d+$/, message: '坐标输入错误' },
@@ -48,17 +51,10 @@ const formRules: IForm.IFormRules = {
     { max: 10, message: '高度过高' },
   ],
 };
-const formItemStyle = {};
-const formStyle = {
-  width: '100%',
-  display: 'grid',
-  gridTemplateColumns: '1fr 1fr 1fr 1fr',
-  gap: '10px',
-};
 const Index: React.FC = () => {
-  const [form] = Form.useForm();
-  const [readResult, setReadResult] = useState<any>('');
-  const [loading, setLoading] = useState<boolean>(false);
+  const [ form ] = Form.useForm();
+  const [ readResult, setReadResult ] = useState<any>('');
+  const [ loading, setLoading ] = useState<boolean>(false);
   const { areas } = useModel('useExperimentModel');
   const onFinish = async (val: IConditions) => {
     try {
@@ -83,6 +79,7 @@ const Index: React.FC = () => {
         spit_once: val.spit_once,
         speed: val.speed,
         interval: val.interval,
+        data_acquisitions: val.data_acquisitions
       };
       const { data } = await pipette(params);
       setLoading(false);
@@ -96,118 +93,167 @@ const Index: React.FC = () => {
   const searchModel = (
     <Form
       {...formItemLayout}
-      layout={'inline'}
       labelWrap={true}
       form={form}
-      style={formStyle}
       colon={false}
       onFinish={onFinish}
     >
-      <Form.Item
-        style={formItemStyle}
-        {...contentItemLayout}
-        name="src_area_name"
-        label="托盘区域"
-        rules={formRules.src_area_name}
-      >
-        <Select options={areas} />
-      </Form.Item>
-      <Form.Item style={formItemStyle} name="src_area_x" label="x" rules={formRules.coordinates}>
-        <Input />
-      </Form.Item>
-      <Form.Item style={formItemStyle} name="src_area_y" label="y" rules={formRules.coordinates}>
-        <Input />
-      </Form.Item>
-      <Form.Item style={formItemStyle} name="src_area_z" label="z" rules={formRules.coordinates}>
-        <Input />
-      </Form.Item>
-      <Form.Item
-        style={formItemStyle}
-        {...contentItemLayout}
-        name="dst_area_name"
-        label="目标区域"
-        rules={formRules.dst_area_name}
-      >
-        <Select options={areas} />
-      </Form.Item>
-      <Form.Item style={formItemStyle} name="dst_area_x" label="x" rules={formRules.coordinates}>
-        <Input />
-      </Form.Item>
-      <Form.Item style={formItemStyle} name="dst_area_y" label="y" rules={formRules.coordinates}>
-        <Input />
-      </Form.Item>
-      <Form.Item style={formItemStyle} name="dst_area_z" label="z" rules={formRules.coordinates}>
-        <Input />
-      </Form.Item>
+      <Row>
+        {/*第一行*/}
+        <Col span={9}>
+          <Form.Item
+            labelCol={{ span: 6 }}
+            name="src_area_name"
+            label="托盘区域"
+            rules={formRules.src_area_name}
+          >
+            <Select options={areas}/>
+          </Form.Item>
+        </Col>
 
-      <Form.Item
-        style={formItemStyle}
-        {...contentItemLayout}
-        name="tip_length"
-        label="枪头长度"
-        rules={formRules.height}
-      >
-        <Input addonAfter="cm" />
-      </Form.Item>
-      <Form.Item
-        style={formItemStyle}
-        {...contentItemLayout}
-        name="height"
-        label="高度"
-        rules={formRules.height}
-      >
-        <Input addonAfter="cm" />
-      </Form.Item>
-      <Form.Item
-        style={formItemStyle}
-        {...contentItemLayout}
-        name="total"
-        label="移液总量"
-        rules={formRules.height}
-      >
-        <Input addonAfter="ml" />
-      </Form.Item>
-      <Form.Item
-        style={formItemStyle}
-        {...contentItemLayout}
-        name="take_once"
-        label="单次吸液量"
-        rules={formRules.height}
-      >
-        <Input addonAfter="ml" />
-      </Form.Item>
-      <Form.Item
-        style={formItemStyle}
-        {...contentItemLayout}
-        name="spit_once"
-        label="单次吐液量"
-        rules={formRules.height}
-      >
-        <Input addonAfter="ml" />
-      </Form.Item>
-      <Form.Item
-        style={formItemStyle}
-        {...contentItemLayout}
-        name="interval"
-        label="吐液间隔时长"
-        rules={formRules.height}
-      >
-        <Input addonAfter="s" />
-      </Form.Item>
-      <Form.Item
-        style={formItemStyle}
-        {...contentItemLayout}
-        name="speed"
-        label="吸液吐液速度"
-        rules={formRules.height}
-      >
-        <Input addonAfter="s" />
-      </Form.Item>
-      <Form.Item wrapperCol={{ offset: 4 }}>
-        <Button type={'primary'} htmlType="submit">
-          确定
-        </Button>
-      </Form.Item>
+        <Col span={5}>
+          <Form.Item name="src_area_x" label="x" rules={formRules.coordinates}>
+            <Input/>
+          </Form.Item>
+        </Col>
+
+        <Col span={5}>
+          <Form.Item name="src_area_y" label="y" rules={formRules.coordinates}>
+            <Input/>
+          </Form.Item>
+        </Col>
+
+        <Col span={5}>
+          <Form.Item name="src_area_z" label="z" rules={formRules.coordinates}>
+            <Input/>
+          </Form.Item>
+        </Col>
+
+        {/*第二行*/}
+        <Col span={9}>
+          <Form.Item
+            labelCol={{ span: 6 }}
+            name="dst_area_name"
+            label="目标区域"
+            rules={formRules.dst_area_name}
+          >
+            <Select options={areas}/>
+          </Form.Item>
+        </Col>
+
+        <Col span={5}>
+          <Form.Item name="dst_area_x" label="x" rules={formRules.coordinates}>
+            <Input/>
+          </Form.Item>
+        </Col>
+
+        <Col span={5}>
+          <Form.Item name="dst_area_y" label="y" rules={formRules.coordinates}>
+            <Input/>
+          </Form.Item>
+        </Col>
+
+        <Col span={5}>
+          <Form.Item name="dst_area_z" label="z" rules={formRules.coordinates}>
+            <Input/>
+          </Form.Item>
+        </Col>
+
+
+        {/*第三行*/}
+        <Col span={9}>
+          <Form.Item
+            labelCol={{ span: 6 }}
+            name="tip_length"
+            label="枪头长度"
+            rules={formRules.height}
+          >
+            <Input addonAfter="cm"/>
+          </Form.Item>
+        </Col>
+
+        <Col span={5}>
+          <Form.Item
+            labelCol={{ span: 7 }}
+            name="height"
+            label="高度"
+            rules={formRules.height}
+          >
+            <Input addonAfter="cm"/>
+          </Form.Item>
+        </Col>
+
+        <Col span={5}>
+          <Form.Item
+            labelCol={{ span: 11 }}
+            name="total"
+            label="移液总量"
+            rules={formRules.height}
+          >
+            <Input addonAfter="ml"/>
+          </Form.Item>
+        </Col>
+
+        <Col span={5}>
+          <Form.Item
+            labelCol={{ span: 12 }}
+            name="take_once"
+            label="单次吸液量"
+            rules={formRules.height}
+          >
+            <Input addonAfter="ml"/>
+          </Form.Item>
+        </Col>
+
+
+        {/*  第四行*/}
+        <Col span={6}>
+          <Form.Item
+
+            {...contentItemLayout}
+            name="spit_once"
+            label="单次吐液量"
+            rules={formRules.height}
+          >
+            <Input addonAfter="ml"/>
+          </Form.Item>
+        </Col>
+
+        <Col span={6}>
+          <Form.Item
+
+            {...contentItemLayout}
+            name="interval"
+            label="吐液间隔时长"
+            rules={formRules.height}
+          >
+            <Input addonAfter="s"/>
+          </Form.Item>
+        </Col>
+
+        <Col span={6}>
+          <Form.Item
+            {...contentItemLayout}
+            name="speed"
+            label="吸液吐液速度"
+            rules={formRules.height}
+          >
+            <Input addonAfter="s"/>
+          </Form.Item>
+
+        </Col>
+
+        <Col span={24}>
+          <DataAcquisition name={[ 'data_acquisitions' ]}/>
+        </Col>
+        <Col span={12} offset={11}>
+          <Form.Item>
+            <Button type={'primary'} htmlType="submit">
+              确定
+            </Button>
+          </Form.Item>
+        </Col>
+      </Row>
     </Form>
   );
 

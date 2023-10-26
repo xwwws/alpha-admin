@@ -21,21 +21,23 @@ const StepHisContent: React.FC<IProps> = (props) => {
   return (
     <Descriptions size={'small'} column={1} colon={true} bordered>
       {
-        Object.keys(content).map(item => {
+        Object.keys(content).map((item, index) => {
 
 
           switch (item) {
             case 'dst_area':
-              return <Descriptions.Item label={item}>
+              return <Descriptions.Item label={item} key={index}>
                 {Coordinates(content[item])}
               </Descriptions.Item>;
             case 'src_area':
-              return <Descriptions.Item label={item}>
+              return <Descriptions.Item label={item} key={index}>
                 {Coordinates(content[item])}
               </Descriptions.Item>;
             default:
-              // @ts-ignore
-              return <Descriptions.Item label={item}>{content[item]}</Descriptions.Item>;
+              return <Descriptions.Item label={item} key={index}>
+                {/*@ts-ignore*/}
+                {content[item]}
+              </Descriptions.Item>;
           }
         })
       }

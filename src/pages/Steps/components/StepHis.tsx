@@ -94,7 +94,7 @@ const StepHis: React.FC<IProps> = (props) => {
     <StepHisStyle>
       <Card title={'步骤调用历史'} size={'small'}>
         <ProTable
-          rowKey={'id'}
+          key={'id'}
           columns={columns}
           options={false}
           request={requestMethod}
