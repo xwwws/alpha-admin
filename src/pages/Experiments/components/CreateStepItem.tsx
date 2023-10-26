@@ -12,7 +12,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useModel } from 'umi';
 import { ITypes } from "@/pages/typings";
-import DataAcquisition from "@/pages/Experiments/components/DataAcquisition";
+import DataAcquisition from "@/pages/components/DataAcquisition";
 
 interface IProps {
   form: FormInstance<any>;
@@ -20,7 +20,6 @@ interface IProps {
   restField: { fieldKey?: number | undefined };
   onDelete: () => void;
   index: number;
-  nodes: ITypes.EnumType[];
 
   [key: string]: any;
 }
@@ -30,7 +29,7 @@ const ToolsBox = styled.div`
   flex-direction: row-reverse;
 `;
 const CreateStepItem: React.FC<IProps> = (props) => {
-  const { onDelete, restField, name, form, nodes } = props;
+  const { onDelete, restField, name, form } = props;
   const [ step, setStep ] = useState<string>();
   const [ reagents, setReagents ] = useState<API.ReagentsInfo[]>([]);
   const [ reagent, setReagent ] = useState<API.ReagentsInfo>();
@@ -130,10 +129,7 @@ const CreateStepItem: React.FC<IProps> = (props) => {
       {/*加热搅拌*/}
       {step === 'heating_stir_step' && <Mix3 reagent={reagent} name={name}/>}
       {step && (
-        <DataAcquisition
-          name={[ name, 'data_acquisitions' ]}
-          nodes={nodes}
-        />
+        <DataAcquisition name={[ name, 'data_acquisitions' ]}/>
       )}
     </Card>
   );

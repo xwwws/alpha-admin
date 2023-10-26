@@ -1,13 +1,12 @@
 import { Button, Col, Form, Input, Row, Select } from 'antd';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ITypes } from "@/pages/typings";
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
+import { getReadNodeList } from "@/api/methods";
 
 interface IProps {
   name: (string | number)[];
-  nodes: ITypes.EnumType[];
-
   [key: string]: any;
 }
 
@@ -21,11 +20,17 @@ const ButtonWarp = styled.div`
   }
 `;
 const DataAcquisition: React.FC<IProps> = (props) => {
-  const { nodes, name } = props;
+  const {  name } = props;
+  const [ nodes, setNodes ] = useState<ITypes.EnumType[]>([]);
 
+  useEffect(() => {
+    (async () => {
+      const res = await getReadNodeList();
+      setNodes(res.data.map((item): ITypes.EnumType => ({ label: item.name, value: item.nodeid })));
+    })();
+  }, []);
   return (
     <div style={{ marginBottom: '10px' }}>
-      {/* @ts-ignore*/}
       <Form.List name={name}>
         {(fields, { add, remove }) => (
           <>

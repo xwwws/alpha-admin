@@ -12,7 +12,7 @@ import { useSearchParams } from "@@/exports";
 import { fmtRequestParams, fmtResToFormData } from "@/pages/Experiments/hooks/experimentHooks";
 import { getProjects } from "@/api/project";
 import { getReadNodeList } from "@/api/methods";
-import DataAcquisition from "@/pages/Experiments/components/DataAcquisition";
+import DataAcquisition from "@/pages/components/DataAcquisition";
 
 const Create: React.FC = () => {
 
@@ -96,7 +96,6 @@ const Create: React.FC = () => {
               index={key}
               name={name}
               restField={restField}
-              nodes={nodes}
               onDelete={() => remove(name)}
             ></CreateStepItem>
           ))}
@@ -204,7 +203,7 @@ const Create: React.FC = () => {
 
             </Row>
 
-            <DataAcquisition name={['data_acquisitions']} nodes={nodes}/>
+            <DataAcquisition name={['data_acquisitions']}/>
             {formList}
             <Form.Item wrapperCol={{ span: 24 }}>
               <CenterHolderStyle>
