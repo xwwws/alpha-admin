@@ -44,4 +44,8 @@ export default {
   'menu.project.list': '项目列表',
   'menu.project.create': '新建项目',
   'menu.project.edit': '编辑',
+  'menu.project.proListData': '项目数据列表',
+  'menu.project.proAddData': '创建数据项',
+  'menu.project.proListInfo': '数据项数据',
+  'menu.project.proListEdit': '修改数据项数据',
 };

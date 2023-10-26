@@ -1,4 +1,4 @@
-import { addSolMethod } from '@/api/methods';
+import { addSolvent } from '@/api/steps';
 import MethodsView from '@/pages/Methods/components/MethodsView';
 import type { IForm } from '@/pages/typings';
 import { PageContainer } from '@ant-design/pro-layout/es/components/PageContainer';
@@ -86,7 +86,7 @@ const Index: React.FC = () => {
         speed: val.speed,
         weight: val.weight,
       };
-      const { data } = await addSolMethod(params);
+      const { data } = await addSolvent(params);
       setLoading(false);
       setReadResult(JSON.stringify(data.result));
     } catch (err) {

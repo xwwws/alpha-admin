@@ -1,4 +1,4 @@
-import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, OrderedListOutlined, PlusOutlined } from '@ant-design/icons';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, Card, Popconfirm, Tooltip } from 'antd';
 import React, { useRef } from 'react';
@@ -21,7 +21,7 @@ const List: React.FC<IProps> = () => {
 
   }
 
-  const columns: ProColumns<API.Projects.List>[] = formatColumns<API.Projects.List>([
+  const columns: ProColumns<Projects.List>[] = formatColumns<Projects.List>([
     { title: 'ID', dataIndex: 'id' },
     { title: '项目名称', dataIndex: 'name' },
     { title: '项目描述', dataIndex: 'description' },
@@ -32,6 +32,15 @@ const List: React.FC<IProps> = () => {
     {
       title: '操作', dataIndex: 'actions', render: (text, item) => {
         return [
+
+          <Tooltip key={'addData'} placement="top" title="项目数据">
+            <Button
+              type={ 'link' }
+              icon={ <OrderedListOutlined/> }
+              onClick={ () => navigate(`/project/pro-data-List/${ item.id }`) }
+            />
+          </Tooltip>,
+
           <Tooltip key={'edit'} placement="top" title="编辑">
             <Button
               type={ 'link' }
@@ -62,7 +71,7 @@ const List: React.FC<IProps> = () => {
   const tableRef = useRef<ActionType>();
 
   const requestTableData = async (params: { pageSize: number, current: number }) => {
-    const query: API.Projects.ListReq = {
+    const query: Projects.ListReq = {
       page_size: params.pageSize,
       page: params.current,
     }
@@ -90,6 +99,7 @@ const List: React.FC<IProps> = () => {
     >
       <Card>
         <ProTable
+          rowKey="id"
           pagination={ {
             pageSize: 10,
           } }
@@ -97,7 +107,6 @@ const List: React.FC<IProps> = () => {
           columns={ columns }
           search={ false }
           options={ false }
-          rowKey="id"
           request={ requestTableData }
         >
 

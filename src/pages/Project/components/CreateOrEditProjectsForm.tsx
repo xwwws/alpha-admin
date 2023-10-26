@@ -38,7 +38,7 @@ const CreateOrEditProjectsForm: React.FC<IProps> = (props) => {
       })();
     }
   }, [location, params, isEdit]);
-  const submit = async (val: API.Projects.CreateProject) => {
+  const submit = async (val: Projects.CreateProject) => {
     setLoading(true);
     if (isEdit) {
       try {

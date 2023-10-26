@@ -116,7 +116,7 @@ const List: React.FC<IProps> = (props) => {
             options={false}
             rowKey="id"
             request={requestTableData}
-            scroll={{ x: 1700 }}
+            scroll={{ x: columns.length * 200 }}
           />
         </Card>
       </Card>

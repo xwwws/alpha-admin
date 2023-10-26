@@ -122,7 +122,7 @@ const List: React.FC<IProps> = (props) => {
             options={false}
             rowKey="id"
             request={requestTableData}
-            scroll={{ x: 2000 }}
+            scroll={{ x: columns.length * 200 }}
           />
         </Card>
         <Detail isOpen={isShowModal} data={currentItem} close={() => setIsShowModal(false)}/>

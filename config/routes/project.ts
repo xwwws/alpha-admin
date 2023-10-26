@@ -24,6 +24,26 @@ export const project = [
         path: 'edit/:id',
         name: 'edit',
         component: './Project/Edit',
+      },
+      {
+        path: 'pro-add-data/:proId',
+        name: 'proAddData',
+        component: './Project/ProAddData',
+      },
+      {
+        path: 'pro-data-List/:proId',
+        name: 'proListData',
+        component: './Project/ProDataList',
+      },
+      {
+        path: 'pro-data-info/:proDataId',
+        name: 'proListInfo',
+        component: './Project/ProDataInfo',
+      },
+      {
+        path: 'pro-data-edit/:proDataId',
+        name: 'proListEdit',
+        component: './Project/ProDataEdit',
       }
     ],
   },

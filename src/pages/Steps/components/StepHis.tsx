@@ -74,27 +74,31 @@ const StepHis: React.FC<IProps> = (props) => {
   ]);
   const requestMethod = async (params: any) => {
 
-    const paramsData:API.Steps.GetStepHisReq = {
+    const paramsData: API.Steps.GetStepHisReq = {
       page: params.current,
       page_size: params.pageSize,
-    }
-    if(params.start_time_before && params.start_time_after) {
-      paramsData.start_time_before = dayjs(params.start_time_before).format('YYYY-MM-DDTHH:mm:ss')
-      paramsData.start_time_after = dayjs(params.start_time_after).format('YYYY-MM-DDTHH:mm:ss')
+    };
+    if (params.start_time_before && params.start_time_after) {
+      paramsData.start_time_before = dayjs(params.start_time_before).format('YYYY-MM-DDTHH:mm:ss');
+      paramsData.start_time_after = dayjs(params.start_time_after).format('YYYY-MM-DDTHH:mm:ss');
     }
 
     const res = await getStepHis(stepMode, paramsData);
-    return { data: res.data.data, success: true, total: res.data.total };
+    return {
+      data: res.data.data,
+      success: true,
+      total: res.data.total
+    };
   };
   return (
     <StepHisStyle>
       <Card title={'步骤调用历史'} size={'small'}>
         <ProTable
-          key={'id'}
+          rowKey={'id'}
           columns={columns}
           options={false}
           request={requestMethod}
-          scroll={{ x: 2100 }}
+          scroll={{ x: columns.length * 200 }}
           pagination={{
             showSizeChanger: false,
             pageSizeOptions: [ 10, 50, 100, 200 ],

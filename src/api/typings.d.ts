@@ -514,39 +514,6 @@ declare namespace API {
     }
   }
 
-  /**
-   * project 相关
-   */
-  declare namespace Projects {
-    interface ListReq extends PagesReq {
-      [key: string]: any;
-    }
-
-    interface List {
-      id: number;
-      name: string;
-      description: string;
-      created_at: string;
-      updated_at: string;
-    }
-
-    interface CreateProject {
-      name: string;
-      description: string;
-    }
-
-    interface EditProject extends CreateProject {
-      id?: string | number;
-    }
-
-    interface ProjectDetail {
-      id: string | number;
-      name: string;
-      description: string;
-      created_at: string;
-      updated_at: string;
-    }
-  }
 
 
   /**

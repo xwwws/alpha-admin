@@ -433,7 +433,7 @@ const List: React.FC = () => {
             options={false}
             rowKey="id"
             request={requestTableData}
-            scroll={{ x: 1600 }}
+            scroll={{ x: columns.length * 200 }}
           />
         </Card>
       </PageContainer>
