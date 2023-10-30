@@ -316,6 +316,16 @@ declare namespace API {
       interval: number;
       value_type: string;
       file_url: string;
+
+      avg: string;
+      data_summary: any;
+      max: string;
+      min: string;
+      record_end_time: string;
+      record_start_time: string;
+      result_value: any;
+
+
     }
 
     type ExperimentDetailsRes = {
@@ -323,6 +333,7 @@ declare namespace API {
       project_id: string | number;
       name: string;
       bottle_area: Coordinates;
+      recycle_area: Coordinates;
       bottle_height: 0;
       steps_data: CreateExperimentStep[];
       status: string;

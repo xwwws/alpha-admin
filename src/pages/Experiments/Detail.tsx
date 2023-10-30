@@ -76,6 +76,23 @@ const Detail: React.FC<IProps> = (props) => {
         </div>
       ),
     },
+
+    {
+      key: '6-2',
+      label: '回收工位',
+      children: recordInfo?.recycle_area.name,
+    },
+    {
+      key: '6-3',
+      label: '回收瓶位置',
+      children: (
+        <div>
+          <p>x: {recordInfo?.recycle_area.x}</p>
+          <p>y: {recordInfo?.recycle_area.y}</p>
+          <p>z: {recordInfo?.recycle_area.z}</p>
+        </div>
+      ),
+    },
     {
       key: '6-1',
       label: '备注',

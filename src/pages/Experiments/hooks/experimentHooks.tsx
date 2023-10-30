@@ -255,6 +255,7 @@ export const fmtResToFormData = (data: API.Experiments.CreateExperimentReq): any
 
     return steps_data_item;
   });
+  console.log(data);
   return {
     name: data.name,
     project_id: `${data.project_id}`,
@@ -263,6 +264,10 @@ export const fmtResToFormData = (data: API.Experiments.CreateExperimentReq): any
     bottle_area_y: `${data.bottle_area.y}`,
     bottle_area_z: `${data.bottle_area.z}`,
     bottle_height: `${data.bottle_height}`,
+    recycle_area_name: `${data.recycle_area?.name}`,
+    recycle_area_x: `${data.recycle_area?.x}`,
+    recycle_area_y: `${data.recycle_area?.y}`,
+    recycle_area_z: `${data.recycle_area?.z}`,
     data_acquisitions: data.data_acquisitions,
     steps_data
   };

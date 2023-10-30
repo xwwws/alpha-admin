@@ -5,6 +5,7 @@ import CollectedData from "@/pages/Experiments/components/CollectedData";
 import styled from 'styled-components';
 import { Button, Card } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
+import CollectedDetails from "@/pages/Experiments/components/CollectedDetails";
 
 interface IProps {
   collected_data: API.Experiments.DataAcquisitionsResults[];
@@ -55,6 +56,8 @@ const CollectedDataWarp: React.FC<IProps> = (props) => {
           <div className="downloadWarp">
             <Button icon={<DownloadOutlined/>} onClick={() => openUrl(collected_data[index].file_url)}>下载</Button>
           </div>
+
+          <CollectedDetails data={collected_data[index]}/>
           <CollectedData data={item}/>
         </Card>;
       })}

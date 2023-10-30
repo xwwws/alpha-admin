@@ -48,6 +48,7 @@ const List: React.FC = () => {
   }>({ id: '', description: '' });
   const [ execStatusLoading, setExecStatusLoading ] = useState<boolean>(false);
   const [ isShowEditDescModal, setIsShowEditDescModal ] = useState<boolean>(false);
+
   /**
    * 执行实验
    * @param id
@@ -192,7 +193,7 @@ const List: React.FC = () => {
     } catch (e) {
       console.log(e);
     } finally {
-      setExecStatusLoading(false)
+      setExecStatusLoading(false);
     }
   };
 
@@ -307,22 +308,30 @@ const List: React.FC = () => {
                 <Tooltip placement="top" title="运行">
                   <Button
                     type={'link'}
-                    icon={<RedoOutlined />}
+                    icon={<RedoOutlined/>}
                     onClick={() => handleReRun(record.id)}
                   ></Button>
                 </Tooltip>
               )
             }
             {
-              //  只有“等待提交”的实验可以提交
+              //  只有“运行中”的实验不可删除
               record.status === 'draft' && (
-                <Tooltip placement="top" title="运行">
-                  <Button
-                    type={'link'}
-                    icon={<PlayCircleOutlined/>}
-                    onClick={() => handleRun(record.id)}
-                  ></Button>
-                </Tooltip>
+                <Popconfirm
+                  key="run"
+                  title={`运行 ${record.name}`}
+                  description={`是否运行实验?`}
+                  okText="是"
+                  cancelText="否"
+                  onConfirm={() => handleRun(record.id)}
+                >
+                  <Tooltip placement="top" title="运行">
+                    <Button
+                      type={'link'}
+                      icon={<PlayCircleOutlined/>}
+                    ></Button>
+                  </Tooltip>
+                </Popconfirm>
               )
             }
             {
