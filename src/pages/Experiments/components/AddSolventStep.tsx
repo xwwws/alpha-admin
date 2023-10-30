@@ -99,7 +99,7 @@ const AddSolventStep: React.FC<IProps> = (props) => {
         </Col>
         <Col span={6}>
           <Form.Item name={[name, 'weight']} labelCol={{span:10}} label="容积" rules={formRules.weight}>
-            <Input addonAfter="ml" />
+            <Input addonAfter="g" />
           </Form.Item>
         </Col>
         <Col span={10}>

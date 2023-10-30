@@ -32,11 +32,11 @@ const DetailAddSolid: React.FC<IProps> = (props) => {
     { key: '7', label: 'x', children: record.kwargs.dst_area?.x },
     { key: '8', label: 'y', children: record.kwargs.dst_area?.y },
     { key: '9', label: 'z', children: record.kwargs.dst_area?.z },
-    { key: '10', label: '速度', children: `${ record.kwargs.speed } g/s` },
+    { key: '10', label: '角度', children: `${ record.kwargs.speed } °/s` },
     { key: '11', label: '质量', children: `${ record.kwargs.weight } g` },
     { key: '12', label: '精确度', children: `${ record.kwargs.tolerance } %` },
     { key: '13', label: '高度', children: `${ record.kwargs.height } mm` },
-    { key: '14', label: '角度', children: `${ record.kwargs.angel } rad` }
+    { key: '14', label: '步长', children: `${ record.kwargs.angel } rad` }
   ];
   return (
     <>

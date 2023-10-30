@@ -33,12 +33,12 @@ const AddSolid: React.FC<IProps> = (props) => {
       { max: 10, message: '比重过高' },
     ],
     height: [
-      { required: true, message: '请输入比高度' },
+      { required: true, message: '请输入高度' },
       { pattern: /^\d+(.\d+)?$/, message: '输入错误' },
       { max: 10, message: '高度过高' },
     ],
     angel: [
-      { required: true, message: '请输入比角度' },
+      { required: true, message: '请输入角度' },
       { pattern: /^\d+(.\d+)?$/, message: '输入错误' },
       { max: 3, message: '角度不正确' },
     ],
@@ -104,7 +104,7 @@ const AddSolid: React.FC<IProps> = (props) => {
         </Col>
         <Col span={8}>
           <Form.Item name={[name, 'speed']} labelCol={{span:10}} label="速度" rules={formRules.speed}>
-            <Input addonAfter="g/s" />
+            <Input addonAfter="°/s" />
           </Form.Item>
         </Col>
         <Col span={8}>
@@ -123,7 +123,7 @@ const AddSolid: React.FC<IProps> = (props) => {
           </Form.Item>
         </Col>
         <Col span={8}>
-          <Form.Item name={[name, 'angel']} labelCol={{span:10}} label="角度" rules={formRules.angel}>
+          <Form.Item name={[name, 'angel']} labelCol={{span:10}} label="步长" rules={formRules.angel}>
             <Input addonAfter="rad" />
           </Form.Item>
         </Col>
