@@ -85,6 +85,12 @@ export const methods = [
         name: 'mix3',
         component: './Methods/Mix3',
       },
+      // 废液蒸馏
+      {
+        path: 'dodistillc3',
+        name: 'dodistillc3',
+        component: './Methods/Dodistillc3',
+      },
     ],
   },
 ];

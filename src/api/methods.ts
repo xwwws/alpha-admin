@@ -137,6 +137,16 @@ export const mix3 = (data: API.Mix3): Promise<Response<API.MethodsRes>> => {
     data,
   });
 };
+/**
+ * 废液蒸馏
+ * @param data
+ */
+export const dodistillc3 = (data: Methods.Dodistillc3): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/methods/dodistillc3`, {
+    method: 'post',
+    data,
+  });
+};
 
 
 /**

@@ -61,6 +61,16 @@ export const mix3Step = (data: API.Mix3Step): Promise<Response<API.MethodsRes>> 
     data,
   });
 };
+/**
+ * 搅拌3
+ * @param data
+ */
+export const dodistillc3step = (data: Steps.Dodistillc3): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/steps/dodistillc3step`, {
+    method: 'post',
+    data,
+  });
+};
 
 
 /**

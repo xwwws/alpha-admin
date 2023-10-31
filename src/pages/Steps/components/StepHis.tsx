@@ -49,12 +49,12 @@ const StepHis: React.FC<IProps> = (props) => {
     { title: '结束时间', dataIndex: 'end_time' },
     { title: '计划量', dataIndex: 'quantity_plan' },
     { title: '实际量', dataIndex: 'quantity_real' },
-    {
-      title: 'content',
-      dataIndex: 'content',
-      width: "200px",
-      render: (text, { content }) => <StepHisContent content={content}/>
-    },
+    // {
+    //   title: 'content',
+    //   dataIndex: 'content',
+    //   width: "200px",
+    //   render: (text, { content }) => <StepHisContent content={content}/>
+    // },
     {
       title: 'result',
       dataIndex: 'result',
