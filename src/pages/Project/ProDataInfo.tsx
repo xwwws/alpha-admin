@@ -139,13 +139,13 @@ const ProDataInfo: React.FC<IProps> = (props) => {
           ]}
         />
       </Card>
-      {/*<ProDataInfoChartModal*/}
-      {/*  isShow={isShow}*/}
-      {/*  unit={unit}*/}
-      {/*  isLoading={isModalLoading}*/}
-      {/*  chartData={chartData}*/}
-      {/*  onCancel={() => setIsShow(false)}*/}
-      {/*/>*/}
+      <ProDataInfoChartModal
+        isShow={isShow}
+        unit={unit}
+        isLoading={isModalLoading}
+        chartData={chartData}
+        onCancel={() => setIsShow(false)}
+      />
     </PageContainer>
   );
 };
