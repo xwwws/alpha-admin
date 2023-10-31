@@ -4,8 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from "@@/exports";
 import { getProDataInfo } from "@/api/project";
 import { formatColumns } from "@/utils/componentSettingUtils";
-import record from "@/pages/Experiments/Record";
 import { Icsv, readCSV } from "@/utils/fileRead";
+import ProDataInfoChartModal from "@/pages/Project/components/ProDataInfoChartModal";
+import type { IChartData } from "@/pages/Project/components/ProDataInfoChartModal";
 
 interface IProps {
   [key: string]: any;
@@ -24,6 +25,10 @@ const ProDataInfo: React.FC<IProps> = (props) => {
   const [ unit, setUnit ] = useState<string>('');
   const [ nameIndex, setNameIndex ] = useState<number>(0);
   const [ IDIndex, setIDIndex ] = useState<number>(0);
+  // model相关数据
+  const [ isShow, setIsShow ] = useState<boolean>(false);
+  const [ isModalLoading, setIsModalLoading ] = useState<boolean>(false);
+  const [ chartData, setChartData ] = useState<IChartData>({ xData: [], yData: [] });
   const pageInit = async (proDataId: string) => {
     const res = await getProDataInfo(proDataId);
     const tableTitle: string[] = res.data.data[0] as string[];
@@ -63,7 +68,7 @@ const ProDataInfo: React.FC<IProps> = (props) => {
    * 将csv数据转换成图表数据
    * @param allData
    */
-  const formatCSVsData2ChartData = (allData: IAllData[]) => {
+  const formatCSVsData2ChartData = (allData: IAllData[]): IChartData => {
     // 合并所有x轴  x轴以 duration 为准
     const xData = allData
       .map((item) => item.data.duration)
@@ -74,22 +79,29 @@ const ProDataInfo: React.FC<IProps> = (props) => {
     const yData = allData.map(({ name, data }) => {
       return {
         name,
-        yData: xData.map((x) => {
+        y: xData.map((x) => {
           const durationIndex = data.duration.indexOf(x);
           if (durationIndex === -1) {
             return '-';
           } else {
             return data.value[durationIndex];
           }
-        })
+        }).reduce((accumulator: string[], item) => {
+          if (item === '-') {
+            return [ ...accumulator, accumulator[accumulator.length - 1] ];
+          } else {
+            return [ ...accumulator, item ];
+          }
+        }, [])
       };
     });
     return { xData, yData };
   };
-  const viewComparisonChart = () => {
-
+  const viewComparisonChart = async () => {
+    setIsModalLoading(false);
+    setChartData(formatCSVsData2ChartData(await getCSVsData()));
+    setIsShow(true);
   };
-
 
   return (
     <PageContainer>
@@ -127,6 +139,13 @@ const ProDataInfo: React.FC<IProps> = (props) => {
           ]}
         />
       </Card>
+      {/*<ProDataInfoChartModal*/}
+      {/*  isShow={isShow}*/}
+      {/*  unit={unit}*/}
+      {/*  isLoading={isModalLoading}*/}
+      {/*  chartData={chartData}*/}
+      {/*  onCancel={() => setIsShow(false)}*/}
+      {/*/>*/}
     </PageContainer>
   );
 };

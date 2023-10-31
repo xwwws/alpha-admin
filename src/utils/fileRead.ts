@@ -26,8 +26,7 @@ export const readCSV = async (csv_url: string): Promise<Icsv> => {
   const CSVData = CSVString.split('\n');
 
   // 表头
-  const THeader = CSVData[0].split(',')
-  THeader.push('duration')
+  const THeader = CSVData[0].split(',');
   // 将表头加入结果
   // 格式化数据  最后一个元素有可能是空字符串
   if (!CSVData[CSVData.length - 1]) {
@@ -38,13 +37,7 @@ export const readCSV = async (csv_url: string): Promise<Icsv> => {
     const csvDataRecord = csvDataItem.split(',');
     THeader.forEach((headerItem, headerIndex) => {
       if (!result[headerItem]) result[headerItem] = [];
-      if (headerItem === 'duration') {
-        result[headerItem].push(`${csvDataIndex}`)
-      } else {
-
-        result[headerItem].push(csvDataRecord[headerIndex]);
-      }
-
+      result[headerItem].push(csvDataRecord[headerIndex]);
     });
   });
   return result;
