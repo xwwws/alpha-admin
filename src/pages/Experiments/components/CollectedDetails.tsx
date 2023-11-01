@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 interface IProps {
-  data: API.Experiments.DataAcquisitionsResults;
+  data: API.DataAcquisitionsResults;
 
   [key: string]: any;
 }

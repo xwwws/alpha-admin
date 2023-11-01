@@ -179,6 +179,9 @@ const Index: React.FC = () => {
           </Form.Item>
         </Col>
 
+        <Col span={24}>
+          <DataAcquisition name={[ 'data_acquisitions' ]}/>
+        </Col>
 
         <Col offset={11} span={12}>
           <Button type={'primary'} htmlType="submit">

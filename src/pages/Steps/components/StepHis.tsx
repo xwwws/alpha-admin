@@ -1,5 +1,5 @@
-import { Card, Tag } from 'antd';
-import React, { ReactNode } from 'react';
+import { Button, Card, Tag, Tooltip } from 'antd';
+import React, { ReactNode, useState } from 'react';
 import styled from 'styled-components';
 import { ProColumns, ProTable } from '@ant-design/pro-components';
 import { getStepHis } from "@/api/steps";
@@ -7,6 +7,8 @@ import { formatColumns } from "@/utils/componentSettingUtils";
 import { experimentStatesMap, expState2ValueEnum } from "@/utils/dataMaps";
 import StepHisContent from './StepHisContent';
 import dayjs from 'dayjs';
+import { FundOutlined } from "@ant-design/icons";
+import StepHisChart from "@/pages/Steps/components/StepHisChart";
 
 interface IProps {
   stepMode: string; //  API.Steps.StepName
@@ -18,6 +20,12 @@ const StepHisStyle = styled.div`
 `;
 const StepHis: React.FC<IProps> = (props) => {
   const { title, stepMode } = props;
+  const [ collected_data, set_collected_data ] = useState<API.DataAcquisitionsResults[]>([]);
+  const [ isShow, setIsShow ] = useState<boolean>(false);
+  const showChart = (results: API.DataAcquisitionsResults[]) => {
+    set_collected_data(results)
+    setIsShow(true)
+  }
   const columns: ProColumns<API.Steps.StepHis>[] = formatColumns<API.Steps.StepHis>([
     { title: 'ID', dataIndex: 'id' },
     { title: 'name', dataIndex: 'name' },
@@ -71,6 +79,21 @@ const StepHis: React.FC<IProps> = (props) => {
         </>
       )
     },
+    {
+      title: '操作',
+      dataIndex: 'action',
+      width: '120px',
+      fixed:'right',
+      render: (text, record) => [
+        <Tooltip key={'01'} title={'查看数据采集信息'}>
+          <Button
+            icon={<FundOutlined/>}
+            type={'link'}
+            onClick={() => showChart(record.data_acquisitions_results)}
+          />
+        </Tooltip>
+      ]
+    },
   ]);
   const requestMethod = async (params: any) => {
 
@@ -107,6 +130,11 @@ const StepHis: React.FC<IProps> = (props) => {
           }}
         />
       </Card>
+      <StepHisChart
+        isShow={isShow}
+        onCancel={() => setIsShow(false)}
+        collected_data={collected_data}
+      />
     </StepHisStyle>
   );
 };

@@ -144,7 +144,7 @@ const Detail: React.FC<IProps> = (props) => {
 
         {/*采集数据信息*/}
         <CollectedDataWarp
-          collected_data={recordInfo?.data_acquisitions_results as API.Experiments.DataAcquisitionsResults[]}
+          collected_data={recordInfo?.data_acquisitions_results as API.DataAcquisitionsResults[]}
         />
       </Card>
     </PageContainer>

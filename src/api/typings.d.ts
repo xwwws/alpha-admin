@@ -5,6 +5,25 @@ declare interface Response<T> {
 }
 
 declare namespace API {
+
+
+  interface DataAcquisitionsResults {
+    name: string;
+    nodeid: number;
+    interval: number;
+    value_type: string;
+    file_url: string;
+
+    avg: string;
+    data_summary: any;
+    max: string;
+    min: string;
+    record_end_time: string;
+    record_start_time: string;
+    result_value: any;
+
+
+  }
   interface PagesReq {
     page_size?: string | number;
     page?: string | number;
@@ -292,6 +311,8 @@ declare namespace API {
       label: string;
       quantity_plan: number;
       quantity_real: number;
+      data_acquisitions: data_acquisitionParams[];
+      data_acquisitions_results: DataAcquisitionsResults[];
     }
   }
 
@@ -309,24 +330,6 @@ declare namespace API {
       name: string;
       status: string;
     };
-
-    interface DataAcquisitionsResults {
-      name: string;
-      nodeid: number;
-      interval: number;
-      value_type: string;
-      file_url: string;
-
-      avg: string;
-      data_summary: any;
-      max: string;
-      min: string;
-      record_end_time: string;
-      record_start_time: string;
-      result_value: any;
-
-
-    }
 
     type ExperimentDetailsRes = {
       id: string | number;

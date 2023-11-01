@@ -8,7 +8,7 @@ import { DownloadOutlined } from '@ant-design/icons';
 import CollectedDetails from "@/pages/Experiments/components/CollectedDetails";
 
 interface IProps {
-  collected_data: API.Experiments.DataAcquisitionsResults[];
+  collected_data: API.DataAcquisitionsResults[];
 
   [key: string]: any;
 }
