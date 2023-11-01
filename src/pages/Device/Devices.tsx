@@ -13,14 +13,17 @@ interface IProps {
 const Devices: React.FC<IProps> = (props) => {
   const [ devices, setDevices ] = useState<Devices.Devices[]>([]);
   const [ currentDevice, setCurrentDevice ] = useState<Devices.Devices>();
+  const [ pageLoading, setPageLoading ] = useState<boolean>(true);
   /**
    * 初始化页面
    */
   useEffect(() => {
     (async () => {
+      setPageLoading(true)
       const res = await getDevices();
       setDevices(res.data);
       setCurrentDevice(res.data[0])
+      setPageLoading(false)
     })();
   }, []);
 
@@ -33,6 +36,11 @@ const Devices: React.FC<IProps> = (props) => {
   };
   return (
     <PageContainer
+
+      loading={{
+        spinning: pageLoading,
+        tip: '拼命加载中...',
+      }}
       tabList={devices.map((item, index) => ({
         tab: item.label,
         key: item.browse_name,
