@@ -197,7 +197,7 @@ const Index: React.FC = () => {
             {searchModel}
           </MethodsView>
         </Card>
-        <StepHis stepMode={'heating_stir_step'}/>
+        <StepHis stepMode={'do_distill_c3'}/>
       </PageContainer>
     </>
   );
