@@ -7,9 +7,10 @@ interface IProps {
 
   [key: string]: any;
 }
+
 const CollectedDetailsStyle = styled.div`
   padding: 10px;
-`
+`;
 const CollectedDetails: React.FC<IProps> = (props) => {
   const { data } = props;
   return (

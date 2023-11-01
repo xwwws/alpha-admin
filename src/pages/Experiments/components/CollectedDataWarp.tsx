@@ -3,7 +3,7 @@ import { readCSV } from "@/utils/fileRead";
 import type { Icsv } from "@/utils/fileRead";
 import CollectedData from "@/pages/Experiments/components/CollectedData";
 import styled from 'styled-components';
-import { Button, Card } from 'antd';
+import { Button, Card, Empty } from 'antd';
 import { DownloadOutlined } from '@ant-design/icons';
 import CollectedDetails from "@/pages/Experiments/components/CollectedDetails";
 
@@ -45,22 +45,27 @@ const CollectedDataWarp: React.FC<IProps> = (props) => {
   }, [ collected_data ]);
 
   const openUrl = (file_url: string) => {
-    const url = `${location.origin}/api/static/acquisitions/${file_url}`
+    const url = `${location.origin}/api/static/acquisitions/${file_url}`;
     window.open(url, '_blank');
   };
   return (
     <CollectedDataWarpStyle>
       <div className="title">数据采集信息</div>
-      {collectedDataList.map((item,index) => {
+      {collectedDataList.length > 0 && collectedDataList.map((item, index) => {
         return <Card hoverable key={index}>
           <div className="downloadWarp">
             <Button icon={<DownloadOutlined/>} onClick={() => openUrl(collected_data[index].file_url)}>下载</Button>
           </div>
 
-          <CollectedDetails data={collected_data[index]}/>
+          {collected_data[index] && <CollectedDetails data={collected_data[index]}/>}
           <CollectedData data={item}/>
         </Card>;
       })}
+      {
+        collectedDataList.length === 0 && <>
+          <Empty description={'暂无数据'}/>
+        </>
+      }
     </CollectedDataWarpStyle>
   );
 };
