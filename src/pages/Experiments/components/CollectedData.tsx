@@ -45,7 +45,7 @@ const CollectedData: React.FC<IProps> = (props) => {
         }
       },
       tooltip: {
-        trigger: 'item',
+        trigger: 'axis',
         formatter: " {b}，{c}"
       },
       xAxis: {

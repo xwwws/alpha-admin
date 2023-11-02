@@ -57,8 +57,8 @@ const CollectedDataWarp: React.FC<IProps> = (props) => {
             <Button icon={<DownloadOutlined/>} onClick={() => openUrl(collected_data[index].file_url)}>下载</Button>
           </div>
 
-          {collected_data[index] && <CollectedDetails data={collected_data[index]}/>}
           <CollectedData data={item}/>
+          {collected_data[index] && <CollectedDetails data={collected_data[index]}/>}
         </Card>;
       })}
       {
