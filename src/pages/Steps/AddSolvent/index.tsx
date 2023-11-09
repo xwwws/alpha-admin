@@ -219,7 +219,7 @@ const Index: React.FC = () => {
 
         <Col span={5}>
           <Form.Item style={formItemStyle} name="accuracy" label="精确度" rules={formRules.accuracy}>
-            <Input addonAfter="mm"/>
+            <Input/>
           </Form.Item>
         </Col>
         <Col span={5}/>

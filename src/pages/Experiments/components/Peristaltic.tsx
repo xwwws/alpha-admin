@@ -104,7 +104,7 @@ const AddSolid: React.FC<IProps> = (props) => {
         </Col>
         <Col span={10}>
           <Form.Item name={[name, 'accuracy']} label="精确度" rules={formRules.accuracy}>
-            <Input addonAfter={'%'}/>
+            <Input />
           </Form.Item>
         </Col>
       </Row>

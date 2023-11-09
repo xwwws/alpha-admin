@@ -109,11 +109,9 @@ const Index: React.FC = () => {
       yAxis: { type: 'value' },
       series: [ { type: 'line', data: XAxis } ]
     };
-    console.log(Series);
-    console.log(XAxis);
     chartInstance && chartInstance.setOption(newOptions);
   };
-
+``
   /**
    * 开始读值
    * @param val

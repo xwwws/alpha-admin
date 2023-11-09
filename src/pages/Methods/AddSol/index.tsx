@@ -183,7 +183,7 @@ const Index: React.FC = () => {
         <Input addonAfter="mm" />
       </Form.Item>
       <Form.Item style={formItemStyle} name="accuracy" label="精确度" rules={formRules.accuracy}>
-        <Input addonAfter="mm" />
+        <Input/>
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 4 }}>

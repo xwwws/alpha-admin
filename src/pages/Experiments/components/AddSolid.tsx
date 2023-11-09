@@ -114,7 +114,7 @@ const AddSolid: React.FC<IProps> = (props) => {
         </Col>
         <Col span={8}>
           <Form.Item name={[name, 'tolerance']} labelCol={{span:10}} label="精确度" rules={formRules.tolerance}>
-            <Input addonAfter="%" />
+            <Input/>
           </Form.Item>
         </Col>
         <Col span={8}>

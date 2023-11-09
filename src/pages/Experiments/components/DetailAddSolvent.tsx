@@ -34,8 +34,8 @@ const DetailAddSolvent: React.FC<IProps> = (props) => {
     { key: '8', label: 'y', children: record.kwargs.dst_area?.y },
     { key: '9', label: 'z', children: record.kwargs.dst_area?.z },
     { key: '10', label: '速度', children: `${record.kwargs.speed} mm/s` },
-    { key: '11', label: '容积', children: `${record.kwargs.weight} g` },
-    { key: '12', label: '精确度', children:`${record.kwargs.accuracy} %` },
+    { key: '11', label: '质量', children: `${record.kwargs.weight} g` },
+    { key: '12', label: '精确度', children:`${record.kwargs.accuracy}` },
   ];
   return (
     <>

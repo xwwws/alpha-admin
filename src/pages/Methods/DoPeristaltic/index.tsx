@@ -139,7 +139,7 @@ const Index: React.FC = () => {
         <Input />
       </Form.Item>
       <Form.Item style={formItemStyle} name="accuracy" label="精确度" rules={formRules.accuracy}>
-        <Input />
+        <Input/>
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 4 }}>
