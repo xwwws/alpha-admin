@@ -3,6 +3,8 @@ import { WebSocketStatus } from "@/utils/componentSettingUtils";
 import DispatchEvent from "@/utils/DispatchEvent";
 import { message } from 'antd';
 import { resolvePath } from "@@/exports";
+import { GET_TOKEN } from "@/utils/auth";
+import QueryString from "qs";
 
 export interface ISendMessage {
   nodeid: string | number;
@@ -44,6 +46,12 @@ const useWebsocket = () => {
    */
   const [ socketState, setSocketState ] = useState<string>('init');
 
+
+  // 连接成功回调
+  const socketBeforeSend = (event: any) => {
+    setSocketState(socketStatus.CONNECTING);
+    DispatchEvent.emit(SocketEventEnum.OPEN);
+  };
   // 连接成功回调
   const socketOnOpen = () => {
     setSocketState(socketStatus.CONNECTING);
@@ -69,7 +77,12 @@ const useWebsocket = () => {
 
   function socketInit(url: string) {
     return new Promise((resolve, reject) => {
+
+      url+= `?${QueryString.stringify({
+        token: GET_TOKEN()
+      })}`
       const socketObj = new WebSocket(url);
+      // [ `Authorization:Bearer ${GET_TOKEN()}` ]
       socketObj.addEventListener("open", socketOnOpen);
       socketObj.addEventListener("close", socketOnClose);
       socketObj.addEventListener("error", socketOnError);

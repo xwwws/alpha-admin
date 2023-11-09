@@ -47,10 +47,7 @@ const List: React.FC<IProps> = (props) => {
     { title: 'CAS号', dataIndex: 'cas' },
     { title: '浓度(mol/L)', dataIndex: 'concentration' },
     { title: '密度(g/ml)', dataIndex: 'solution_density' },
-    {
-      title: '分子量(g/mol)',
-      dataIndex: 'solute_molecular_weight',
-    },
+    { title: '分子量(g/mol)', dataIndex: 'solute_molecular_weight', },
     { title: '溶剂', dataIndex: 'solvent' },
     { title: '沸点(℃)', dataIndex: 'boiling_point' },
     { title: '熔点(℃)', dataIndex: 'melting_point' },
@@ -113,6 +110,7 @@ const List: React.FC<IProps> = (props) => {
       >
         <Card>
           <ProTable
+            rowKey="id"
             pagination={{
               pageSize: 10,
             }}
@@ -120,7 +118,6 @@ const List: React.FC<IProps> = (props) => {
             columns={columns}
             search={false}
             options={false}
-            rowKey="id"
             request={requestTableData}
             scroll={{ x: columns.length * 200 }}
           />

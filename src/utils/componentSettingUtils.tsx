@@ -1,6 +1,7 @@
-import type { ProColumns } from "@ant-design/pro-components"
-import dayjs from "dayjs"
-import type {ReactNode} from 'react'
+import type { ProColumns } from "@ant-design/pro-components";
+import dayjs from "dayjs";
+import type { ReactNode } from 'react';
+
 const tableColumnsSetting: ProColumns = {
   // hideInSearch: true,
   align: 'center',
@@ -8,15 +9,10 @@ const tableColumnsSetting: ProColumns = {
 }
 
 export function formatColumns<T>(columns: ProColumns<T>[]): ProColumns<T>[] {
-  const result = columns.map(item => {
-    return {
-      ...tableColumnsSetting,
-      ...item
-    }
-  })
-  // log table columns
-  // console.log(result);
-  return result
+  return columns.map(item => ({
+    ...tableColumnsSetting,
+    ...item
+  }))
 }
 
 interface TRenderTime {

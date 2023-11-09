@@ -10,7 +10,6 @@ import * as echarts from "echarts";
 import dayjs from 'dayjs';
 import MethodsHis from "@/pages/Methods/components/MethodsHis";
 import { webSocketUrl } from "@/utils";
-
 const formItemLayout = {
   labelCol: { span: 8 },
   wrapperCol: { span: 16 },
@@ -60,14 +59,6 @@ const Index: React.FC = () => {
         {
           data: [],
           type: 'line',
-          itemStyle: {
-            // @ts-ignore
-            normal: {
-              color,
-              borderColor: color,
-              borderWidth: 2
-            }
-          },
           label: {
             show: true,
             position: 'top',

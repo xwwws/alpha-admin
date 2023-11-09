@@ -60,14 +60,6 @@ const CollectedData: React.FC<IProps> = (props) => {
         {
           data: data.value ? data.value.map((item: string) => MathRound(Number(item as string), 2)) : [],
           type: 'line',
-          itemStyle: {
-            // @ts-ignore
-            normal: {
-              color,
-              borderColor: color,
-              borderWidth: 2
-            }
-          },
           label: {
             show: true,
             position: 'top',

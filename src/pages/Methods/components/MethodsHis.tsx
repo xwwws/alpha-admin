@@ -60,13 +60,14 @@ const MethodsHis: React.FC<IProps> = (props) => {
 
   // table columns
   const columns: ProColumns<API.Methods.MethodHis>[] = formatColumns<API.Methods.MethodHis>([
-    { title: 'ID', dataIndex: 'id' },
-    { title: 'action', dataIndex: 'action' },
-    { title: 'label', dataIndex: 'label' },
+    { title: 'ID', key: "id", dataIndex: 'id' },
+    { title: 'action', key: "action", dataIndex: 'action' },
+    { title: 'label', key: "label", dataIndex: 'label' },
     {
       title: '开始时间',
       valueType: 'dateTimeRange',
       dataIndex: 'start_time',
+      key: 'start_time',
       search: {
         transform: (value: any) => {
           return {
@@ -79,9 +80,10 @@ const MethodsHis: React.FC<IProps> = (props) => {
         return record.start_time;
       }
     },
-    { title: '结束时间', dataIndex: 'end_time' },
+    { title: '结束时间', dataIndex: 'end_time', key: 'end_time', },
     {
       title: 'args',
+      key: 'args',
       dataIndex: 'args',
       render: (text, record) => (
         <>
@@ -97,6 +99,7 @@ const MethodsHis: React.FC<IProps> = (props) => {
     },
     {
       title: 'result',
+      key: 'result',
       dataIndex: 'result',
       render: (text, record) => (
         <>
@@ -119,8 +122,8 @@ const MethodsHis: React.FC<IProps> = (props) => {
       page_size: params.pageSize,
     }
     if(params.start_time_before && params.start_time_after) {
-      paramsData.start_time_before = dayjs(params.start_time_before).format('YYYY-MM-DDTHH:mm:ss')
-      paramsData.start_time_after = dayjs(params.start_time_after).format('YYYY-MM-DDTHH:mm:ss')
+      paramsData.start_time_before = dayjs(params.start_time_before).format('YYYY-MM-DD HH:mm:ss')
+      paramsData.start_time_after = dayjs(params.start_time_after).format('YYYY-MM-DD HH:mm:ss')
     }
     const res = await getMethodHisByMethods(methodMode, paramsData);
     return { data: res.data.data, success: true, total: res.data.total };
@@ -154,14 +157,13 @@ const MethodsHis: React.FC<IProps> = (props) => {
       </StatisticsWarpStyle>
       <Card title={'指令调用历史'} size={'small'}>
         <ProTable
-          key={'id'}
+          rowKey={({id}) => `${id}`}
           columns={columns}
           options={false}
           request={requestMethod}
           scroll={{ x: columns.length * 200 }}
           pagination={{
             showSizeChanger: false,
-            // pageSizeOptions: [ 10, 50, 100, 200 ],
             showQuickJumper: true,
             pageSize: 10,
           }}
