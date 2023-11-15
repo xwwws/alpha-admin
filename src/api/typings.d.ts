@@ -13,7 +13,7 @@ declare namespace API {
     interval: number;
     value_type: string;
     file_url: string;
-
+    label: string;
     avg: string;
     data_summary: any;
     max: string;
@@ -81,6 +81,7 @@ declare namespace API {
       label: string;
       server_time: string;
       value: string | number;
+      custom_name: string;
       value_type: string | number;
     }
 

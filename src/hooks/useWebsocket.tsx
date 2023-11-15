@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { WebSocketStatus } from "@/utils/componentSettingUtils";
 import DispatchEvent from "@/utils/DispatchEvent";
 import { message } from 'antd';
-import { resolvePath } from "@@/exports";
 import { GET_TOKEN } from "@/utils/auth";
 import QueryString from "qs";
 
@@ -12,6 +11,7 @@ export interface ISendMessage {
 }
 
 export interface IMsgGet {
+  custom_name:string;
   current_time: string;
   description: string;
   label: string;

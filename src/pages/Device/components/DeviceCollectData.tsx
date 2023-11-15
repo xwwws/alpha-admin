@@ -12,8 +12,15 @@ interface IProps {
 }
 
 interface ICollectData {
+  current_time: string;
+  server_time: string;
+  custom_name: string;
+  description: string;
+  name: string;
+  nodeid: number;
   label: string;
   value?: any;
+  value_type: string;
 }
 
 const CollectDataStyle = styled.div`
@@ -95,7 +102,7 @@ const DeviceCollectData: React.FC<IProps> = (props) => {
             {collectDataList.map(item => {
               return (
                 <Descriptions.Item
-                  key={item.label}
+                  key={item.custom_name}
                   labelStyle={{ width: '180px', textAlign: 'center' }}
                   label={item.label}
                 >

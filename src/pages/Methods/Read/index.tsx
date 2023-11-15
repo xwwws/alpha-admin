@@ -41,11 +41,15 @@ const Index: React.FC = () => {
     const echartsOption: ECOption = {
       title: {
         text: "",
-        textStyle: {}
+        left: 'center',
+        textStyle: {
+          fontSize: "15",
+          fontWeight: 900
+        },
       },
       tooltip: {
-        trigger: 'item',
-        formatter: " {b}，{c}"
+        trigger: 'axis',
+        formatter: " {b} - {c}"
       },
       xAxis: {
         type: 'category',
@@ -105,13 +109,23 @@ const Index: React.FC = () => {
     // @ts-ignore
     const chartInstance = echarts.getInstanceByDom(chartRef.current);
     const newOptions = {
+
+      title: {text: msg.custom_name},
       xAxis: { type: 'category', data: Series },
-      yAxis: { type: 'value' },
-      series: [ { type: 'line', data: XAxis } ]
+      yAxis: { type: 'value' ,name: msg.custom_name.split('(')[1].replaceAll(')','')},
+      series: [ { type: 'line', data: XAxis.map(item => (item.toFixed(2))) } ]
     };
+    console.log(newOptions);
     chartInstance && chartInstance.setOption(newOptions);
   };
-``
+  /**
+   * chart resize
+    */
+  const chartResize = () => {
+    // @ts-ignore
+    const chartInstance = echarts.getInstanceByDom(chartRef.current);
+    chartInstance?.resize()
+  }
   /**
    * 开始读值
    * @param val
@@ -124,7 +138,6 @@ const Index: React.FC = () => {
     if (reg.test(curNode?.value_type)) {
       await connect(url);
       sendMessage([ { nodeid: val.node_index, interval: 1 } ]);
-    } else {
     }
   };
 
@@ -133,7 +146,7 @@ const Index: React.FC = () => {
     (async () => {
       const res = await getReadNodeList();
       setNodes(res.data.map((item): ITypes.EnumType => ({
-        label: item.label,
+        label: item.custom_name,
         value: item.nodeid,
         value_type: item.value_type,
       })));
@@ -142,7 +155,10 @@ const Index: React.FC = () => {
     initChart();
     // 订阅socket
     DispatchEvent.on(SocketEventEnum.MSG, drawChart);
+    // 注册chart resize事件
+    window.addEventListener('resize', chartResize)
     return () => {
+      window.removeEventListener('resize', chartResize)
       DispatchEvent.off(SocketEventEnum.MSG, drawChart);
     };
   }, []);
@@ -182,6 +198,7 @@ const Index: React.FC = () => {
       <PageContainer>
         <Card>
           {searchModel}
+          <br/>
           <div ref={chartRef} style={{ width: '100%', height: 400 }}/>
         </Card>
         <MethodsHis methodMode={'read'}/>

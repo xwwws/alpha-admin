@@ -1,4 +1,4 @@
-import { Button, Card, Tag, Tooltip } from 'antd';
+import { Button, Card, Divider, Tag, Tooltip } from 'antd';
 import React, { ReactNode, useState } from 'react';
 import styled from 'styled-components';
 import { ProColumns, ProTable } from '@ant-design/pro-components';
@@ -18,29 +18,35 @@ interface IProps {
 const StepHisStyle = styled.div`
   margin-top: 20px;
 `;
+const TagStyle = styled.span`
+  font-size: 12px;
+  word-break: break-all;
+`;
 const StepHis: React.FC<IProps> = (props) => {
   const { title, stepMode } = props;
   const [ collected_data, set_collected_data ] = useState<API.DataAcquisitionsResults[]>([]);
   const [ isShow, setIsShow ] = useState<boolean>(false);
   const showChart = (results: API.DataAcquisitionsResults[]) => {
-    set_collected_data(results)
-    setIsShow(true)
-  }
+    set_collected_data(results);
+    setIsShow(true);
+  };
   const columns: ProColumns<API.Steps.StepHis>[] = formatColumns<API.Steps.StepHis>([
-    { title: 'ID', dataIndex: 'id' },
-    { title: 'name', dataIndex: 'name' },
-    { title: 'label', dataIndex: 'label' },
-    { title: '实验id', dataIndex: 'expt_id' },
-    { title: '试剂', dataIndex: 'reagent_name' },
-    { title: '试剂id', dataIndex: 'reagent_id' },
+    { title: 'ID', dataIndex: 'id', width: '80px' },
+    { title: 'name', dataIndex: 'name', width: '120px' },
+    { title: 'label', dataIndex: 'label', width: '80px' },
+    { title: '实验id', dataIndex: 'expt_id', width: '80px' },
+    { title: '试剂', dataIndex: 'reagent_name', width: '80px' },
+    { title: '试剂id', dataIndex: 'reagent_id', width: '80px' },
     {
       title: '状态',
       dataIndex: 'status',
+      width: '80px',
       valueEnum: expState2ValueEnum(experimentStatesMap),
     },
     {
       title: '开始时间',
       dataIndex: 'start_time',
+      width: '150px',
       valueType: 'dateTimeRange',
       render: (text, record) => {
         return record.start_time;
@@ -54,9 +60,9 @@ const StepHis: React.FC<IProps> = (props) => {
         }
       }
     },
-    { title: '结束时间', dataIndex: 'end_time' },
-    { title: '计划量', dataIndex: 'quantity_plan' },
-    { title: '实际量', dataIndex: 'quantity_real' },
+    { title: '结束时间', dataIndex: 'end_time', width: '150px' },
+    { title: '计划量', dataIndex: 'quantity_plan', width: '80px' },
+    { title: '实际量', dataIndex: 'quantity_real', width: '80px' },
     // {
     //   title: 'content',
     //   dataIndex: 'content',
@@ -66,13 +72,14 @@ const StepHis: React.FC<IProps> = (props) => {
     {
       title: 'result',
       dataIndex: 'result',
-      width: '250px',
+      width: '230px',
       render: (text, record) => (
         <>
           {
             record.result.map((item, index) => (
               <>
-                <Tag color={'orange'} key={index}>{item}</Tag>
+                {index !== 0 && <Divider/>}
+                <TagStyle color={'orange'} key={index}>{item}</TagStyle>
               </>
             ))
           }
@@ -83,7 +90,7 @@ const StepHis: React.FC<IProps> = (props) => {
       title: '操作',
       dataIndex: 'action',
       width: '120px',
-      fixed:'right',
+      fixed: 'right',
       render: (text, record) => [
         <Tooltip key={'01'} title={'查看数据采集信息'}>
           <Button
@@ -121,7 +128,7 @@ const StepHis: React.FC<IProps> = (props) => {
           columns={columns}
           options={false}
           request={requestMethod}
-          scroll={{ x: columns.length * 200 }}
+          scroll={{ x: 2000 }}
           pagination={{
             showSizeChanger: false,
             pageSizeOptions: [ 10, 50, 100, 200 ],

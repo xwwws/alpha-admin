@@ -30,14 +30,20 @@ const CollectedDataWarpStyle = styled.div`
   }
 `;
 const CollectedDataWarp: React.FC<IProps> = (props) => {
+
   const { collected_data } = props;
+  console.log(collected_data);
   const [ collectedDataList, setCollectedDataList ] = useState<Icsv[]>([]);
   useEffect(() => {
     const getCollectedData = async () => {
       if (!collected_data) return false;
       // 拿到所有图表的数据
-      const collectedData = await Promise.all(collected_data.map(item => {
-        return readCSV(item.file_url);
+      const collectedData = await Promise.all(collected_data.map(async (item) => {
+        const result  = await readCSV(item.file_url)
+        return {
+          ...result,
+          name: [item.label]
+        }
       }));
       setCollectedDataList(collectedData);
     };
@@ -56,7 +62,6 @@ const CollectedDataWarp: React.FC<IProps> = (props) => {
           <div className="downloadWarp">
             <Button icon={<DownloadOutlined/>} onClick={() => openUrl(collected_data[index].file_url)}>下载</Button>
           </div>
-
           <CollectedData data={item}/>
           {collected_data[index] && <CollectedDetails data={collected_data[index]}/>}
         </Card>;

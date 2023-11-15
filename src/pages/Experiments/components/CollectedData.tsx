@@ -5,6 +5,9 @@ import * as echarts from "echarts";
 import dayjs from 'dayjs';
 import { MathRound } from "@/utils";
 
+interface rule {
+  [key: string]: any[];
+}
 
 interface IProps {
   data: any;
@@ -23,6 +26,7 @@ const ChartBox = styled.div`
 
 const CollectedData: React.FC<IProps> = (props) => {
   const { data } = props;
+  console.log(data);
   const chartRef = useRef(null);
   const drawChart = () => {
     const color = '#2fc49a';
@@ -30,7 +34,7 @@ const CollectedData: React.FC<IProps> = (props) => {
 
     const echartsOption: ECOption = {
       title: {
-        text: data.name ? `${data.name[0]} 信息` : '暂无信息',
+        text: data.name ? `${data.name[0]}` : '暂无信息',
         left: 'center',
         textStyle: {
           fontSize: "15",
