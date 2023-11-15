@@ -11,7 +11,6 @@ import { Card, Col, Form, Input, Row, Select, Spin } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useModel } from 'umi';
-import { ITypes } from "@/pages/typings";
 import DataAcquisition from "@/pages/components/DataAcquisition";
 
 interface IProps {
@@ -23,6 +22,21 @@ interface IProps {
 
   [key: string]: any;
 }
+
+interface IStepRemarksInfo {
+  name: string,
+  label: string,
+  showReagent: boolean,
+}
+
+const StepMap: IStepRemarksInfo[] = [
+  { name: 'add_solvent_step', label: '注射器加液', showReagent: true },
+  { name: 'pipette_step', label: '移液', showReagent: true },
+  { name: 'add_solid_step', label: '加固', showReagent: true },
+  { name: 'do_peristaltic_step', label: '蠕动泵加液', showReagent: true },
+  { name: 'heating_stir_step', label: '加热搅拌', showReagent: false },
+  { name: 'do_mix3_planet_step', label: '行星搅拌', showReagent: false },
+];
 
 const ToolsBox = styled.div`
   display: flex;
@@ -36,13 +50,12 @@ const CreateStepItem: React.FC<IProps> = (props) => {
   const [ reagentShow, setReagentShow ] = useState<boolean>(false);
   const { steps } = useModel('useExperimentModel');
   const getReagents = async (step: string) => {
-    // heating_stir_step  不用试剂id
-    if (step !== 'heating_stir_step') {
-      setReagentShow(true);
+    // 是否需要试剂
+    const isNeedReagent: boolean = StepMap.find(({ name }) => name === step)?.showReagent as boolean;
+    setReagentShow(isNeedReagent);
+    if (isNeedReagent) {
       const res = await getReagentsByStep(step);
       setReagents(res.data);
-    } else {
-      setReagentShow(false);
     }
   };
   const handleStepChange = async (val: string) => {
@@ -128,6 +141,8 @@ const CreateStepItem: React.FC<IProps> = (props) => {
       {step === 'do_peristaltic_step' && <Peristaltic reagent={reagent} name={name}/>}
       {/*加热搅拌*/}
       {step === 'heating_stir_step' && <Mix3 reagent={reagent} name={name}/>}
+      {/*行星搅拌*/}
+      {step === 'do_mix3_planet_step' && <Mix3 reagent={reagent} name={name}/>}
       {step && (
         <DataAcquisition name={[ name, 'data_acquisitions' ]}/>
       )}

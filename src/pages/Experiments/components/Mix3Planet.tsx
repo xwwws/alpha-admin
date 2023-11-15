@@ -10,7 +10,7 @@ interface IProps {
   [key: string]: any;
 }
 
-const Mix3: React.FC<IProps> = (props) => {
+const Mix3Planet: React.FC<IProps> = (props) => {
   const { areas } = useModel('useExperimentModel');
 
   const { name } = props;
@@ -67,4 +67,4 @@ const Mix3: React.FC<IProps> = (props) => {
     </>
   );
 };
-export default Mix3;
+export default Mix3Planet;

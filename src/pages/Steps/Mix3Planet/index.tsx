@@ -151,7 +151,7 @@ const Index: React.FC = () => {
             {searchModel}
           </MethodsView>
         </Card>
-        <StepHis stepMode={'domix3planetstep'}/>
+        <StepHis stepMode={'do_mix3_planet_step'}/>
       </PageContainer>
     </>
   );

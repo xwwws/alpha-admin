@@ -158,6 +158,22 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
           },
         });
         break;
+      //   行星搅拌
+      case 'do_mix3_planet_step':
+        params.steps_data.push({
+          name: item.step_name,
+          data_acquisitions: item.data_acquisitions,
+          kwargs: {
+            dst_area: {
+              name: item.dst_area_name,
+              x: item.dst_area_x,
+              y: item.dst_area_y,
+              z: item.dst_area_z,
+            },
+            time: item.time,
+          },
+        });
+        break;
     }
   });
   return params;
@@ -251,6 +267,16 @@ export const fmtResToFormData = (data: API.Experiments.CreateExperimentReq): any
         steps_data_item.time = `${item.kwargs.time}`;
         steps_data_item.data_acquisitions = item.data_acquisitions;
         break;
+      //   行星搅拌
+      case 'do_mix3_planet_step':
+        steps_data_item.dst_area_name = `${item.kwargs.dst_area?.name}`;
+        steps_data_item.dst_area_x = `${item.kwargs.dst_area?.x}`;
+        steps_data_item.dst_area_y = `${item.kwargs.dst_area?.y}`;
+        steps_data_item.dst_area_z = `${item.kwargs.dst_area?.z}`;
+        steps_data_item.time = `${item.kwargs.time}`;
+        steps_data_item.data_acquisitions = item.data_acquisitions;
+        break;
+
     }
 
     return steps_data_item;
