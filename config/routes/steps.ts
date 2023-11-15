@@ -40,6 +40,12 @@ export const steps = [
         name: 'mix3',
         component: './Steps/Mix3',
       },
+      // 行星搅拌3
+      {
+        path: 'mix3planet',
+        name: 'mix3planet',
+        component: './Steps/Mix3Planet',
+      },
       // 废液蒸馏
       {
         path: 'dodistillc3',

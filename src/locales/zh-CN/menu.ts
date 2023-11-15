@@ -25,6 +25,7 @@ export default {
   'menu.steps.addSolid': '加固',
   'menu.steps.doperistaltic': '蠕动泵加液',
   'menu.steps.mix3': '搅拌3',
+  'menu.steps.mix3planet': '行星搅拌',
   'menu.steps.dodistillc3': '废液蒸馏',
   'menu.exp': '实验',
   'menu.exp.experiment': '实验列表',

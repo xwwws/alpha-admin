@@ -62,7 +62,17 @@ export const mix3Step = (data: API.Mix3Step): Promise<Response<API.MethodsRes>> 
   });
 };
 /**
- * 搅拌3
+ * 行星搅拌
+ * @param data
+ */
+export const mix3PlanetStep = (data: Steps.Mix3PlanetStep): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/steps/domix3planetstep`, {
+    method: 'post',
+    data,
+  });
+};
+/**
+ * 废液蒸馏
  * @param data
  */
 export const dodistillc3step = (data: Steps.Dodistillc3): Promise<Response<API.MethodsRes>> => {

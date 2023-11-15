@@ -32,8 +32,8 @@ const StepHis: React.FC<IProps> = (props) => {
   };
   const columns: ProColumns<API.Steps.StepHis>[] = formatColumns<API.Steps.StepHis>([
     { title: 'ID', dataIndex: 'id', width: '80px' },
-    { title: 'name', dataIndex: 'name', width: '120px' },
-    { title: 'label', dataIndex: 'label', width: '80px' },
+    { title: '名称', dataIndex: 'name', width: '120px' },
+    { title: '标签', dataIndex: 'label', width: '80px' },
     { title: '实验id', dataIndex: 'expt_id', width: '80px' },
     { title: '试剂', dataIndex: 'reagent_name', width: '80px' },
     { title: '试剂id', dataIndex: 'reagent_id', width: '80px' },
@@ -70,7 +70,7 @@ const StepHis: React.FC<IProps> = (props) => {
     //   render: (text, { content }) => <StepHisContent content={content}/>
     // },
     {
-      title: 'result',
+      title: '结果',
       dataIndex: 'result',
       width: '230px',
       render: (text, record) => (
