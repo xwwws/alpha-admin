@@ -72,10 +72,10 @@ const StepHis: React.FC<IProps> = (props) => {
         <>
           {
             record.result.map((item, index) => (
-              <>
+              <div key={index}>
                 {index !== 0 && <Divider/>}
                 <TagStyle key={index}>{item}</TagStyle>
-              </>
+              </div>
             ))
           }
         </>
@@ -126,7 +126,7 @@ const StepHis: React.FC<IProps> = (props) => {
     <StepHisStyle>
       <Card title={'步骤调用历史'} size={'small'}>
         <ProTable
-          key={'id'}
+          rowKey={'id'}
           columns={columns}
           options={false}
           request={requestMethod}
