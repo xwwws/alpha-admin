@@ -108,3 +108,16 @@ export const getStepHis = (step_name: string, params: API.Steps.GetStepHisReq): 
     params,
   });
 };
+
+
+/**
+ * 查询步骤详情：
+ */
+export const getStepHisInfo = (step_id: number ): Promise<Response<Steps.StepHisInfo>> => {
+  return request(`/api/v1/lab/steps/${step_id}/detail`, {
+    method: 'get',
+  });
+};
+
+
+

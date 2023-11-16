@@ -32,7 +32,6 @@ const CollectedDataWarpStyle = styled.div`
 const CollectedDataWarp: React.FC<IProps> = (props) => {
 
   const { collected_data } = props;
-  console.log(collected_data);
   const [ collectedDataList, setCollectedDataList ] = useState<Icsv[]>([]);
   useEffect(() => {
     const getCollectedData = async () => {

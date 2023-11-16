@@ -1,5 +1,5 @@
 import { Button, Card, Divider, Tag, Tooltip } from 'antd';
-import React, { ReactNode, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { ProColumns, ProTable } from '@ant-design/pro-components';
 import { getStepHis } from "@/api/steps";
@@ -7,8 +7,8 @@ import { formatColumns } from "@/utils/componentSettingUtils";
 import { experimentStatesMap, expState2ValueEnum } from "@/utils/dataMaps";
 import StepHisContent from './StepHisContent';
 import dayjs from 'dayjs';
-import { FundOutlined } from "@ant-design/icons";
-import StepHisChart from "@/pages/Steps/components/StepHisChart";
+import { AlignLeftOutlined } from "@ant-design/icons";
+import StepHisInfo, { IRef } from "@/pages/Steps/components/StepHisInfo";
 
 interface IProps {
   stepMode: string; //  API.Steps.StepName
@@ -23,13 +23,8 @@ const TagStyle = styled.span`
   word-break: break-all;
 `;
 const StepHis: React.FC<IProps> = (props) => {
-  const { title, stepMode } = props;
-  const [ collected_data, set_collected_data ] = useState<API.DataAcquisitionsResults[]>([]);
-  const [ isShow, setIsShow ] = useState<boolean>(false);
-  const showChart = (results: API.DataAcquisitionsResults[]) => {
-    set_collected_data(results);
-    setIsShow(true);
-  };
+  const { stepMode } = props;
+  const StepHisInfoRef = useRef<IRef>();
   const columns: ProColumns<API.Steps.StepHis>[] = formatColumns<API.Steps.StepHis>([
     { title: 'ID', dataIndex: 'id', width: '80px' },
     { title: '名称', dataIndex: 'name', width: '120px' },
@@ -79,7 +74,7 @@ const StepHis: React.FC<IProps> = (props) => {
             record.result.map((item, index) => (
               <>
                 {index !== 0 && <Divider/>}
-                <TagStyle color={'orange'} key={index}>{item}</TagStyle>
+                <TagStyle key={index}>{item}</TagStyle>
               </>
             ))
           }
@@ -92,13 +87,20 @@ const StepHis: React.FC<IProps> = (props) => {
       width: '120px',
       fixed: 'right',
       render: (text, record) => [
-        <Tooltip key={'01'} title={'查看数据采集信息'}>
+        // <Tooltip key={'01'} title={'查看指令信息'}>
+        //   <Button
+        //     icon={<TagOutlined/>}
+        //     type={'link'}
+        //     onClick={() => showMethods(record)}
+        //   />
+        // </Tooltip>,
+        <Tooltip key={'02'} title={'详情'}>
           <Button
-            icon={<FundOutlined/>}
+            icon={<AlignLeftOutlined/>}
             type={'link'}
-            onClick={() => showChart(record.data_acquisitions_results)}
+            onClick={() => StepHisInfoRef.current?.show(record.id)}
           />
-        </Tooltip>
+        </Tooltip>,
       ]
     },
   ]);
@@ -137,10 +139,8 @@ const StepHis: React.FC<IProps> = (props) => {
           }}
         />
       </Card>
-      <StepHisChart
-        isShow={isShow}
-        onCancel={() => setIsShow(false)}
-        collected_data={collected_data}
+      <StepHisInfo
+        ref={StepHisInfoRef}
       />
     </StepHisStyle>
   );

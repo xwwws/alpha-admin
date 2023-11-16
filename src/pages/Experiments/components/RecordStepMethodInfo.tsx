@@ -17,7 +17,7 @@ const TagWarp = styled.div`
   overflow: auto;
 `;
 
-const RecordStepMethod: React.FC<IProps> = (props) => {
+const RecordStepMethodInfo: React.FC<IProps> = (props) => {
   const { method, index } = props;
   // 步骤信息
   const descriptionInfo: DescriptionsProps[`items`] = [
@@ -50,4 +50,4 @@ const RecordStepMethod: React.FC<IProps> = (props) => {
   );
 };
 
-export default RecordStepMethod;
+export default RecordStepMethodInfo;
