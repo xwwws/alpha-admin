@@ -14,9 +14,13 @@ export const getReadNodeList = (): Promise<Response<API.Methods.ReadNode[]>> => 
  * @param data {API.ReadReq}
  */
 export const readMethod = (data: API.ReadReq): Promise<Response<API.MethodsRes>> => {
+
   return request(`/api/v1/lab/methods/read`, {
     method: 'post',
-    data,
+    data: {
+      ...data,
+      nodeid: data.node_index
+    }
   });
 };
 
@@ -27,7 +31,10 @@ export const readMethod = (data: API.ReadReq): Promise<Response<API.MethodsRes>>
 export const writeMethod = (data: Methods.Write): Promise<Response<API.MethodsRes>> => {
   return request(`/api/v1/lab/methods/write`, {
     method: 'post',
-    data
+    data: {
+      ...data,
+      nodeid: data.node_index
+    }
   });
 };
 
