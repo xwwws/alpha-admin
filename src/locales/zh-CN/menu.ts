@@ -7,6 +7,7 @@ export default {
   'menu.device.devices.list': '所有设备',
   'menu.methods': '实验指令',
   'menu.methods.read': '读值',
+  'menu.methods.write': '写值',
   'menu.methods.sleep': '等待',
   'menu.methods.move': '移动',
   'menu.methods.addSol': '加液',

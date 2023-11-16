@@ -2,7 +2,7 @@ export const methods = [
   {
     path: '/methods',
     name: 'methods',
-    icon: 'crown',
+    icon: 'TagOutlined',
     // access: 'canAdmin',
 
     routes: [
@@ -15,6 +15,12 @@ export const methods = [
         path: 'read',
         name: 'read',
         component: './Methods/Read',
+      },
+      // 写值
+      {
+        path: 'write',
+        name: 'write',
+        component: './Methods/Write',
       },
       // 等待
       {

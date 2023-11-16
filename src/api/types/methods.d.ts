@@ -14,4 +14,9 @@ declare namespace Methods {
     total_time: number | string;
   }
 
+  interface Write {
+    node_index: number | string;
+    node_value: number | string;
+  }
+
 }

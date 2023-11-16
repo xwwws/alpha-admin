@@ -19,6 +19,18 @@ export const readMethod = (data: API.ReadReq): Promise<Response<API.MethodsRes>>
     data,
   });
 };
+
+/**
+ * 读值
+ * @param data {API.ReadReq}
+ */
+export const writeMethod = (data: Methods.Write): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/methods/write`, {
+    method: 'post',
+    data
+  });
+};
+
 /**
  * 等待
  * @param data {API.sleepReq}
