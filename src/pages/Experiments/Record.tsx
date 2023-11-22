@@ -1,10 +1,13 @@
 import { PageContainer } from '@ant-design/pro-components';
 import { Button, Card, message } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from "umi";
 import { getStepsByExperimentId } from "@/api/experiments";
 import RecordStep from "@/pages/Experiments/components/RecordStep";
 import PreAndNext from "@/pages/Experiments/components/PreAndNext";
+import { UploadOutlined } from "@ant-design/icons";
+import UploadFileForm from "@/pages/Experiments/components/UploadFileForm";
+import type { IRef } from "@/pages/Experiments/components/UploadFileForm";
 
 interface IProps {
   [key: string]: any;
@@ -15,6 +18,7 @@ const Record: React.FC<IProps> = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [ steps, setSteps ] = useState<API.Experiments.ExperimentStepsResItem[]>([]);
+  const UploadFileFormRef = useRef<IRef>(null);
 
   // 根据实验id查询所有步骤
   useEffect(() => {
@@ -25,6 +29,10 @@ const Record: React.FC<IProps> = () => {
     getSteps();
   }, [ id ]);
 
+  /**
+   * 上一条下一条
+   * @param type
+   */
   const handlePrevOrNext = async (type: string) => {
     const res = await getStepsByExperimentId(id as string, {
       sibling: type
@@ -35,9 +43,23 @@ const Record: React.FC<IProps> = () => {
       navigate(`/exp/experiment/${res.data.id}/record`, { replace: true });
     }
   };
+  /**
+   * 上传文件
+   */
+  const inputChange = (e:any) => {
+    console.log(e.target.files);
+
+  }
   return (
     <PageContainer
       extra={[
+        <Button
+          icon={<UploadOutlined/>}
+          key={'upload'}
+          onClick={() => UploadFileFormRef.current?.show()}
+        >
+          上传附件
+        </Button>,
         <Button
           key={'add'}
           onClick={() => navigate(`/exp/experiment/${id}/detail`, { replace: true })}
@@ -51,10 +73,21 @@ const Record: React.FC<IProps> = () => {
           onPreOrNext={handlePrevOrNext}
         />
         {steps.map((item, index) => (
-          <RecordStep key={index} index={index} step={item}/>
+          <RecordStep
+            key={index}
+            index={index}
+            step={item}
+          />
         ))}
 
       </Card>
+      {/*<input*/}
+      {/*  ref={inputRef}*/}
+      {/*  type={'file'}*/}
+      {/*  style={{ display: "none" }}*/}
+      {/*  onChange={inputChange}*/}
+      {/*/>*/}
+      <UploadFileForm ref={UploadFileFormRef}/>
     </PageContainer>
   );
 };

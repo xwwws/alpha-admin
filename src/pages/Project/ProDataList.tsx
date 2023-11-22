@@ -97,7 +97,7 @@ const ProDataList: React.FC<IProps> = (props) => {
           options={false}
           search={false}
           request={requestMethod}
-          scroll={{ x: columns.length * 200 }}
+          scroll={{ x: columns.length * 120 }}
           pagination={{
             showSizeChanger: false,
             // pageSizeOptions: [ 10, 50, 100, 200 ],

@@ -119,7 +119,7 @@ const List: React.FC<IProps> = (props) => {
             search={false}
             options={false}
             request={requestTableData}
-            scroll={{ x: columns.length * 200 }}
+            scroll={{ x: columns.length * 120 }}
           />
         </Card>
         <Detail isOpen={isShowModal} data={currentItem} close={() => setIsShowModal(false)}/>

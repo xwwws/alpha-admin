@@ -161,7 +161,7 @@ const MethodsHis: React.FC<IProps> = (props) => {
           columns={columns}
           options={false}
           request={requestMethod}
-          scroll={{ x: columns.length * 200 }}
+          scroll={{ x: columns.length * 120 }}
           pagination={{
             showSizeChanger: false,
             showQuickJumper: true,

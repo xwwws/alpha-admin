@@ -120,7 +120,7 @@ const ProDataInfo: React.FC<IProps> = (props) => {
           options={false}
           search={false}
           dataSource={dataSource}
-          scroll={{ x: columns.length * 200 }}
+          scroll={{ x: columns.length * 120 }}
           pagination={{
             showSizeChanger: false,
             showQuickJumper: true,
