@@ -7,9 +7,11 @@ import { getMethodsByStepId } from "@/api/steps";
 import RecordStepMethodInfo from "@/pages/Experiments/components/RecordStepMethodInfo";
 import CollectedDataWarp from "@/pages/Experiments/components/CollectedDataWarp";
 import { CalculateDuration } from "@/utils";
-import { FastForwardOutlined, ReloadOutlined } from '@ant-design/icons';
+import { FastForwardOutlined, ReloadOutlined, UploadOutlined } from '@ant-design/icons';
 import { reRunExpStep, skipRunExpStep } from "@/api/experiments";
 import RecordStepMethods, { IRecordStepMethodsRef } from "@/pages/Experiments/components/RecordStepMethods";
+import UploadStepFileForm from "@/pages/Experiments/components/UploadStepFileForm";
+import { IRef } from "@/pages/Experiments/components/UploadStepFileForm";
 
 interface IProps {
   step: API.Experiments.ExperimentStepsResItem;
@@ -52,18 +54,24 @@ const StatusStyle = styled.div`
   display: flex;
   gap: 10px;
 `;
+const UploadExpStepAnnexStBtnStyle = styled.div`
+  display: flex;
+  flex-direction: row-reverse;
+`;
 const RecordStep: React.FC<IProps> = (props) => {
   const { step, index } = props;
-const RecordStepMethodsRef = useRef<IRecordStepMethodsRef>()
-  const handleReExpStep = async (id: string|number) => {
-    await reRunExpStep(id)
-    await RecordStepMethodsRef.current?.getMethods()
-    message.success('已重新执行')
+  const RecordStepMethodsRef = useRef<IRecordStepMethodsRef>();
+  const UploadStepFileFormRef = useRef<IRef>(null);
+
+  const handleReExpStep = async (id: string | number) => {
+    await reRunExpStep(id);
+    await RecordStepMethodsRef.current?.getMethods();
+    message.success('已重新执行');
   };
-  const handleSkipRunExpStep = async (id: string|number) => {
-    await skipRunExpStep(id)
-    await RecordStepMethodsRef.current?.getMethods()
-    message.success('已跳过该步骤执行')
+  const handleSkipRunExpStep = async (id: string | number) => {
+    await skipRunExpStep(id);
+    await RecordStepMethodsRef.current?.getMethods();
+    message.success('已跳过该步骤执行');
   };
   // 步骤信息
   const descriptionInfo: DescriptionsProps[`items`] = [
@@ -106,6 +114,19 @@ const RecordStepMethodsRef = useRef<IRecordStepMethodsRef>()
       <Divider orientation={'left'}>
         {index + 1} : {step.label ? `${step.label} - ` : ''} {step.name}
       </Divider>
+      <UploadExpStepAnnexStBtnStyle>
+        <Button
+          type={"link"}
+          icon={<UploadOutlined/>}
+          onClick={() => UploadStepFileFormRef.current?.show()}
+        >
+          上传附件
+        </Button>
+        <UploadStepFileForm
+          id={step.id}
+          ref={UploadStepFileFormRef}
+        />
+      </UploadExpStepAnnexStBtnStyle>
       <div className="descriptions">
         <Descriptions
           column={2}

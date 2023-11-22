@@ -49,6 +49,7 @@ const DeviceCollectData: React.FC<IProps> = (props) => {
       const curIndex = val.findIndex(item => item.label === resData.label);
       if (curIndex !== -1) {
         val[curIndex].value = resData.value;
+        val[curIndex].custom_name = resData.custom_name;
       }
       return [...val];
     });
@@ -99,12 +100,12 @@ const DeviceCollectData: React.FC<IProps> = (props) => {
             bordered
             column={1}
           >
-            {collectDataList.map(item => {
+            {collectDataList.map((item, index) => {
               return (
                 <Descriptions.Item
-                  key={item.custom_name}
+                  key={index}
                   labelStyle={{ width: '180px', textAlign: 'center' }}
-                  label={item.label}
+                  label={item.custom_name}
                 >
                   {item.value}
                 </Descriptions.Item>

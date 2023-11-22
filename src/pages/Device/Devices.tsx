@@ -39,7 +39,6 @@ const Devices: React.FC<IProps> = (props) => {
 
       loading={{
         spinning: pageLoading,
-        tip: '拼命加载中...',
       }}
       tabList={devices.map((item, index) => ({
         tab: item.label,

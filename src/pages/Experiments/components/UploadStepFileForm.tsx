@@ -4,9 +4,11 @@ import type { UploadFile } from 'antd';
 import { UploadOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
 import { IForm } from "@/pages/typings";
-import { uploadExpAnnex } from "@/api/experiments";
+import { uploadExpStepAnnex } from "@/api/experiments";
 
 interface IProps {
+  id: string | number;
+
   [key: string]: any;
 }
 
@@ -15,10 +17,9 @@ export interface IRef {
 }
 
 const UploadExpFileForm: React.FC<IProps> = (props, ref: any) => {
-  const {} = props;
+  const {id} = props;
   const [ form ] = Form.useForm();
   const [ isShow, setIsShow ] = useState<boolean>(false);
-  const { id } = useParams();
   const [ fileList, setFileList ] = useState<UploadFile[]>();
   const show = () => {
     form.resetFields();
@@ -42,7 +43,7 @@ const UploadExpFileForm: React.FC<IProps> = (props, ref: any) => {
       file: data.file.fileList[0].originFileObj,
       description: data.description || ''
     };
-    const res = await uploadExpAnnex(id as string, params);
+    const res = await uploadExpStepAnnex(id as string, params);
     message.success('上传成功')
     setIsShow(false)
   }, [ id ]);

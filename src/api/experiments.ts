@@ -151,7 +151,7 @@ export const skipRunExpStep = (step_id: string | number) => {
 
 
 /**
- * 上传附件
+ * 实验上传附件
  * @param exp_id
  * @param data
  */
@@ -161,6 +161,25 @@ export const uploadExpAnnex = (exp_id: string | number, data: Experiments.Upload
   formData.append('file', data.file);
   formData.append('description', data.description);
   return request<Response<any>>(`/api/v1/expt/expts/${exp_id}/attachments`, {
+    method: 'post',
+    requestType: 'form',
+    data: formData
+  });
+};
+
+
+/**
+ * 实验步骤上传附件
+ * @param step_id
+ * @param data
+ */
+export const uploadExpStepAnnex = (step_id: string | number, data: Experiments.UploadExpAnnex) => {
+  const formData = new FormData();
+  formData.append('name', data.name);
+  formData.append('file', data.file);
+  formData.append('description', data.description);
+
+  return request<Response<any>>(`/api/v1/expt/expts/steps/${step_id}/attachments`, {
     method: 'post',
     requestType: 'form',
     data: formData
