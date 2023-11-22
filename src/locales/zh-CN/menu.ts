@@ -44,6 +44,9 @@ export default {
   'menu.exp.reactionVessel.list': '反应容器列表',
   'menu.exp.reactionVessel.create': '创建反应容器',
   'menu.exp.reactionVessel.info': '反应容器详情',
+  'menu.flow': '工作流',
+  'menu.flow.list': '工作流列表',
+  'menu.flow.create': '创建工作流',
   'menu.project': '项目',
   'menu.project.list': '项目列表',
   'menu.project.create': '新建项目',
@@ -51,5 +54,5 @@ export default {
   'menu.project.proListData': '项目数据列表',
   'menu.project.proAddData': '创建数据项',
   'menu.project.proListInfo': '数据项数据',
-  'menu.project.proListEdit': '修改数据项数据',
+  'menu.project.proListEdit': '修改数据项数据'
 };

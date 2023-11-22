@@ -14,7 +14,7 @@ export interface IRef {
   show: () => void;
 }
 
-const UploadFileForm: React.FC<IProps> = (props, ref: any) => {
+const UploadExpFileForm: React.FC<IProps> = (props, ref: any) => {
   const {} = props;
   const [ form ] = Form.useForm();
   const [ isShow, setIsShow ] = useState<boolean>(false);
@@ -32,6 +32,7 @@ const UploadFileForm: React.FC<IProps> = (props, ref: any) => {
     setIsShow(false);
   };
   const formRules: IForm.IFormRules = {
+    name: [ { required: true, message: '请输入名称' } ],
     file: [ { required: true, message: '请选择文件' } ],
     description: [ { required: false, message: '输入描述信息' } ],
   };
@@ -52,11 +53,14 @@ const UploadFileForm: React.FC<IProps> = (props, ref: any) => {
         footer={null}
       >
         <Form form={form} onFinish={finish}>
+          <Form.Item label="名称" name="name" rules={formRules.name}>
+            <Input/>
+          </Form.Item>
           <Form.Item label="文件" name={'file'} rules={formRules.file}>
             <Upload
               beforeUpload={file => false}
               fileList={fileList}
-              onChange={({fileList}) => setFileList(fileList)}
+              onChange={({ fileList }) => setFileList(fileList)}
               maxCount={1}
             >
               <Button icon={<UploadOutlined/>}>选择文件</Button>
@@ -75,4 +79,4 @@ const UploadFileForm: React.FC<IProps> = (props, ref: any) => {
 };
 
 // @ts-ignore
-export default forwardRef(UploadFileForm);
+export default forwardRef(UploadExpFileForm);

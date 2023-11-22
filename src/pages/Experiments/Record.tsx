@@ -6,8 +6,8 @@ import { getStepsByExperimentId } from "@/api/experiments";
 import RecordStep from "@/pages/Experiments/components/RecordStep";
 import PreAndNext from "@/pages/Experiments/components/PreAndNext";
 import { UploadOutlined } from "@ant-design/icons";
-import UploadFileForm from "@/pages/Experiments/components/UploadFileForm";
-import type { IRef } from "@/pages/Experiments/components/UploadFileForm";
+import UploadFileForm from "@/pages/Experiments/components/UploadExpFileForm";
+import type { IRef } from "@/pages/Experiments/components/UploadExpFileForm";
 
 interface IProps {
   [key: string]: any;
@@ -87,7 +87,9 @@ const Record: React.FC<IProps> = () => {
       {/*  style={{ display: "none" }}*/}
       {/*  onChange={inputChange}*/}
       {/*/>*/}
-      <UploadFileForm ref={UploadFileFormRef}/>
+      <UploadFileForm
+        ref={UploadFileFormRef}
+      />
     </PageContainer>
   );
 };

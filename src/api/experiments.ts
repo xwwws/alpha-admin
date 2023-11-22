@@ -99,12 +99,12 @@ export const deleteExperiment = (expt_id: string | number) => {
  * @param expt_id
  * @param data
  */
-export const updateDescription = (expt_id: string | number,data: {description: string}) => {
-  return request<Response<any>>(`/api/v1/expt/expts/${expt_id}/description`,{
+export const updateDescription = (expt_id: string | number, data: { description: string }) => {
+  return request<Response<any>>(`/api/v1/expt/expts/${expt_id}/description`, {
     method: 'put',
     data
-  })
-}
+  });
+};
 
 
 /**
@@ -112,42 +112,42 @@ export const updateDescription = (expt_id: string | number,data: {description: s
  * @param params
  */
 
-export const updateExecStatus = (params: {status: string}) => {
-  return request<Response<any>>(`/api/v1/expt/expts/exec_status`,{
+export const updateExecStatus = (params: { status: string }) => {
+  return request<Response<any>>(`/api/v1/expt/expts/exec_status`, {
     method: 'post',
     params
-  })
-}
+  });
+};
 
 /**
  * 重新执行错误实验
  * @param expt_id
  */
 export const reRunExp = (expt_id: string | number) => {
-  return request<Response<any>>(`/api/v1/expt/expts/${expt_id}/rerun`,{
+  return request<Response<any>>(`/api/v1/expt/expts/${expt_id}/rerun`, {
     method: 'post'
-  })
-}
+  });
+};
 
 /**
  * 重新执行错误步骤
  * @param step_id
  */
 export const reRunExpStep = (step_id: string | number) => {
-  return request<Response<any>>(`/api/v1/expt/expts/step/${step_id}/rerun`,{
+  return request<Response<any>>(`/api/v1/expt/expts/step/${step_id}/rerun`, {
     method: 'post'
-  })
-}
+  });
+};
 
 /**
  * 跳过错误步骤
  * @param step_id
  */
 export const skipRunExpStep = (step_id: string | number) => {
-  return request<Response<any>>(`/api/v1/expt/expts/step/${step_id}/succeed`,{
+  return request<Response<any>>(`/api/v1/expt/expts/step/${step_id}/succeed`, {
     method: 'post'
-  })
-}
+  });
+};
 
 
 /**
@@ -156,13 +156,13 @@ export const skipRunExpStep = (step_id: string | number) => {
  * @param data
  */
 export const uploadExpAnnex = (exp_id: string | number, data: Experiments.UploadExpAnnex) => {
-  const formData = new FormData()
-  formData.append('name',data.name)
-  formData.append('file ',data.file)
-  formData.append('description',data.description)
-  return request<Response<any>>(`/api/v1/expt/expts/${exp_id}/attachments`,{
+  const formData = new FormData();
+  formData.append('name', data.name);
+  formData.append('file', data.file);
+  formData.append('description', data.description);
+  return request<Response<any>>(`/api/v1/expt/expts/${exp_id}/attachments`, {
     method: 'post',
     requestType: 'form',
     data: formData
-  })
-}
+  });
+};
