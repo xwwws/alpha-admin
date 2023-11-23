@@ -50,7 +50,7 @@ const CollectedDataWarp: React.FC<IProps> = (props) => {
   }, [ collected_data ]);
 
   const openUrl = (file_url: string) => {
-    const url = `${location.origin}/api/static/acquisitions/${file_url}`;
+    const url = `${location.origin}/api/static/${file_url}`;
     window.open(url, '_blank');
   };
   return (

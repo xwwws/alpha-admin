@@ -4,24 +4,24 @@ import type { UploadFile } from 'antd';
 import { UploadOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
 import { IForm } from "@/pages/typings";
-import { uploadExpStepAnnex } from "@/api/experiments";
+import { updateExpAnnex } from "@/api/attachments";
 
 interface IProps {
-  id: string | number;
 
   [key: string]: any;
 }
 
-export interface IRef {
-  show: () => void;
+export interface IUpdateExpAnnexRef {
+  show: (data: Experiments.ExpInfoAttachments) => void;
 }
 
-const UploadExpFileForm: React.FC<IProps> = (props, ref: any) => {
-  const {id} = props;
+const UpdateExpAnnex: React.FC<IProps> = (props, ref: any) => {
   const [ form ] = Form.useForm();
   const [ isShow, setIsShow ] = useState<boolean>(false);
+  const [ attachmentId, setAttachmentId ] = useState<string | number>('');
   const [ fileList, setFileList ] = useState<UploadFile[]>();
-  const show = () => {
+  const show = (data: Experiments.ExpInfoAttachments) => {
+    setAttachmentId(data.id)
     form.resetFields();
     setIsShow(true);
   };
@@ -43,10 +43,10 @@ const UploadExpFileForm: React.FC<IProps> = (props, ref: any) => {
       file: data.file.fileList[0].originFileObj,
       description: data.description || ''
     };
-    const res = await uploadExpStepAnnex(id as string, params);
+    const res = await updateExpAnnex(attachmentId as string, params);
     message.success('上传成功')
     setIsShow(false)
-  }, [ id ]);
+  }, [ attachmentId ]);
   return (
     <>
       <Modal
@@ -82,4 +82,4 @@ const UploadExpFileForm: React.FC<IProps> = (props, ref: any) => {
 };
 
 // @ts-ignore
-export default forwardRef(UploadExpFileForm);
+export default forwardRef(UpdateExpAnnex);

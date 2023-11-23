@@ -1,4 +1,3 @@
-
 declare namespace Experiments {
 
   type List = {
@@ -10,9 +9,21 @@ declare namespace Experiments {
     name: string;
     status: string;
   };
-
+  type ExpInfoAttachments = {
+    id: number;
+    expt_id: number;
+    expt_name: string;
+    step_id: number;
+    step_name: string;
+    created_at: string;
+    description: string;
+    file_url: string;
+    filename: string;
+    name: string;
+    updated_at: string;
+  }
   type ExperimentDetailsRes = {
-
+    attachments: ExpInfoAttachments[];
     id: string | number;
     project_id: string | number;
     name: string;
@@ -106,10 +117,11 @@ declare namespace Experiments {
   interface CreateExperimentRes extends CreateExperimentReq, ExperimentStatus {
     id: string | number;
   }
+
   interface UploadExpAnnex {
     name: string;
     file: any;
-    description: string
+    description: string;
   }
 
 }

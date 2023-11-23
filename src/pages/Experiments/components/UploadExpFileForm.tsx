@@ -38,7 +38,7 @@ const UploadExpFileForm: React.FC<IProps> = (props, ref: any) => {
   };
   const finish = useCallback(async (data: any) => {
     const params: Experiments.UploadExpAnnex = {
-      name: data.file.file.name,
+      name: data.name,
       file: data.file.fileList[0].originFileObj,
       description: data.description || ''
     };

@@ -12,6 +12,7 @@ import { useNavigate } from "umi";
 import PreAndNext from "@/pages/Experiments/components/PreAndNext";
 import { UploadOutlined } from "@ant-design/icons";
 import UploadFileForm, { IRef } from "@/pages/Experiments/components/UploadExpFileForm";
+import ShowExpAnnex, { IShowExpAnnexRef } from "@/pages/Experiments/components/ShowExpAnnex";
 
 interface IProps {
   [key: string]: any;
@@ -23,6 +24,7 @@ const Detail: React.FC<IProps> = (props) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const UploadExpFileFormRef = useRef<IRef>(null);
+  const ShowExpAnnexRef = useRef<IShowExpAnnexRef>(null);
 
   useEffect(() => {
     const getExpInfo = async () => {
@@ -43,6 +45,26 @@ const Detail: React.FC<IProps> = (props) => {
     }
   };
   const items: DescriptionsProps[`items`] = [
+    {
+      key: '0',
+      label: '实验名称',
+      children: recordInfo?.name,
+    },
+    {
+      key: '1',
+      label: '附件',
+      children: <>
+        <Button
+          onClick={() => ShowExpAnnexRef.current?.show()}
+        >
+          查看附件
+        </Button>
+        <ShowExpAnnex
+          attachments={recordInfo?.attachments}
+          ref={ShowExpAnnexRef}
+        />
+      </>,
+    },
     {
       key: '2',
       label: '实验id',
@@ -142,7 +164,6 @@ const Detail: React.FC<IProps> = (props) => {
           onPreOrNext={handlePrevOrNext}
         />
         <Descriptions
-          title={`实验名称: ${recordInfo?.name}`}
           bordered
           column={2}
           labelStyle={{ width: '180px', textAlign: 'center' }}
