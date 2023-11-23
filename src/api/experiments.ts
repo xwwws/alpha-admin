@@ -5,7 +5,7 @@ import { request } from '@umijs/max';
  * @param params {API.AddSolvent}
  */
 export const getExperimentList = (params: API.PagesReq) => {
-  return request<Response<API.PagesRes<API.Experiments.List>>>(`/api/v1/expt/expts`, {
+  return request<Response<API.PagesRes<Experiments.List>>>(`/api/v1/expt/expts`, {
     method: 'get',
     params,
   });
@@ -13,10 +13,10 @@ export const getExperimentList = (params: API.PagesReq) => {
 
 /**
  * 创建实验
- * @param data {API.Experiments.CreateExperimentReq}
+ * @param data {Experiments.CreateExperimentReq}
  */
-export const createExperiment = (data: API.Experiments.CreateExperimentReq) => {
-  return request<Response<API.Experiments.CreateExperimentRes>>(`/api/v1/expt/expts`, {
+export const createExperiment = (data: Experiments.CreateExperimentReq) => {
+  return request<Response<Experiments.CreateExperimentRes>>(`/api/v1/expt/expts`, {
     method: 'post',
     data,
   });
@@ -49,7 +49,7 @@ export const cancelExperimentById = (id: string | number, data?: object | undefi
  * @param params {} object
  */
 export const getExperimentDetailsById = (id: string | number, params?: { sibling?: string }) => {
-  return request<Response<API.Experiments.ExperimentDetailsRes>>(`/api/v1/expt/expts/${id}`, {
+  return request<Response<Experiments.ExperimentDetailsRes>>(`/api/v1/expt/expts/${id}`, {
     method: 'get',
     params,
   });
@@ -61,7 +61,7 @@ export const getExperimentDetailsById = (id: string | number, params?: { sibling
  * @param data {} object
  */
 export const getExperimentLogsById = (id: string | number, data?: object | undefined) => {
-  return request<Response<API.Experiments.ExperimentRecordRes[]>>(`/api/v1/expt/expts/${id}/logs`, {
+  return request<Response<Experiments.ExperimentRecordRes[]>>(`/api/v1/expt/expts/${id}/logs`, {
     method: 'get',
     data,
   });
@@ -74,7 +74,7 @@ export const getExperimentLogsById = (id: string | number, data?: object | undef
  * @param params
  */
 export const getStepsByExperimentId = (id: string | number, params?: { sibling?: string }) => {
-  return request<Response<API.Experiments.ExperimentStepsRes>>(`/api/v1/expt/expts/${id}/steps`, {
+  return request<Response<Experiments.ExperimentStepsRes>>(`/api/v1/expt/expts/${id}/steps`, {
     method: 'get',
     params
   });

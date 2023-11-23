@@ -5,21 +5,25 @@ import { experimentStatesMap } from '@/utils/dataMaps';
 import { PageContainer } from '@ant-design/pro-components';
 import type { DescriptionsProps } from 'antd';
 import { Badge, Button, Card, Descriptions, message } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CollectedDataWarp from "@/pages/Experiments/components/CollectedDataWarp";
 import { useNavigate } from "umi";
 import PreAndNext from "@/pages/Experiments/components/PreAndNext";
+import { UploadOutlined } from "@ant-design/icons";
+import UploadFileForm, { IRef } from "@/pages/Experiments/components/UploadExpFileForm";
 
 interface IProps {
   [key: string]: any;
 }
 
 const Detail: React.FC<IProps> = (props) => {
-  const [ recordInfo, setRecordInfo ] = useState<API.Experiments.ExperimentDetailsRes>();
+  const [ recordInfo, setRecordInfo ] = useState<Experiments.ExperimentDetailsRes>();
   const [ currentState, setCurrentState ] = useState<IExpState>();
   const { id } = useParams();
   const navigate = useNavigate();
+  const UploadExpFileFormRef = useRef<IRef>(null);
+
   useEffect(() => {
     const getExpInfo = async () => {
       const res = await getExperimentDetailsById(id as string);
@@ -104,7 +108,7 @@ const Detail: React.FC<IProps> = (props) => {
       label: '采集数据',
       children: (
         <div>
-          {recordInfo?.data_acquisitions_results.map((item,index) => (
+          {recordInfo?.data_acquisitions_results.map((item, index) => (
             <p key={index}>
               采集信息: {item.name} 间隔: {item.interval}
             </p>
@@ -117,6 +121,14 @@ const Detail: React.FC<IProps> = (props) => {
   return (
     <PageContainer
       extra={[
+
+        <Button
+          icon={<UploadOutlined/>}
+          key={'upload'}
+          onClick={() => UploadExpFileFormRef.current?.show()}
+        >
+          上传附件
+        </Button>,
         <Button
           key={'add'}
           onClick={() => navigate(`/exp/experiment/${id}/record`, { replace: true })}
@@ -147,6 +159,9 @@ const Detail: React.FC<IProps> = (props) => {
           collected_data={recordInfo?.data_acquisitions_results as API.DataAcquisitionsResults[]}
         />
       </Card>
+      <UploadFileForm
+        ref={UploadExpFileFormRef}
+      />
     </PageContainer>
   );
 };

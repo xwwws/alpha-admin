@@ -101,7 +101,9 @@ const useWebsocket = () => {
     if (socket?.current?.readyState === WebSocketStatus.OPEN) {
       socket?.current?.send(JSON.stringify(msg));
     } else {
-      console.error('socket 尚未连接!');
+      setTimeout(() => {
+        sendMessage(msg)
+      },100)
     }
   }
 

@@ -3,7 +3,7 @@ import { Descriptions, DescriptionsProps } from 'antd';
 import React from 'react';
 
 interface IProps {
-  record: API.Experiments.CreateExperimentStep;
+  record: Experiments.CreateExperimentStep;
 
   [key: string]: any;
 }

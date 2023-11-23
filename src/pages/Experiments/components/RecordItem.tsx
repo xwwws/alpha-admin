@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 import { Descriptions, DescriptionsProps } from 'antd';
 interface IProps {
-  record: API.Experiments.CreateExperimentStep;
+  record: Experiments.CreateExperimentStep;
 }
 
 const RecordItemStyle = styled.div`

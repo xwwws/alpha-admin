@@ -2,7 +2,7 @@
  * 格式化采集数据
  * @param arr
  */
-// const getDataAcquisitions = (arr: ()[]): API.Experiments.IAcquisitions[] => {
+// const getDataAcquisitions = (arr: ()[]): Experiments.IAcquisitions[] => {
 //   arr = arr || [];
 //   return arr.map(item => ({
 //     nodeid: item,
@@ -12,11 +12,11 @@
 /**
  * 将表单数据格式化为创建实验参数
  * @param values
- * @return {API.Experiments.CreateExperimentReq}
+ * @return {Experiments.CreateExperimentReq}
  */
-export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentReq => {
+export const fmtRequestParams = (values: any): Experiments.CreateExperimentReq => {
   console.log(values);
-  const params: API.Experiments.CreateExperimentReq = {
+  const params: Experiments.CreateExperimentReq = {
     name: values.name,
     project_id: values.project_id,
     bottle_height: values.bottle_height,
@@ -183,7 +183,7 @@ export const fmtRequestParams = (values: any): API.Experiments.CreateExperimentR
  *  将后台实验数据格式化为form所需数据
  * @param data
  */
-export const fmtResToFormData = (data: API.Experiments.CreateExperimentReq): any => {
+export const fmtResToFormData = (data: Experiments.CreateExperimentReq): any => {
   const steps_data = data.steps_data.map(item => {
     const steps_data_item: any = {
       step_name: item.name,

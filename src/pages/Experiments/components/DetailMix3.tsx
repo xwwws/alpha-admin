@@ -4,7 +4,7 @@ import React from 'react';
 import { useModel } from 'umi';
 
 interface IProps {
-  record: API.Experiments.CreateExperimentStep;
+  record: Experiments.CreateExperimentStep;
 
   [key: string]: any;
 }

@@ -17,8 +17,7 @@ const Record: React.FC<IProps> = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
-  const [ steps, setSteps ] = useState<API.Experiments.ExperimentStepsResItem[]>([]);
-  const UploadExpFileFormRef = useRef<IRef>(null);
+  const [ steps, setSteps ] = useState<Experiments.ExperimentStepsResItem[]>([]);
 
   // 根据实验id查询所有步骤
   useEffect(() => {
@@ -54,13 +53,6 @@ const Record: React.FC<IProps> = () => {
     <PageContainer
       extra={[
         <Button
-          icon={<UploadOutlined/>}
-          key={'upload'}
-          onClick={() => UploadExpFileFormRef.current?.show()}
-        >
-          上传附件
-        </Button>,
-        <Button
           key={'add'}
           onClick={() => navigate(`/exp/experiment/${id}/detail`, { replace: true })}
         >
@@ -87,9 +79,6 @@ const Record: React.FC<IProps> = () => {
       {/*  style={{ display: "none" }}*/}
       {/*  onChange={inputChange}*/}
       {/*/>*/}
-      <UploadFileForm
-        ref={UploadExpFileFormRef}
-      />
     </PageContainer>
   );
 };

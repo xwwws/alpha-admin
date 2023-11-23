@@ -14,7 +14,7 @@ import UploadStepFileForm from "@/pages/Experiments/components/UploadStepFileFor
 import { IRef } from "@/pages/Experiments/components/UploadStepFileForm";
 
 interface IProps {
-  step: API.Experiments.ExperimentStepsResItem;
+  step: Experiments.ExperimentStepsResItem;
   index: number;
 
   [key: string]: any;

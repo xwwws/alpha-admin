@@ -164,7 +164,7 @@ const List: React.FC = () => {
     getProjectIds();
   }, []);
 
-  const editExpDesc = (record: API.Experiments.List) => {
+  const editExpDesc = (record: Experiments.List) => {
     const { id, description } = record;
     setActiveExpEditRemark({
       id, description
@@ -197,7 +197,7 @@ const List: React.FC = () => {
     }
   };
 
-  const columns: ProColumns<API.Experiments.List>[] = [
+  const columns: ProColumns<Experiments.List>[] = [
     {
       hideInSearch: true,
       title: '实验名称',

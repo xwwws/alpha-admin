@@ -18,4 +18,20 @@ declare namespace Devices {
     method_list: methodList[];
     data_node_list: dataNodeList[];
   }
+
+  interface DeviceHisReq extends API.PagesReq {
+    start_time_after: string;
+    start_time_before: string;
+  }
+
+  interface DeviceHisRes {
+    id: number;
+    start_time: string;
+    end_time: string;
+    duration: number;
+    action: string;
+    label: string;
+    args: string[];
+    result: string[];
+  }
 }

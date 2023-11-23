@@ -26,7 +26,6 @@ const ChartBox = styled.div`
 
 const CollectedData: React.FC<IProps> = (props) => {
   const { data } = props;
-  console.log(data);
   const chartRef = useRef(null);
   const drawChart = () => {
     const color = '#2fc49a';
