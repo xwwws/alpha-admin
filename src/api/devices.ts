@@ -30,11 +30,13 @@ export const getDeviceHis = (device_name: string, params: Devices.DeviceHisReq) 
  * 设备按日运行时长统计:
  * 默认返回过去两周的统计数据
  * @param device_name
+ * @param params
  */
-export const getDeviceStatistics = (device_name: string) => {
-  return request<Response<Devices.Devices[]>>(
+export const getDeviceStatistics = (device_name: string,params: Devices.DeviceRunTimeReq) => {
+  return request<Response<Devices.DeviceRunTimeRes[]>>(
     `/api/v1/lab/devices/${device_name}/statistics`,
     {
       method: 'get',
+      params
     });
 };

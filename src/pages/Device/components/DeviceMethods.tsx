@@ -25,7 +25,7 @@ const MethodStyle = styled.div`
 const DeviceMethods: React.FC<IProps> = (props) => {
   const { deviceName, methods } = props;
   const MethodsModel = <>
-    <Card title={'指令'}>
+    <Card title={'指令'} size={"small"} hoverable>
       <Descriptions
         className={'methods'}
         size={'small'}

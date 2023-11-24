@@ -84,7 +84,7 @@ const DeviceCollectData: React.FC<IProps> = (props) => {
   return (
     <>
       <CollectDataStyle>
-        <Card title={'采集数据信息'}>
+        <Card title={'采集数据信息'} size={"small"} hoverable>
           {
             collectDataList && collectDataList.length &&
             <Descriptions

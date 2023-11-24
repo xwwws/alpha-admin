@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import styled from "styled-components";
 import { ProColumns, ProTable } from "@ant-design/pro-components";
+import type { ActionType } from "@ant-design/pro-components";
 import { formatColumns } from "@/utils/componentSettingUtils";
 import { Card, Tag } from "antd";
 import dayjs from "dayjs";
@@ -20,6 +21,7 @@ const DeviceHisStyle = styled.div`
 
 const DeviceHis: React.FC<IProps> = (props) => {
   const { deviceName } = props;
+  const tableRef = useRef<ActionType>();
 
   // table columns
   const columns: ProColumns<API.Methods.MethodHis>[] = formatColumns<API.Methods.MethodHis>([
@@ -79,8 +81,7 @@ const DeviceHis: React.FC<IProps> = (props) => {
   ]);
 
   // 获取table数据
-  const requestMethod = async (params: any) => {
-
+  const requestMethod = useCallback(async (params: any) => {
     const paramsData:Devices.DeviceHisReq = {
       page: params.current,
       page_size: params.pageSize,
@@ -91,16 +92,20 @@ const DeviceHis: React.FC<IProps> = (props) => {
     }
     const res = await getDeviceHis(deviceName, paramsData);
     return { data: res.data.data, success: true, total: res.data.total };
-  };
+  },[deviceName]);
+  useEffect(() => {
+    tableRef.current?.reload()
+  }, [deviceName])
   return (
     <DeviceHisStyle>
-      <Card title={'设备调用历史'}>
+      <Card title={'设备调用历史'} size={"small"} hoverable>
       <ProTable
+        actionRef={tableRef}
         rowKey={({id}) => `${id}`}
         columns={columns}
         options={false}
         request={requestMethod}
-        scroll={{ x: columns.length * 120 }}
+        scroll={{ x: columns.length * 150 }}
         pagination={{
           showSizeChanger: false,
           showQuickJumper: true,

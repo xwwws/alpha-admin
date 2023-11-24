@@ -7,13 +7,13 @@ import DeviceMethods from "@/pages/Device/components/DeviceMethods";
 import DeviceCollectData from "@/pages/Device/components/DeviceCollectData";
 import DeviceHis from "@/pages/Device/components/DeviceHis";
 import styled from "styled-components";
+import DeviceRunTime from "@/pages/Device/components/DeviceRunTime";
 
 interface IProps {
   [key: string]: any;
 }
 
 const CardContentStyle = styled.div`
-  display: grid;
   gap: 10px;
 `;
 
@@ -67,12 +67,21 @@ const Devices: React.FC<IProps> = (props) => {
             deviceName={currentDevice?.label}
             methods={currentDevice?.method_list}
           />
+          <br/>
           <DeviceCollectData
             dataNodes={currentDevice?.data_node_list}
           />
+          <br/>
           {/* 指令调用历史*/}
           {
             currentDevice && <DeviceHis
+              deviceName={currentDevice?.browse_name}
+            />
+          }
+          <br/>
+          {/* 设备按日运行时长统计*/}
+          {
+            currentDevice && <DeviceRunTime
               deviceName={currentDevice?.browse_name}
             />
           }

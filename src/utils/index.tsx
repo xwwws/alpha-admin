@@ -82,6 +82,3 @@ export const webSocketUrl = {
   [BuildEnv.TEST]: WS_URL,
 }[BUILD_ENV];
 
-export const parseTime = (time: string, fmt: string = 'YYYY-MM-DD HH:mm:ss') => {
-  return dayjs(time).format(fmt);
-};

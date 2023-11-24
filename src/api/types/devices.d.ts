@@ -34,4 +34,14 @@ declare namespace Devices {
     args: string[];
     result: string[];
   }
+
+  interface DeviceRunTimeReq {
+    start_time_after?: string;
+    start_time_before?: string;
+  }
+
+  interface DeviceRunTimeRes {
+    hours: string;
+    day: string;
+  }
 }
