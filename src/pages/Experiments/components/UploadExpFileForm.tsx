@@ -7,6 +7,8 @@ import { IForm } from "@/pages/typings";
 import { uploadExpAnnex } from "@/api/experiments";
 
 interface IProps {
+  uploadSuccess: () => void;
+
   [key: string]: any;
 }
 
@@ -15,7 +17,7 @@ export interface IRef {
 }
 
 const UploadExpFileForm: React.FC<IProps> = (props, ref: any) => {
-  const {} = props;
+  const {uploadSuccess} = props;
   const [ form ] = Form.useForm();
   const [ isShow, setIsShow ] = useState<boolean>(false);
   const { id } = useParams();
@@ -43,8 +45,9 @@ const UploadExpFileForm: React.FC<IProps> = (props, ref: any) => {
       description: data.description || ''
     };
     const res = await uploadExpAnnex(id as string, params);
-    message.success('上传成功')
-    setIsShow(false)
+    message.success('上传成功', uploadSuccess);
+
+    setIsShow(false);
   }, [ id ]);
   return (
     <>

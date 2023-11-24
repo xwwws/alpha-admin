@@ -25,13 +25,12 @@ const Detail: React.FC<IProps> = (props) => {
   const navigate = useNavigate();
   const UploadExpFileFormRef = useRef<IRef>(null);
   const ShowExpAnnexRef = useRef<IShowExpAnnexRef>(null);
-
+  const getExpInfo = async () => {
+    const res = await getExperimentDetailsById(id as string);
+    setRecordInfo(res.data);
+    setCurrentState(experimentStatesMap.find((item) => item.value === res.data.status));
+  };
   useEffect(() => {
-    const getExpInfo = async () => {
-      const res = await getExperimentDetailsById(id as string);
-      setRecordInfo(res.data);
-      setCurrentState(experimentStatesMap.find((item) => item.value === res.data.status));
-    };
     getExpInfo();
   }, [ id ]);
   const handlePrevOrNext = async (type: string) => {
@@ -181,6 +180,7 @@ const Detail: React.FC<IProps> = (props) => {
         />
       </Card>
       <UploadFileForm
+        uploadSuccess={getExpInfo}
         ref={UploadExpFileFormRef}
       />
     </PageContainer>

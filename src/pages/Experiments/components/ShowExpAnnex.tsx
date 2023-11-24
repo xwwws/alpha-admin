@@ -24,11 +24,12 @@ const ShowExpAnnex: React.FC<IProps> = (props, ref: any) => {
   };
 
   const columns = formatColumns<Experiments.ExpInfoAttachments>([
-    { title: 'id', dataIndex: 'id', key: 'id' },
+    { title: '附件id', dataIndex: 'id', key: 'id' },
     { title: '源文件名', dataIndex: 'filename', key: 'filename' },
     { title: '文件名', dataIndex: 'name', key: 'name' },
     {
       title: '文件地址',
+      width: '200px',
       render: (text, record) =>
         <a
           target={'_blank'}

@@ -59,7 +59,12 @@ const CollectedDataWarp: React.FC<IProps> = (props) => {
       {collectedDataList.length > 0 && collectedDataList.map((item, index) => {
         return <Card hoverable key={index}>
           <div className="downloadWarp">
-            <Button icon={<DownloadOutlined/>} onClick={() => openUrl(collected_data[index].file_url)}>下载</Button>
+            <Button
+              icon={<DownloadOutlined/>}
+              onClick={() => openUrl(collected_data[index].file_url)}
+            >
+              下载
+            </Button>
           </div>
           <CollectedData data={item}/>
           {collected_data[index] && <CollectedDetails data={collected_data[index]}/>}

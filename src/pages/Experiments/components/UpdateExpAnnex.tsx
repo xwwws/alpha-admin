@@ -7,6 +7,7 @@ import { IForm } from "@/pages/typings";
 import { updateExpAnnex } from "@/api/attachments";
 
 interface IProps {
+  uploadSuccess: () => void;
 
   [key: string]: any;
 }
@@ -16,12 +17,13 @@ export interface IUpdateExpAnnexRef {
 }
 
 const UpdateExpAnnex: React.FC<IProps> = (props, ref: any) => {
+  const { uploadSuccess } = props;
   const [ form ] = Form.useForm();
   const [ isShow, setIsShow ] = useState<boolean>(false);
   const [ attachmentId, setAttachmentId ] = useState<string | number>('');
   const [ fileList, setFileList ] = useState<UploadFile[]>();
   const show = (data: Experiments.ExpInfoAttachments) => {
-    setAttachmentId(data.id)
+    setAttachmentId(data.id);
     form.resetFields();
     setIsShow(true);
   };
@@ -44,8 +46,8 @@ const UpdateExpAnnex: React.FC<IProps> = (props, ref: any) => {
       description: data.description || ''
     };
     const res = await updateExpAnnex(attachmentId as string, params);
-    message.success('上传成功')
-    setIsShow(false)
+    message.success('上传成功', uploadSuccess);
+    setIsShow(false);
   }, [ attachmentId ]);
   return (
     <>
