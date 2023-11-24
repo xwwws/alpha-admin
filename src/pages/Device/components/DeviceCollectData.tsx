@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import DispatchEvent from "@/utils/DispatchEvent";
 import useWebsocket, { IMsgGet, ISendMessage, SocketEventEnum } from "@/hooks/useWebsocket";
 import { webSocketUrl } from "@/utils";
-import { Descriptions } from 'antd';
+import { Card, Descriptions } from 'antd';
 import styled from 'styled-components';
 
 interface IProps {
@@ -24,10 +24,6 @@ interface ICollectData {
 }
 
 const CollectDataStyle = styled.div`
-  .collectDataTitle {
-    font-weight: bold;
-    font-size: 18px;
-  }
 
   .CollectData {
     width: 400px;
@@ -88,31 +84,30 @@ const DeviceCollectData: React.FC<IProps> = (props) => {
   return (
     <>
       <CollectDataStyle>
-        <div className="collectDataTitle">
-          采集数据信息
-        </div>
-        {
-          collectDataList && collectDataList.length &&
-          <Descriptions
-            className={'CollectData'}
-            size={'small'}
-            labelStyle={{ width: '180px', textAlign: 'center' }}
-            bordered
-            column={1}
-          >
-            {collectDataList.map((item, index) => {
-              return (
-                <Descriptions.Item
-                  key={index}
-                  labelStyle={{ width: '180px', textAlign: 'center' }}
-                  label={item.custom_name}
-                >
-                  {item.value}
-                </Descriptions.Item>
-              );
-            })}
-          </Descriptions>
-        }
+        <Card title={'采集数据信息'}>
+          {
+            collectDataList && collectDataList.length &&
+            <Descriptions
+              className={'CollectData'}
+              size={'small'}
+              labelStyle={{ width: '180px', textAlign: 'center' }}
+              bordered
+              column={1}
+            >
+              {collectDataList.map((item, index) => {
+                return (
+                  <Descriptions.Item
+                    key={index}
+                    labelStyle={{ width: '180px', textAlign: 'center' }}
+                    label={item.custom_name}
+                  >
+                    {item.value}
+                  </Descriptions.Item>
+                );
+              })}
+            </Descriptions>
+          }
+        </Card>
       </CollectDataStyle>
     </>
   );

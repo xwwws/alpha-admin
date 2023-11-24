@@ -20,8 +20,8 @@ declare namespace Devices {
   }
 
   interface DeviceHisReq extends API.PagesReq {
-    start_time_after: string;
-    start_time_before: string;
+    start_time_after?: string;
+    start_time_before?: string;
   }
 
   interface DeviceHisRes {

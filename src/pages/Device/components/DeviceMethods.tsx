@@ -25,20 +25,22 @@ const MethodStyle = styled.div`
 const DeviceMethods: React.FC<IProps> = (props) => {
   const { deviceName, methods } = props;
   const MethodsModel = <>
-    <div className="methodsTitle">指令</div>
-    <Descriptions
-      className={'methods'}
-      size={'small'}
-      labelStyle={{ width: '180px', textAlign: 'center' }}
-      bordered
-      column={1}
-    >
-      {methods?.map((item, index) => (
-        <Descriptions.Item label={index + 1} key={item.action}>
-          {item.label}
-        </Descriptions.Item>
-      ))}
-    </Descriptions>
+    <Card title={'指令'}>
+      <Descriptions
+        className={'methods'}
+        size={'small'}
+        labelStyle={{ width: '180px', textAlign: 'center' }}
+        bordered
+        column={1}
+      >
+        {methods?.map((item, index) => (
+          <Descriptions.Item label={index + 1} key={item.action}>
+            {item.label}
+          </Descriptions.Item>
+        ))}
+      </Descriptions>
+    </Card>
+
   </>;
   return (
     <>

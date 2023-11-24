@@ -5,10 +5,17 @@ import { getDevices } from "@/api/devices";
 import { getAreasMap } from "@/api/public";
 import DeviceMethods from "@/pages/Device/components/DeviceMethods";
 import DeviceCollectData from "@/pages/Device/components/DeviceCollectData";
+import DeviceHis from "@/pages/Device/components/DeviceHis";
+import styled from "styled-components";
 
 interface IProps {
   [key: string]: any;
 }
+
+const CardContentStyle = styled.div`
+  display: grid;
+  gap: 10px;
+`;
 
 const Devices: React.FC<IProps> = (props) => {
   const [ devices, setDevices ] = useState<Devices.Devices[]>([]);
@@ -19,11 +26,11 @@ const Devices: React.FC<IProps> = (props) => {
    */
   useEffect(() => {
     (async () => {
-      setPageLoading(true)
+      setPageLoading(true);
       const res = await getDevices();
       setDevices(res.data);
-      setCurrentDevice(res.data[0])
-      setPageLoading(false)
+      setCurrentDevice(res.data[0]);
+      setPageLoading(false);
     })();
   }, []);
 
@@ -32,7 +39,7 @@ const Devices: React.FC<IProps> = (props) => {
    * @param key
    */
   const handleTabsChange = async (key: string): Promise<void> => {
-    setCurrentDevice(devices.find(item => item.browse_name === key))
+    setCurrentDevice(devices.find(item => item.browse_name === key));
   };
   return (
     <PageContainer
@@ -54,13 +61,23 @@ const Devices: React.FC<IProps> = (props) => {
       }}
     >
       <Card>
-        <DeviceMethods
-          deviceName={currentDevice?.label}
-          methods={currentDevice?.method_list}
-        />
-        <DeviceCollectData
-          dataNodes={currentDevice?.data_node_list}
-        />
+        <CardContentStyle>
+
+          <DeviceMethods
+            deviceName={currentDevice?.label}
+            methods={currentDevice?.method_list}
+          />
+          <DeviceCollectData
+            dataNodes={currentDevice?.data_node_list}
+          />
+          {/* 指令调用历史*/}
+          {
+            currentDevice && <DeviceHis
+              deviceName={currentDevice?.browse_name}
+            />
+          }
+
+        </CardContentStyle>
       </Card>
     </PageContainer>
   );
