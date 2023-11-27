@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from "@@/exports";
 import { getProDataInfo } from "@/api/project";
 import { formatColumns } from "@/utils/componentSettingUtils";
-import { Icsv, readCSV } from "@/utils/fileRead";
+import { Icsv, readCSV, readFHTLCSV } from "@/utils/fileRead";
 import ProDataInfoChartModal from "@/pages/Project/components/ProDataInfoChartModal";
 import type { IChartData } from "@/pages/Project/components/ProDataInfoChartModal";
 
@@ -17,10 +17,15 @@ interface IAllData {
   name: string
 }
 
+interface IFHTLAllData {
+  data: any,
+  name: string
+}
+
 const ProDataInfo: React.FC<IProps> = (props) => {
   const { proDataId } = useParams();
   const [ columns, setColumns ] = useState<ProColumns<any>[]>([]);
-  const [ dataSource, setDataSource ] = useState<(string | number)[][]>([]);
+  const [ dataSource, setDataSource ] = useState<(any)[][]>([]);
   const [ activeRows, setActiveRows ] = useState<any[]>([]);
   const [ unit, setUnit ] = useState<string>('');
   const [ nameIndex, setNameIndex ] = useState<number>(0);
@@ -29,6 +34,8 @@ const ProDataInfo: React.FC<IProps> = (props) => {
   const [ isShow, setIsShow ] = useState<boolean>(false);
   const [ isModalLoading, setIsModalLoading ] = useState<boolean>(false);
   const [ chartData, setChartData ] = useState<IChartData>({ xData: [], yData: [] });
+  // 防火涂料model相关数据
+
   const pageInit = async (proDataId: string) => {
     const res = await getProDataInfo(proDataId);
     const tableTitle: string[] = res.data.data[0] as string[];
@@ -64,6 +71,18 @@ const ProDataInfo: React.FC<IProps> = (props) => {
     })))) as IAllData[];
   };
 
+
+  /**
+   * 获取防火涂料csv数据
+   */
+  const getFHTLCSCData = async (): Promise<IFHTLAllData[]> => {
+    // 读取所有文件
+    return await Promise.all(activeRows.map((item) => new Promise(async (resolve) => resolve({
+      name: item[nameIndex],
+      data: await readFHTLCSV(item[item.length - 1])
+    })))) as IAllData[];
+  };
+
   /**
    * 将csv数据转换成图表数据
    * @param allData
@@ -77,6 +96,7 @@ const ProDataInfo: React.FC<IProps> = (props) => {
       .filter((value, index, self) => self.indexOf(value) === index);
     // 处理y数据
     const yData = allData.map(({ name, data }) => {
+      console.log(allData);
       return {
         name,
         y: xData.map((x) => {
@@ -87,6 +107,7 @@ const ProDataInfo: React.FC<IProps> = (props) => {
             return data.value[durationIndex];
           }
         }).reduce((accumulator: string[], item) => {
+          console.log(item);
           if (item === '-') {
             return [ ...accumulator, accumulator[accumulator.length - 1] ];
           } else {
@@ -97,10 +118,76 @@ const ProDataInfo: React.FC<IProps> = (props) => {
     });
     return { xData, yData };
   };
-  const viewComparisonChart = async () => {
+  /**
+   * 普通视图查看
+   */
+  const showNormalData = async () => {
     setIsModalLoading(false);
     setChartData(formatCSVsData2ChartData(await getCSVsData()));
     setIsShow(true);
+  };
+
+  /**
+   * 将csv数据转换成图表数据   防火涂料
+   * @param allData
+   */
+  const formatCSVsData2ChartFHTLData = (allData: IFHTLAllData[]): IChartData => {
+    const baseX = '记录时间';
+    const baseY1 = '温控表1#PV(℃)';
+    const baseY2 = '温控表2#PV(℃)';
+    // // 合并所有x轴  x轴以 duration 为准
+    const xData = allData
+      .map((item) => item.data.map((dataItem: any) => dataItem[baseX]))
+      .flat()
+      .sort((a, b) => (Date.parse(a) - Date.parse(b)))
+      .filter((value, index, self) => self.indexOf(value) === index);
+    // 处理y数据
+    const yData = allData.map(({ name, data }) => {
+      return [
+        {
+          name: `${name}-${baseY1}`,
+          y: xData.map((x) => {
+            // @ts-ignore key 是csv文件表头   给的就是汉字
+            const iResult = data.find(({记录时间}) => 记录时间 === x)
+            if(iResult) {
+              return iResult[baseY1]
+            } else {
+              return '-'
+            }
+          })
+        },
+        {
+          name: `${name}-${baseY2}`,
+          y: xData.map((x) => {
+            // @ts-ignore key 是csv文件表头   给的就是汉字
+            const iResult = data.find(({记录时间}) => 记录时间 === x)
+            if(iResult) {
+              return iResult[baseY2]
+            } else {
+              return '-'
+            }
+          })
+        }
+      ];
+    });
+    return { xData, yData: yData.flat() };
+  };
+  /**
+   * 防火涂料视图查看
+   */
+  const showFHTLData = async () => {
+    setIsModalLoading(false)
+    setChartData(formatCSVsData2ChartFHTLData(await getFHTLCSCData()));
+    setIsShow(true)
+  };
+  const viewComparisonChart = () => {
+    // 判断是不是防火涂料
+    if (dataSource[0][1].includes('FH')) { // 是防火涂料
+      showFHTLData();
+    } else { // 不是防火涂料
+      // 普通视图查看
+      showNormalData();
+    }
   };
 
   return (

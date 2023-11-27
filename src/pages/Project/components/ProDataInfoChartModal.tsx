@@ -58,9 +58,6 @@ const ProDataInfoChartModal: React.FC<IProps> = (props) => {
           boundaryGap: false,
           data: xData,
           name: 's',
-          axisLabel: {
-            interval: 0,
-          }
         },
         yAxis: {
           type: 'value',
