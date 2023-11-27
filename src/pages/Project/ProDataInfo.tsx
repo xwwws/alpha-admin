@@ -34,8 +34,6 @@ const ProDataInfo: React.FC<IProps> = (props) => {
   const [ isShow, setIsShow ] = useState<boolean>(false);
   const [ isModalLoading, setIsModalLoading ] = useState<boolean>(false);
   const [ chartData, setChartData ] = useState<IChartData>({ xData: [], yData: [] });
-  // 防火涂料model相关数据
-
   const pageInit = async (proDataId: string) => {
     const res = await getProDataInfo(proDataId);
     const tableTitle: string[] = res.data.data[0] as string[];
