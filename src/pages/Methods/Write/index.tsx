@@ -67,10 +67,10 @@ const Index: React.FC = () => {
         />
       </Form.Item>
 
-      <Form.Item name="node_value" label="节点id" rules={[ { required: true, message: '请输入内容' } ]}>
+      <Form.Item name="node_value" label="值" rules={[ { required: true, message: '请输入内容' } ]}>
         <Input
           style={{ width: `150px` }}
-          placeholder={'请选择节点'}
+          placeholder={'请填写值'}
         />
       </Form.Item>
       <Form.Item wrapperCol={{ offset: 4 }}>

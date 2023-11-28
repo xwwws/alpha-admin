@@ -22,9 +22,9 @@ interface IValueEnum {
   [key: string]:
     | ReactNode
     | {
-        text: ReactNode;
-        status: 'Success' | 'Error' | 'Processing' | 'Warning' | 'Default';
-      };
+    text: ReactNode;
+    status: 'Success' | 'Error' | 'Processing' | 'Warning' | 'Default';
+  };
 }
 
 /**
@@ -53,3 +53,11 @@ export enum StepStatusMap {
   'canceled' = 'Default',
   'canceling' = 'Default',
 }
+interface IMethodsMap {
+  name: string;
+  label: string
+}
+export const MethodsMap: IMethodsMap[] = [
+  { name: 'read', label: '读值' },
+  { name: 'write', label: '写值' },
+];
