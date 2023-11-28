@@ -1,3 +1,6 @@
+/**
+ * 本文件定义的methods类型大多适用于工作流中的methods
+ */
 declare namespace Methods {
   // 读值
   interface Read {
@@ -12,8 +15,106 @@ declare namespace Methods {
   }
 
 //   等待
-  interface sleepReq {
+  interface Sleep {
     seconds: string | number;
+  }
+
+  // 移动
+  interface MethodMvThing {
+    dst_x: string | number;
+    dst_y: string | number;
+    dst_z: string | number;
+    src_x: string | number;
+    src_y: string | number;
+    src_z: string | number;
+    height: string | number;
+    dst_area: string;
+    src_area: string;
+  }
+
+  // 加固
+  interface AddSolid {
+    angel: string | number;
+    speed: string | number;
+    weight: string | number;
+    area_name: string;
+    tolerance: string | number;
+  }
+
+
+  // 加液
+
+  interface AddSol {
+    dst_x: string | number;
+    dst_y: string | number;
+    dst_z: string | number;
+    speed: string | number;
+    src_x: string | number;
+    src_y: string | number;
+    src_z: string | number;
+    weight: string | number;
+    accuracy: string | number;
+    dst_area: string;
+    src_area: string;
+  }
+
+  // 开盖
+  interface UnCap {
+    y: string | number;
+    height: string | number;
+    area_name: string;
+  }
+
+  // 加盖
+  interface ReCap {
+    y: string | number;
+    height: string | number;
+    area_name: string;
+  }
+
+
+  // 加盖
+  interface ChangeTool {
+    dst_tool: string;
+    src_tool: string;
+  }
+
+
+  // 抬起枪头
+  interface PickTip {
+    x: string | number;
+    y: string | number;
+    z: string | number;
+    drop_pre: boolean;
+    tip_length: string | number;
+    tip_area_name: string;
+  }
+
+  // 移液
+  interface TrnsLiquid {
+    speed: string | number;
+    src_x: string | number;
+    total: string | number;
+    interval: string | number;
+    spit_once: string | number;
+    take_once: string | number;
+    tip_length: string | number;
+    dst_area_name: string;
+    src_area_name: string;
+  }
+
+
+  // 移动固体料仓
+  interface  MvSolid {
+    dst_x: string | number;
+    dst_y: string | number;
+    dst_z: string | number;
+    src_x: string | number;
+    src_y: string | number;
+    src_z: string | number;
+    height: string | number;
+    dst_area_name: string
+    src_area_name: string
   }
 
   interface Dodistillc3 {
@@ -30,4 +131,5 @@ declare namespace Methods {
     suply_time: number | string;
     total_time: number | string;
   }
+
 }

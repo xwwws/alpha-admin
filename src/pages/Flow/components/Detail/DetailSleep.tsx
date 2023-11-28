@@ -2,7 +2,7 @@ import React from 'react';
 import { Descriptions } from "antd";
 
 interface IProps {
-  data: Flows.FlowDataItem<Methods.sleepReq>;
+  data: Flows.FlowDataItem<Methods.Sleep>;
   [key: string]: any;
 }
 

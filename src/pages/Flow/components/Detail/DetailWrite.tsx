@@ -6,7 +6,7 @@ interface IProps {
   [key: string]: any;
 }
 
-const DetailRead: React.FC<IProps> = (props) => {
+const DetailWrite: React.FC<IProps> = (props) => {
   const { data } = props;
   return (
     <>
@@ -27,4 +27,4 @@ const DetailRead: React.FC<IProps> = (props) => {
   );
 };
 
-export default DetailRead;
+export default DetailWrite;

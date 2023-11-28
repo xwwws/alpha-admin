@@ -12,11 +12,10 @@ const FlowDetailWrap: React.FC<IProps> = (props) => {
   return (
     <>
       {
-        flowData.map((item, key) => <>
+        flowData.map((item, key) => <div key={key}>
           <br/>
-          <FlowDetailItem key={key} flowItem={item}/>
-          <br/>
-        </>)
+          <FlowDetailItem flowItem={item}/>
+        </div>)
       }
     </>
   );

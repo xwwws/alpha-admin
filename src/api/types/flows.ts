@@ -30,7 +30,7 @@ declare namespace Flows {
   interface Detail {
     id: number;
     name: string;
-    flow_data: FlowDataItem<Methods.Read | Methods.Write | Methods.sleepReq>[];
+    flow_data: FlowDataItem<Methods.Read | Methods.Write | Methods.Sleep | Methods.MethodMvThing | Methods.AddSol | Methods.UnCap>[];
     data_acquisitions: API.data_acquisitionParams[];
     status: string;
     description: string;

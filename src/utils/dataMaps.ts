@@ -53,11 +53,23 @@ export enum StepStatusMap {
   'canceled' = 'Default',
   'canceling' = 'Default',
 }
+
 interface IMethodsMap {
   name: string;
-  label: string
+  label: string;
 }
+
 export const MethodsMap: IMethodsMap[] = [
   { name: 'read', label: '读值' },
   { name: 'write', label: '写值' },
+  { name: 'sleep', label: '等待' },
+  { name: 'methdMvThing', label: '移动' },
+  { name: 'methdDoAddSolid', label: '加固' },
+  { name: 'methdAddSol', label: '加液' },
+  { name: 'methdUncap', label: '开盖' },
+  { name: 'methdRecap', label: '加盖' },
+  { name: 'methdChngTool', label: '更换夹爪' },
+  { name: 'methdPickTip', label: '抬起枪头' },
+  { name: 'methdTrnsLiquid', label: '移液' },
+  { name: 'methdMvSolid', label: '移动固体料仓' },
 ];
