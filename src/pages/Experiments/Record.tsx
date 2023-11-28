@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, useParams } from "umi";
 import { getStepsByExperimentId } from "@/api/experiments";
 import RecordStep from "@/pages/Experiments/components/RecordStep";
-import PreAndNext from "@/pages/Experiments/components/PreAndNext";
+import PreAndNext from "@/pages/components/PreAndNext";
 import { UploadOutlined } from "@ant-design/icons";
 import UploadFileForm from "@/pages/Experiments/components/UploadExpFileForm";
 import type { IRef } from "@/pages/Experiments/components/UploadExpFileForm";

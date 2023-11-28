@@ -10,14 +10,19 @@ export const flows = [
         redirect: '/flow/list',
       },
       {
-        path: 'list',
+        path: '/flow/list',
         name: 'list',
         component: './Flow/List',
       },
       {
-        path: 'create',
+        path: '/flow/create',
         name: 'create',
         component: './Flow/Create',
+      },
+      {
+        path: '/flow/:id/detail',
+        name: 'detail',
+        component: './Flow/Detail',
       },
     ]
   }

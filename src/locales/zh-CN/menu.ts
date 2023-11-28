@@ -47,6 +47,8 @@ export default {
   'menu.flow': '工作流',
   'menu.flow.list': '工作流列表',
   'menu.flow.create': '创建工作流',
+  'menu.flow.detail': '工作流详情',
+  'menu.flow.record': '工作流记录',
   'menu.project': '项目',
   'menu.project.list': '项目列表',
   'menu.project.create': '新建项目',

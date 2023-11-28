@@ -1,12 +1,11 @@
-import { DeleteOutlined, EditOutlined, OrderedListOutlined, PlusOutlined } from '@ant-design/icons';
+import { AlignLeftOutlined, DeleteOutlined, EditOutlined, OrderedListOutlined, PlusOutlined } from '@ant-design/icons';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import { Button, Card, Popconfirm, Tooltip } from 'antd';
 import React, { useRef } from 'react';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
-import { deleteProject, getProjects } from "@/api/project";
 import { formatColumns, tableTimeRender } from "@/utils/componentSettingUtils";
 import { useNavigate } from "umi";
-import { getFlowList } from "@/api/flows";
+import { deleteFlow, getFlowList } from "@/api/flows";
 import { experimentStatesMap, expState2ValueEnum } from "@/utils/dataMaps";
 
 interface IProps {
@@ -17,8 +16,8 @@ const timeRender = tableTimeRender();
 
 const List: React.FC<IProps> = () => {
   const navigate = useNavigate();
-  const handleDeleteProject = async (id: string | number) => {
-    await deleteProject(id);
+  const handleDeleteProject = async (id: number) => {
+    await deleteFlow(id);
     tableRef.current?.reload();
 
   };
@@ -42,14 +41,13 @@ const List: React.FC<IProps> = () => {
     {
       title: '操作', dataIndex: 'actions', render: (text, item) => {
         return [
-          <Tooltip key={'addData'} placement="top" title="项目数据">
+          <Tooltip key={'detail'} title={'详情'}>
             <Button
+              icon={<AlignLeftOutlined/>}
               type={'link'}
-              icon={<OrderedListOutlined/>}
-              onClick={() => navigate(`/project/pro-data-List/${item.id}`)}
+              onClick={() => navigate(`/flow/${item.id}/detail`)}
             />
           </Tooltip>,
-
           <Tooltip key={'edit'} placement="top" title="编辑">
             <Button
               type={'link'}
