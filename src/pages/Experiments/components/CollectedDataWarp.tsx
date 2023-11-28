@@ -13,7 +13,7 @@ interface IProps {
   [key: string]: any;
 }
 
-const CollectedDataWarpStyle = styled.div`
+const CollectedDataWrapStyle = styled.div`
   display: grid;
   gap: 20px;
   padding-top: 20px;
@@ -29,7 +29,7 @@ const CollectedDataWarpStyle = styled.div`
     line-height: 1.5;
   }
 `;
-const CollectedDataWarp: React.FC<IProps> = (props) => {
+const CollectedDataWrap: React.FC<IProps> = (props) => {
 
   const { collected_data } = props;
   const [ collectedDataList, setCollectedDataList ] = useState<Icsv[]>([]);
@@ -54,11 +54,11 @@ const CollectedDataWarp: React.FC<IProps> = (props) => {
     window.open(url, '_blank');
   };
   return (
-    <CollectedDataWarpStyle>
+    <CollectedDataWrapStyle>
       <div className="title">数据采集信息</div>
       {collectedDataList.length > 0 && collectedDataList.map((item, index) => {
         return <Card hoverable key={index}>
-          <div className="downloadWarp">
+          <div className="downloadWrap">
             <Button
               icon={<DownloadOutlined/>}
               onClick={() => openUrl(collected_data[index].file_url)}
@@ -75,8 +75,8 @@ const CollectedDataWarp: React.FC<IProps> = (props) => {
           <Empty description={'暂无数据'}/>
         </>
       }
-    </CollectedDataWarpStyle>
+    </CollectedDataWrapStyle>
   );
 };
 
-export default CollectedDataWarp;
+export default CollectedDataWrap;

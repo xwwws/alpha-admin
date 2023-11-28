@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { StepStatusMap } from "@/utils/dataMaps";
 import { getMethodsByStepId } from "@/api/steps";
 import RecordStepMethodInfo from "@/pages/Experiments/components/RecordStepMethodInfo";
-import CollectedDataWarp from "@/pages/Experiments/components/CollectedDataWarp";
+import CollectedDataWrap from "@/pages/Experiments/components/CollectedDataWrap";
 import { CalculateDuration } from "@/utils";
 import { FastForwardOutlined, ReloadOutlined, UploadOutlined } from '@ant-design/icons';
 import { reRunExpStep, skipRunExpStep } from "@/api/experiments";
@@ -28,7 +28,7 @@ const RecordStyle = styled.div`
     padding: 10px 80px;
   }
 
-  .collectedDataWarp {
+  .collectedDataWrap {
     width: 85%;
     margin: 0 auto;
   }
@@ -135,8 +135,8 @@ const RecordStep: React.FC<IProps> = (props) => {
           items={descriptionInfo}
         />
       </div>
-      <div className="collectedDataWarp">
-        <CollectedDataWarp collected_data={step.data_acquisitions_results}/>
+      <div className="collectedDataWrap">
+        <CollectedDataWrap collected_data={step.data_acquisitions_results}/>
       </div>
       <div className="methods">
         <div className="title">指令信息</div>

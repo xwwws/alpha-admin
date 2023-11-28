@@ -14,7 +14,7 @@ interface IProps {
 const MethodsHisStyle = styled.div`
   margin-top: 20px;
 `;
-const StatisticsWarpStyle = styled.div`
+const StatisticsWrapStyle = styled.div`
   margin: 0 auto 20px;
 
   .form {
@@ -130,7 +130,7 @@ const MethodsHis: React.FC<IProps> = (props) => {
   };
   return (
     <MethodsHisStyle>
-      <StatisticsWarpStyle>
+      <StatisticsWrapStyle>
         <Card title={'指令执行数据统计'} size={'small'}>
           <div className="form">
             <Form layout="inline" form={form} onFinish={formFinish}>
@@ -154,7 +154,7 @@ const MethodsHis: React.FC<IProps> = (props) => {
             </Descriptions.Item>
           </Descriptions>
         </Card>
-      </StatisticsWarpStyle>
+      </StatisticsWrapStyle>
       <Card title={'指令调用历史'} size={'small'}>
         <ProTable
           rowKey={({id}) => `${id}`}

@@ -16,7 +16,7 @@ interface IProps {
 const TraysArea: React.FC<IProps> = (props) => {
   const { trays, bindReagent, deleteReagent } = props;
   const maxCol = Math.max(...trays.map((item) => item.y));
-  const TraysAreaWarp = styled.div`
+  const TraysAreaWrap = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -48,7 +48,7 @@ const TraysArea: React.FC<IProps> = (props) => {
   `;
   return (
     <Card>
-      <TraysAreaWarp>
+      <TraysAreaWrap>
         {/*{ loading && <div className="loging"><Spin tip={'loading'}/></div> }*/}
 
         <div className="trays">
@@ -90,7 +90,7 @@ const TraysArea: React.FC<IProps> = (props) => {
             );
           })}
         </div>
-      </TraysAreaWarp>
+      </TraysAreaWrap>
     </Card>
   );
 };

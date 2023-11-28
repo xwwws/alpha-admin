@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from "antd";
-import CollectedDataWarp from "@/pages/Experiments/components/CollectedDataWarp";
+import CollectedDataWrap from "@/pages/Experiments/components/CollectedDataWrap";
 
 interface IProps {
   isShow: boolean;
@@ -21,7 +21,7 @@ const StepHisChart: React.FC<IProps> = (props) => {
         footer={null}
         width={'80%'}
       >
-        <CollectedDataWarp collected_data={collected_data}/>
+        <CollectedDataWrap collected_data={collected_data}/>
       </Modal>
     </>
   );

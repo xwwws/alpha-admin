@@ -8,7 +8,7 @@ interface IProps {
   [key: string]: any;
 }
 
-const FormWarp = styled.div`
+const FormWrap = styled.div`
   width: 500px;
   margin: 0 auto;
 `;
@@ -23,7 +23,7 @@ const ChangePwd: React.FC<IProps> = (props) => {
   return (
     <PageContainer>
       <Card>
-        <FormWarp>
+        <FormWrap>
 
           <Form form={form}>
             <Form.Item label={"新密码"} name={'passwd'} rules={[ { required: true, message: '请输入新密码' } ]}>
@@ -31,7 +31,7 @@ const ChangePwd: React.FC<IProps> = (props) => {
             </Form.Item>
           </Form>
           <Button style={{ margin: '0 auto;' }} type="primary" onClick={handleConfirm}>确定</Button>
-        </FormWarp>
+        </FormWrap>
       </Card>
     </PageContainer>
   );

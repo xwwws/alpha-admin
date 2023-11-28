@@ -9,7 +9,7 @@ interface IProps {
   [key: string]: any;
 }
 
-const PreAndNextWarpStyle = styled.div`
+const PreAndNextWrapStyle = styled.div`
   padding-bottom: 20px;
   display: flex;
   justify-content: space-between;
@@ -18,10 +18,10 @@ const PreAndNextWarpStyle = styled.div`
 const PreAndNext: React.FC<IProps> = (props) => {
   const { onPreOrNext } = props;
   return (
-    <PreAndNextWarpStyle>
+    <PreAndNextWrapStyle>
       <Button size={'small'} onClick={() => onPreOrNext('prev')}><DoubleLeftOutlined/>上一条</Button>
       <Button size={'small'} onClick={() => onPreOrNext('next')}>下一条 <DoubleRightOutlined/></Button>
-    </PreAndNextWarpStyle>
+    </PreAndNextWrapStyle>
   );
 };
 

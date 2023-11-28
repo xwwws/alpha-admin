@@ -10,7 +10,7 @@ interface IProps {
   [key: string]: any;
 }
 
-const ButtonWarp = styled.div`
+const ButtonWrap = styled.div`
   display: flex;
   flex-direction: row-reverse;
 
@@ -34,11 +34,11 @@ const DataAcquisition: React.FC<IProps> = (props) => {
       <Form.List name={name}>
         {(fields, { add, remove }) => (
           <>
-            <ButtonWarp>
+            <ButtonWrap>
               <Button className={"button"} onClick={() => add()} block icon={<PlusOutlined/>}>
                 采集数据
               </Button>
-            </ButtonWarp>
+            </ButtonWrap>
             {fields.map((subField, key) => (
               <Row gutter={10} key={key} style={{ margin: '5px 0' }}>
                 <Col span={11}>

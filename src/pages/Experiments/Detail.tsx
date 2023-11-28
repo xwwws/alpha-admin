@@ -7,7 +7,7 @@ import type { DescriptionsProps } from 'antd';
 import { Badge, Button, Card, Descriptions, message } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import CollectedDataWarp from "@/pages/Experiments/components/CollectedDataWarp";
+import CollectedDataWrap from "@/pages/Experiments/components/CollectedDataWrap";
 import { useNavigate } from "umi";
 import PreAndNext from "@/pages/components/PreAndNext";
 import { UploadOutlined } from "@ant-design/icons";
@@ -175,7 +175,7 @@ const Detail: React.FC<IProps> = (props) => {
 
 
         {/*采集数据信息*/}
-        <CollectedDataWarp
+        <CollectedDataWrap
           collected_data={recordInfo?.data_acquisitions_results as API.DataAcquisitionsResults[]}
         />
       </Card>

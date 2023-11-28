@@ -1,6 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { Modal } from "antd";
-import CollectedDataWarp from "@/pages/Experiments/components/CollectedDataWarp";
+import CollectedDataWrap from "@/pages/Experiments/components/CollectedDataWrap";
 import { getStepHisInfo } from "@/api/steps";
 import StepHisInfoContent from "@/pages/Steps/components/StepHisInfoContent";
 import RecordStepMethods from '@/pages/Experiments/components/RecordStepMethods';
@@ -64,7 +64,7 @@ const StepHisChart: React.FC<IProps> = (props, ref: any) => {
           <div className="title">指令信息</div>
           <RecordStepMethods stepId={StepId} />
         </MethodsStyle>
-        <CollectedDataWarp
+        <CollectedDataWrap
           collected_data={stepHisInfo?.data_acquisitions_results as API.DataAcquisitionsResults[]}
         />
       </Modal>

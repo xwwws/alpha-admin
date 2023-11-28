@@ -11,7 +11,7 @@ interface IProps {
   [key: string]: any;
 }
 
-const TagWarp = styled.div`
+const TagWrap = styled.div`
   display: grid;
   gap: 10px;
   overflow: auto;
@@ -30,10 +30,10 @@ const RecordStepMethodInfo: React.FC<IProps> = (props) => {
     { key: '4-1', label: '运行时长', children: method.duration, span: 3 },
     {
       key: '5', label: '结果', children: method.result.map((item, index) => (
-        <TagWarp key={index}>
+        <TagWrap key={index}>
           <Tag style={{ display: 'block' }}>{item}</Tag>
           <Tag style={{ display: 'block' }}>{item}</Tag>
-        </TagWarp>
+        </TagWrap>
       )),
       span: 3
     },
