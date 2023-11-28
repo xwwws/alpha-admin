@@ -1,26 +1,26 @@
 export const flows = [
   {
-    path: '/flow',
+    path: '/exp/flow',
     name: 'flow',
     icon: 'ContainerOutlined',
     hideChildrenInMenu: true,
     routes: [
       {
-        path: '/flow',
-        redirect: '/flow/list',
+        path: '/exp/flow',
+        redirect: '/exp/flow/list',
       },
       {
-        path: '/flow/list',
+        path: '/exp/flow/list',
         name: 'list',
         component: './Flow/List',
       },
       {
-        path: '/flow/create',
+        path: '/exp/flow/create',
         name: 'create',
         component: './Flow/Create',
       },
       {
-        path: '/flow/:id/detail',
+        path: '/exp/flow/:id/detail',
         name: 'detail',
         component: './Flow/Detail',
       },

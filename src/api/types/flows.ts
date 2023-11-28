@@ -26,6 +26,5 @@ declare namespace Flows {
     user_username: string;
     project_id: number;
     project_name: string;
-
   }
 }

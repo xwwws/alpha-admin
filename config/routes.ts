@@ -89,10 +89,10 @@ export default [
       ...reagents,
       ...trays,
       ...experiments,
+      ...flows,
       ...reactionVessels
     ],
   },
-  ...flows,
   ...project,
 
   {

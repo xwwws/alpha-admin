@@ -34,7 +34,7 @@ const Detail: React.FC<IProps> = (props) => {
     if (`${res.data.id}` === id) {
       message.warning(`已经是${type === 'prev' ? '第' : '最后'}一条了`);
     } else {
-      navigate(`/flow/${res.data.id}/detail`, { replace: true });
+      navigate(`/exp/flow/${res.data.id}/detail`, { replace: true });
     }
   };
 
@@ -52,6 +52,11 @@ const Detail: React.FC<IProps> = (props) => {
           flowDetail && <FlowDetail
             detail={flowDetail}
           />
+        }
+
+        {/*工作流指令信息*/}
+        {
+
         }
 
 

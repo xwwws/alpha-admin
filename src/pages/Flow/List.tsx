@@ -45,7 +45,7 @@ const List: React.FC<IProps> = () => {
             <Button
               icon={<AlignLeftOutlined/>}
               type={'link'}
-              onClick={() => navigate(`/flow/${item.id}/detail`)}
+              onClick={() => navigate(`/exp/flow/${item.id}/detail`)}
             />
           </Tooltip>,
           <Tooltip key={'edit'} placement="top" title="编辑">
@@ -97,7 +97,7 @@ const List: React.FC<IProps> = () => {
           key={'create'}
           type="primary"
           icon={<PlusOutlined/>}
-          onClick={() => navigate('/flow/create')}
+          onClick={() => navigate('/exp/flow/create')}
         >
           新建工作流
         </Button>
