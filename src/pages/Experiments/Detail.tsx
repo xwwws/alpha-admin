@@ -9,7 +9,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import CollectedDataWarp from "@/pages/Experiments/components/CollectedDataWarp";
 import { useNavigate } from "umi";
-import PreAndNext from "@/pages/Experiments/components/PreAndNext";
+import PreAndNext from "@/pages/components/PreAndNext";
 import { UploadOutlined } from "@ant-design/icons";
 import UploadFileForm, { IRef } from "@/pages/Experiments/components/UploadExpFileForm";
 import ShowExpAnnex, { IShowExpAnnexRef } from "@/pages/Experiments/components/ShowExpAnnex";
