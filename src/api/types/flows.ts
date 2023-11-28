@@ -15,10 +15,22 @@ declare namespace Flows {
     description: string;
   }
 
+  interface Iprerequisite {
+    value?: string | boolean;
+    nodeid?: string | number;
+    operator?: string;
+  }
+
+  interface FlowDataItem<T> {
+    action: string;
+    kwargs: T;
+    prerequisite: Iprerequisite;
+  }
+
   interface Detail {
     id: number;
     name: string;
-    flow_data: any[];
+    flow_data: FlowDataItem<Methods.Read | Methods.Write | Methods.sleepReq>[];
     data_acquisitions: API.data_acquisitionParams[];
     status: string;
     description: string;
@@ -27,4 +39,6 @@ declare namespace Flows {
     project_id: number;
     project_name: string;
   }
+
+
 }
