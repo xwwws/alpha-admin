@@ -45,6 +45,8 @@ const RecordItem: React.FC<IProps> = (props) => {
       {/*搅拌3*/}
       {record.name === 'heating_stir_step' && <DetailMix3 record={record} />}
 
+      {/*TODO 行星搅拌*/}
+      {/*TODO 废液蒸馏*/}
 
       <Descriptions
         bordered
