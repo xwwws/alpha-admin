@@ -6,115 +6,122 @@ import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { deleteProject, getProjects } from "@/api/project";
 import { formatColumns, tableTimeRender } from "@/utils/componentSettingUtils";
 import { useNavigate } from "umi";
+import { getFlowList } from "@/api/flows";
+import { experimentStatesMap, expState2ValueEnum } from "@/utils/dataMaps";
 
 interface IProps {
-  [key: string]: any
+  [key: string]: any;
 }
 
-const timeRender = tableTimeRender()
+const timeRender = tableTimeRender();
 
 const List: React.FC<IProps> = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleDeleteProject = async (id: string | number) => {
-    await deleteProject(id)
+    await deleteProject(id);
     tableRef.current?.reload();
 
-  }
+  };
 
-  const columns: ProColumns<Projects.List>[] = formatColumns<Projects.List>([
+  const columns: ProColumns<Flows.List>[] = formatColumns<Flows.List>([
     { title: 'ID', dataIndex: 'id' },
-    { title: '项目名称', dataIndex: 'name' },
-    { title: '项目描述', dataIndex: 'description' },
+    { title: '名称', dataIndex: 'name' },
+    {
+      hideInSearch: true,
+      title: '状态',
+      dataIndex: 'status',
+      align: 'center',
+      valueType: 'select',
+      valueEnum: expState2ValueEnum(experimentStatesMap),
+    },
+    { title: '创建账号', dataIndex: 'user_username' },
+    { title: '所属项目', dataIndex: 'project_name' },
     // @ts-ignore
     { title: '创建时间', dataIndex: 'created_at', render: timeRender },
-    // @ts-ignore
-    { title: '上次修改时间', dataIndex: 'updated_at', render: timeRender },
+    { title: '项目描述', dataIndex: 'description' },
     {
       title: '操作', dataIndex: 'actions', render: (text, item) => {
         return [
-
           <Tooltip key={'addData'} placement="top" title="项目数据">
             <Button
-              type={ 'link' }
-              icon={ <OrderedListOutlined/> }
-              onClick={ () => navigate(`/project/pro-data-List/${ item.id }`) }
+              type={'link'}
+              icon={<OrderedListOutlined/>}
+              onClick={() => navigate(`/project/pro-data-List/${item.id}`)}
             />
           </Tooltip>,
 
           <Tooltip key={'edit'} placement="top" title="编辑">
             <Button
-              type={ 'link' }
-              icon={ <EditOutlined/> }
-              onClick={ () => navigate(`/project/edit/${ item.id }`) }
+              type={'link'}
+              icon={<EditOutlined/>}
+              onClick={() => navigate(`/project/edit/${item.id}`)}
             />
           </Tooltip>,
           <Popconfirm
             key="del"
-            title={ `删除 ${ item.name }` }
-            description={ `是否确认删除${ item.name }?` }
+            title={`删除 ${item.name}`}
+            description={`是否确认删除${item.name}?`}
             okText="是"
             cancelText="否"
-            onConfirm={ () => handleDeleteProject(item.id) }
+            onConfirm={() => handleDeleteProject(item.id)}
           >
             <Tooltip placement="top" title="删除">
               <Button
-                type={ 'link' }
+                type={'link'}
                 danger
-                icon={ <DeleteOutlined/> }
+                icon={<DeleteOutlined/>}
               />
             </Tooltip>
           </Popconfirm>,
-        ]
+        ];
       }
     },
-  ])
+  ]);
   const tableRef = useRef<ActionType>();
 
   const requestTableData = async (params: { pageSize: number, current: number }) => {
-    const query: Projects.ListReq = {
+    const query: Flows.ListReq = {
       page_size: params.pageSize,
       page: params.current,
-    }
-    const res = await getProjects(query)
+    };
+    const res = await getFlowList(query);
     return {
       data: res.data.data,
       success: true,
       total: res.data.total
-    }
+    };
 
-  }
+  };
   return (
     <PageContainer
-      extra={ [
+      extra={[
         <Button
           key={'create'}
           type="primary"
-          icon={ <PlusOutlined/> }
-          onClick={ () => navigate('/flow/create') }
+          icon={<PlusOutlined/>}
+          onClick={() => navigate('/flow/create')}
         >
           新建工作流
         </Button>
-      ] }
+      ]}
 
     >
       <Card>
         <ProTable
           rowKey="id"
-          pagination={ {
+          pagination={{
             pageSize: 10,
-          } }
-          actionRef={ tableRef }
-          columns={ columns }
-          search={ false }
-          options={ false }
-          request={ requestTableData }
+          }}
+          actionRef={tableRef}
+          columns={columns}
+          search={false}
+          options={false}
+          request={requestTableData}
         >
-
         </ProTable>
       </Card>
 
     </PageContainer>
-  )
-}
-
+  );
+};
 export default List;
