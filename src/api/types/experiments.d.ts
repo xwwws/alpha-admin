@@ -67,14 +67,15 @@ declare namespace Experiments {
       accuracy: string | number;
       dst_area: Coordinates;
       src_area: Coordinates;
-    }
-    result: string[]
-    name: string
-    label: string
-    quantity_plan: number
-    quantity_real: number
-    data_acquisitions: data_acquisitionParams[]
-    data_acquisitions_results: DataAcquisitionsResults[]
+    };
+    result: string[];
+    name: string;
+    label: string;
+    quantity_plan: number;
+    quantity_real: number;
+    data_acquisitions: data_acquisitionParams[];
+    data_acquisitions_results: DataAcquisitionsResults[];
+    step_description: string;
 
   };
 
