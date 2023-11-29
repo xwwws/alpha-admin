@@ -20,10 +20,10 @@ const Index: React.FC = () => {
   const [ readResult, setReadResult ] = useState<any>('');
   const [ loading, setLoading ] = useState<boolean>(false);
   const { areas } = useModel('useExperimentModel');
-  const onFinish = async (val: Methods.Dodistillc3) => {
+  const onFinish = async (val: Methods.DoDistillc3Req) => {
     try {
       setLoading(true);
-      const params: Methods.Dodistillc3 = {
+      const params: Methods.DoDistillc3Req = {
         ...val
       };
       const { data } = await dodistillc3(params);

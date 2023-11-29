@@ -15,6 +15,7 @@ import DetailTrnsLiquid from "@/pages/Flow/components/Detail/DetailTrnsLiquid";
 import DetailMvSolid from "@/pages/Flow/components/Detail/DetailMvSolid";
 import DetailPeristaltic from "@/pages/Flow/components/Detail/DetailPeristaltic";
 import DetailMix3 from "@/pages/Flow/components/Detail/DetailMix3";
+import DetailDistillC3 from "@/pages/Flow/components/Detail/DetailDistillC3";
 
 interface IProps {
   flowItem: Flows.FlowDataItem<any>;
@@ -150,9 +151,9 @@ const FlowDetailItem: React.FC<IProps> = (props) => {
 
       {/*废液蒸馏*/}
       {
-        flowItem.action === 'methdDoMix3' &&
-        <DetailMix3
-          data={flowItem as Flows.FlowDataItem<Methods.Mix3>}
+        flowItem.action === 'methdDoDistillC3' &&
+        <DetailDistillC3
+          data={flowItem as Flows.FlowDataItem<Methods.Distillc3>}
         />
       }
 

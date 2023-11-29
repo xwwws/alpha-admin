@@ -40,6 +40,7 @@ declare namespace Methods {
     weight: string | number;
     tolerance: string | number;
   }
+
   interface AddSolid {
     angel: string | number;
     speed: string | number;
@@ -139,7 +140,23 @@ declare namespace Methods {
     area_name: string;
   }
 
-  interface Dodistillc3 {
+  interface Distillc3 {
+    fbpTemp: string | number;
+    ibpTemp: string | number;
+    stirRPM: string | number;
+    coolerSy: string | number;
+    src_area: string;
+    stirMode: string | number;
+    stirTemp: string | number;
+    washTime: string | number;
+    cleanTime: string | number;
+    suplyTime: string | number;
+    totalTime: string | number;
+    heatBandsy: string | number;
+
+  }
+
+  interface DoDistillc3Req {
     area_name: string;
     cooler_sy: number | string;
     heat_band_sy: number | string;
