@@ -133,10 +133,10 @@ const Index: React.FC = () => {
       </Form.Item>
 
       <Form.Item style={formItemStyle} name="speed" label="速度" rules={formRules.speed}>
-        <Input />
+        <Input addonAfter={'g/s'}/>
       </Form.Item>
       <Form.Item style={formItemStyle} name="weight" label="重量" rules={formRules.weight}>
-        <Input />
+        <Input addonAfter={'g'}/>
       </Form.Item>
       <Form.Item style={formItemStyle} name="accuracy" label="精确度" rules={formRules.accuracy}>
         <Input/>

@@ -194,13 +194,13 @@ const Index: React.FC = () => {
         <Col span={6}>
 
           <Form.Item name="speed" label="速度" rules={formRules.speed}>
-            <Input/>
+            <Input addonAfter={'g/s'}/>
           </Form.Item>
         </Col>
 
         <Col span={6}>
           <Form.Item name="weight" label="重量" rules={formRules.weight}>
-            <Input/>
+            <Input addonAfter={'g'}/>
           </Form.Item>
         </Col>
 

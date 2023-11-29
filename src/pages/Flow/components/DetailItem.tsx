@@ -139,7 +139,7 @@ const DetailItem: React.FC<IProps> = (props) => {
         />
       }
 
-      {/*移动固体料仓*/}
+      {/* 蠕动泵加液*/}
       {
         action === 'methdDoPeristaltic' &&
         <DetailPeristaltic

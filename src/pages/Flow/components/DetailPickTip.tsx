@@ -14,7 +14,7 @@ const DetailPickTip: React.FC<IProps> = (props) => {
     { key: '1', label: 'x', children: data.x },
     { key: '2', label: 'y', children: data.y },
     { key: '3', label: 'z', children: data.z },
-    { key: '4', label: '枪头长度', children: data.tip_length },
+    { key: '4', label: '枪头长度', children: `${data.tip_length}cm` },
     { key: '5', label: '是否卸下', children:`${data.drop_pre}` },
   ];
   return (
