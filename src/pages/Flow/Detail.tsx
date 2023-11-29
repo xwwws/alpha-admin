@@ -1,5 +1,5 @@
 import { PageContainer } from '@ant-design/pro-components';
-import { Card, message } from 'antd';
+import { Button, Card, message } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { getFlowDetail } from "@/api/flows";
@@ -44,7 +44,15 @@ const Detail: React.FC<IProps> = (props) => {
     getDetail();
   }, [ id ]);
   return (
-    <PageContainer>
+    <PageContainer
+      extra={[
+        <Button
+          key={'add'}
+          onClick={() => navigate(`/exp/flow/${id}/record`, { replace: true })}
+        >
+          查看记录
+        </Button>,
+      ]}>
       <Card>
         {/*上下一条导航*/}
         <PreAndNext onPreOrNext={handlePrevOrNext}/>

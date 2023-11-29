@@ -24,6 +24,11 @@ export const flows = [
         name: 'detail',
         component: './Flow/Detail',
       },
+      {
+        path: '/exp/flow/:id/record',
+        name: 'record',
+        component: './Flow/Record',
+      },
     ]
   }
 ]

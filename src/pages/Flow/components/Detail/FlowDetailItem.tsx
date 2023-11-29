@@ -18,6 +18,7 @@ import DetailMix3 from "@/pages/Flow/components/Detail/DetailMix3";
 import DetailDistillC3 from "@/pages/Flow/components/Detail/DetailDistillC3";
 
 interface IProps {
+  index: number;
   flowItem: Flows.FlowDataItem<any>;
 
   [key: string]: any;
@@ -27,10 +28,13 @@ const getFlowName = (action: string): string => {
   return MethodsMap.find(item => item.name === action)?.label || '';
 };
 const FlowDetailItem: React.FC<IProps> = (props) => {
-  const { flowItem } = props;
-  console.log(flowItem);
+  const { flowItem, index } = props;
   return (
-    <Card size={"small"} title={`${getFlowName(flowItem.action)} - ${flowItem.action}`}>
+    <Card
+      size={"small"}
+      title={`${index}. ${getFlowName(flowItem.action)} - ${flowItem.action}`}
+      hoverable
+    >
       {/*先决条件*/}
       <DetailPrerequisite prerequisite={flowItem.prerequisite}/>
       <br/>
@@ -156,8 +160,6 @@ const FlowDetailItem: React.FC<IProps> = (props) => {
           data={flowItem as Flows.FlowDataItem<Methods.Distillc3>}
         />
       }
-
-
 
 
     </Card>
