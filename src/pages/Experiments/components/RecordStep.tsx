@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { StepStatusMap } from "@/utils/dataMaps";
 import { getMethodsByStepId } from "@/api/steps";
 import RecordStepMethodInfo from "@/pages/Experiments/components/RecordStepMethodInfo";
-import CollectedDataWrap from "@/pages/Experiments/components/CollectedDataWrap";
+import CollectedDataWrap from "@/pages/components/CollectedDataWrap";
 import { CalculateDuration } from "@/utils";
 import { FastForwardOutlined, ReloadOutlined, UploadOutlined } from '@ant-design/icons';
 import { reRunExpStep, skipRunExpStep } from "@/api/experiments";

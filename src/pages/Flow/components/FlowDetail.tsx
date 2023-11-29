@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Badge, Descriptions } from "antd";
 import type { DescriptionsProps } from "antd";
-import CollectedDataWrap from "@/pages/Experiments/components/CollectedDataWrap";
+import CollectedDataWrap from "@/pages/components/CollectedDataWrap";
 import { experimentStatesMap, IExpState } from "@/utils/dataMaps";
 
 interface IProps {

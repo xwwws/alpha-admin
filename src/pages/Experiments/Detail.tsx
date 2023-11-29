@@ -7,7 +7,7 @@ import type { DescriptionsProps } from 'antd';
 import { Badge, Button, Card, Descriptions, message } from 'antd';
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import CollectedDataWrap from "@/pages/Experiments/components/CollectedDataWrap";
+import CollectedDataWrap from "@/pages/components/CollectedDataWrap";
 import { useNavigate } from "umi";
 import PreAndNext from "@/pages/components/PreAndNext";
 import { UploadOutlined } from "@ant-design/icons";

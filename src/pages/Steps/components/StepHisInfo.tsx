@@ -1,6 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useState } from 'react';
 import { Modal } from "antd";
-import CollectedDataWrap from "@/pages/Experiments/components/CollectedDataWrap";
+import CollectedDataWrap from "@/pages/components/CollectedDataWrap";
 import { getStepHisInfo } from "@/api/steps";
 import StepHisInfoContent from "@/pages/Steps/components/StepHisInfoContent";
 import RecordStepMethods from '@/pages/Experiments/components/RecordStepMethods';

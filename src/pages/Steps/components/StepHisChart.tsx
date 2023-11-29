@@ -1,6 +1,6 @@
 import React from 'react';
 import { Modal } from "antd";
-import CollectedDataWrap from "@/pages/Experiments/components/CollectedDataWrap";
+import CollectedDataWrap from "@/pages/components/CollectedDataWrap";
 
 interface IProps {
   isShow: boolean;

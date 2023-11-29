@@ -35,20 +35,21 @@ const StepHisContent: React.FC<IProps> = (props) => {
     { key: '9', label: '开始时间', children: content.start_time || '-', span: 1 },
     { key: '10', label: '结束时间', children: content.end_time || '-', span: 1 },
     { key: '11', label: '运行时长', children: content.duration || '-', span: 1 },
-    { key: '12', label: '计划量', children: content.quantity_plan || '-', span: 1 },
-    { key: '13', label: '实际量', children: content.quantity_real || '-', span: 1 },
+    { key: '12', label: '计划量', children: `${content.quantity_plan}g` || '-', span: 1 },
+    { key: '13', label: '实际量', children: `${content.quantity_real}g` || '-', span: 2 },
     {
-      key: '14', label: '结果', children: <>
+      key: '14',
+      label: '结果', children: <>
         {
           content.result.map((item, index) => (
-            <>
+            <div key={index}>
               {index !== 0 && <Divider/>}
-              <TagStyle key={index}>{index + 1}、{item}</TagStyle>
-            </>
+              <TagStyle >{index + 1}、{item}</TagStyle>
+            </div>
           ))
         }
       </>,
-      span: 2
+      span: 3
     },
   ];
   return (

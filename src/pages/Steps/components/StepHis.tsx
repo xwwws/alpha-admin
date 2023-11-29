@@ -56,8 +56,8 @@ const StepHis: React.FC<IProps> = (props) => {
       }
     },
     { title: '结束时间', dataIndex: 'end_time', width: '150px' },
-    { title: '计划量', dataIndex: 'quantity_plan', width: '80px' },
-    { title: '实际量', dataIndex: 'quantity_real', width: '80px' },
+    { title: '计划量(g)', dataIndex: 'quantity_plan', width: '80px' },
+    { title: '实际量(g)', dataIndex: 'quantity_real', width: '80px' },
     // {
     //   title: 'content',
     //   dataIndex: 'content',

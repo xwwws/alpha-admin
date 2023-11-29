@@ -1,5 +1,5 @@
 import { Descriptions } from 'antd';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface IProps {
@@ -13,6 +13,10 @@ const CollectedDetailsStyle = styled.div`
 `;
 const CollectedDetails: React.FC<IProps> = (props) => {
   const { data } = props;
+  const [ unit, setUnit ] = useState<string>('');
+  useEffect(() => {
+    setUnit(data.label.split('(')[1].split(')')[0])
+  },[data.label])
   return (
     <CollectedDetailsStyle>
       <Descriptions
@@ -21,14 +25,13 @@ const CollectedDetails: React.FC<IProps> = (props) => {
         bordered
         column={3}
       >
-        <Descriptions.Item label={"平均值"}>
-          {data.avg}
+        <Descriptions.Item label={"平均值"}>{data.avg} {unit}
         </Descriptions.Item>
         <Descriptions.Item label={"最大值"}>
-          {data.max}
+          {data.max} {unit}
         </Descriptions.Item>
         <Descriptions.Item label={"最小值"}>
-          {data.min}
+          {data.min} {unit}
         </Descriptions.Item>
         <Descriptions.Item label={"开始时间"}>
           {data.record_start_time}
