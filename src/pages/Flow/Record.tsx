@@ -7,7 +7,7 @@ import PreAndNext from "@/pages/components/PreAndNext";
 import { getFlowRecord } from "@/api/flows";
 import FlowRecordItem from "@/pages/Flow/components/FlowRecordItem";
 import { StepStatusMap } from "@/utils/dataMaps";
-import DetailItem from "@/pages/Flow/components/DetailItem";
+import RecordOverview from "@/pages/components/RecordOverview";
 
 interface IProps {
   [key: string]: any;
@@ -17,6 +17,8 @@ const Record: React.FC<IProps> = (props) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [ collapseItems, setCollapseItems ] = useState<CollapseProps['items']>([]);
+  const [ isShowOverView, setIsShowOverView ] = useState<boolean>(false);
+
   /**
    * 上一条 下一条
    * @param type
@@ -50,6 +52,12 @@ const Record: React.FC<IProps> = (props) => {
   return (
     <PageContainer
       extra={[
+        // <Button
+        //   key={'recordOverview'}
+        //   onClick={() => setIsShowOverView(true)}
+        // >
+        //   总览
+        // </Button>,
         <Button
           key={'add'}
           onClick={() => navigate(`/exp/flow/${id}/detail`, { replace: true })}
@@ -67,6 +75,12 @@ const Record: React.FC<IProps> = (props) => {
           items={collapseItems}
         />
       </Card>
+
+      {/*<RecordOverview*/}
+      {/*  isShow={isShowOverView}*/}
+      {/*  onClose={() => setIsShowOverView(false)}*/}
+      {/*  data={steps.map(({step_description}) => step_description)}*/}
+      {/*/>*/}
     </PageContainer>
   );
 };

@@ -5,7 +5,7 @@ import { useNavigate, useParams } from "umi";
 import { getStepsByExperimentId } from "@/api/experiments";
 import RecordStep from "@/pages/Experiments/components/RecordStep";
 import PreAndNext from "@/pages/components/PreAndNext";
-import RecordOverview from "@/pages/Experiments/components/RecordOverview";
+import RecordOverview from "@/pages/components/RecordOverview";
 
 interface IProps {
   [key: string]: any;
@@ -74,7 +74,6 @@ const Record: React.FC<IProps> = () => {
         isShow={isShowOverView}
         onClose={() => setIsShowOverView(false)}
         data={steps.map(({step_description}) => step_description)}
-
       />
       {/*<input*/}
       {/*  ref={inputRef}*/}

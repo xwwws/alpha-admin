@@ -22,7 +22,7 @@ const RecordOverview: React.FC<IProps> = (props) => {
     <>
       <Drawer
         placement={'right'}
-        title={'实验记录总览'}
+        title={'记录总览'}
         onClose={onClose}
         open={isShow}
         width={800}
