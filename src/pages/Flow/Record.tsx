@@ -7,6 +7,7 @@ import PreAndNext from "@/pages/components/PreAndNext";
 import { getFlowRecord } from "@/api/flows";
 import FlowRecordItem from "@/pages/Flow/components/FlowRecordItem";
 import { StepStatusMap } from "@/utils/dataMaps";
+import DetailItem from "@/pages/Flow/components/DetailItem";
 
 interface IProps {
   [key: string]: any;
@@ -61,6 +62,7 @@ const Record: React.FC<IProps> = (props) => {
           onPreOrNext={handlePrevOrNext}
         />
         <Collapse
+          accordion
           defaultActiveKey={[ '0' ]}
           items={collapseItems}
         />

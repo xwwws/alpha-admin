@@ -49,7 +49,7 @@ const List: React.FC<IProps> = () => {
             />
           </Tooltip>,
 
-          <Tooltip placement="top" title="工作流记录">
+          <Tooltip key={'record'} placement="top" title="工作流记录">
             <Button
               type={'link'}
               icon={<OrderedListOutlined/>}

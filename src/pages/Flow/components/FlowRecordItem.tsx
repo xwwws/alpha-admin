@@ -2,6 +2,7 @@ import React from 'react';
 import { Badge, Descriptions, DescriptionsProps } from "antd";
 import DetailPrerequisite from "@/pages/Flow/components/DetailPrerequisite";
 import { StepStatusMap } from "@/utils/dataMaps";
+import DetailItem from "@/pages/Flow/components/DetailItem";
 
 interface IProps {
   recordItem: Flows.RecordItem;
@@ -38,6 +39,8 @@ const FlowRecordItem: React.FC<IProps> = (props) => {
         items={items}
       >
       </Descriptions>
+      <br/>
+      <DetailItem action={recordItem.action} data={recordItem.content}/>
     </>
   );
 };
