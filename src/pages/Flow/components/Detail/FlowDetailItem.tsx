@@ -13,6 +13,8 @@ import DetailChangeTool from "@/pages/Flow/components/Detail/DetailChangeTool";
 import DetailPickTip from "@/pages/Flow/components/Detail/DetailPickTip";
 import DetailTrnsLiquid from "@/pages/Flow/components/Detail/DetailTrnsLiquid";
 import DetailMvSolid from "@/pages/Flow/components/Detail/DetailMvSolid";
+import DetailPeristaltic from "@/pages/Flow/components/Detail/DetailPeristaltic";
+import DetailMix3 from "@/pages/Flow/components/Detail/DetailMix3";
 
 interface IProps {
   flowItem: Flows.FlowDataItem<any>;
@@ -126,6 +128,31 @@ const FlowDetailItem: React.FC<IProps> = (props) => {
         flowItem.action === 'methdMvSolid' &&
         <DetailMvSolid
           data={flowItem as Flows.FlowDataItem<Methods.MvSolid>}
+        />
+      }
+
+      {/*移动固体料仓*/}
+      {
+        flowItem.action === 'methdDoPeristaltic' &&
+        <DetailPeristaltic
+          data={flowItem as Flows.FlowDataItem<Methods.Peristaltic>}
+        />
+      }
+
+      {/*搅拌3*/}
+      {
+        flowItem.action === 'methdDoMix3' &&
+        <DetailMix3
+          data={flowItem as Flows.FlowDataItem<Methods.Mix3>}
+        />
+      }
+
+
+      {/*废液蒸馏*/}
+      {
+        flowItem.action === 'methdDoMix3' &&
+        <DetailMix3
+          data={flowItem as Flows.FlowDataItem<Methods.Mix3>}
         />
       }
 

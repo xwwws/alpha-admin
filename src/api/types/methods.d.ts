@@ -105,7 +105,7 @@ declare namespace Methods {
 
 
   // 移动固体料仓
-  interface  MvSolid {
+  interface MvSolid {
     dst_x: string | number;
     dst_y: string | number;
     dst_z: string | number;
@@ -113,8 +113,25 @@ declare namespace Methods {
     src_y: string | number;
     src_z: string | number;
     height: string | number;
-    dst_area_name: string
-    src_area_name: string
+    dst_area_name: string;
+    src_area_name: string;
+  }
+
+  // 蠕动泵加液
+  interface Peristaltic {
+    speed: string | number;
+    src_x: string | number;
+    src_y: string | number;
+    src_z: string | number;
+    weight: string | number;
+    accuracy: string | number;
+    src_area_name: string;
+  }
+
+  // 搅拌3
+  interface Mix3 {
+    time: string | number;
+    area_name: string;
   }
 
   interface Dodistillc3 {

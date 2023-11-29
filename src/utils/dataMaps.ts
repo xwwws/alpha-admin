@@ -72,4 +72,7 @@ export const MethodsMap: IMethodsMap[] = [
   { name: 'methdPickTip', label: '抬起枪头' },
   { name: 'methdTrnsLiquid', label: '移液' },
   { name: 'methdMvSolid', label: '移动固体料仓' },
+  { name: 'methdDoPeristaltic', label: '蠕动泵加液' },
+  { name: 'methdDoMix3', label: '搅拌3' },
+  { name: 'methdDoMix3', label: '废液蒸馏' },
 ];
