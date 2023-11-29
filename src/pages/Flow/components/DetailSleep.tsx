@@ -2,11 +2,11 @@ import React from 'react';
 import { Descriptions } from "antd";
 
 interface IProps {
-  data: Flows.FlowDataItem<Methods.Write>;
+  data: Methods.Sleep;
   [key: string]: any;
 }
 
-const DetailWrite: React.FC<IProps> = (props) => {
+const DetailRead: React.FC<IProps> = (props) => {
   const { data } = props;
   return (
     <>
@@ -16,15 +16,12 @@ const DetailWrite: React.FC<IProps> = (props) => {
         column={2}
         bordered
       >
-        <Descriptions.Item label={'节点id'}>
-          {data.kwargs.nodeid}
-        </Descriptions.Item>
-        <Descriptions.Item label={'值'}>
-          {data.kwargs.node_value}
+        <Descriptions.Item label={'等待'}>
+          {data.seconds} s
         </Descriptions.Item>
       </Descriptions>
     </>
   );
 };
 
-export default DetailWrite;
+export default DetailRead;

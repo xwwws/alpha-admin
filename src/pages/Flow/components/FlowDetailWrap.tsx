@@ -1,5 +1,5 @@
 import React from 'react';
-import FlowDetailItem from "@/pages/Flow/components/Detail/FlowDetailItem";
+import FlowDetailItem from "@/pages/Flow/components/FlowDetailItem";
 
 interface IProps {
   flowData: Flows.FlowDataItem<any>[];

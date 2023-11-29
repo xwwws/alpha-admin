@@ -49,9 +49,9 @@ export enum StepStatusMap {
   'waiting' = 'processing',
   'doing' = 'processing',
   'succeed' = 'success',
-  'failed' = 'Error',
-  'canceled' = 'Default',
-  'canceling' = 'Default',
+  'failed' = 'error',
+  'canceled' = 'default',
+  'canceling' = 'default',
 }
 
 interface IMethodsMap {

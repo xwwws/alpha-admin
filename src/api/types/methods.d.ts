@@ -140,6 +140,7 @@ declare namespace Methods {
     area_name: string;
   }
 
+  // 废液蒸馏
   interface Distillc3 {
     fbpTemp: string | number;
     ibpTemp: string | number;

@@ -5,8 +5,8 @@ import { useParams } from "react-router-dom";
 import { getFlowDetail } from "@/api/flows";
 import PreAndNext from "@/pages/components/PreAndNext";
 import { useNavigate } from "@@/exports";
-import FlowDetail from "@/pages/Flow/components/Detail/FlowDetail";
-import FlowDetailWrap from "@/pages/Flow/components/Detail/FlowDetailWrap";
+import FlowDetail from "@/pages/Flow/components/FlowDetail";
+import FlowDetailWrap from "@/pages/Flow/components/FlowDetailWrap";
 
 interface IProps {
   [key: string]: any;

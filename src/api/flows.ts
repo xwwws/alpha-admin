@@ -19,7 +19,7 @@ export const getFlowList = (params: Flows.ListReq) => {
  * @param flow_id
  * @param params
  */
-export const getFlowDetail = (flow_id: string | number,params?: { sibling?: string }) => {
+export const getFlowDetail = (flow_id: string | number, params?: { sibling?: string }) => {
   return request<Response<Flows.Detail>>(
     `/api/v1/expt/flows/${flow_id}`,
     {
@@ -28,11 +28,19 @@ export const getFlowDetail = (flow_id: string | number,params?: { sibling?: stri
     });
 };
 
-
-
-
-
-
+/**
+ * 获取工作流记录
+ * @param flow_id
+ * @param params
+ */
+export const getFlowRecord = (flow_id: string | number, params?: { sibling?: string }) => {
+  return request<Response<Flows.Record>>(
+    `/api/v1/expt/flows/${flow_id}/record`,
+    {
+      method: 'get',
+      params
+    });
+};
 
 
 /**

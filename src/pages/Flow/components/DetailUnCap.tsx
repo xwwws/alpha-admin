@@ -2,7 +2,7 @@ import React from 'react';
 import { Descriptions, DescriptionsProps } from "antd";
 
 interface IProps {
-  data: Flows.FlowDataItem<Methods.ReCap>;
+  data: Methods.ReCap;
 
   [key: string]: any;
 }
@@ -10,9 +10,9 @@ interface IProps {
 const DetailUnCap: React.FC<IProps> = (props) => {
   const { data } = props;
   const items: DescriptionsProps[`items`] = [
-    { key: '0', label: '瓶盖位置', children: data.kwargs.area_name },
-    { key: '1', label: 'y', children: `${data.kwargs.y}` },
-    { key: '2', label: '高度', children: `${data.kwargs.height}cm`},
+    { key: '0', label: '瓶盖位置', children: data.area_name },
+    { key: '1', label: 'y', children: `${data.y}` },
+    { key: '2', label: '高度', children: `${data.height}cm`},
   ];
   return (
     <>

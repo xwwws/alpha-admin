@@ -2,13 +2,14 @@ import React from 'react';
 import { Descriptions } from "antd";
 
 interface IProps {
-  data: Flows.FlowDataItem<Methods.Read>;
+  data: Methods.Read;
 
   [key: string]: any;
 }
 
 const DetailRead: React.FC<IProps> = (props) => {
   const { data } = props;
+  console.log( data);
   return (
     <>
       <Descriptions
@@ -20,8 +21,8 @@ const DetailRead: React.FC<IProps> = (props) => {
         <Descriptions.Item label={'实验指令'}>
           读值
         </Descriptions.Item>
-        <Descriptions.Item label={'action'}>
-          {data.action}
+        <Descriptions.Item label={'nodeid'}>
+          {data.nodeid}
         </Descriptions.Item>
       </Descriptions>
     </>

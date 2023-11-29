@@ -49,13 +49,13 @@ const List: React.FC<IProps> = () => {
             />
           </Tooltip>,
 
-          // <Tooltip placement="top" title="工作流记录">
-          //   <Button
-          //     type={'link'}
-          //     icon={<OrderedListOutlined/>}
-          //     onClick={() => navigate(`/exp/flow/${item.id}/record`)}
-          //   ></Button>
-          // </Tooltip>,
+          <Tooltip placement="top" title="工作流记录">
+            <Button
+              type={'link'}
+              icon={<OrderedListOutlined/>}
+              onClick={() => navigate(`/exp/flow/${item.id}/record`)}
+            ></Button>
+          </Tooltip>,
           // <Tooltip key={'edit'} placement="top" title="编辑">
           //   <Button
           //     type={'link'}
@@ -101,14 +101,14 @@ const List: React.FC<IProps> = () => {
   return (
     <PageContainer
       extra={[
-        // <Button
-        //   key={'create'}
-        //   type="primary"
-        //   icon={<PlusOutlined/>}
-        //   onClick={() => navigate('/exp/flow/create')}
-        // >
-        //   新建工作流
-        // </Button>
+        <Button
+          key={'create'}
+          type="primary"
+          icon={<PlusOutlined/>}
+          onClick={() => navigate('/exp/flow/create')}
+        >
+          新建工作流
+        </Button>
       ]}
 
     >

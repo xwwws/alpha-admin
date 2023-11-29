@@ -2,7 +2,7 @@ import React from 'react';
 import { Descriptions, DescriptionsProps } from "antd";
 
 interface IProps {
-  data: Flows.FlowDataItem<Methods.ChangeTool>;
+  data: Methods.ChangeTool;
 
   [key: string]: any;
 }
@@ -10,8 +10,8 @@ interface IProps {
 const DetailChangeTool: React.FC<IProps> = (props) => {
   const { data } = props;
   const items: DescriptionsProps[`items`] = [
-    { key: '0', label: '当前夹爪', children: data.kwargs.src_tool },
-    { key: '2', label: '目标夹爪', children: `${data.kwargs.dst_tool}`},
+    { key: '0', label: '当前夹爪', children: data.src_tool },
+    { key: '2', label: '目标夹爪', children: `${data.dst_tool}`},
   ];
   return (
     <>

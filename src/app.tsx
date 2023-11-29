@@ -5,11 +5,12 @@ import type { RunTimeLayoutConfig } from 'umi';
 import { history } from 'umi';
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
+import { App } from 'antd';
 
 console.log(REACT_APP_ENV);
-if(REACT_APP_ENV === 'dev') {
-  console.log('WS_URL',WS_URL)
-  console.log('BASE_URL',BASE_URL)
+if (REACT_APP_ENV === 'dev') {
+  console.log('WS_URL', WS_URL);
+  console.log('BASE_URL', BASE_URL);
 }
 
 const isDev = process.env.NODE_ENV === 'development';
@@ -55,13 +56,13 @@ export async function getInitialState(): Promise<IgetInitialState> {
 export const layout: RunTimeLayoutConfig = ({ initialState }) => {
 
   return {
-    bgLayout:'red',
+    bgLayout: 'red',
     // 头部右侧按钮
     // actionsRender: () => [<Question key="doc" />, <SelectLang key="SelectLang" />],
     actionsRender: () => [],
     avatarProps: {
       src: initialState?.currentUser?.avatar,
-      title: <AvatarName />,
+      title: <AvatarName/>,
       render: (_, avatarChildren) => {
         return <AvatarDropdown menu={true}>{avatarChildren}</AvatarDropdown>;
       },
@@ -86,7 +87,11 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     // unAccessible: <div>unAccessible</div>,
     // 增加一个 loading 的状态
     childrenRender: (children) => {
-      return <>{children}</>;
+      return <>
+        <App>
+          {children}
+        </App>
+      </>;
     },
     ...initialState?.settings,
   };

@@ -1,4 +1,3 @@
-
 declare namespace Steps {
   /**
    * 行星搅拌
@@ -9,6 +8,7 @@ declare namespace Steps {
     time?: string | number;
     data_acquisitions?: API.data_acquisitionParams[];
   };
+
   /**
    * 废液蒸馏
    */
@@ -48,7 +48,7 @@ declare namespace Steps {
     quantity_real: string;
     duration: 0;
     data_acquisitions: API.data_acquisitionParams[];
-    data_acquisitions_results:API.DataAcquisitionsResults[];
+    data_acquisitions_results: API.DataAcquisitionsResults[];
     attachments: any[];
   }
 
