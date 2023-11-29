@@ -11,6 +11,7 @@ export default {
   'menu.methods.sleep': '等待',
   'menu.methods.move': '移动',
   'menu.methods.addSol': '加液',
+  'menu.methods.addSolid': '加固启动',
   'menu.methods.openCap': '开盖',
   'menu.methods.closeCap': '加盖',
   'menu.methods.clawGripper': '更换夹爪',

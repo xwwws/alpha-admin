@@ -34,6 +34,12 @@ export const methods = [
         name: 'move',
         component: './Methods/Move',
       },
+      // 加固启动
+      {
+        path: 'add-solid',
+        name: 'addSolid',
+        component: './Methods/AddSolid',
+      },
       // 加液
       {
         path: 'add-sol',

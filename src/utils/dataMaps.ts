@@ -64,7 +64,7 @@ export const MethodsMap: IMethodsMap[] = [
   { name: 'write', label: '写值' },
   { name: 'sleep', label: '等待' },
   { name: 'methdMvThing', label: '移动' },
-  { name: 'methdDoAddSolid', label: '加固' },
+  { name: 'methdDoAddSolid', label: '加固启动' },
   { name: 'methdAddSol', label: '加液' },
   { name: 'methdUncap', label: '开盖' },
   { name: 'methdRecap', label: '加盖' },
@@ -74,5 +74,5 @@ export const MethodsMap: IMethodsMap[] = [
   { name: 'methdMvSolid', label: '移动固体料仓' },
   { name: 'methdDoPeristaltic', label: '蠕动泵加液' },
   { name: 'methdDoMix3', label: '搅拌3' },
-  { name: 'methdDoMix3', label: '废液蒸馏' },
+  { name: 'methdDoDistillC3', label: '废液蒸馏' },
 ];

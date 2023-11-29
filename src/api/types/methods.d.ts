@@ -33,6 +33,13 @@ declare namespace Methods {
   }
 
   // 加固
+  interface AddSolidReq {
+    area_name: string;
+    speed: string | number;
+    angel: string | number;
+    weight: string | number;
+    tolerance: string | number;
+  }
   interface AddSolid {
     angel: string | number;
     speed: string | number;
@@ -41,9 +48,7 @@ declare namespace Methods {
     tolerance: string | number;
   }
 
-
   // 加液
-
   interface AddSol {
     dst_x: string | number;
     dst_y: string | number;
@@ -148,5 +153,4 @@ declare namespace Methods {
     suply_time: number | string;
     total_time: number | string;
   }
-
 }

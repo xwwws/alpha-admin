@@ -25,8 +25,8 @@ export const readMethod = (data: API.ReadReq): Promise<Response<API.MethodsRes>>
 };
 
 /**
- * 读值
- * @param data {API.ReadReq}
+ * 写值
+ * @param data {API.Write}
  */
 export const writeMethod = (data: Methods.Write): Promise<Response<API.MethodsRes>> => {
   return request(`/api/v1/lab/methods/write`, {
@@ -58,6 +58,22 @@ export const moveMethod = (data: API.MoveReq): Promise<Response<API.MethodsRes>>
     data,
   });
 };
+
+
+
+/**
+ * 加液
+ * @param data {API.AddSolReq}
+ */
+export const addSolidMethod = (data: Methods.AddSolidReq): Promise<Response<API.MethodsRes>> => {
+  return request(`/api/v1/lab/methods/doaddsolid`, {
+    method: 'post',
+    data,
+  });
+};
+
+
+
 /**
  * 加液
  * @param data {API.AddSolReq}
