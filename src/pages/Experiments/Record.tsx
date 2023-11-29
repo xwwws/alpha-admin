@@ -5,9 +5,7 @@ import { useNavigate, useParams } from "umi";
 import { getStepsByExperimentId } from "@/api/experiments";
 import RecordStep from "@/pages/Experiments/components/RecordStep";
 import PreAndNext from "@/pages/components/PreAndNext";
-import { UploadOutlined } from "@ant-design/icons";
-import UploadFileForm from "@/pages/Experiments/components/UploadExpFileForm";
-import type { IRef } from "@/pages/Experiments/components/UploadExpFileForm";
+import RecordOverview from "@/pages/Experiments/components/RecordOverview";
 
 interface IProps {
   [key: string]: any;
@@ -18,6 +16,7 @@ const Record: React.FC<IProps> = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [ steps, setSteps ] = useState<Experiments.ExperimentStepsResItem[]>([]);
+  const [ isShowOverView, setIsShowOverView ] = useState<boolean>(false);
 
   // 根据实验id查询所有步骤
   useEffect(() => {
@@ -42,21 +41,20 @@ const Record: React.FC<IProps> = () => {
       navigate(`/exp/experiment/${res.data.id}/record`, { replace: true });
     }
   };
-  /**
-   * 上传文件
-   */
-  const inputChange = (e:any) => {
-    console.log(e.target.files);
-
-  }
   return (
     <PageContainer
       extra={[
         <Button
+          key={'recordOverview'}
+          onClick={() => setIsShowOverView(true)}
+        >
+          总览
+        </Button>,
+        <Button
           key={'add'}
           onClick={() => navigate(`/exp/experiment/${id}/detail`, { replace: true })}
         >
-          查看实验详情
+          实验详情
         </Button>,
       ]}
     >
@@ -71,8 +69,13 @@ const Record: React.FC<IProps> = () => {
             step={item}
           />
         ))}
-
       </Card>
+      <RecordOverview
+        isShow={isShowOverView}
+        onClose={() => setIsShowOverView(false)}
+        data={steps.map(({step_description}) => step_description)}
+
+      />
       {/*<input*/}
       {/*  ref={inputRef}*/}
       {/*  type={'file'}*/}

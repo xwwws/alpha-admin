@@ -154,7 +154,7 @@ const Detail: React.FC<IProps> = (props) => {
           key={'add'}
           onClick={() => navigate(`/exp/experiment/${id}/record`, { replace: true })}
         >
-          查看实验记录
+          实验记录
         </Button>,
       ]}
     >
