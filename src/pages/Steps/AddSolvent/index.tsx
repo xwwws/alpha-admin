@@ -88,7 +88,6 @@ const Index: React.FC = () => {
 
 
       };
-      console.log(params);
       const { data } = await addSolvent(params);
       setLoading(false);
       setReadResult(JSON.stringify(data.result));

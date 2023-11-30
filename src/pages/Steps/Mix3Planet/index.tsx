@@ -45,7 +45,6 @@ const Index: React.FC = () => {
   const { areas } = useModel('useExperimentModel');
   const onFinish = async (val: IConditions) => {
     try {
-      console.log(val);
       setLoading(true);
       const params: Steps.Mix3PlanetStep = {
         dst_area: {

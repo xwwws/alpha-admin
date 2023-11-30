@@ -9,7 +9,6 @@ interface IProps {
 
 const DetailRead: React.FC<IProps> = (props) => {
   const { data } = props;
-  console.log( data);
   return (
     <>
       <Descriptions

@@ -36,7 +36,6 @@ const Index: React.FC = () => {
   const { areas } = useModel('useExperimentModel');
   const onFinish = async (val: Steps.Dodistillc3) => {
     try {
-      console.log(val);
       setLoading(true);
       const params: Steps.Dodistillc3 = {
         ...val,

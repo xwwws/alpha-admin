@@ -12,7 +12,6 @@ interface IProps {
 
 const FlowRecordItem: React.FC<IProps> = (props) => {
   const { recordItem } = props;
-  console.log( recordItem);
   const items: DescriptionsProps[`items`] = [
     { key: '0', label: 'id', children: `${recordItem.id}` },
     {

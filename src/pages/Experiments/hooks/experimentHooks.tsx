@@ -15,7 +15,6 @@
  * @return {Experiments.CreateExperimentReq}
  */
 export const fmtRequestParams = (values: any): Experiments.CreateExperimentReq => {
-  console.log(values);
   const params: Experiments.CreateExperimentReq = {
     name: values.name,
     project_id: values.project_id,
@@ -281,7 +280,6 @@ export const fmtResToFormData = (data: Experiments.CreateExperimentReq): any => 
 
     return steps_data_item;
   });
-  console.log(data);
   return {
     name: data.name,
     project_id: `${data.project_id}`,

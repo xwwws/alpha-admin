@@ -115,7 +115,6 @@ const Index: React.FC = () => {
       yAxis: { type: 'value' ,name: msg.custom_name.split('(')[1].replaceAll(')','')},
       series: [ { type: 'line', data: XAxis.map(item => (item.toFixed(2))) } ]
     };
-    console.log(newOptions);
     chartInstance && chartInstance.setOption(newOptions);
   };
   /**

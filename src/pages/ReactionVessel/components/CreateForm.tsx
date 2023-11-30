@@ -41,7 +41,6 @@ const CreateForm: React.FC<IProps> = (props) => {
     };
     setLoading(true);
     try {
-      console.log(data);
       await createReactionVessel(data);
       messageApi.success('创建反应容器成功');
       navigate(-1);

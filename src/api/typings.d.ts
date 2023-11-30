@@ -40,6 +40,7 @@ declare namespace API {
   interface Enum {
     name: string;
     label: string;
+    action: string;
   }
 
   interface Area_Enum extends Enum {

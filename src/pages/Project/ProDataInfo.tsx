@@ -94,7 +94,6 @@ const ProDataInfo: React.FC<IProps> = (props) => {
       .filter((value, index, self) => self.indexOf(value) === index);
     // 处理y数据
     const yData = allData.map(({ name, data }) => {
-      console.log(allData);
       return {
         name,
         y: xData.map((x) => {
@@ -105,7 +104,6 @@ const ProDataInfo: React.FC<IProps> = (props) => {
             return data.value[durationIndex];
           }
         }).reduce((accumulator: string[], item) => {
-          console.log(item);
           if (item === '-') {
             return [ ...accumulator, accumulator[accumulator.length - 1] ];
           } else {

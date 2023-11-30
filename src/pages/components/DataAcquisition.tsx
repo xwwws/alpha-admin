@@ -4,6 +4,7 @@ import { ITypes } from "@/pages/typings";
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
 import { getReadNodeList } from "@/api/methods";
+import { useModel } from "@@/exports";
 
 interface IProps {
   name: (string | number)[];
@@ -21,14 +22,7 @@ const ButtonWrap = styled.div`
 `;
 const DataAcquisition: React.FC<IProps> = (props) => {
   const {  name } = props;
-  const [ nodes, setNodes ] = useState<ITypes.EnumType[]>([]);
-
-  useEffect(() => {
-    (async () => {
-      const res = await getReadNodeList();
-      setNodes(res.data.map((item): ITypes.EnumType => ({ label: item.name, value: item.nodeid })));
-    })();
-  }, []);
+  const { nodeIds } = useModel('useExperimentModel');
   return (
     <div style={{ marginBottom: '10px' }}>
       <Form.List name={name}>
@@ -43,7 +37,7 @@ const DataAcquisition: React.FC<IProps> = (props) => {
               <Row gutter={10} key={key} style={{ margin: '5px 0' }}>
                 <Col span={11}>
                   <Form.Item label={'采集数据'} name={[ subField.name, 'nodeid' ]}>
-                    <Select options={nodes}/>
+                    <Select options={nodeIds}/>
                   </Form.Item>
                 </Col>
                 <Col span={11}>

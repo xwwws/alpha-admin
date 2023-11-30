@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card } from "antd";
 import DetailPrerequisite from "@/pages/Flow/components/DetailPrerequisite";
-import { MethodsMap } from "@/utils/dataMaps";
 import DetailItem from "@/pages/Flow/components/DetailItem";
+import { useModel } from "umi";
 
 interface IProps {
   index: number;
@@ -11,10 +11,11 @@ interface IProps {
   [key: string]: any;
 }
 
-const getFlowName = (action: string): string => {
-  return MethodsMap.find(item => item.name === action)?.label || '';
-};
 const FlowDetailItem: React.FC<IProps> = (props) => {
+const {methods} = useModel('useExperimentModel')
+  const getFlowName = (action: string): string => {
+    return methods.find(item => item.value === action)?.label || '';
+  };
   const { flowItem, index } = props;
   return (
     <Card
