@@ -54,3 +54,44 @@ export const deleteFlow = (flow_id: number) => {
       method: 'delete',
     });
 };
+
+/**
+ * 执行工作流
+ * @param flow_id
+ */
+export const runFlow = (flow_id: number) => {
+  return request<Response<any>>(
+    `/api/v1/expt/flows/${flow_id}/run`,
+    {
+      method: 'post',
+    });
+};
+
+
+/**
+ * 取消工作流
+ * @param flow_id
+ */
+export const cancelFlow = (flow_id: number) => {
+  return request<Response<any>>(
+    `/api/v1/expt/flows/${flow_id}/cancel`,
+    {
+      method: 'post',
+    });
+};
+
+
+/**
+ * 暂停 继续工作流
+ * @param flow_id
+ * @param query
+ */
+export const statusFlow = (flow_id: number, query: { status: 'running' | 'pause' }) => {
+  return request<Response<any>>(
+    `/api/v1/expt/flows/${flow_id}/flow_status`,
+    {
+      method: 'post',
+      query
+    });
+};
+
