@@ -3,6 +3,7 @@ import {
   DeleteOutlined,
   EditOutlined,
   OrderedListOutlined,
+  PauseCircleOutlined,
   PlayCircleOutlined,
   PlusOutlined,
   StopOutlined
@@ -86,7 +87,7 @@ const List: React.FC<IProps> = () => {
     { title: '项目描述', dataIndex: 'description' },
     {
       title: '操作', dataIndex: 'actions', render: (text, item: Flows.List) => {
-        const runBtn = <Tooltip key={'detail'} title={'执行'}>
+        const runBtn = <Tooltip key={'detail'} title={'开始执行'}>
           <Button
             icon={<PlayCircleOutlined/>}
             type={'link'}
@@ -103,14 +104,14 @@ const List: React.FC<IProps> = () => {
         const pauseBtn = <Tooltip key={'pause'} title="暂停">
           <Button
             type={'link'}
-            icon={<StopOutlined/>}
+            icon={<PauseCircleOutlined/>}
             onClick={() => handlePauseOrRunning(item, "pause")}
           ></Button>
         </Tooltip>;
         const reRunBtn = <Tooltip key={'reRun'} title="继续">
           <Button
             type={'link'}
-            icon={<StopOutlined/>}
+            icon={<PlayCircleOutlined/>}
             onClick={() => handlePauseOrRunning(item, "running")}
           ></Button>
         </Tooltip>;
