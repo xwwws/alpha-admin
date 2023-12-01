@@ -1,7 +1,7 @@
 import { request } from '@umijs/max';
 
 /**
- * 获取工作流列表
+ * 获取作业流程列表
  * @param params {API.AddSolvent}
  */
 export const getFlowList = (params: Flows.ListReq) => {
@@ -15,7 +15,7 @@ export const getFlowList = (params: Flows.ListReq) => {
 
 
 /**
- * 获取工作流详情
+ * 获取作业流程详情
  * @param flow_id
  * @param params
  */
@@ -29,7 +29,7 @@ export const getFlowDetail = (flow_id: string | number, params?: { sibling?: str
 };
 
 /**
- * 获取工作流记录
+ * 获取作业流程记录
  * @param flow_id
  * @param params
  */
@@ -44,7 +44,7 @@ export const getFlowRecord = (flow_id: string | number, params?: { sibling?: str
 
 
 /**
- * 删除工作流
+ * 删除作业流程
  * @param flow_id
  */
 export const deleteFlow = (flow_id: number) => {
@@ -56,7 +56,7 @@ export const deleteFlow = (flow_id: number) => {
 };
 
 /**
- * 执行工作流
+ * 执行作业流程
  * @param flow_id
  */
 export const runFlow = (flow_id: number) => {
@@ -69,7 +69,7 @@ export const runFlow = (flow_id: number) => {
 
 
 /**
- * 取消工作流
+ * 取消作业流程
  * @param flow_id
  */
 export const cancelFlow = (flow_id: number) => {
@@ -82,7 +82,7 @@ export const cancelFlow = (flow_id: number) => {
 
 
 /**
- * 暂停 继续工作流
+ * 暂停 继续作业流程
  * @param flow_id
  * @param query
  */

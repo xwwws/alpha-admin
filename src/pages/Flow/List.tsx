@@ -115,14 +115,14 @@ const List: React.FC<IProps> = () => {
             onClick={() => handlePauseOrRunning(item, "running")}
           ></Button>
         </Tooltip>;
-        const detailBtn = <Tooltip key={'detail'} title={'工作流详情'}>
+        const detailBtn = <Tooltip key={'detail'} title={'作业流程详情'}>
           <Button
             icon={<AlignLeftOutlined/>}
             type={'link'}
             onClick={() => navigate(`/exp/flow/${item.id}/detail`)}
           />
         </Tooltip>;
-        const recordBtn = <Tooltip key={'record'} title="工作流记录">
+        const recordBtn = <Tooltip key={'record'} title="作业流程记录">
           <Button
             type={'link'}
             icon={<OrderedListOutlined/>}
@@ -205,7 +205,7 @@ const List: React.FC<IProps> = () => {
           icon={<PlusOutlined/>}
           onClick={() => navigate('/exp/flow/create')}
         >
-          新建工作流
+          新建作业流程
         </Button>
       ]}
     >

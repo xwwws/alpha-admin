@@ -5,12 +5,14 @@ import { LoginForm, ProFormText } from '@ant-design/pro-components';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { FormattedMessage, Helmet, history, useIntl, useModel } from 'umi';
 
-import { Alert, message, Tabs } from 'antd';
+import { Alert, Button, message, Tabs } from 'antd';
 import React, { useState } from 'react';
 import Settings from '../../../../config/defaultSettings';
 
 import { setUser } from '@/utils/auth';
 import { flushSync } from 'react-dom';
+import styled from "styled-components";
+import { IndexTopStyle } from "@/utils/styleComponents";
 
 const LoginMessage: React.FC<{ content: string }> = ({ content }) => {
   return (
@@ -25,10 +27,11 @@ const LoginMessage: React.FC<{ content: string }> = ({ content }) => {
   );
 };
 
+
 const Login: React.FC = () => {
   const { initAreas, initMethods, initSteps } = useModel('useExperimentModel');
-  const [userLoginState, setUserLoginState] = useState<string>('');
-  const [type, setType] = useState<string>('account');
+  const [ userLoginState, setUserLoginState ] = useState<string>('');
+  const [ type, setType ] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
   const containerClassName = useEmotionCss(() => {
     return {
@@ -75,6 +78,10 @@ const Login: React.FC = () => {
 
   return (
     <div className={containerClassName}>
+      <IndexTopStyle>
+        <a href="/other/upload">防火涂料烧蚀结果数据上传{'>>'}</a>
+      </IndexTopStyle>
+
       <Helmet>
         <title>
           {intl.formatMessage({
@@ -95,7 +102,7 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          logo={<img alt="logo" src="/logo.png" />}
+          logo={<img alt="logo" src="/logo.png"/>}
           title="计算化学合成平台监管系统"
           subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
           actions={[]}
@@ -125,14 +132,14 @@ const Login: React.FC = () => {
             ]}
           />
 
-          {userLoginState !== '' && <LoginMessage content={userLoginState} />}
+          {userLoginState !== '' && <LoginMessage content={userLoginState}/>}
           {type === 'account' && (
             <>
               <ProFormText
                 name="username"
                 fieldProps={{
                   size: 'large',
-                  prefix: <UserOutlined />,
+                  prefix: <UserOutlined/>,
                 }}
                 placeholder={intl.formatMessage({
                   id: 'pages.login.username.placeholder',
@@ -154,7 +161,7 @@ const Login: React.FC = () => {
                 name="passwd"
                 fieldProps={{
                   size: 'large',
-                  prefix: <LockOutlined />,
+                  prefix: <LockOutlined/>,
                 }}
                 placeholder={intl.formatMessage({
                   id: 'pages.login.password.placeholder',
@@ -180,6 +187,7 @@ const Login: React.FC = () => {
             }}
           ></div>
         </LoginForm>
+
       </div>
       {/*<Footer />*/}
     </div>

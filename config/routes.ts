@@ -8,6 +8,7 @@ import { project } from "./routes/project";
 import { account } from "./routes/accounts";
 import { devices } from "./routes/devices";
 import { flows } from "./routes/flows";
+import { others } from "./routes/others";
 
 // 文档地址  https://v3.umijs.org/zh-CN/plugins/plugin-layout
 //config/route.ts
@@ -58,6 +59,7 @@ export default [
       },
     ],
   },
+  ...others,
   {
     path: '/account',
     routes: [

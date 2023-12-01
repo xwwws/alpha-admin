@@ -18,7 +18,7 @@ const Detail: React.FC<IProps> = (props) => {
   const [ flowDetail, setFlowDetail ] = useState<Flows.Detail>();
 
   /**
-   * 获取工作流详情信息
+   * 获取作业流程详情信息
    */
   const getDetail = async () => {
     const res = await getFlowDetail(id as string);
@@ -58,12 +58,12 @@ const Detail: React.FC<IProps> = (props) => {
         <PreAndNext onPreOrNext={handlePrevOrNext}/>
         {
           flowDetail && <>
-            {/*工作流基本信息*/}
+            {/*作业流程基本信息*/}
             <FlowDetail
               detail={flowDetail}
             />
 
-            {/*工作流指令信息*/}
+            {/*作业流程指令信息*/}
             <FlowDetailWrap flowData={flowDetail.flow_data}/>
           </>
         }

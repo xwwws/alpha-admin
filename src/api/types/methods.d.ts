@@ -1,5 +1,5 @@
 /**
- * 本文件定义的methods类型大多适用于工作流中的methods
+ * 本文件定义的methods类型大多适用于作业流程中的methods
  */
 declare namespace Methods {
   // 读值
