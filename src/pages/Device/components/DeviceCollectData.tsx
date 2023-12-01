@@ -101,7 +101,7 @@ const DeviceCollectData: React.FC<IProps> = (props) => {
                     labelStyle={{ width: '180px', textAlign: 'center' }}
                     label={item.custom_name}
                   >
-                    {item.value}
+                    {`${item.value}`}
                   </Descriptions.Item>
                 );
               })}

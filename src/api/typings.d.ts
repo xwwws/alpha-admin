@@ -101,6 +101,7 @@ declare namespace API {
       id: number;
       start_time: string;
       end_time: string;
+      expt_name: string;
       action: string;
       label: string;
       args: (string | number)[];
