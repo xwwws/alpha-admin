@@ -6,13 +6,14 @@ import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { FormattedMessage, Helmet, history, useIntl, useModel } from 'umi';
 
 import { Alert, Button, message, Tabs } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Settings from '../../../../config/defaultSettings';
 
 import { setUser } from '@/utils/auth';
 import { flushSync } from 'react-dom';
 import styled from "styled-components";
 import { IndexTopStyle } from "@/utils/styleComponents";
+import { useNavigate } from "@@/exports";
 
 const LoginMessage: React.FC<{ content: string }> = ({ content }) => {
   return (
@@ -33,6 +34,8 @@ const Login: React.FC = () => {
   const [ userLoginState, setUserLoginState ] = useState<string>('');
   const [ type, setType ] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
+  const [ timestamps, setTimestamps ] = useState<number[]>([]);
+  const navigate = useNavigate();
   const containerClassName = useEmotionCss(() => {
     return {
       display: 'flex',
@@ -75,12 +78,30 @@ const Login: React.FC = () => {
       console.log(error);
     }
   };
+  const uploadPage = () => {
+    const now = Date.now();
+    if (timestamps.length > 0) {
+      if(now - timestamps[timestamps.length - 1] > 500) {
+        setTimestamps([ now ]);
+      } else {
+        setTimestamps([...timestamps, now ]);
+      }
+    } else {
+      setTimestamps([ now ]);
+    }
+  };
+  useEffect(() => {
+    console.log(timestamps);
+    if(timestamps.length >= 3) {
+      navigate('/other/upload')
+    }
+  },[timestamps])
 
   return (
     <div className={containerClassName}>
-      <IndexTopStyle>
-        <a href="/other/upload">防火涂料烧蚀结果数据上传{'>>'}</a>
-      </IndexTopStyle>
+      {/*<IndexTopStyle>*/}
+      {/*  <a href="/other/upload">防火涂料烧蚀结果数据上传{'>>'}</a>*/}
+      {/*</IndexTopStyle>*/}
 
       <Helmet>
         <title>
@@ -102,7 +123,7 @@ const Login: React.FC = () => {
             minWidth: 280,
             maxWidth: '75vw',
           }}
-          logo={<img alt="logo" src="/logo.png"/>}
+          logo={<img alt="logo" src="/logo.png" onClick={uploadPage}/>}
           title="计算化学合成平台监管系统"
           subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
           actions={[]}
