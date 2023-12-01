@@ -106,7 +106,6 @@ const CreateMethodItem: React.FC<IProps> = (props) => {
       </Row>
 
       {/*以下都是选择指令之后展示的内容*/}
-
       {/*读值*/}
       {method === 'read' && <CreateFlowRead name={name}/>}
 
