@@ -91,7 +91,6 @@ const Login: React.FC = () => {
     }
   };
   useEffect(() => {
-    console.log(timestamps);
     if(timestamps.length >= 3) {
       navigate('/other/upload')
     }

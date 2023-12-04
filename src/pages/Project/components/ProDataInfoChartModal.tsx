@@ -67,6 +67,9 @@ const ProDataInfoChartModal: React.FC<IProps> = (props) => {
           name: item.name,
           type: 'line',
           data: item.y,
+          lineStyle: {
+            width:1
+          },
           smooth: true
         }))
       };
