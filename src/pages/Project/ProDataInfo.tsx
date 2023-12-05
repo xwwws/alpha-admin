@@ -131,8 +131,7 @@ const ProDataInfo: React.FC<IProps> = (props) => {
     const baseX = '记录时间';
     const baseY1 = '升温曲线';
     const baseY2 = '背温曲线';
-    // // 合并所有x轴  x轴以 duration 为准
-    const xData = allData
+    /* // 合并所有x轴  x轴以 duration 为准 */const xData = allData
       .map((item) => item.data.map((dataItem: any) => dataItem[baseX]))
       .flat()
       .sort((a, b) => (Date.parse(a) - Date.parse(b)))
