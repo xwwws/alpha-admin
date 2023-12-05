@@ -48,6 +48,7 @@ const ProDataInfoChartModal: React.FC<IProps> = (props) => {
           selected
         },
         grid: {
+          top: '20%',
           left: '3%',
           right: '4%',
           bottom: '3%',
@@ -87,7 +88,7 @@ const ProDataInfoChartModal: React.FC<IProps> = (props) => {
         confirmLoading={isLoading}
         onCancel={onCancel}
         footer={null}
-        width={'80%'}
+        width={'100%'}
       >
         <div ref={chartRef} style={{ width: '100%', height: 700 }}/>
       </Modal>

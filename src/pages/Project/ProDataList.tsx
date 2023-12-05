@@ -83,6 +83,7 @@ const ProDataList: React.FC<IProps> = (props) => {
     <PageContainer
       extra={[
         <Button
+          key={'create'}
           icon={<PlusOutlined/>}
           type={'primary'}
           onClick={() => navigate(`/project/pro-add-data/${proId}`)}
@@ -91,7 +92,7 @@ const ProDataList: React.FC<IProps> = (props) => {
     >
       <Card>
         <ProTable
-          rowKey="id"
+          rowKey={({id}) => `${id}`}
           actionRef={tableRef}
           columns={columns}
           options={false}

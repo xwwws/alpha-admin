@@ -101,12 +101,12 @@ const DeviceHis: React.FC<IProps> = (props) => {
   return (
     <DeviceHisStyle>
       <Card title={'设备调用历史'} size={"small"} hoverable>
-        <ProTable
+        {/*@ts-ignore*/}
+        <ProTable request={requestMethod}
           actionRef={tableRef}
           rowKey={({ id }) => `${id}`}
           columns={columns}
           options={false}
-          request={requestMethod}
           scroll={{ x: columns.length * 190 }}
           pagination={{
             showSizeChanger: false,

@@ -128,13 +128,15 @@ const ProDataInfo: React.FC<IProps> = (props) => {
    * @param allData
    */
   const formatCSVsData2ChartFHTLData = (allData: IFHTLAllData[]): IChartData => {
-    const baseX = '记录时间';
+    console.log(allData);
+    const baseX = 'duration';
     const baseY1 = '升温曲线(℃)';
     const baseY2 = '背温曲线(℃)';
-    /* // 合并所有x轴  x轴以 duration 为准 */const xData = allData
+    /* // 合并所有x轴  x轴以 duration 为准 */
+    const xData = allData
       .map((item) => item.data.map((dataItem: any) => dataItem[baseX]))
       .flat()
-      .sort((a, b) => (Date.parse(a) - Date.parse(b)))
+      .sort((a, b) => (Number(a) - Number(b)))
       .filter((value, index, self) => self.indexOf(value) === index);
     // 处理y数据
     const yData = allData.map(({ name, data }) => {
@@ -143,37 +145,50 @@ const ProDataInfo: React.FC<IProps> = (props) => {
           name: `${name}-${baseY1}`,
           y: xData.map((x) => {
             // @ts-ignore key 是csv文件表头   给的就是汉字
-            const iResult = data.find(({记录时间}) => 记录时间 === x)
-            if(iResult) {
-              return iResult[baseY1]
+            const iResult = data.find(({ duration }) => duration === x);
+            if (iResult) {
+              return `${Math.round(Number(iResult[baseY1]) * 100) / 100}`;
             } else {
-              return '-'
+              return '-';
             }
-          })
+          }).reduce((accumulator: string[], item) => {
+            if (item === '-') {
+              return [ ...accumulator, accumulator[accumulator.length - 1] ];
+            } else {
+              return [ ...accumulator, item ];
+            }
+          }, [])
         },
         {
           name: `${name}-${baseY2}`,
           y: xData.map((x) => {
             // @ts-ignore key 是csv文件表头   给的就是汉字
-            const iResult = data.find(({记录时间}) => 记录时间 === x)
-            if(iResult) {
-              return iResult[baseY2]
+            const iResult = data.find(({ duration }) => duration === x);
+            if (iResult) {
+              return `${Math.round(Number(iResult[baseY2]) * 100) / 100}`;
             } else {
-              return '-'
+              return '-';
             }
-          })
+          }).reduce((accumulator: string[], item) => {
+            if (item === '-') {
+              return [ ...accumulator, accumulator[accumulator.length - 1] ];
+            } else {
+              return [ ...accumulator, item ];
+            }
+          }, [])
         }
       ];
     });
+    console.log({ xData, yData: yData.flat() });
     return { xData, yData: yData.flat() };
   };
   /**
    * 防火涂料视图查看
    */
   const showFHTLData = async () => {
-    setIsModalLoading(false)
+    setIsModalLoading(false);
     setChartData(formatCSVsData2ChartFHTLData(await getFHTLCSCData()));
-    setIsShow(true)
+    setIsShow(true);
   };
   const viewComparisonChart = () => {
     // 判断是不是防火涂料
