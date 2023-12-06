@@ -13,8 +13,22 @@ export const updateExpAnnex = (exptattach_id : string | number, data: Experiment
 
   return request<Response<any>>(
     `/api/v1/lab/attachments/attachments/${exptattach_id}`, {
-    method: 'put',
-    requestType: 'form',
-    data: formData
-  });
+      method: 'put',
+      requestType: 'form',
+      data: formData
+    });
 };
+
+
+/**
+ * 获取附件列表
+ * @param params
+ */
+export const getAnnexList = (params: Attachments.GetAnnexReq) => {
+  return request<Response<Attachments.GetAnnexRes[]>>(
+    `/api/v1/lab/attachments/attachments`, {
+      method: 'get',
+      params
+    });
+};
+

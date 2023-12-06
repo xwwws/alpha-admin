@@ -27,56 +27,56 @@ const ProDataInfoChartModal: React.FC<IProps> = (props) => {
   const { isShow, unit, onCancel, isLoading, chartData } = props;
   const chartRef = useRef(null);
   const getSelectAll = (data: string[], isSelect: boolean) => {
-      const result: { [key: string]: boolean } = {};
-      data.forEach(item => {
-        result[item] = isSelect;
-      });
-      return result;
-    },
-    drawChart = () => {
-      const myChart = echarts.init(chartRef.current);
-      const { xData, yData } = chartData;
-      const allLine = yData.map(({ name }) => name);
-      const selected = getSelectAll(allLine, true);
-      myChart.clear();
-      const option: ECOption = {
-        tooltip: {
-          trigger: 'axis'
+    const result: { [key: string]: boolean } = {};
+    data.forEach(item => {
+      result[item] = isSelect;
+    });
+    return result;
+  };
+  const drawChart = () => {
+    const myChart = echarts.init(chartRef.current);
+    const { xData, yData } = chartData;
+    const allLine = yData.map(({ name }) => name);
+    const selected = getSelectAll(allLine, true);
+    myChart.clear();
+    const option: ECOption = {
+      tooltip: {
+        trigger: 'axis'
+      },
+      legend: {
+        data: allLine,
+        selected
+      },
+      grid: {
+        top: '20%',
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        type: 'category',
+        boundaryGap: false,
+        data: xData,
+        name: 's',
+      },
+      yAxis: {
+        type: 'value',
+        name: unit
+      },
+      series: yData.map(item => ({
+        name: item.name,
+        type: 'line',
+        data: item.y,
+        lineStyle: {
+          width: 1
         },
-        legend: {
-          data: allLine,
-          selected
-        },
-        grid: {
-          top: '20%',
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true
-        },
-        xAxis: {
-          type: 'category',
-          boundaryGap: false,
-          data: xData,
-          name: 's',
-        },
-        yAxis: {
-          type: 'value',
-          name: unit
-        },
-        series: yData.map(item => ({
-          name: item.name,
-          type: 'line',
-          data: item.y,
-          lineStyle: {
-            width:1
-          },
-          smooth: true
-        }))
-      };
-      myChart.setOption(option);
-
+        smooth: true
+      }))
     };
+    myChart.setOption(option);
+
+  };
   useEffect(() => {
     isShow && drawChart();
   }, [ isShow ]);

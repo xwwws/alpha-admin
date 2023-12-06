@@ -6,6 +6,7 @@ import { getStepsByExperimentId } from "@/api/experiments";
 import RecordStep from "@/pages/Experiments/components/RecordStep";
 import PreAndNext from "@/pages/components/PreAndNext";
 import RecordOverview from "@/pages/components/RecordOverview";
+import RecordChartFH from "@/pages/Experiments/components/RecordChartFH";
 
 interface IProps {
   [key: string]: any;
@@ -62,6 +63,8 @@ const Record: React.FC<IProps> = () => {
         <PreAndNext
           onPreOrNext={handlePrevOrNext}
         />
+        {/*防火涂料图表*/}
+        <RecordChartFH/>
         {steps.map((item, index) => (
           <RecordStep
             key={index}
@@ -73,7 +76,7 @@ const Record: React.FC<IProps> = () => {
       <RecordOverview
         isShow={isShowOverView}
         onClose={() => setIsShowOverView(false)}
-        data={steps.map(({step_description}) => step_description)}
+        data={steps.map(({ step_description }) => step_description)}
       />
       {/*<input*/}
       {/*  ref={inputRef}*/}

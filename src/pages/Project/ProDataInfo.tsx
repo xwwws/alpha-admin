@@ -128,7 +128,6 @@ const ProDataInfo: React.FC<IProps> = (props) => {
    * @param allData
    */
   const formatCSVsData2ChartFHTLData = (allData: IFHTLAllData[]): IChartData => {
-    console.log(allData);
     const baseX = 'duration';
     const baseY1 = '升温曲线(℃)';
     const baseY2 = '背温曲线(℃)';
@@ -179,7 +178,6 @@ const ProDataInfo: React.FC<IProps> = (props) => {
         }
       ];
     });
-    console.log({ xData, yData: yData.flat() });
     return { xData, yData: yData.flat() };
   };
   /**
