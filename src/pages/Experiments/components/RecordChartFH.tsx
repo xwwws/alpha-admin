@@ -32,7 +32,7 @@ const RecordChartFH: React.FC<IProps> = (props) => {
   const getAnnex = async () => {
     const res = await getAnnexList({ expt_id: id });
     if (res.data.length > 0 && res.data[0].expt_name.includes('FH')) {
-      setChartData(formatCSVsData2ChartFHTLData(await getFHTLCSCData(res.data)));
+      setChartData(formatCSVsData2ChartFHTLData(await getFHTLCSVData(res.data)));
       setIsShowChart(true);
     } else {
       setIsShowChart(false);
@@ -99,7 +99,7 @@ const RecordChartFH: React.FC<IProps> = (props) => {
   /**
    * 获取防火涂料csv数据
    */
-  const getFHTLCSCData = async (data: Attachments.GetAnnexRes[]): Promise<IFHTLAllData[]> => {
+  const getFHTLCSVData = async (data: Attachments.GetAnnexRes[]): Promise<IFHTLAllData[]> => {
     // 读取所有文件
     return await Promise.all(data.map((item) => new Promise(async (resolve) => resolve({
       name: item.expt_name,

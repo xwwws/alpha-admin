@@ -73,7 +73,7 @@ const ProDataInfo: React.FC<IProps> = (props) => {
   /**
    * 获取防火涂料csv数据
    */
-  const getFHTLCSCData = async (): Promise<IFHTLAllData[]> => {
+  const getFHTLCSVData = async (): Promise<IFHTLAllData[]> => {
     // 读取所有文件
     return await Promise.all(activeRows.map((item) => new Promise(async (resolve) => resolve({
       name: item[nameIndex],
@@ -185,7 +185,7 @@ const ProDataInfo: React.FC<IProps> = (props) => {
    */
   const showFHTLData = async () => {
     setIsModalLoading(false);
-    setChartData(formatCSVsData2ChartFHTLData(await getFHTLCSCData()));
+    setChartData(formatCSVsData2ChartFHTLData(await getFHTLCSVData()));
     setIsShow(true);
   };
   const viewComparisonChart = () => {
