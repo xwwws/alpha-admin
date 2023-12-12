@@ -41,6 +41,7 @@ const UploadAnnex: React.FC<IProps> = (props) => {
       y_axis_front: data.y_axis_front,
       y_axis_back: data.y_axis_back,
     };
+    console.log(params);
     await uploadAnnex(params);
     message.success('上传成功');
     form.resetFields()
