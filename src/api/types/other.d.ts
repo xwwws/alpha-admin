@@ -4,5 +4,7 @@ declare namespace Other {
     name: string;
     file: any;
     description: string;
+    y_axis_front: string;
+    y_axis_back: string;
   }
 }
