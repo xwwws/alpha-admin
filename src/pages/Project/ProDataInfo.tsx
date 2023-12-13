@@ -76,7 +76,7 @@ const ProDataInfo: React.FC<IProps> = (props) => {
   const getFHTLCSVData = async (): Promise<IFHTLAllData[]> => {
     // 读取所有文件
     return await Promise.all(activeRows.map((item) => new Promise(async (resolve) => resolve({
-      name: item[nameIndex],
+      name: item[IDIndex],
       data: await readFHTLCSV(item[item.length - 1])
     })))) as IAllData[];
   };

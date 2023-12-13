@@ -38,8 +38,8 @@ const UploadAnnex: React.FC<IProps> = (props) => {
       name: data.name,
       file: data.file.fileList[0].originFileObj,
       description: data.description || '',
-      y_axis_front: `温控表${data.y_axis_front}PV(℃)`,
-      y_axis_back: `温控表${data.y_axis_back}PV(℃)`,
+      y_axis_front: `温控表${data.y_axis_front}#PV(℃)`,
+      y_axis_back: `温控表${data.y_axis_back}#PV(℃)`,
     };
     await uploadAnnex(params);
     message.success('上传成功');
@@ -78,11 +78,11 @@ const UploadAnnex: React.FC<IProps> = (props) => {
             </Form.Item>
 
             <Form.Item label="升温曲线表头" name="y_axis_front" rules={formRules.y_axis_front}>
-              <Input addonBefore="温控表" addonAfter="PV(℃)"/>
+              <Input addonBefore="温控表" addonAfter="#PV(℃)"/>
             </Form.Item>
 
             <Form.Item label="背温曲线表头" name="y_axis_back" rules={formRules.y_axis_back}>
-              <Input addonBefore="温控表" addonAfter="PV(℃)"/>
+              <Input addonBefore="温控表" addonAfter="#PV(℃)"/>
             </Form.Item>
 
             <Form.Item label="备注" name="description" rules={formRules.description}>
