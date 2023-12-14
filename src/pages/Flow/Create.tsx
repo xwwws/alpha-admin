@@ -7,6 +7,8 @@ import { PlusOutlined } from "@ant-design/icons";
 import { getProjects } from "@/api/project";
 import DataAcquisition from "@/pages/components/DataAcquisition";
 import CreateMethodItem from "@/pages/Flow/components/CreateMethodItem";
+import { createFlow } from "@/api/flows";
+import { fmtFlowRequestParams } from "@/pages/Flow/tools/CreateTools";
 
 interface IProps {
   [key: string]: any;
@@ -24,8 +26,7 @@ const Create: React.FC<IProps> = (props) => {
     setProjects(res.data.data.map(pro => ({ label: pro.name, value: pro.id + '' })));
   };
   const onFinish = async (values: any) => {
-    console.log(values);
-
+    await createFlow(fmtFlowRequestParams(values));
   };
 
   const formRules: IForm.IFormRules = {

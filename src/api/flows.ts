@@ -95,3 +95,16 @@ export const statusFlow = (flow_id: number, query: { status: 'running' | 'pause'
     });
 };
 
+/**
+ * 创建作业流程
+ * @param data
+ */
+export const createFlow = (data: any) => {
+  return request<Response<any>>(
+    `/api/v1/expt/flows`,
+    {
+      method: 'post',
+      data
+    });
+};
+

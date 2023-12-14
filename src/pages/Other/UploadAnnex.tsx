@@ -22,7 +22,7 @@ const UploadAnnex: React.FC<IProps> = (props) => {
 
   const formRules: IForm.IFormRules = {
     expt_id: [ { required: true, message: '请输入实验id' } ],
-    name: [ { required: true, message: '请输入名称' } ],
+    name: [ { required: false, message: '请输入名称' } ],
     y_axis_front: [ { required: true, message: '请输入升温曲线表头' } ],
     y_axis_back: [ { required: true, message: '请输入背温曲线表头' } ],
     file: [ { required: true, message: '请选择文件' } ],

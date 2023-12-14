@@ -5,6 +5,10 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useModel } from 'umi';
 import CreateFlowRead from "@/pages/Flow/components/CreateFlowRead";
+import CreateFlowWrite from "@/pages/Flow/components/CreateFlowWrite";
+import CreateFlowSleep from "@/pages/Flow/components/CreateFlowSleep";
+import CreateFlowMove from "@/pages/Flow/components/CreateFlowMove";
+import CreateFlowAddSol from "@/pages/Flow/components/CreateFlowAddSol";
 
 interface IProps {
   form: FormInstance<any>;
@@ -22,7 +26,7 @@ interface IStepRemarksInfo {
   showReagent: boolean,
 }
 
-const prerequisite = [ '>', '<', '=', '≠' ];
+const prerequisite = [ '>', '<', '==', '<>' ];
 
 const ToolsBox = styled.div`
   display: flex;
@@ -110,16 +114,16 @@ const CreateMethodItem: React.FC<IProps> = (props) => {
       {method === 'read' && <CreateFlowRead name={name}/>}
 
       {/*写值*/}
-      {method === 'read' && <></>}
+      {method === 'write' && <CreateFlowWrite name={name}/>}
 
       {/*等待*/}
-      {method === 'sleep' && <></>}
+      {method === 'sleep' && <CreateFlowSleep name={name}/>}
 
       {/*移动*/}
-      {method === 'methdMvThing' && <></>}
+      {method === 'methdMvThing' && <CreateFlowMove name={name}/>}
 
       {/*加液*/}
-      {method === 'methdAddSol' && <></>}
+      {method === 'methdAddSol' && <CreateFlowAddSol name={name}/>}
 
       {/*开瓶器位开盖*/}
       {method === 'methdUncap' && <></>}
@@ -181,4 +185,4 @@ const CreateMethodItem: React.FC<IProps> = (props) => {
     </Card>
   );
 };
-export default CreateMethodItem;
+export default CreateMethodItem

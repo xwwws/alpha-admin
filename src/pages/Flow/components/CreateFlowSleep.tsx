@@ -10,22 +10,20 @@ interface IProps {
 }
 
 const formRules: IForm.IFormRules = {
-  nodeid: [{ required: true, message: '请选择节点' }],
+  seconds: [
+    { required: true, message: '请输入等待时间' },
+    { pattern: /^\d+(.\d+)?$/, message: '输入错误' },
+    { max: 6, message: '等待时间过长' },
+  ]
 };
-const CreateFlowRead: React.FC<IProps> = (props) => {
+const CreateFlowSleep: React.FC<IProps> = (props) => {
   const { name } = props;
-  const { nodeIds } = useModel('useExperimentModel');
-
   return (
     <>
       <Row gutter={10}>
         <Col span={12}>
-          <Form.Item name={[ name, 'nodeid' ]} label="节点id" rules={formRules.nodeid}>
-            <Select
-              allowClear
-              options={nodeIds}
-              placeholder="请选择节点"
-            />
+          <Form.Item name={[ name, 'seconds' ]} label="等待" rules={formRules.seconds}>
+            <Input addonAfter="秒" />
           </Form.Item>
         </Col>
       </Row>
@@ -34,4 +32,4 @@ const CreateFlowRead: React.FC<IProps> = (props) => {
     ;
 };
 
-export default CreateFlowRead
+export default CreateFlowSleep;
