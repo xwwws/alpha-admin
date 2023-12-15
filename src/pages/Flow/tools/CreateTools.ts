@@ -180,6 +180,28 @@ export const fmtFlowRequestParams = (value: any) => {
           }
         });
         break;
+      //   开瓶器工位吸液，滴加位吐液  /  移液
+      case 'methdMvSolid':
+        params.flow_data.push({
+          action: item.action,
+          prerequisite: parsePrerequisite(item),
+          kwargs: {
+            src_area: {
+              name: item.src_area_name,
+              x: item.src_area_x,
+              y: item.src_area_y,
+              z: item.src_area_z
+            },
+            dst_area: {
+              name: item.dst_area_name,
+              x: item.dst_area_x,
+              y: item.dst_area_y,
+              z: item.dst_area_z
+            },
+            height: item.height
+          }
+        });
+        break;
       default:
 
     }
