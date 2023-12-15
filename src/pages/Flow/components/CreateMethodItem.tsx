@@ -16,6 +16,9 @@ import CreateFlowPickTip from "@/pages/Flow/components/CreateFlowPickTip";
 import CreateFlowLiquidMovement from "@/pages/Flow/components/CreateFlowLiquidMovement";
 import CreateFlowMvSolid from "@/pages/Flow/components/CreateFlowMvSolid";
 import CreateFlowAddSolid from "@/pages/Flow/components/CreateFlowAddSolid";
+import CreateFlowPeristaltic from "@/pages/Flow/components/CreateFlowPeristaltic";
+import CreateFlowMix3 from "@/pages/Flow/components/CreateFlowMix3";
+import CreateFlowDistillC3 from "@/pages/Flow/components/CreateFlowDistillC3";
 
 interface IProps {
   form: FormInstance<any>;
@@ -45,6 +48,7 @@ const CreateMethodItem: React.FC<IProps> = (props) => {
   const { methods, nodeIds } = useModel('useExperimentModel');
   const handleMethodChange = async (val: string) => {
     form.setFieldValue([ 'flow_data', name ], { action: val });
+    console.log(val);
     setMethod(val);
   };
 
@@ -154,13 +158,13 @@ const CreateMethodItem: React.FC<IProps> = (props) => {
       {method === 'methdDoAddSolid' && <CreateFlowAddSolid name={name}/>}
 
       {/*蠕动泵加液*/}
-      {method === 'methdDoPeristaltic' && <></>}
+      {method === 'methdDoPeristaltic' && <CreateFlowPeristaltic name={name}/>}
 
       {/*搅拌3*/}
-      {method === 'methdDoMix3' && <></>}
+      {method === 'methdDoMix3' && <CreateFlowMix3 name={name}/>}
 
       {/*废液蒸馏*/}
-      {method === 'methdDoDistillC3' && <></>}
+      {method === 'methdDoDistillC3' && <CreateFlowDistillC3 name={name}/>}
 
       {/*以下不展示*/}
       {

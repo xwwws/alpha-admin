@@ -216,6 +216,35 @@ export const fmtFlowRequestParams = (value: any) => {
           }
         });
         break;
+      //   蠕动泵加液
+      case 'methdDoPeristaltic':
+        params.flow_data.push({
+          action: item.action,
+          prerequisite: parsePrerequisite(item),
+          kwargs: {
+            src_area: {
+              name: item.src_area_name,
+              x: item.src_area_x,
+              y: item.src_area_y,
+              z: item.src_area_z
+            },
+            speed: item.speed,
+            weight: item.weight,
+            accuracy: item.accuracy,
+          }
+        });
+        break;
+      //   搅拌3
+      case 'methdDoMix3':
+        params.flow_data.push({
+          action: item.action,
+          prerequisite: parsePrerequisite(item),
+          kwargs: {
+            area_name: item.area_name,
+            time: item.time,
+          }
+        });
+        break;
       default:
 
     }
