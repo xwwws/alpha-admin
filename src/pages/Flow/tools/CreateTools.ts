@@ -180,7 +180,7 @@ export const fmtFlowRequestParams = (value: any) => {
           }
         });
         break;
-      //   开瓶器工位吸液，滴加位吐液  /  移液
+      //   移固体料仓
       case 'methdMvSolid':
         params.flow_data.push({
           action: item.action,
@@ -199,6 +199,20 @@ export const fmtFlowRequestParams = (value: any) => {
               z: item.dst_area_z
             },
             height: item.height
+          }
+        });
+        break;
+      //   加固启动
+      case 'methdDoAddSolid':
+        params.flow_data.push({
+          action: item.action,
+          prerequisite: parsePrerequisite(item),
+          kwargs: {
+            area_name: item.area_name,
+            speed: item.speed,
+            angel: item.angel,
+            weight: item.weight,
+            tolerance: item.tolerance,
           }
         });
         break;
