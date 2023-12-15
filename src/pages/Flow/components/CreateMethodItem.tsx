@@ -12,6 +12,8 @@ import CreateFlowAddSol from "@/pages/Flow/components/CreateFlowAddSol";
 import CreateFlowUnCap from "@/pages/Flow/components/CreateFlowUnCap";
 import CreateFlowReCap from "@/pages/Flow/components/CreateFlowReCap";
 import CreateFlowChangeTool from "@/pages/Flow/components/CreateFlowChangeTool";
+import CreateFlowPickTip from "@/pages/Flow/components/CreateFlowPickTip";
+import CreateFlowLiquidMovement from "@/pages/Flow/components/CreateFlowLiquidMovement";
 
 interface IProps {
   form: FormInstance<any>;
@@ -138,10 +140,10 @@ const CreateMethodItem: React.FC<IProps> = (props) => {
       {method === 'methdChngTool' && <CreateFlowChangeTool name={name}/>}
 
       {/*抬起枪头*/}
-      {method === 'methdPickTip' && <></>}
+      {method === 'methdPickTip' && <CreateFlowPickTip name={name}/>}
 
-      {/*开瓶器工位吸液，滴加位吐液*/}
-      {method === 'methdTrnsLiquid' && <></>}
+      {/*开瓶器工位吸液，滴加位吐液  /  移液*/}
+      {method === 'methdTrnsLiquid' && <CreateFlowLiquidMovement name={name}/>}
 
       {/*移固体料仓*/}
       {method === 'methdMvSolid' && <></>}

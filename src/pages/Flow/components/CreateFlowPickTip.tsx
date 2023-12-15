@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Form, Input, Row, Select } from "antd";
+import { Col, Form, Input, Row, Select, Switch } from "antd";
 import { IForm } from "@/pages/typings";
 import { useModel } from "@@/exports";
 
@@ -10,8 +10,7 @@ interface IProps {
 }
 
 const formRules: IForm.IFormRules = {
-  src_area_name: [ { required: true, message: '请选择托盘区域' } ],
-  dst_area_name: [ { required: true, message: '请选择目标区域' } ],
+  tip_area_name: [ { required: true, message: '请选择托盘区域' } ],
   coordinates: [
     { required: true, message: '请输入坐标' },
     { pattern: /^\d+$/, message: '坐标输入错误' },
@@ -23,7 +22,7 @@ const formRules: IForm.IFormRules = {
     { max: 10, message: '高度过高' },
   ],
 };
-const CreateFlowMove: React.FC<IProps> = (props) => {
+const CreateFlowPickTip: React.FC<IProps> = (props) => {
   const { name } = props;
   const { areas } = useModel('useExperimentModel');
 
@@ -32,9 +31,9 @@ const CreateFlowMove: React.FC<IProps> = (props) => {
       <Row gutter={10}>
         <Col span={12}>
           <Form.Item
-            name={[ name, 'src_area_name' ]}
+            name={[ name, 'tip_area_name' ]}
             label="托盘区域"
-            rules={formRules.src_area_name}
+            rules={formRules.tip_area_name}
           >
             <Select options={areas}/>
           </Form.Item>
@@ -42,7 +41,7 @@ const CreateFlowMove: React.FC<IProps> = (props) => {
 
         <Col span={4}>
           <Form.Item
-            name={[ name, 'src_area_x' ]}
+            name={[ name, 'tip_area_x' ]}
             label="x"
             rules={formRules.coordinates}
           >
@@ -52,7 +51,7 @@ const CreateFlowMove: React.FC<IProps> = (props) => {
 
         <Col span={4}>
           <Form.Item
-            name={[ name, 'src_area_y' ]}
+            name={[ name, 'tip_area_y' ]}
             label="y"
             rules={formRules.coordinates}
           >
@@ -62,48 +61,7 @@ const CreateFlowMove: React.FC<IProps> = (props) => {
 
         <Col span={4}>
           <Form.Item
-            name={[ name, 'src_area_z' ]}
-            label="z"
-            rules={formRules.coordinates}
-          >
-            <Input />
-          </Form.Item>
-        </Col>
-
-        {/*第二行*/}
-        <Col span={12}>
-          <Form.Item
-            name={[ name, 'dst_area_name' ]}
-            label="目标区域"
-            rules={formRules.dst_area_name}
-          >
-            <Select options={areas}/>
-          </Form.Item>
-        </Col>
-
-        <Col span={4}>
-          <Form.Item
-            name={[ name, 'dst_area_x' ]}
-            label="x"
-            rules={formRules.coordinates}
-          >
-            <Input />
-          </Form.Item>
-        </Col>
-
-        <Col span={4}>
-          <Form.Item
-            name={[ name, 'dst_area_y' ]}
-            label="y"
-            rules={formRules.coordinates}
-          >
-            <Input />
-          </Form.Item>
-        </Col>
-
-        <Col span={4}>
-          <Form.Item
-            name={[ name, 'dst_area_z' ]}
+            name={[ name, 'tip_area_z' ]}
             label="z"
             rules={formRules.coordinates}
           >
@@ -115,11 +73,20 @@ const CreateFlowMove: React.FC<IProps> = (props) => {
 
         <Col span={12}>
           <Form.Item
-            name={[ name, 'height' ]}
-            label="高度"
+            name={[ name, 'tip_length' ]}
+            label="枪头长度"
             rules={formRules.height}
           >
-            <Input addonAfter="cm"/>
+            <Input addonAfter="mm"/>
+          </Form.Item>
+        </Col>
+        <Col span={12}>
+          <Form.Item
+            name={[ name, 'drop_pre' ]}
+            label="是否卸下"
+            rules={formRules.drop_pre}
+          >
+            <Switch />
           </Form.Item>
         </Col>
       </Row>
@@ -127,4 +94,4 @@ const CreateFlowMove: React.FC<IProps> = (props) => {
   );
 };
 
-export default CreateFlowMove;
+export default CreateFlowPickTip;

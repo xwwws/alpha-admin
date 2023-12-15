@@ -42,9 +42,8 @@ const formRules = {
     { max: 10, message: '坐标长度过长' },
   ],
   height: [
-    { required: true, message: '请输入高度' },
-    { pattern: /^\d+$/, message: '高度应为数字' },
-    { max: 10, message: '高度过高' },
+    { required: true, message: '请输入数字' },
+    { pattern: /^\d+$/, message: '请输入数字' }
   ],
 };
 const formItemStyle = {};

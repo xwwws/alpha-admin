@@ -27,7 +27,7 @@ export const fmtFlowRequestParams = (value: any) => {
       // 读值
       case 'read':
         params.flow_data.push({
-          action: 'read',
+          action: item.action,
           prerequisite: parsePrerequisite(item),
           kwargs: {
             nodeid: item.nodeid
@@ -37,7 +37,7 @@ export const fmtFlowRequestParams = (value: any) => {
       //   写值
       case 'write':
         params.flow_data.push({
-          action: 'write',
+          action: item.action,
           prerequisite: parsePrerequisite(item),
           kwargs: {
             nodeid: item.nodeid,
@@ -48,7 +48,7 @@ export const fmtFlowRequestParams = (value: any) => {
       //   等待
       case 'sleep':
         params.flow_data.push({
-          action: 'sleep',
+          action: item.action,
           prerequisite: parsePrerequisite(item),
           kwargs: {
             seconds: item.seconds
@@ -58,7 +58,7 @@ export const fmtFlowRequestParams = (value: any) => {
       //   移动
       case 'methdMvThing':
         params.flow_data.push({
-          action: 'methdMvThing',
+          action: item.action,
           prerequisite: parsePrerequisite(item),
           kwargs: {
             src_area: {
@@ -80,7 +80,7 @@ export const fmtFlowRequestParams = (value: any) => {
       //   加液
       case 'methdAddSol':
         params.flow_data.push({
-          action: 'methdAddSol',
+          action: item.action,
           prerequisite: parsePrerequisite(item),
           kwargs: {
             src_area: {
@@ -104,7 +104,7 @@ export const fmtFlowRequestParams = (value: any) => {
       //   开瓶器位开盖
       case 'methdUncap':
         params.flow_data.push({
-          action: 'methdUncap',
+          action: item.action,
           prerequisite: parsePrerequisite(item),
           kwargs: {
             area_name: item.area_name,
@@ -116,7 +116,7 @@ export const fmtFlowRequestParams = (value: any) => {
       //   开瓶器位开盖
       case 'methdRecap':
         params.flow_data.push({
-          action: 'methdUncap',
+          action: item.action,
           prerequisite: parsePrerequisite(item),
           kwargs: {
             area_name: item.area_name,
@@ -128,11 +128,55 @@ export const fmtFlowRequestParams = (value: any) => {
       //   开瓶器位开盖
       case 'methdChngTool':
         params.flow_data.push({
-          action: 'methdChngTool',
+          action: item.action,
           prerequisite: parsePrerequisite(item),
           kwargs: {
             src_tool: item.src_tool,
             dst_tool: item.dst_tool,
+          }
+        });
+        break;
+      //   开瓶器位开盖
+      case 'methdPickTip':
+        params.flow_data.push({
+          action: item.action,
+          prerequisite: parsePrerequisite(item),
+          kwargs: {
+            tip_area: {
+              name: item.tip_area_name,
+              x: item.tip_area_x,
+              y: item.tip_area_y,
+              z: item.tip_area_z,
+            },
+            tip_length: item.tip_length,
+            drop_pre: item.drop_pre,
+          }
+        });
+        break;
+      //   开瓶器工位吸液，滴加位吐液  /  移液
+      case 'methdTrnsLiquid':
+        params.flow_data.push({
+          action: item.action,
+          prerequisite: parsePrerequisite(item),
+          kwargs: {
+            src_area: {
+              name: item.src_area_name,
+              x: item.src_area_x,
+              y: item.src_area_y,
+              z: item.src_area_z
+            },
+            dst_area: {
+              name: item.dst_area_name,
+              x: item.dst_area_x,
+              y: item.dst_area_y,
+              z: item.dst_area_z
+            },
+            tip_length: item.tip_length,
+            total: item.total,
+            take_once: item.take_once,
+            spit_once: item.spit_once,
+            interval: item.interval,
+            speed: item.speed,
           }
         });
         break;
