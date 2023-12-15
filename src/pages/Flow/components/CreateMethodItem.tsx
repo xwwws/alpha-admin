@@ -9,6 +9,9 @@ import CreateFlowWrite from "@/pages/Flow/components/CreateFlowWrite";
 import CreateFlowSleep from "@/pages/Flow/components/CreateFlowSleep";
 import CreateFlowMove from "@/pages/Flow/components/CreateFlowMove";
 import CreateFlowAddSol from "@/pages/Flow/components/CreateFlowAddSol";
+import CreateFlowUnCap from "@/pages/Flow/components/CreateFlowUnCap";
+import CreateFlowReCap from "@/pages/Flow/components/CreateFlowReCap";
+import CreateFlowChangeTool from "@/pages/Flow/components/CreateFlowChangeTool";
 
 interface IProps {
   form: FormInstance<any>;
@@ -126,13 +129,13 @@ const CreateMethodItem: React.FC<IProps> = (props) => {
       {method === 'methdAddSol' && <CreateFlowAddSol name={name}/>}
 
       {/*开瓶器位开盖*/}
-      {method === 'methdUncap' && <></>}
+      {method === 'methdUncap' && <CreateFlowUnCap name={name}/>}
 
       {/*开瓶器位加盖*/}
-      {method === 'methdRecap' && <></>}
+      {method === 'methdRecap' && <CreateFlowReCap name={name}/>}
 
       {/*换工具*/}
-      {method === 'methdChngTool' && <></>}
+      {method === 'methdChngTool' && <CreateFlowChangeTool name={name}/>}
 
       {/*抬起枪头*/}
       {method === 'methdPickTip' && <></>}
@@ -185,4 +188,4 @@ const CreateMethodItem: React.FC<IProps> = (props) => {
     </Card>
   );
 };
-export default CreateMethodItem
+export default CreateMethodItem;

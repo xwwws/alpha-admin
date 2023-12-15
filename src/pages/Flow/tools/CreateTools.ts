@@ -1,9 +1,17 @@
 const parsePrerequisite = (item: any) => {
-  return {
-    nodeid: item.prerequisite_nodeid,
-    operator: item.prerequisite_operator,
-    value: item.prerequisite_value,
-  };
+  if (
+    item.prerequisite_nodeid &&
+    item.prerequisite_operator &&
+    item.prerequisite_value
+  ) {
+    return {
+      nodeid: item.prerequisite_nodeid,
+      operator: item.prerequisite_operator,
+      value: item.prerequisite_value,
+    };
+  } else {
+    return {};
+  }
 };
 export const fmtFlowRequestParams = (value: any) => {
   const params: any = {
@@ -90,6 +98,41 @@ export const fmtFlowRequestParams = (value: any) => {
             speed: item.speed,
             weight: item.weight,
             accuracy: item.accuracy
+          }
+        });
+        break;
+      //   开瓶器位开盖
+      case 'methdUncap':
+        params.flow_data.push({
+          action: 'methdUncap',
+          prerequisite: parsePrerequisite(item),
+          kwargs: {
+            area_name: item.area_name,
+            y: item.y,
+            height: item.height
+          }
+        });
+        break;
+      //   开瓶器位开盖
+      case 'methdRecap':
+        params.flow_data.push({
+          action: 'methdUncap',
+          prerequisite: parsePrerequisite(item),
+          kwargs: {
+            area_name: item.area_name,
+            y: item.y,
+            height: item.height
+          }
+        });
+        break;
+      //   开瓶器位开盖
+      case 'methdChngTool':
+        params.flow_data.push({
+          action: 'methdChngTool',
+          prerequisite: parsePrerequisite(item),
+          kwargs: {
+            src_tool: item.src_tool,
+            dst_tool: item.dst_tool,
           }
         });
         break;
