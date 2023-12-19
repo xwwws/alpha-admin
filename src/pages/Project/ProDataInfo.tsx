@@ -43,13 +43,19 @@ const ProDataInfo: React.FC<IProps> = (props) => {
     // 实验名称索引
 
 
-    setColumns(formatColumns<ProColumns<any>>(tableTitle.map((title, index) => (
-      {
+    setColumns(formatColumns<ProColumns<any>>(tableTitle.map((title, index) => {
+      const result: ProColumns<any> = {
         title: index + 1 === tableTitle.length ? `${title.replaceAll('$', '')}` : title,
         dataIndex: index,
-        key: title
+        key: title,
+      };
+      if (title === '实验ID') {
+        result.render = (text) => (
+          <a href={`/exp/experiment/${text}/detail`}>{text}</a>
+        )
       }
-    ))));
+      return result;
+    })));
 
     setDataSource(res.data.data.filter((item, index) => index !== 0));
   };
