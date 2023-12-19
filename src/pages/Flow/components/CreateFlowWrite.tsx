@@ -20,7 +20,7 @@ const CreateFlowWrite: React.FC<IProps> = (props) => {
     <>
       <Row gutter={10}>
         <Col span={12}>
-          <Form.Item name={[ name, 'node_index' ]} label="节点id" rules={formRules.node_index}>
+          <Form.Item name={[ name, 'nodeid' ]} label="节点id" rules={formRules.node_index}>
             <Select
               allowClear
               options={nodeIds}
@@ -29,7 +29,7 @@ const CreateFlowWrite: React.FC<IProps> = (props) => {
           </Form.Item>
         </Col>
         <Col span={12}>
-          <Form.Item name={[ name, 'node_index' ]} label="值" rules={[ { required: true, message: '请输入内容' } ]}>
+          <Form.Item name={[ name, 'node_value' ]} label="值" rules={[ { required: true, message: '请输入内容' } ]}>
             <Input
               style={{ width: `150px` }}
               placeholder={'请输入内容'}

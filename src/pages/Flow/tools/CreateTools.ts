@@ -245,6 +245,27 @@ export const fmtFlowRequestParams = (value: any) => {
           }
         });
         break;
+      //   废液蒸馏
+      case 'methdDoDistillC3':
+        params.flow_data.push({
+          action: item.action,
+          prerequisite: parsePrerequisite(item),
+          kwargs: {
+            area_name: item.area_name,
+            cooler_sy: item.cooler_sy,
+            heat_band_sy: item.heat_band_sy,
+            stir_temp: item.stir_temp,
+            ibp_temp: item.ibp_temp,
+            fbp_temp: item.fbp_temp,
+            stir_mode: item.stir_mode,
+            stir_rpm: item.stir_rpm,
+            wash_time: item.wash_time,
+            clean_time: item.clean_time,
+            suply_time: item.suply_time,
+            total_time: item.total_time,
+          }
+        });
+        break;
       default:
 
     }
