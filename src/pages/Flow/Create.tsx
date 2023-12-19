@@ -1,5 +1,5 @@
 import { PageContainer } from '@ant-design/pro-components';
-import { Button, Card, Col, Form, Input, Row, Select } from 'antd';
+import { Button, Card, Col, Form, Input, message, Row, Select } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { CenterHolderStyle, formItemLayout } from "@/utils";
 import { IForm } from "@/pages/typings";
@@ -9,6 +9,7 @@ import DataAcquisition from "@/pages/components/DataAcquisition";
 import CreateMethodItem from "@/pages/Flow/components/CreateMethodItem";
 import { createFlow } from "@/api/flows";
 import { fmtFlowRequestParams } from "@/pages/Flow/tools/CreateTools";
+import { useNavigate } from "umi";
 
 interface IProps {
   [key: string]: any;
@@ -18,6 +19,9 @@ const Create: React.FC<IProps> = (props) => {
   const [ form ] = Form.useForm();
   const [ submitLoading, setSubmitLoading ] = useState<boolean>(false);
   const [ projects, setProjects ] = useState<{ label: string; value: string }[]>([]);
+  const [ messageApi, contextHolder ] = message.useMessage();
+  const navigate = useNavigate();
+
   /**
    * 获取项目数据
    */
@@ -26,7 +30,13 @@ const Create: React.FC<IProps> = (props) => {
     setProjects(res.data.data.map(pro => ({ label: pro.name, value: pro.id + '' })));
   };
   const onFinish = async (values: any) => {
+    if (!values.flow_data || values.flow_data.length === 0) {
+      message.warning('请添加指令');
+      return;
+    }
     await createFlow(fmtFlowRequestParams(values));
+    messageApi.success('创建成功');
+    navigate('/exp/flow/list');
   };
 
   const formRules: IForm.IFormRules = {

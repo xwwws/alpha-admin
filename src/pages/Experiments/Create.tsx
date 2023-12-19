@@ -66,7 +66,7 @@ const Create: React.FC = () => {
    * @param values
    */
   const onFinish = async (values: any) => {
-    if (!values.steps_data || values.steps_data?.length === 0) {
+    if (!values.steps_data || values.steps_data.length === 0) {
       message.warning('请添加步骤');
       return;
     }

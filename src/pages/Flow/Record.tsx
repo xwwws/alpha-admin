@@ -68,6 +68,7 @@ const Record: React.FC<IProps> = (props) => {
           onPreOrNext={handlePrevOrNext}
         />
         <CollectedDataWrap collected_data={collectedData}/>
+        <br/>
         <Collapse
           accordion
           defaultActiveKey={[ '0' ]}
