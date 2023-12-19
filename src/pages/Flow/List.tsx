@@ -72,6 +72,7 @@ const List: React.FC<IProps> = () => {
   const columns: ProColumns<Flows.List>[] = formatColumns<Flows.List>([
     { title: 'ID', dataIndex: 'id' },
     { title: '名称', dataIndex: 'name' },
+    { title: '状态', dataIndex: 'status' },
     {
       hideInSearch: true,
       title: '状态',
@@ -154,7 +155,7 @@ const List: React.FC<IProps> = () => {
         </Popconfirm>;
         return <>
           {/*只有“等待提交”的实验可以提交*/}
-          {(item.status === 'waiting') && runBtn}
+          {(item.status === 'draft') && runBtn}
           {/*取消作业流程:*/}
           {/*“待提交”,“等待执行",“执行中”,"失败"的实验都可以取消*/}
           {/*“执行中”和失败的实验，取消未开始执行的作业流程节点*/}
