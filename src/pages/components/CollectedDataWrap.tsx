@@ -32,6 +32,7 @@ const CollectedDataWrapStyle = styled.div`
 const CollectedDataWrap: React.FC<IProps> = (props) => {
 
   const { collected_data } = props;
+  console.log(collected_data);
   const [ collectedDataList, setCollectedDataList ] = useState<Icsv[]>([]);
   useEffect(() => {
     const getCollectedData = async () => {

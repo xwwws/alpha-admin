@@ -15,7 +15,9 @@ const CollectedDetails: React.FC<IProps> = (props) => {
   const { data } = props;
   const [ unit, setUnit ] = useState<string>('');
   useEffect(() => {
-    setUnit(data.label.split('(')[1].split(')')[0])
+    if(data.label.indexOf('(') !== -1 && data.label.indexOf(')') !== -1) {
+      setUnit(data.label.split('(')[1].split(')')[0])
+    }
   },[data.label])
   return (
     <CollectedDetailsStyle>

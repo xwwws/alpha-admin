@@ -8,6 +8,7 @@ import { getFlowRecord } from "@/api/flows";
 import FlowRecordItem from "@/pages/Flow/components/FlowRecordItem";
 import { StepStatusMap } from "@/utils/dataMaps";
 import RecordOverview from "@/pages/components/RecordOverview";
+import CollectedDataWrap from "@/pages/components/CollectedDataWrap";
 
 interface IProps {
   [key: string]: any;
@@ -17,8 +18,7 @@ const Record: React.FC<IProps> = (props) => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [ collapseItems, setCollapseItems ] = useState<CollapseProps['items']>([]);
-  const [ isShowOverView, setIsShowOverView ] = useState<boolean>(false);
-
+  const [ collectedData, setCollectedData ] = useState<API.DataAcquisitionsResults[]>([]);
   /**
    * 上一条 下一条
    * @param type
@@ -35,16 +35,14 @@ const Record: React.FC<IProps> = (props) => {
   };
   const getRecord = async () => {
     const res = await getFlowRecord(id as string);
-    setCollapseItems(res.data.flow_data.map((item, index) => {
-
-      return {
-        key: index,
-        label: `${index + 1}. ${item.label} - ${item.action}`,
-        // @ts-ignore
-        extra: <Badge status={StepStatusMap[item.status]} text={item.status}/>,
-        children: <FlowRecordItem recordItem={item}/>,
-      };
-    }));
+    setCollapseItems(res.data.flow_data.map((item, index) => ({
+      key: index,
+      label: `${index + 1}. ${item.label} - ${item.action}`,
+      // @ts-ignore
+      extra: <Badge status={StepStatusMap[item.status]} text={item.status}/>,
+      children: <FlowRecordItem recordItem={item}/>,
+    })));
+    setCollectedData(res.data.data_acquisitions_results)
   };
   useEffect(() => {
     getRecord();
@@ -69,6 +67,7 @@ const Record: React.FC<IProps> = (props) => {
         <PreAndNext
           onPreOrNext={handlePrevOrNext}
         />
+        <CollectedDataWrap collected_data={collectedData}/>
         <Collapse
           accordion
           defaultActiveKey={[ '0' ]}
