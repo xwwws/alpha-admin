@@ -7,6 +7,7 @@ import { formatColumns } from "@/utils/componentSettingUtils";
 import { Icsv, readCSV, readFHTLCSV } from "@/utils/fileRead";
 import ProDataInfoChartModal from "@/pages/Project/components/ProDataInfoChartModal";
 import type { IChartData } from "@/pages/Project/components/ProDataInfoChartModal";
+import { useNavigate } from "umi";
 
 interface IProps {
   [key: string]: any;
@@ -34,6 +35,7 @@ const ProDataInfo: React.FC<IProps> = (props) => {
   const [ isShow, setIsShow ] = useState<boolean>(false);
   const [ isModalLoading, setIsModalLoading ] = useState<boolean>(false);
   const [ chartData, setChartData ] = useState<IChartData>({ xData: [], yData: [] });
+  const navigate = useNavigate()
   const pageInit = async (proDataId: string) => {
     const res = await getProDataInfo(proDataId);
     const tableTitle: string[] = res.data.data[0] as string[];
@@ -51,7 +53,7 @@ const ProDataInfo: React.FC<IProps> = (props) => {
       };
       if (title === '实验ID') {
         result.render = (text) => (
-          <a href={`/exp/experiment/${text}/detail`}>{text}</a>
+          <Button type={'link'} onClick={() => navigate(`/exp/experiment/${text}/detail`)}>{text}</Button>
         )
       }
       return result;
