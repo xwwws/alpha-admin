@@ -3,7 +3,7 @@ import dayjs from "dayjs";
 import type { ReactNode } from 'react';
 
 const tableColumnsSetting: ProColumns = {
-  // hideInSearch: true,
+  hideInSearch: true,
   align: 'center',
   search: false
 }

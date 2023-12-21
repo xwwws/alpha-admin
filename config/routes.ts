@@ -5,10 +5,12 @@ import { reactionVessels } from './routes/reactionVessels';
 import { steps } from './routes/steps';
 import { trays } from './routes/trays';
 import { project } from "./routes/project";
-import { account } from "./routes/accounts";
+import { users } from "./routes/users";
 import { devices } from "./routes/devices";
 import { flows } from "./routes/flows";
 import { others } from "./routes/others";
+import { roles } from "./routes/roles";
+import { menus } from "./routes/menus";
 
 // 文档地址  https://v3.umijs.org/zh-CN/plugins/plugin-layout
 //config/route.ts
@@ -61,16 +63,36 @@ export default [
   },
   ...others,
   {
-    path: '/account',
-    routes: [
-      ...account
-    ],
-  },
-  {
     path: '/welcome',
     name: 'welcome',
     icon: 'smile',
     component: './Welcome',
+  },
+  {
+    path: '/account',
+    name: 'account',
+    icon: 'smile',
+    routes: [
+
+      {
+        path: '/account',
+        redirect: '/account/users',
+      },
+
+      ...users,
+      ...roles,
+      ...menus,
+
+
+      // 修改密码
+      {
+        hideInMenu: true,
+        name: 'changePwd',
+        path: '/account/change-pwd',
+        component: './User/ChangePwd/ChangePwd',
+      }
+
+    ],
   },
   {
     path: '/device',
@@ -96,7 +118,6 @@ export default [
     ],
   },
   ...project,
-
   {
     path: '/',
     redirect: '/welcome',

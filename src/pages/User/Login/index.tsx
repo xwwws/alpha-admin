@@ -1,4 +1,4 @@
-import { login } from '@/api/user';
+import { login } from '@/api/login';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 
 import { LoginForm, ProFormText } from '@ant-design/pro-components';

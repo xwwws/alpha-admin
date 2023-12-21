@@ -2,7 +2,7 @@ import { PageContainer } from '@ant-design/pro-components';
 import { Button, Card, Form, Input, message } from 'antd';
 import React from 'react';
 import styled from 'styled-components';
-import { changePass } from "@/api/user";
+import { changePass } from "@/api/login";
 
 interface IProps {
   [key: string]: any;

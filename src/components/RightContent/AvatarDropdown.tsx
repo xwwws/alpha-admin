@@ -1,4 +1,4 @@
-import { outLogin } from '@/api/user';
+import { outLogin } from '@/api/login';
 import { CLEAR_TOKEN, CLEAR_USER } from '@/utils/auth';
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
