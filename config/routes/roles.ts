@@ -23,6 +23,13 @@ export const roles = [
         path: '/account/roles/:userId/edit',
         component: './Account/Roles/Edit',
       },
+    //   AssignPermissions
+
+      {
+        name: 'assignPermissions',
+        path: '/account/roles/:userId/assign-permissions',
+        component: './Account/Roles/AssignPermissions',
+      },
     ]
   }
 ];
