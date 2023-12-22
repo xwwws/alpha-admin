@@ -9,4 +9,13 @@ declare namespace Users {
     status: string;
     type: string;
   }
+
+  interface Create {
+    passwd: string;
+    username: string;
+    name: string;
+    email: string;
+    phone: string;
+    gender: unknown;
+  }
 }

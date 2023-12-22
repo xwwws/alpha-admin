@@ -12,7 +12,22 @@ export const users = [
         name: 'list',
         path: '/account/users/list',
         component: './Account/Users/List',
-      }
+      },
+      {
+        name: 'create',
+        path: '/account/users/create',
+        component: './Account/Users/Create',
+      },
+      {
+        name: 'edit',
+        path: '/account/users/edit',
+        component: './Account/Users/Edit',
+      },
+      {
+        name: 'allocationRoles',
+        path: '/account/users/allocation-roles',
+        component: './Account/Users/AllocationRoles',
+      },
     ]
   },
   // {

@@ -1,10 +1,11 @@
-import { PageContainer, ProColumns, ProTable } from '@ant-design/pro-components';
+import { ActionType, PageContainer, ProColumns, ProTable } from '@ant-design/pro-components';
 import { Button, Card, Dropdown, Popconfirm, Tooltip } from 'antd';
-import React from 'react';
-import { getUserList } from "@/api/users";
+import React, { useRef, useState } from 'react';
+import { delUser, getUserList } from "@/api/users";
 import { formatColumns } from "@/utils/componentSettingUtils";
 import { DeleteOutlined, FormOutlined, PlusOutlined, ToolOutlined } from "@ant-design/icons";
 import { useNavigate } from "umi";
+import Edit from "@/pages/Account/Users/Edit";
 
 interface IProps {
   [key: string]: any;
@@ -12,12 +13,15 @@ interface IProps {
 
 const List: React.FC<IProps> = (props) => {
   const navigate = useNavigate();
+  const tableRef = useRef<ActionType>();
+
   /**
    * 删除用户
    * @param id
    */
-  const deleteUser = (id: string | number) => {
-    console.log(`删除${id}`);
+  const deleteUser = async (id: string | number) => {
+    await delUser(id);
+    tableRef.current?.reload();
   };
   const columns: ProColumns<Users.List>[] = formatColumns([
     { title: 'ID', key: "id", dataIndex: 'id', width: 50 },
@@ -41,13 +45,15 @@ const List: React.FC<IProps> = (props) => {
           <Button
             type={'link'}
             icon={<FormOutlined/>}
+            onClick={() => navigate('/account/users/edit')}
           ></Button>
         </Tooltip>
         ,
-        <Tooltip placement="top" title="分配角色"  key={'role'}>
+        <Tooltip placement="top" title="分配角色" key={'role'}>
           <Button
             type={'link'}
             icon={<ToolOutlined/>}
+            onClick={() => navigate('/account/users/allocation-roles')}
           ></Button>
         </Tooltip>
         ,
@@ -93,7 +99,7 @@ const List: React.FC<IProps> = (props) => {
           key="add"
           icon={<PlusOutlined/>}
           type={'primary'}
-          onClick={() => navigate('/exp/experiment/create')}
+          onClick={() => navigate('/account/users/create')}
         >
           新建用户
         </Button>,
@@ -105,6 +111,7 @@ const List: React.FC<IProps> = (props) => {
           rowKey={({ id }) => `${id}`}
           columns={columns}
           options={false}
+          actionRef={tableRef}
           request={requestMethod}
           scroll={{ x: columns.length * 120 }}
           pagination={{
