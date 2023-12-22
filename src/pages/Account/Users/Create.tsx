@@ -2,9 +2,9 @@ import { PageContainer } from '@ant-design/pro-components';
 import { Button, Card, Form, Input, message, Select } from 'antd';
 import React from 'react';
 import styled from "styled-components";
-import { changePass } from "@/api/login";
 import { IForm } from "@/pages/typings";
 import { createUser } from "@/api/users";
+import { userGender } from "@/utils/userMaps";
 
 interface IProps {
   [key: string]: any;
@@ -74,11 +74,7 @@ const Create: React.FC<IProps> = (props) => {
               rules={formRules.email}
             >
               <Select
-                options={[
-                  { value: 'male', label: '男' },
-                  { value: 'female', label: '女' },
-                  { value: 'unknown', label: '未知' },
-                ]}
+                options={userGender}
               />
             </Form.Item>
 

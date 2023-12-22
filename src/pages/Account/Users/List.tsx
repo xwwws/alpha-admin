@@ -45,7 +45,7 @@ const List: React.FC<IProps> = (props) => {
           <Button
             type={'link'}
             icon={<FormOutlined/>}
-            onClick={() => navigate('/account/users/edit')}
+            onClick={() => navigate(`/account/users/${record.id}/edit`)}
           ></Button>
         </Tooltip>
         ,
@@ -53,7 +53,7 @@ const List: React.FC<IProps> = (props) => {
           <Button
             type={'link'}
             icon={<ToolOutlined/>}
-            onClick={() => navigate('/account/users/allocation-roles')}
+            onClick={() => navigate(`/account/users/${record.id}/allocation-roles`)}
           ></Button>
         </Tooltip>
         ,
@@ -114,6 +114,7 @@ const List: React.FC<IProps> = (props) => {
           actionRef={tableRef}
           request={requestMethod}
           scroll={{ x: columns.length * 120 }}
+          search={false}
           pagination={{
             showSizeChanger: false,
             showQuickJumper: true,

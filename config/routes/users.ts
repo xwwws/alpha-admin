@@ -20,12 +20,12 @@ export const users = [
       },
       {
         name: 'edit',
-        path: '/account/users/edit',
+        path: '/account/users/:userId/edit',
         component: './Account/Users/Edit',
       },
       {
         name: 'allocationRoles',
-        path: '/account/users/allocation-roles',
+        path: '/account/users/:userId/allocation-roles',
         component: './Account/Users/AllocationRoles',
       },
     ]

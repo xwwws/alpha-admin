@@ -14,7 +14,7 @@ export const getUserList = (params: API.PagesReq) => {
   );
 };
 /**
- * 获取用户列表
+ * 创建用户
  * @param data
  */
 export const createUser = (data: Users.Create) => {
@@ -23,6 +23,34 @@ export const createUser = (data: Users.Create) => {
     {
       method: 'post',
       data,
+    }
+  );
+};
+/**
+ * 获取用户详情
+ * @param id
+ */
+export const getUserInfo = (id: string | number) => {
+  return request<Response<Users.UserInfo>>(
+    `/api/v1/user/users/${id}`,
+    {
+      method: 'get',
+    }
+  );
+};
+
+
+/**
+ * 获取用户详情
+ * @param id
+ * @param data
+ */
+export const editUserInfo = (id: string | number, data: Users.SetUserInfo) => {
+  return request<Response<any>>(
+    `/api/v1/user/users/${id}`,
+    {
+      method: 'put',
+      data
     }
   );
 };
