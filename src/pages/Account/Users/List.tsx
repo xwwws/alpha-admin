@@ -1,11 +1,10 @@
 import { ActionType, PageContainer, ProColumns, ProTable } from '@ant-design/pro-components';
-import { Button, Card, Dropdown, Popconfirm, Tooltip } from 'antd';
-import React, { useRef, useState } from 'react';
+import { Button, Card, Popconfirm, Tooltip } from 'antd';
+import React, { useRef } from 'react';
 import { delUser, getUserList } from "@/api/users";
 import { formatColumns } from "@/utils/componentSettingUtils";
 import { DeleteOutlined, FormOutlined, PlusOutlined, ToolOutlined } from "@ant-design/icons";
 import { useNavigate } from "umi";
-import Edit from "@/pages/Account/Users/Edit";
 
 interface IProps {
   [key: string]: any;

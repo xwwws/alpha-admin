@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { IForm } from "@/pages/typings";
 import { createUser } from "@/api/users";
 import { userGender } from "@/utils/userMaps";
+import { useNavigate } from "umi";
 
 interface IProps {
   [key: string]: any;
@@ -40,11 +41,14 @@ const formRules: IForm.IFormRules = {
 };
 const Create: React.FC<IProps> = (props) => {
   const [ form ] = Form.useForm();
+  const  navigate = useNavigate()
   const handleConfirm = async () => {
     const formData = await form.validateFields();
     await createUser(formData);
     message.success('用户创建成功');
     form.resetFields();
+    navigate('/account/users/list')
+
   };
   return (
     <PageContainer>
