@@ -57,6 +57,37 @@ export const editUserInfo = (id: string | number, data: Users.SetUserInfo) => {
 
 
 /**
+ * 获取用户角色
+ * @param user_id
+ */
+export const getUserRoles = (user_id: string | number) => {
+  return request<Response<Roles.List[]>>(
+    `/api/v1/user/users/${user_id}/roles`,
+    {
+      method: 'get',
+    }
+  );
+};
+
+
+/**
+ * 获取用户角色
+ * @param user_id
+ * @param data
+ */
+export const setUserRoles = (user_id: string | number,data: Users.AllocationRoles) => {
+  return request<Response<Roles.List[]>>(
+    `/api/v1/user/users/${user_id}/roles`,
+    {
+      method: 'post',
+      data
+    }
+  );
+};
+
+
+
+/**
  * 删除用户
  * @param id
  */

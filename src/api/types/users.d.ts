@@ -37,4 +37,8 @@ declare namespace Users {
     gender: string;
     status: string;
   }
+
+  interface AllocationRoles {
+    role_ids: any[]
+  }
 }
