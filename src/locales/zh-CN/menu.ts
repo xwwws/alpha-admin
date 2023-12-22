@@ -10,6 +10,8 @@ export default {
   'menu.account.users.allocationRoles': '分配角色',
   'menu.account.roles': '角色管理',
   'menu.account.roles.list': '角色列表',
+  'menu.account.roles.create': '创建角色',
+  'menu.account.roles.edit': '编辑角色信息',
   'menu.account.menus': '菜单管理',
   'menu.account.menus.list': '角色列表',
   'menu.device': '设备信息',
