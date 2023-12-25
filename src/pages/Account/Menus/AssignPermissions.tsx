@@ -1,5 +1,5 @@
 import { PageContainer } from '@ant-design/pro-components';
-import { Button, Card, Modal, Tree } from 'antd';
+import { Button, Card, message, Modal, Tree } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { getApiPermissions, getPermissionsByMenuId, savePermissions } from "@/api/menus";
 import type { DataNode } from 'antd/es/tree';
@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { useParams } from "react-router-dom";
 import { isNumber } from "@/utils";
+import { useNavigate } from "@@/exports";
 
 interface IProps {
   [key: string]: any;
@@ -22,9 +23,11 @@ const FormWrap = styled.div`
   }
 `;
 const AssignPermissions: React.FC<IProps> = (props) => {
+  const navigate = useNavigate();
+
+  const [ messageApi, contextHolder ] = message.useMessage();
   const { id } = useParams();
   const [ allPermissions, setAllPermissions ] = useState<DataNode[]>([]);
-  const [ userPms, setUserPms ] = useState<(string | number)[]>([]);
   const [ checkedKeys, setCheckedKeys ] = useState<(string | number)[]>([]);
 
   /**
@@ -54,7 +57,7 @@ const AssignPermissions: React.FC<IProps> = (props) => {
    */
   const getMenuPms = async (id: number | string) => {
     const res = await getPermissionsByMenuId(id);
-    setCheckedKeys(res.data)
+    setCheckedKeys(res.data);
   };
 
   /**
@@ -66,6 +69,9 @@ const AssignPermissions: React.FC<IProps> = (props) => {
       icon: <ExclamationCircleFilled/>,
       onOk: async () => {
         await savePermissions(id as string, checkedKeys.filter(item => isNumber(item)));
+        messageApi.success('权限配置成功');
+        navigate('/account/menus/list');
+
       },
     });
   };
@@ -97,6 +103,7 @@ const AssignPermissions: React.FC<IProps> = (props) => {
           </div>
         </FormWrap>
       </Card>
+      {contextHolder}
     </PageContainer>
   );
 };
