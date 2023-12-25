@@ -71,7 +71,7 @@ export default [
   {
     path: '/account',
     name: 'account',
-    icon: 'smile',
+    icon: 'SettingOutlined',
     routes: [
 
       {
