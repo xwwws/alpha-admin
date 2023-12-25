@@ -42,7 +42,7 @@ const List: React.FC<IProps> = (props) => {
           <Button
             type={'link'}
             icon={<ToolOutlined/>}
-            onClick={() => navigate(`/account/roles/${record.id}/assign-permissions`)}
+            onClick={() => navigate(`/account/roles/${record.id}/assign-menu`)}
           ></Button>
         </Tooltip>
         ,

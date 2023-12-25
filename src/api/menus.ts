@@ -2,14 +2,12 @@ import { request } from '@umijs/max';
 
 /**
  * 获取菜单配置列表
- * @param params
  */
-export const getMenuList = (params: API.PagesReq) => {
+export const getMenuList = () => {
   return request<Response<Menus.List[]>>(
     `/api/v1/menu/elements/tree`,
     {
       method: 'get',
-      params,
     }
   );
 };

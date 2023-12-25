@@ -46,7 +46,7 @@ const AllocationRoles: React.FC<IProps> = (props) => {
       role_ids: rolesResult
     });
     message.success('角色分配完成');
-    navigate('/account/roles/list');
+    navigate('/account/users/list');
   };
   return (
     <PageContainer>

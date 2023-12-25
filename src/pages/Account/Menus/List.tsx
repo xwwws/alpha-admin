@@ -10,11 +10,10 @@ interface IProps {
   [key: string]: any;
 }
 
-const formatTree = (tree: Menus.List[]): Menus.List[] => {
-  return tree.map((item) => {
-    const result = { ...item };
+const format2Tree = (tree: Menus.List[]): Menus.List[] => {
+  return tree.map((result) => {
     if (result.children && result.children.length > 0) {
-      result.children = formatTree(result.children);
+      result.children = format2Tree(result.children);
       return result;
     } else {
       delete result.children;
@@ -83,15 +82,10 @@ const List: React.FC<IProps> = (props) => {
   ]);
 
 
-  const requestMethod = async (params: { pageSize: number; current: number }) => {
-    const query = {
-      page_size: params.pageSize,
-      page: params.current,
-    };
-    const res = await getMenuList(query);
-
+  const requestMethod = async () => {
+    const res = await getMenuList();
     return {
-      data: formatTree(res.data),
+      data: format2Tree(res.data),
       // success 请返回 true，
       // 不然 table 会停止解析数据，即使有数据
       success: true,

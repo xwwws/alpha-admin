@@ -12,7 +12,7 @@ export default {
   'menu.account.roles.list': '角色列表',
   'menu.account.roles.create': '创建角色',
   'menu.account.roles.edit': '编辑角色信息',
-  'menu.account.roles.assignPermissions': '分配权限',
+  'menu.account.roles.assignMenu': '分配菜单',
   'menu.account.menus': '菜单管理',
   'menu.account.menus.list': '菜单列表',
   'menu.account.menus.create': '创建菜单',

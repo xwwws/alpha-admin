@@ -23,12 +23,12 @@ export const roles = [
         path: '/account/roles/:userId/edit',
         component: './Account/Roles/Edit',
       },
-    //   AssignPermissions
+    //   AssignMenus
 
       {
-        name: 'assignPermissions',
-        path: '/account/roles/:userId/assign-permissions',
-        component: './Account/Roles/AssignPermissions',
+        name: 'assignMenu',
+        path: '/account/roles/:roleId/assign-menu',
+        component: './Account/Roles/AssignMenus',
       },
     ]
   }

@@ -76,4 +76,36 @@ export const deleteRole = (id: string| number) => {
 };
 
 
+/**
+ * 更新角色的菜单
+ * @param role_id
+ * @param data
+ */
+export const saveRoleMenus = (role_id: string| number, data: number[]) => {
+  console.log(data);
+  return request<Response<any>>(
+    `/api/v1/user/roles/${role_id}/elements`,
+    {
+      method: 'post',
+      data
+    }
+  );
+};
+
+/**
+ * 获取角色对应菜单
+ * @param role_id
+ */
+export const getRoleMenusById = (role_id: string| number) => {
+  return request<Response<number[]>>(
+    `/api/v1/user/roles/${role_id}/elements`,
+    {
+      method: 'get',
+    }
+  );
+};
+
+
+
+
 

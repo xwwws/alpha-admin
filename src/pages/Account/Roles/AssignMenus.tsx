@@ -1,13 +1,13 @@
 import { PageContainer } from '@ant-design/pro-components';
 import { Button, Card, message, Modal, Tree } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { getApiPermissions, getPermissionsByMenuId, savePermissions } from "@/api/menus";
 import type { DataNode } from 'antd/es/tree';
 import styled from "styled-components";
 import { ExclamationCircleFilled } from '@ant-design/icons';
 import { useParams } from "react-router-dom";
-import { isNumber } from "@/utils";
 import { useNavigate } from "@@/exports";
+import { getMenuList } from "@/api/menus";
+import { getRoleMenusById, saveRoleMenus } from "@/api/roles";
 
 interface IProps {
   [key: string]: any;
@@ -22,59 +22,69 @@ const FormWrap = styled.div`
     justify-content: center;
   }
 `;
-const AssignPermissions: React.FC<IProps> = (props) => {
+
+interface ITreeData {
+  title: string,
+  key: string,
+  children?: ITreeData[]
+}
+
+const format2Tree = (tree: Menus.List[]): ITreeData[] => {
+  return tree.map((item) => {
+    const result: ITreeData = {
+      title: item.name,
+      key: `${item.id}`
+    };
+    if (item.children && item.children.length > 0) {
+      result.children = format2Tree(item.children);
+    }
+    return result;
+  });
+};
+
+const AssignMenus: React.FC<IProps> = (props) => {
   const navigate = useNavigate();
 
   const [ messageApi, contextHolder ] = message.useMessage();
-  const { id } = useParams();
+  const { roleId } = useParams();
   const [ allPermissions, setAllPermissions ] = useState<DataNode[]>([]);
   const [ checkedKeys, setCheckedKeys ] = useState<(string | number)[]>([]);
 
+
   /**
-   * 将所有权限格式化为树形结构数据
-   * @param data
+   * 获取所有菜单
    */
-  const fmt2Tree = (data: Menus.AllPermission[]): DataNode[] => {
-    return data.map((dataItem) => ({
-      title: dataItem.tag,
-      key: dataItem.tag,
-      children: dataItem.api_permission_list.map(pmsItem => ({
-        title: pmsItem.summary,
-        key: pmsItem.id
-      }))
-    }));
-  };
-  /**
-   * 获取所有的接口权限列表
-   */
-  const getPms = async () => {
-    const res = await getApiPermissions();
-    // 将所有权限格式化为树形结构数据
-    setAllPermissions(fmt2Tree(res.data));
-  };
-  /**
-   * 获取菜单所属权限
-   */
-  const getMenuPms = async (id: number | string) => {
-    const res = await getPermissionsByMenuId(id);
-    setCheckedKeys(res.data);
+  const getMenuPms = async () => {
+    const res = await getMenuList();
+    setAllPermissions(format2Tree(res.data));
   };
 
   /**
-   * 保存权限信息
+   * 获取当前角色菜单权限
+   */
+  const getRoleMenus = async (id: string | number) => {
+    const res = await getRoleMenusById(id);
+    setCheckedKeys(res.data.map(item => `${item}`))
+  };
+
+  /**
+   * 保存菜单信息
    */
   const handleConfirm = async () => {
     Modal.confirm({
-      title: '是否保存菜单权限配置?',
+      title: '是否保存角色菜单配置?',
       icon: <ExclamationCircleFilled/>,
       onOk: async () => {
-        await savePermissions(id as string, checkedKeys.filter(item => isNumber(item)));
-        messageApi.success('权限配置成功');
-        navigate('/account/menus/list');
-
+        console.log(roleId);
+        if (roleId) {
+          await saveRoleMenus(roleId, checkedKeys.map(item => Number(item)));
+          messageApi.success('菜单配置成功');
+          navigate('/account/roles/list');
+        }
       },
     });
   };
+
   /**
    * 点击复选框
    */
@@ -83,9 +93,10 @@ const AssignPermissions: React.FC<IProps> = (props) => {
   };
 
   useEffect(() => {
-    getPms();
-    id && getMenuPms(id);
-  }, [ id ]);
+    getMenuPms();
+    roleId && getRoleMenus(roleId);
+  }, [ roleId ]);
+
   return (
     <PageContainer>
       <Card>
@@ -108,4 +119,4 @@ const AssignPermissions: React.FC<IProps> = (props) => {
   );
 };
 
-export default AssignPermissions;
+export default AssignMenus;
