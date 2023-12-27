@@ -1,32 +1,32 @@
 export const menus = [
   {
-    path: '/account/menus',
+    path: '/system/menus',
     name: 'menus',
     hideChildrenInMenu: true,
     routes: [
       {
-        path: '/account/menus',
-        redirect: '/account/menus/list',
+        path: '/system/menus',
+        redirect: '/system/menus/list',
       },
       {
         name: 'list',
-        path: '/account/menus/list',
-        component: './Account/Menus/List',
+        path: '/system/menus/list',
+        component: './System/Menus/List',
       },
       {
         name: 'create',
-        path: '/account/menus/create/:pid',
-        component: './Account/Menus/Create',
+        path: '/system/menus/create/:pid',
+        component: './System/Menus/Create',
       },
       {
         name: 'edit',
-        path: '/account/menus/edit/:id',
-        component: './Account/Menus/Edit',
+        path: '/system/menus/edit/:id',
+        component: './System/Menus/Edit',
       },
       {
         name: 'assignPermissions',
-        path: '/account/menus/:id/assign-permissions',
-        component: './Account/Menus/AssignPermissions',
+        path: '/system/menus/:id/assign-permissions',
+        component: './System/Menus/AssignPermissions',
       },
     ]
   }

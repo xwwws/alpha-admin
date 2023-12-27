@@ -1,44 +1,33 @@
 export const users = [
   {
-    path: '/account/users',
+    path: '/system/users',
     name: 'users',
     hideChildrenInMenu: true,
     routes: [
       {
-        path: '/account/users',
-        redirect: '/account/users/list',
+        path: '/system/users',
+        redirect: '/system/users/list',
       },
       {
         name: 'list',
-        path: '/account/users/list',
-        component: './Account/Users/List',
+        path: '/system/users/list',
+        component: './System/Users/List',
       },
       {
         name: 'create',
-        path: '/account/users/create',
-        component: './Account/Users/Create',
+        path: '/system/users/create',
+        component: './System/Users/Create',
       },
       {
         name: 'edit',
-        path: '/account/users/:userId/edit',
-        component: './Account/Users/Edit',
+        path: '/system/users/:userId/edit',
+        component: './System/Users/Edit',
       },
       {
         name: 'allocationRoles',
-        path: '/account/users/:userId/allocation-roles',
-        component: './Account/Users/AllocationRoles',
+        path: '/system/users/:userId/allocation-roles',
+        component: './System/Users/AllocationRoles',
       },
     ]
-  },
-  // {
-  //   name: 'roles',
-  //   path: '/account/roles',
-  //   component: './Account/Roles/List',
-  // },
-  // {
-  //   name: 'menus',
-  //   path: '/account/menus',
-  //   component: './Account/Menus/List',
-  // },
-
+  }
 ];

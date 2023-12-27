@@ -70,14 +70,14 @@ export default [
     component: './Welcome',
   },
   {
-    path: '/account',
-    name: 'account',
+    path: '/system',
+    name: 'system',
     icon: <SettingOutlined />,
     routes: [
 
       {
-        path: '/account',
-        redirect: '/account/users',
+        path: '/system',
+        redirect: '/system/users',
       },
 
       ...users,
@@ -89,7 +89,7 @@ export default [
       {
         hideInMenu: true,
         name: 'changePwd',
-        path: '/account/change-pwd',
+        path: '/system/change-pwd',
         component: './User/ChangePwd/ChangePwd',
       }
 

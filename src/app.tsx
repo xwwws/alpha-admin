@@ -6,6 +6,8 @@ import { history } from 'umi';
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
 import { App } from 'antd';
+import routes from "@/utils/menus/routes";
+import { userInfo } from "@/api/login";
 
 console.log(REACT_APP_ENV);
 if (REACT_APP_ENV === 'dev') {
@@ -29,8 +31,7 @@ interface IgetInitialState {
 export async function getInitialState(): Promise<IgetInitialState> {
   const fetchUserInfo = async (): Promise<API.UserInfoRes | undefined> => {
     try {
-      const user = await getUser();
-      return user as API.UserInfoRes;
+      return await getUser() as API.UserInfoRes;
     } catch (error) {
       history.push(loginPath);
     }
@@ -92,6 +93,45 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
           {children}
         </App>
       </>;
+    },
+    menu: {
+      params: {
+        userId: initialState?.currentUser?.avatar
+      },
+      request: async (params) => {
+        const fmtPermissions = (permissions: Login.Permission[]): Login.Permission[] => {
+          return permissions.map((result) => {
+            if (result.children && result.children.length > 0) {
+              result.children = fmtPermissions(result.children);
+              return result;
+            } else {
+              delete result.children;
+              return result;
+            }
+          });
+        };
+        const fmtMenus = (permissions: Login.Permission[], allRoutes: any[]):any => {
+          const result =  allRoutes.map((route, index) => {
+            const permission = permissions.find(item => item.code === route.name);
+            if (permission) {
+              if (permission.children) {
+                const innerRoute = fmtMenus(permission.children, route.routes)
+                return {
+                  ...route,
+                  routes: innerRoute
+                };
+              } else {
+                delete route.routes
+                return route
+              }
+            }
+          }).filter(item => item !== undefined)
+          console.log(result);
+          return result
+        };
+        const res = await userInfo();
+        return  fmtMenus(fmtPermissions(res.data.menus), routes);
+      }
     },
     ...initialState?.settings,
   };

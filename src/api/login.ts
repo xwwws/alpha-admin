@@ -31,3 +31,13 @@ export const changePass = (data: {passwd:string}) => {
     data
   })
 }
+
+
+/**
+ * 获取用户信息  菜单信息
+ */
+export const userInfo = () => {
+  return request<Response<Login.UserInfo>>('/api/v1/auth/profile',{
+    method: 'post',
+  })
+}

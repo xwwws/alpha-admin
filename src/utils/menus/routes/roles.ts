@@ -1,34 +1,34 @@
 export const roles = [
   {
-    path: '/account/roles',
+    path: '/system/roles',
     name: 'roles',
     hideChildrenInMenu: true,
     routes: [
       {
-        path: '/account/roles',
-        redirect: '/account/roles/list',
+        path: '/system/roles',
+        redirect: '/system/roles/list',
       },
       {
         name: 'list',
-        path: '/account/roles/list',
-        component: './Account/Roles/List',
+        path: '/system/roles/list',
+        component: './System/Roles/List',
       },
       {
         name: 'create',
-        path: '/account/roles/create',
-        component: './Account/Roles/Create',
+        path: '/system/roles/create',
+        component: './System/Roles/Create',
       },
       {
         name: 'edit',
-        path: '/account/roles/:userId/edit',
-        component: './Account/Roles/Edit',
+        path: '/system/roles/:userId/edit',
+        component: './System/Roles/Edit',
       },
     //   AssignMenus
 
       {
         name: 'assignMenu',
-        path: '/account/roles/:roleId/assign-menu',
-        component: './Account/Roles/AssignMenus',
+        path: '/system/roles/:roleId/assign-menu',
+        component: './System/Roles/AssignMenus',
       },
     ]
   }
