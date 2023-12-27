@@ -126,7 +126,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
               }
             }
           }).filter(item => item !== undefined)
-          console.log(result);
           return result
         };
         const res = await userInfo();
