@@ -1,5 +1,5 @@
 import { PageContainer } from '@ant-design/pro-components';
-import { Button, Card, Form, Input, message, Upload, UploadFile } from 'antd';
+import { Button, Card, Form, Input, message, Select, Upload, UploadFile } from 'antd';
 import React, { useState } from 'react';
 import { HomeOutlined, UploadOutlined } from "@ant-design/icons";
 import { IForm } from "@/pages/typings";
@@ -23,6 +23,7 @@ const UploadAnnex: React.FC<IProps> = (props) => {
   const formRules: IForm.IFormRules = {
     expt_id: [ { required: true, message: '请输入实验id' } ],
     name: [ { required: false, message: '请输入名称' } ],
+    furnace: [ { required: true, message: '请选择马弗炉' } ],
     y_axis_front: [ { required: true, message: '请输入升温曲线表头' } ],
     y_axis_back: [ { required: true, message: '请输入背温曲线表头' } ],
     file: [ { required: true, message: '请选择文件' } ],
@@ -33,13 +34,23 @@ const UploadAnnex: React.FC<IProps> = (props) => {
 
 
   const finish = async (data: any) => {
+    let y_axis_front = ''
+    let y_axis_back = ''
+    if(data.furnace === '1') {
+      y_axis_front = `温控表1#PV(℃)`
+      y_axis_back = `温控表2#PV(℃)`
+    } else if (data.furnace === '3') {
+      y_axis_front = `温控表3#PV(℃)`
+      y_axis_back = `温控表4#PV(℃)`
+
+    }
     const params: Other.UploadExpAnnex = {
       expt_id: data.expt_id,
       name: data.name,
       file: data.file.fileList[0].originFileObj,
       description: data.description || '',
-      y_axis_front: `温控表${data.y_axis_front}#PV(℃)`,
-      y_axis_back: `温控表${data.y_axis_back}#PV(℃)`,
+      y_axis_front,
+      y_axis_back,
     };
     await uploadAnnex(params);
     message.success('上传成功');
@@ -77,13 +88,23 @@ const UploadAnnex: React.FC<IProps> = (props) => {
               </Upload>
             </Form.Item>
 
-            <Form.Item label="升温曲线表头" name="y_axis_front" rules={formRules.y_axis_front}>
-              <Input addonBefore="温控表" addonAfter="#PV(℃)"/>
+            <Form.Item label="马弗炉" name="furnace" rules={formRules.furnace}>
+              <Select
+                options={[
+                  {label: '1号马弗炉', value: '1'},
+                  {label: '3号马弗炉', value: '3'},
+                ]}
+              />
             </Form.Item>
 
-            <Form.Item label="背温曲线表头" name="y_axis_back" rules={formRules.y_axis_back}>
-              <Input addonBefore="温控表" addonAfter="#PV(℃)"/>
-            </Form.Item>
+
+            {/*<Form.Item label="升温曲线表头" name="y_axis_front" rules={formRules.y_axis_front}>*/}
+            {/*  <Input addonBefore="温控表" addonAfter="#PV(℃)"/>*/}
+            {/*</Form.Item>*/}
+
+            {/*<Form.Item label="背温曲线表头" name="y_axis_back" rules={formRules.y_axis_back}>*/}
+            {/*  <Input addonBefore="温控表" addonAfter="#PV(℃)"/>*/}
+            {/*</Form.Item>*/}
 
             <Form.Item label="备注" name="description" rules={formRules.description}>
               <Input.TextArea rows={2}/>

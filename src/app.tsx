@@ -100,7 +100,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
       },
       request: async (params) => {
         const fmtPermissions = (permissions: Login.Permission[]): Login.Permission[] => {
-          return permissions.map((result) => {
+          const result =  permissions.map((result) => {
             if (result.children && result.children.length > 0) {
               result.children = fmtPermissions(result.children);
               return result;
@@ -109,9 +109,16 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
               return result;
             }
           });
+          result.unshift({
+            id: 0,
+            parent_id: 0,
+            code: 'welcome',
+            name: '欢迎'
+          })
+          return  result
         };
         const fmtMenus = (permissions: Login.Permission[], allRoutes: any[]):any => {
-          const result =  allRoutes.map((route, index) => {
+          return allRoutes.map((route, index) => {
             const permission = permissions.find(item => item.code === route.name);
             if (permission) {
               if (permission.children) {
@@ -126,7 +133,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
               }
             }
           }).filter(item => item !== undefined)
-          return result
         };
         const res = await userInfo();
         return  fmtMenus(fmtPermissions(res.data.menus), routes);

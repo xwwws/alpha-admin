@@ -104,7 +104,7 @@ const List: React.FC<IProps> = (props) => {
             type={'primary'}
             onClick={() => navigate('/exp/reagent/create')}
           >
-            创建实验
+            创建试剂
           </Button>,
         ]}
       >
